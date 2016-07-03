@@ -235,7 +235,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JAnounce;
+    public javax.swing.JLabel JAnounce;
     private javax.swing.JPanel JCodeWorkIcon;
     public javax.swing.JPasswordField JContraseñaInicio;
     public javax.swing.JButton JIngresar;

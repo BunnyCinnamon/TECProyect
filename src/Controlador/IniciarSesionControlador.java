@@ -30,6 +30,8 @@ public class IniciarSesionControlador implements ActionListener{
         is.setVisible(false);
         o.setVisible(true);
         o.setLocationRelativeTo(null);
+        } else {
+            is.JAnounce.setText("Usuario o Contraseña incorrecto");
         }
     }
 }

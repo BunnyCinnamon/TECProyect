@@ -3,6 +3,7 @@ package Classes.Beans;
 
 public class AdministradorBean implements java.io.Serializable{
     
+    private int idAdministrador;
     private int Administrador;
     private String nombre;
     private String apellidoP;
@@ -15,6 +16,10 @@ public class AdministradorBean implements java.io.Serializable{
     
 //    Setters for class AdministradorBean
 
+    public void setidAdministrador(int idAdministrador) {
+        this.idAdministrador = idAdministrador;
+    }
+    
     public void setAdministrador(int Administrador) {
         this.Administrador = Administrador;
     }
@@ -45,6 +50,10 @@ public class AdministradorBean implements java.io.Serializable{
     
 //    Getters for class AdministadorBean
 
+    public int getidAdministrador() {
+        return idAdministrador;
+    }
+    
     public int getAdministrador() {
         return Administrador;
     }

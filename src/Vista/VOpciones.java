@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import Controlador.OpcionesControlador;
+import Controlador.SalirControlador;
+
 /**
  *
  * @author Snack
@@ -46,8 +49,7 @@ public class VOpciones extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        JMenuCerrarSesion = new javax.swing.JMenuItem();
 
         jMenu2.setText("File");
         jMenuBar2.add(jMenu2);
@@ -62,6 +64,11 @@ public class VOpciones extends javax.swing.JFrame {
 
         JLibrosOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467285836_OFFice-33.png"))); // NOI18N
         JLibrosOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JLibrosOpen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JLibrosOpenMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout JModificarLibrosLayout = new javax.swing.GroupLayout(JModificarLibros);
         JModificarLibros.setLayout(JModificarLibrosLayout);
@@ -76,6 +83,11 @@ public class VOpciones extends javax.swing.JFrame {
 
         JSociosOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467284734_OFFice-66.png"))); // NOI18N
         JSociosOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JSociosOpen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JSociosOpenMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout JModificarUsuariosLayout = new javax.swing.GroupLayout(JModificarUsuarios);
         JModificarUsuarios.setLayout(JModificarUsuariosLayout);
@@ -90,6 +102,11 @@ public class VOpciones extends javax.swing.JFrame {
 
         JPrestamosOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467284813_OFFice-90.png"))); // NOI18N
         JPrestamosOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JPrestamosOpen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JPrestamosOpenMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout JVerContabilidadLayout = new javax.swing.GroupLayout(JVerContabilidad);
         JVerContabilidad.setLayout(JVerContabilidadLayout);
@@ -104,6 +121,11 @@ public class VOpciones extends javax.swing.JFrame {
 
         JBibliotecaOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467286183_bookshelf.png"))); // NOI18N
         JBibliotecaOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JBibliotecaOpen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JBibliotecaOpenMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout JModificarBibliotecaLayout = new javax.swing.GroupLayout(JModificarBiblioteca);
         JModificarBiblioteca.setLayout(JModificarBibliotecaLayout);
@@ -130,11 +152,13 @@ public class VOpciones extends javax.swing.JFrame {
 
         jMenu1.setText("Opciones");
 
-        jMenuItem1.setText("Cerrar Sesión");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Salir");
-        jMenu1.add(jMenuItem2);
+        JMenuCerrarSesion.setText("Cerrar Sesión");
+        JMenuCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuCerrarSesionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(JMenuCerrarSesion);
 
         jMenuBar1.add(jMenu1);
 
@@ -199,6 +223,36 @@ public class VOpciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JLibrosOpenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLibrosOpenMouseClicked
+        OpcionesControlador OpcionesControlador = new OpcionesControlador();
+        OpcionesControlador.actionPerformedJLibrosOpen(evt);
+        this.setVisible(false);
+    }//GEN-LAST:event_JLibrosOpenMouseClicked
+
+    private void JSociosOpenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JSociosOpenMouseClicked
+        OpcionesControlador OpcionesControlador = new OpcionesControlador();
+        OpcionesControlador.actionPerformedJSociosOpen(evt);
+        this.setVisible(false);
+    }//GEN-LAST:event_JSociosOpenMouseClicked
+
+    private void JPrestamosOpenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPrestamosOpenMouseClicked
+        OpcionesControlador OpcionesControlador = new OpcionesControlador();
+        OpcionesControlador.actionPerformedJPrestamosOpen(evt);
+        this.setVisible(false);
+    }//GEN-LAST:event_JPrestamosOpenMouseClicked
+
+    private void JBibliotecaOpenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBibliotecaOpenMouseClicked
+        OpcionesControlador OpcionesControlador = new OpcionesControlador();
+        OpcionesControlador.actionPerformedJBibliotecaOpen(evt);
+        this.setVisible(false);
+    }//GEN-LAST:event_JBibliotecaOpenMouseClicked
+
+    private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
+        SalirControlador SalirControlador = new SalirControlador();
+        SalirControlador.actionPerformed(evt);
+        this.setVisible(false);
+    }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,13 +290,14 @@ public class VOpciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JBibliotecaOpen;
-    private javax.swing.JLabel JLibrosOpen;
+    public javax.swing.JLabel JBibliotecaOpen;
+    public javax.swing.JLabel JLibrosOpen;
+    private javax.swing.JMenuItem JMenuCerrarSesion;
     private javax.swing.JPanel JModificarBiblioteca;
     private javax.swing.JPanel JModificarLibros;
     private javax.swing.JPanel JModificarUsuarios;
-    private javax.swing.JLabel JPrestamosOpen;
-    private javax.swing.JLabel JSociosOpen;
+    public javax.swing.JLabel JPrestamosOpen;
+    public javax.swing.JLabel JSociosOpen;
     private javax.swing.JPanel JVerContabilidad;
     private javax.swing.JLabel jBiblioteca;
     private javax.swing.JLabel jIconLeeyAprende;
@@ -253,8 +308,6 @@ public class VOpciones extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel jPrestamos;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
