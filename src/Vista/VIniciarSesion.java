@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.IniciarSesionControlador;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -13,11 +14,29 @@ import Controlador.IniciarSesionControlador;
  */
 public class VIniciarSesion extends javax.swing.JFrame {
 
+    private static String usuario;
+    private static String login;
+    private static ResourceBundle propertiesLogins;
     /**
      * Creates new form IniciarSesion
      */
     public VIniciarSesion() {
         initComponents();
+        if(propertiesLogins == null){
+             propertiesLogins = ResourceBundle.getBundle("logins");
+            try {
+                if(propertiesLogins.getString("login").equals("true")){
+                JRecordarUsuario.setSelected(true);
+                usuario = propertiesLogins.getString("usuario");
+                JUsuarioInicio.setText(usuario);
+                } else if(!propertiesLogins.getString("login").equals("true") && !propertiesLogins.getString("login").equals("false")){
+                    JAnounce.setText("Error in configuration file: Cannot reach TRUE or FALSE value");
+                }
+            } catch (java.util.MissingResourceException e) {
+                System.err.println("Error in configuration file: " + e.getMessage());
+                JAnounce.setText("Error in configuration file: " + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -42,6 +61,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
         JContraseñaInicio = new javax.swing.JPasswordField();
         JSesionIcon = new javax.swing.JPanel();
         jIconSession = new javax.swing.JLabel();
+        JAnounce = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,22 +140,28 @@ public class VIniciarSesion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jUsuario)
-                            .addComponent(jContraseña))
-                        .addGap(47, 47, 47))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jUsuario)
+                                    .addComponent(jContraseña))
+                                .addGap(47, 47, 47))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(JRecordarUsuario)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(JIngresar)
+                            .addComponent(JUsuarioInicio)
+                            .addComponent(JContraseñaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(JSesionIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(JRecordarUsuario)
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(JIngresar)
-                    .addComponent(JUsuarioInicio)
-                    .addComponent(JContraseñaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addComponent(JSesionIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +186,8 @@ public class VIniciarSesion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JRecordarUsuario)
                     .addComponent(JIngresar))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(JAnounce))
         );
 
         pack();
@@ -208,6 +235,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JAnounce;
     private javax.swing.JPanel JCodeWorkIcon;
     public javax.swing.JPasswordField JContraseñaInicio;
     public javax.swing.JButton JIngresar;

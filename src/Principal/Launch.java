@@ -10,5 +10,4 @@ public class Launch {
         IniciarSesion.setVisible(true);
         IniciarSesion.setLocationRelativeTo(null);
     }
-    
 }

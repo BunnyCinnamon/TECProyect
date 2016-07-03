@@ -32,5 +32,4 @@ public class IniciarSesionControlador implements ActionListener{
         o.setLocationRelativeTo(null);
         }
     }
-    
 }
