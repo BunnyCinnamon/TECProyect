@@ -26,8 +26,7 @@ public class IniciarSesionDAO {
                 prs.setString(2, adm.getContraseña());
                 rs = prs.executeQuery();
                 if(rs.next()){
-                    AdministradorBean AdministradorBean = new AdministradorBean();
-                    AdministradorBean.setidAdministrador(rs.getInt(1));
+                    adm.setidAdministrador(rs.getInt(1));
                     CORRECT = true;
                 }
                 rs.close();

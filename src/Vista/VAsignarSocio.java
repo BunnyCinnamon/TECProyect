@@ -40,7 +40,6 @@ public class VAsignarSocio extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         JMenuOpciones = new javax.swing.JMenu();
         JMenuSalir = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,9 +83,6 @@ public class VAsignarSocio extends javax.swing.JFrame {
         JMenuOpciones.add(JMenuSalir);
 
         jMenuBar1.add(JMenuOpciones);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -186,7 +182,6 @@ public class VAsignarSocio extends javax.swing.JFrame {
     private javax.swing.JLabel jIconLeeyAprende;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

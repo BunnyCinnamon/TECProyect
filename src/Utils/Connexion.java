@@ -30,7 +30,6 @@ public class Connexion {
             Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, n, null);
         } finally {
             try {
-                System.out.println("LOOOOOOOOOOOOL");
                 conn.close();
             } catch (SQLException m){
                 Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, m, null);

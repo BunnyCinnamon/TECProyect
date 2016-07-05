@@ -6,7 +6,10 @@ import Classes.Beans.AdministradorBean;
 public class OpcionesDAO {
     
     public boolean CheckAdmin(AdministradorBean adb) {
-     return true;
+            boolean ISADMIN = false;
+            if(adb.getidAdministrador() == 0){
+     ISADMIN = true;
+            }
+        return ISADMIN;
     }
-    
 }

@@ -1,10 +1,8 @@
 
 package Controlador;
 
-import java.util.EventListener;
 import Classes.Beans.AdministradorBean;
 import Modelo.IniciarSesionDAO;
-import Vista.VIniciarSesion;
 import Vista.VOpciones;
 import Vista.VIniciarSesion;
 import java.awt.event.ActionEvent;

@@ -21,6 +21,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuSalirActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -118,6 +121,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Regresar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JRegresarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="JTabbedRegistroLibro">
 
@@ -158,8 +164,8 @@
                                               <Component id="JISBNText" min="-2" pref="142" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="jNPag" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="JNPagText" min="-2" pref="56" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                              <Component id="JSpinnerNPag" min="-2" pref="56" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jNPag3" min="-2" max="-2" attributes="0"/>
                                           </Group>
@@ -225,9 +231,9 @@
                                   <Component id="jISBN" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="JISBNText" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jNPag" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JNPagText" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jNPag3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="JCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JSpinnerNPag" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -292,11 +298,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="N&#xb0; P&#xe1;g:"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="JNPagText">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -380,7 +381,8 @@
                 <Component class="javax.swing.JTable" name="JTableRLibro">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="9" rowCount="0">
+                      <Table columnCount="10" rowCount="0">
+                        <Column editable="true" title="id" type="java.lang.Object"/>
                         <Column editable="true" title="Titulo" type="java.lang.Object"/>
                         <Column editable="true" title="ISBN" type="java.lang.Object"/>
                         <Column editable="true" title="N&#xb0; Pag" type="java.lang.Object"/>
@@ -394,6 +396,11 @@
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -510,16 +517,25 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Ingresar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarLibroActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="JModificarLibroTabla">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Modificar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JModificarLibroTablaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="JEliminarLibroTabla">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Eliminar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JEliminarLibroTablaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel5">
                       <Properties>
@@ -605,6 +621,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Buscar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBuscarLibroActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="JCheckTitulo">
                       <Properties>
@@ -725,6 +744,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jNPag3">
@@ -736,6 +756,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="JCantidad">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="JSpinnerNPag">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -1038,6 +1063,9 @@
                           <Color id="Cursor Por defecto"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JEliminarSocioTablaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel8">
                       <Properties>
@@ -1051,11 +1079,17 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Ingresar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarSocioActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="JModificarSocioTabla">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Modificar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JModificarSocioTablaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
@@ -1183,6 +1217,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Buscar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBuscarSocioActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="JCheckEstado">
                       <Properties>
@@ -1486,6 +1523,9 @@
                           <Color id="Cursor Por defecto"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JEliminarAutorTablaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel10">
                       <Properties>
@@ -1499,11 +1539,17 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Ingresar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarAutorActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="JModificarAutorTabla">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Modificar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JModificarAutorTablaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel6">
                       <Properties>
@@ -1606,6 +1652,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Buscar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBuscarSocio1ActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1715,8 +1764,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="JComboEstatusEditorial" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                                  <Component id="JNombreTextEditorial" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                                  <Component id="JComboEstatusEditorial" min="-2" pref="74" max="-2" attributes="0"/>
+                                  <Component id="JNombreTextEditorial" min="-2" pref="169" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -1730,54 +1779,60 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel13" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jTitulo15" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="JLocalizacionText" min="-2" pref="153" max="-2" attributes="0"/>
-                                      </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jTitulo15" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="JLocalizacionText" min="-2" pref="153" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel14" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jTitulo16" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="JAreaText" min="-2" pref="157" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jTitulo17" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="JComboEstatusArea" min="-2" pref="74" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel13" min="-2" pref="210" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="JIngresarNuevoLocalizacion" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="JModificarLocalizacion" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="JEliminarLocalizacion" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="JIngresarNuevaArea" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="JModificarArea" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="JEliminarArea" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel14" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jTitulo16" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="JAreaText" min="-2" pref="157" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jTitulo17" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="JComboEstatusArea" min="-2" pref="74" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jScrollPane10" pref="0" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane9" min="-2" pref="229" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jScrollPane10" pref="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="JIngresarNuevoLocalizacion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="JModificarLocalizacion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="JEliminarLocalizacion" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="JIngresarNuevaArea" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="JModificarArea" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="JEliminarArea" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane9" min="-2" pref="229" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1881,6 +1936,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingresar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarNuevoEditorialActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -1889,6 +1947,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JModificarEditorialActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -1897,6 +1958,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JEliminarEditorialActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -2008,6 +2072,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingresar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarNuevoLocalizacionActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -2016,6 +2083,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JModificarLocalizacionActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -2024,6 +2094,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JEliminarLocalizacionActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -2032,6 +2105,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingresar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarNuevaAreaActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -2040,6 +2116,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JModificarAreaActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -2048,6 +2127,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JEliminarAreaActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
