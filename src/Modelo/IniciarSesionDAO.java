@@ -1,4 +1,3 @@
-
 package Modelo;
 
 import Classes.Beans.AdministradorBean;
@@ -14,32 +13,32 @@ public class IniciarSesionDAO {
 
     Connection conn;
     ResultSet rs;
-    
-    private final String SQL_CHECK_PASSWORD="SELECT idAdministrador FROM Administador WHERE usuario=? and contraseña=?";
-    
+
+    private final String SQL_CHECK_PASSWORD = "SELECT IdAdministrador FROM Administrador WHERE Usuario=? AND Constraseña=?";
+
     public boolean CheckPassword(AdministradorBean adm) {
         boolean CORRECT = false;
-        try{
-        conn = Connexion.getConnection();
-            try (PreparedStatement prs = conn.prepareStatement(SQL_CHECK_PASSWORD)) {
-                prs.setString(1, adm.getUsuario());
-                prs.setString(2, adm.getContraseña());
-                rs = prs.executeQuery();
-                if(rs.next()){
-                    adm.setidAdministrador(rs.getInt(1));
-                    CORRECT = true;
-                }
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_CHECK_PASSWORD);
+            prs.setString(1, adm.getUsuario());
+            prs.setString(2, adm.getContraseña());
+            rs = prs.executeQuery();
+            if (rs.next()) {
+                adm.setidAdministrador(rs.getInt(1));
+                CORRECT = true;
                 rs.close();
+                prs.close();
             }
-        } catch(SQLException n){
-        Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+        } catch (SQLException n) {
+            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
         } finally {
-            try{
+            try {
                 conn.close();
-            } catch (SQLException m){
+            } catch (SQLException m) {
                 Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
             }
         }
-    return CORRECT;
+        return CORRECT;
     }
 }

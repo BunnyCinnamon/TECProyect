@@ -66,7 +66,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JTabbedRegistroLibro" max="32767" attributes="0"/>
+                      <Component id="JTabbedRegistroLibro" pref="831" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -194,13 +194,13 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                               <Component id="jISBN4" min="-2" pref="56" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="JAreaLibro" max="32767" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                                              <Component id="JAreaLibro" min="-2" pref="56" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jISBN5" min="-2" pref="56" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="JCantidad" max="32767" attributes="0"/>
+                                                  <Component id="JSpinnerCantidad" max="32767" attributes="0"/>
                                                   <Component id="JEstadoLibro" min="-2" pref="60" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -232,7 +232,7 @@
                                   <Component id="JISBNText" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jNPag" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jNPag3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JSpinnerCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="JSpinnerNPag" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -317,11 +317,10 @@
                 <Component class="javax.swing.JList" name="JListAutor">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="William Shakespeare"/>
-                        <StringItem index="1" value="Agatha Christie"/>
-                        <StringItem index="2" value="Barbara Cartland"/>
-                        <StringItem index="3" value="Danielle Steel"/>
+                      <StringArray count="3">
+                        <StringItem index="0" value="Default"/>
+                        <StringItem index="1" value="J"/>
+                        <StringItem index="2" value="H"/>
                       </StringArray>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -353,11 +352,10 @@
                 <Component class="javax.swing.JList" name="JListEditorial">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Editorial Santillana"/>
-                        <StringItem index="1" value="Penguin Random House Grupo Editorial"/>
-                        <StringItem index="2" value="Editorial Planeta"/>
-                        <StringItem index="3" value="Cafebrer&#xed;a el P&#xe9;ndulo"/>
+                      <StringArray count="3">
+                        <StringItem index="0" value="Default"/>
+                        <StringItem index="1" value="Santillana"/>
+                        <StringItem index="2" value="RanaSabia"/>
                       </StringArray>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -382,15 +380,15 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="10" rowCount="0">
-                        <Column editable="true" title="id" type="java.lang.Object"/>
-                        <Column editable="true" title="Titulo" type="java.lang.Object"/>
+                        <Column editable="true" title="Id" type="java.lang.Object"/>
                         <Column editable="true" title="ISBN" type="java.lang.Object"/>
+                        <Column editable="true" title="Titulo" type="java.lang.Object"/>
                         <Column editable="true" title="N&#xb0; Pag" type="java.lang.Object"/>
+                        <Column editable="true" title="Estado" type="java.lang.Object"/>
                         <Column editable="true" title="Autor" type="java.lang.Object"/>
                         <Column editable="true" title="Editorial" type="java.lang.Object"/>
                         <Column editable="true" title="Localizaci&#xf3;n" type="java.lang.Object"/>
                         <Column editable="true" title="&#xc1;rea" type="java.lang.Object"/>
-                        <Column editable="true" title="Estado" type="java.lang.Object"/>
                         <Column editable="true" title="Existencias" type="java.lang.Object"/>
                       </Table>
                     </Property>
@@ -577,18 +575,13 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="JCheckNPag" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="JCheckTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="JCheckISBN" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="JCheckEditorial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="JCheckAutor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="JCheckTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JCheckISBN" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="JCheckEditorial" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JCheckAutor" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -607,9 +600,7 @@
                                   <Component id="JCheckISBN" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="JCheckEditorial" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="JCheckNPag" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="10" max="32767" attributes="0"/>
+                              <EmptySpace pref="38" max="32767" attributes="0"/>
                               <Component id="JBuscarLibro" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -644,18 +635,6 @@
                         </Property>
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="ISBN"/>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JCheckBox" name="JCheckNPag">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Consolas" size="14" style="0"/>
-                        </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="N&#xb0; Pag"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -708,21 +687,31 @@
             <Component class="javax.swing.JComboBox" name="JLocalizacionLibro">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="Default"/>
+                    <StringItem index="1" value="A1"/>
+                    <StringItem index="2" value="A2"/>
+                  </StringArray>
                 </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JComboBox" name="JAreaLibro">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="Default"/>
+                    <StringItem index="1" value="Aventura"/>
+                    <StringItem index="2" value="Accion"/>
+                  </StringArray>
                 </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jISBN5">
@@ -755,7 +744,7 @@
                 <Property name="text" type="java.lang.String" value="Cant:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSpinner" name="JCantidad">
+            <Component class="javax.swing.JSpinner" name="JSpinnerCantidad">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -788,31 +777,31 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane4" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jTitulo5" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jNPag1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="JApellidoMTextSocio" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                                              <Component id="JTelefonoTextSocio" min="-2" pref="123" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jISBN1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="JApellidoPTextSocio" min="-2" pref="317" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <Component id="jTitulo4" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="JCalleTextSocio" min="-2" pref="150" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="jTitulo6" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="JNCalleTextSocio" min="-2" pref="150" max="-2" attributes="0"/>
+                                              <Component id="JNCalleTextSocio" min="-2" pref="139" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jTitulo2" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jTitulo3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -823,21 +812,32 @@
                                                   <Component id="JEstadoTextSocio" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Component id="jTitulo5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jNPag1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="JApellidoMTextSocio" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jISBN1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="JApellidoPTextSocio" max="32767" attributes="0"/>
+                                          </Group>
                                           <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               <Component id="jTitulo1" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="JNombreTextSocio" min="-2" pref="397" max="-2" attributes="0"/>
+                                              <Component id="JNombreTextSocio" min="-2" pref="174" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="JTextUsuario" min="-2" pref="164" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                                      <Component id="JTelefonoTextSocio" min="-2" pref="123" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" pref="24" max="32767" attributes="0"/>
-                              <Component id="JTabbedBusquedaSocios" min="-2" pref="291" max="-2" attributes="0"/>
+                              <Component id="JTabbedBusquedaSocios" min="-2" pref="273" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -855,6 +855,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="JNombreTextSocio" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTitulo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JTextUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -1029,7 +1031,7 @@
                                   <Component id="JIngresarSocio" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="JModificarSocioTabla" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="47" max="32767" attributes="0"/>
+                              <EmptySpace pref="29" max="32767" attributes="0"/>
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1120,33 +1122,22 @@
                               <Component id="JBuscarSocio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="JCheckApellidoM" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="JCheckMunicipio" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="JCheckNombre1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="JCheckTelefono" min="-2" max="-2" attributes="0"/>
+                                      <Component id="JCheckNombre" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="JCheckApellidoP" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="JCheckApellidoM" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="JCheckEstado" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="JCheckNombre" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="JCheckApellidoP" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="JCheckEstado" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                      <Component id="JCheckMunicipio" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1159,17 +1150,13 @@
                                   <Component id="JCheckApellidoP" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="JCheckApellidoM" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JCheckEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="JCheckApellidoM" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="JCheckMunicipio" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JCheckTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JCheckNombre1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JCheckEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                               <Component id="JBuscarSocio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="14" max="32767" attributes="0"/>
                           </Group>
@@ -1245,30 +1232,6 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JCheckBox" name="JCheckTelefono">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Consolas" size="14" style="0"/>
-                        </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JCheckBox" name="JCheckNombre1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Consolas" size="14" style="0"/>
-                        </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Calle"/>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                      </AuxValues>
-                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
@@ -1283,16 +1246,28 @@
                 <Component class="javax.swing.JTable" name="JTableRSocio">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
+                      <Table columnCount="7" rowCount="0">
+                        <Column editable="true" title="Id" type="java.lang.Object"/>
                         <Column editable="true" title="Nombre" type="java.lang.Object"/>
                         <Column editable="true" title="Apellido Paterno" type="java.lang.Object"/>
                         <Column editable="true" title="Apellido Materno" type="java.lang.Object"/>
                         <Column editable="true" title="Direcci&#xf3;n" type="java.lang.Object"/>
                         <Column editable="true" title="Tel&#xe9;fono" type="java.lang.Object"/>
+                        <Column editable="true" title="Contrase&#xf1;a" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -1330,6 +1305,16 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Consolas" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Usuario:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="JTextUsuario">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JInternalFrame" name="JInternalAutor">
@@ -1670,7 +1655,8 @@
                 <Component class="javax.swing.JTable" name="JTableRSocio1">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="0">
+                      <Table columnCount="5" rowCount="0">
+                        <Column editable="true" title="Id" type="java.lang.Object"/>
                         <Column editable="true" title="Nombre" type="java.lang.Object"/>
                         <Column editable="true" title="Apellido Paterno" type="java.lang.Object"/>
                         <Column editable="true" title="Apellido Materno" type="java.lang.Object"/>
@@ -1685,7 +1671,7 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="Apellido Paterno"/>
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
@@ -1695,7 +1681,12 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="Estatus"/>
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
@@ -1975,13 +1966,19 @@
                 <Component class="javax.swing.JTable" name="JTableREditorial">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="0">
+                      <Table columnCount="3" rowCount="0">
+                        <Column editable="true" title="Id" type="java.lang.Object"/>
                         <Column editable="true" title="Nombre" type="java.lang.Object"/>
                         <Column editable="true" title="Estatus" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -2144,13 +2141,19 @@
                 <Component class="javax.swing.JTable" name="JTableRArea">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="0">
+                      <Table columnCount="3" rowCount="0">
+                        <Column editable="true" title="Id" type="java.lang.Object"/>
                         <Column editable="true" title="Secci&#xf3;n" type="java.lang.Object"/>
                         <Column editable="true" title="Estatus" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -2183,12 +2186,18 @@
                 <Component class="javax.swing.JTable" name="JTableRLocalizacion">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="1" rowCount="0">
+                      <Table columnCount="2" rowCount="0">
+                        <Column editable="true" title="Id" type="java.lang.Object"/>
                         <Column editable="true" title="Pasillo" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>

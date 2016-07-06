@@ -243,8 +243,7 @@ public class VOpciones extends javax.swing.JFrame {
 
     private void JBibliotecaOpenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBibliotecaOpenMouseClicked
         OpcionesControlador OpcionesControlador = new OpcionesControlador();
-        OpcionesControlador.actionPerformedJBibliotecaOpen(evt);
-        this.setVisible(false);
+        OpcionesControlador.actionPerformedJBibliotecaOpen(this);
     }//GEN-LAST:event_JBibliotecaOpenMouseClicked
 
     private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed

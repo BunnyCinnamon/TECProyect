@@ -45,7 +45,6 @@ public class VAdministrador extends javax.swing.JFrame {
         JBuscarLibro = new javax.swing.JButton();
         JCheckTitulo = new javax.swing.JCheckBox();
         JCheckISBN = new javax.swing.JCheckBox();
-        JCheckNPag = new javax.swing.JCheckBox();
         JCheckAutor = new javax.swing.JCheckBox();
         JCheckEditorial = new javax.swing.JCheckBox();
         jISBN3 = new javax.swing.JLabel();
@@ -55,7 +54,7 @@ public class VAdministrador extends javax.swing.JFrame {
         jISBN5 = new javax.swing.JLabel();
         JEstadoLibro = new javax.swing.JComboBox<>();
         jNPag3 = new javax.swing.JLabel();
-        JCantidad = new javax.swing.JSpinner();
+        JSpinnerCantidad = new javax.swing.JSpinner();
         JSpinnerNPag = new javax.swing.JSpinner();
         JInternalSocio = new javax.swing.JInternalFrame();
         jTitulo1 = new javax.swing.JLabel();
@@ -88,10 +87,10 @@ public class VAdministrador extends javax.swing.JFrame {
         JBuscarSocio = new javax.swing.JButton();
         JCheckEstado = new javax.swing.JCheckBox();
         JCheckMunicipio = new javax.swing.JCheckBox();
-        JCheckTelefono = new javax.swing.JCheckBox();
-        JCheckNombre1 = new javax.swing.JCheckBox();
         jScrollPane4 = new javax.swing.JScrollPane();
         JTableRSocio = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        JTextUsuario = new javax.swing.JTextField();
         JInternalAutor = new javax.swing.JInternalFrame();
         jTitulo7 = new javax.swing.JLabel();
         JNombreTextAutor = new javax.swing.JTextField();
@@ -180,7 +179,7 @@ public class VAdministrador extends javax.swing.JFrame {
         jLabel1.setText("Autor");
 
         JListAutor.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "William Shakespeare", "Agatha Christie", "Barbara Cartland", "Danielle Steel" };
+            String[] strings = { "Default", "J", "H" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -191,7 +190,7 @@ public class VAdministrador extends javax.swing.JFrame {
         jLabel2.setText("Editorial");
 
         JListEditorial.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Editorial Santillana", "Penguin Random House Grupo Editorial", "Editorial Planeta", "Cafebrería el Péndulo" };
+            String[] strings = { "Default", "Santillana", "RanaSabia" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -203,7 +202,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "Titulo", "ISBN", "N° Pag", "Autor", "Editorial", "Localización", "Área", "Estado", "Existencias"
+                "Id", "ISBN", "Titulo", "N° Pag", "Estado", "Autor", "Editorial", "Localización", "Área", "Existencias"
             }
         ));
         jScrollPane1.setViewportView(JTableRLibro);
@@ -287,10 +286,6 @@ public class VAdministrador extends javax.swing.JFrame {
         JCheckISBN.setSelected(true);
         JCheckISBN.setText("ISBN");
 
-        JCheckNPag.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckNPag.setSelected(true);
-        JCheckNPag.setText("N° Pag");
-
         JCheckAutor.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCheckAutor.setSelected(true);
         JCheckAutor.setText("Autor");
@@ -310,15 +305,12 @@ public class VAdministrador extends javax.swing.JFrame {
             .addGroup(JInternalBuscarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JCheckNPag)
-                    .addGroup(JInternalBuscarLayout.createSequentialGroup()
-                        .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCheckTitulo)
-                            .addComponent(JCheckISBN))
-                        .addGap(18, 18, 18)
-                        .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCheckEditorial)
-                            .addComponent(JCheckAutor))))
+                    .addComponent(JCheckTitulo)
+                    .addComponent(JCheckISBN))
+                .addGap(18, 18, 18)
+                .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JCheckEditorial)
+                    .addComponent(JCheckAutor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JInternalBuscarLayout.setVerticalGroup(
@@ -332,9 +324,7 @@ public class VAdministrador extends javax.swing.JFrame {
                 .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JCheckISBN)
                     .addComponent(JCheckEditorial))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JCheckNPag)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(JBuscarLibro)
                 .addContainerGap())
         );
@@ -346,6 +336,10 @@ public class VAdministrador extends javax.swing.JFrame {
 
         jISBN4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jISBN4.setText("Área:");
+
+        JLocalizacionLibro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "A1", "A2" }));
+
+        JAreaLibro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Aventura", "Accion" }));
 
         jISBN5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jISBN5.setText("Estado:");
@@ -400,13 +394,13 @@ public class VAdministrador extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JInternalLibroLayout.createSequentialGroup()
                                         .addGap(4, 4, 4)
                                         .addComponent(jISBN4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JAreaLibro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(JAreaLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jISBN5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(JInternalLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(JCantidad)
+                                            .addComponent(JSpinnerCantidad)
                                             .addComponent(JEstadoLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(JTabbedAdminLibros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -428,7 +422,7 @@ public class VAdministrador extends javax.swing.JFrame {
                             .addComponent(JISBNText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jNPag)
                             .addComponent(jNPag3)
-                            .addComponent(JCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JSpinnerCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JSpinnerNPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(JInternalLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -520,7 +514,7 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(JIngresarSocio)
                     .addComponent(JModificarSocioTabla))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addContainerGap())
         );
@@ -572,14 +566,6 @@ public class VAdministrador extends javax.swing.JFrame {
         JCheckMunicipio.setSelected(true);
         JCheckMunicipio.setText("Municipio");
 
-        JCheckTelefono.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckTelefono.setSelected(true);
-        JCheckTelefono.setText("Teléfono");
-
-        JCheckNombre1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckNombre1.setSelected(true);
-        JCheckNombre1.setText("Calle");
-
         javax.swing.GroupLayout JInternalBuscar1Layout = new javax.swing.GroupLayout(JInternalBuscar1.getContentPane());
         JInternalBuscar1.getContentPane().setLayout(JInternalBuscar1Layout);
         JInternalBuscar1Layout.setHorizontalGroup(
@@ -591,24 +577,16 @@ public class VAdministrador extends javax.swing.JFrame {
             .addGroup(JInternalBuscar1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JInternalBuscar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JCheckApellidoM)
                     .addGroup(JInternalBuscar1Layout.createSequentialGroup()
-                        .addComponent(JCheckMunicipio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JCheckNombre1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JCheckTelefono))
+                        .addComponent(JCheckNombre)
+                        .addGap(18, 18, 18)
+                        .addComponent(JCheckApellidoP))
                     .addGroup(JInternalBuscar1Layout.createSequentialGroup()
-                        .addGroup(JInternalBuscar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(JInternalBuscar1Layout.createSequentialGroup()
-                                .addComponent(JCheckApellidoM)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JCheckEstado))
-                            .addGroup(JInternalBuscar1Layout.createSequentialGroup()
-                                .addComponent(JCheckNombre)
-                                .addGap(18, 18, 18)
-                                .addComponent(JCheckApellidoP)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(JCheckEstado)
+                        .addGap(7, 7, 7)
+                        .addComponent(JCheckMunicipio)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JInternalBuscar1Layout.setVerticalGroup(
             JInternalBuscar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,15 +596,12 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addComponent(JCheckNombre)
                     .addComponent(JCheckApellidoP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JInternalBuscar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JCheckApellidoM)
-                    .addComponent(JCheckEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JCheckApellidoM)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JInternalBuscar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JCheckMunicipio)
-                    .addComponent(JCheckTelefono)
-                    .addComponent(JCheckNombre1))
-                .addGap(10, 10, 10)
+                    .addComponent(JCheckEstado))
+                .addGap(13, 13, 13)
                 .addComponent(JBuscarSocio)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -638,10 +613,13 @@ public class VAdministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Apellido Paterno", "Apellido Materno", "Dirección", "Teléfono"
+                "Id", "Nombre", "Apellido Paterno", "Apellido Materno", "Dirección", "Teléfono", "Contraseña"
             }
         ));
         jScrollPane4.setViewportView(JTableRSocio);
+
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel3.setText("Usuario:");
 
         javax.swing.GroupLayout JInternalSocioLayout = new javax.swing.GroupLayout(JInternalSocio.getContentPane());
         JInternalSocio.getContentPane().setLayout(JInternalSocioLayout);
@@ -652,19 +630,18 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addGroup(JInternalSocioLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane4))
-                    .addGroup(JInternalSocioLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JInternalSocioLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addGroup(JInternalSocioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(JInternalSocioLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(JInternalSocioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(JInternalSocioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTitulo5)
                                     .addGroup(JInternalSocioLayout.createSequentialGroup()
-                                        .addComponent(jNPag1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JApellidoMTextSocio))
-                                    .addGroup(JInternalSocioLayout.createSequentialGroup()
-                                        .addComponent(jISBN1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JApellidoPTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(79, 79, 79)
+                                        .addComponent(JTelefonoTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JInternalSocioLayout.createSequentialGroup()
+                                .addGroup(JInternalSocioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(JInternalSocioLayout.createSequentialGroup()
                                         .addComponent(jTitulo4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -672,7 +649,7 @@ public class VAdministrador extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jTitulo6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JNCalleTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(JNCalleTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(JInternalSocioLayout.createSequentialGroup()
                                         .addGroup(JInternalSocioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTitulo2)
@@ -681,16 +658,26 @@ public class VAdministrador extends javax.swing.JFrame {
                                         .addGroup(JInternalSocioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(JMunicipioTextSocio)
                                             .addComponent(JEstadoTextSocio)))
-                                    .addComponent(jTitulo5)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JInternalSocioLayout.createSequentialGroup()
+                                    .addGroup(JInternalSocioLayout.createSequentialGroup()
+                                        .addComponent(jNPag1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(JApellidoMTextSocio))
+                                    .addGroup(JInternalSocioLayout.createSequentialGroup()
+                                        .addComponent(jISBN1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(JApellidoPTextSocio))
+                                    .addGroup(JInternalSocioLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(jTitulo1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JNombreTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(JInternalSocioLayout.createSequentialGroup()
-                                .addGap(101, 101, 101)
-                                .addComponent(JTelefonoTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 24, Short.MAX_VALUE)
-                        .addComponent(JTabbedBusquedaSocios, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(JNombreTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(JTextUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(29, 29, 29)))
+                        .addComponent(JTabbedBusquedaSocios, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addContainerGap())
         );
         JInternalSocioLayout.setVerticalGroup(
@@ -703,7 +690,9 @@ public class VAdministrador extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addGroup(JInternalSocioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JNombreTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTitulo1))
+                            .addComponent(jTitulo1)
+                            .addComponent(jLabel3)
+                            .addComponent(JTextUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(JInternalSocioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JApellidoPTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -871,14 +860,10 @@ public class VAdministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Apellido Paterno", "Apellido Materno", "Estatus"
+                "Id", "Nombre", "Apellido Paterno", "Apellido Materno", "Estatus"
             }
         ));
         jScrollPane5.setViewportView(JTableRSocio1);
-        if (JTableRSocio1.getColumnModel().getColumnCount() > 0) {
-            JTableRSocio1.getColumnModel().getColumn(1).setHeaderValue("Apellido Paterno");
-            JTableRSocio1.getColumnModel().getColumn(3).setHeaderValue("Estatus");
-        }
 
         jTitulo10.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jTitulo10.setText("Estatus:");
@@ -986,7 +971,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Estatus"
+                "Id", "Nombre", "Estatus"
             }
         ));
         jScrollPane8.setViewportView(JTableREditorial);
@@ -1055,7 +1040,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Sección", "Estatus"
+                "Id", "Sección", "Estatus"
             }
         ));
         jScrollPane9.setViewportView(JTableRArea);
@@ -1065,7 +1050,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Pasillo"
+                "Id", "Pasillo"
             }
         ));
         jScrollPane10.setViewportView(JTableRLocalizacion);
@@ -1212,7 +1197,7 @@ public class VAdministrador extends javax.swing.JFrame {
                         .addComponent(JRegresar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(JTabbedRegistroLibro)))
+                        .addComponent(JTabbedRegistroLibro, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1276,9 +1261,10 @@ public class VAdministrador extends javax.swing.JFrame {
     private void JBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarLibroActionPerformed
         AdministradorControlador AdministradorControlador = new AdministradorControlador();
         DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
-        AdministradorControlador.actionPerformedJBuscarLibro(model);
+        AdministradorControlador.actionPerformedJBuscarLibro(model, this);
     }//GEN-LAST:event_JBuscarLibroActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
     /**
      * Registro de Socios*
      */
@@ -1303,6 +1289,7 @@ public class VAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JBuscarSocioActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
     /**
      * Registro de Autor*
      */
@@ -1327,6 +1314,7 @@ public class VAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JBuscarSocio1ActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
     /**
      * Registros de Editorial*
      */
@@ -1343,6 +1331,7 @@ public class VAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JEliminarEditorialActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
     /**
      * Registros de Localización*
      */
@@ -1359,6 +1348,7 @@ public class VAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JEliminarLocalizacionActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
     /**
      * Registros de Area*
      */
@@ -1424,13 +1414,12 @@ public class VAdministrador extends javax.swing.JFrame {
     public javax.swing.JTextField JApellidoMTextSocio;
     public javax.swing.JTextField JApellidoPText1;
     public javax.swing.JTextField JApellidoPTextSocio;
-    private javax.swing.JComboBox<String> JAreaLibro;
+    public javax.swing.JComboBox<String> JAreaLibro;
     public javax.swing.JTextField JAreaText;
     private javax.swing.JButton JBuscarLibro;
     private javax.swing.JButton JBuscarSocio;
     private javax.swing.JButton JBuscarSocio1;
     public javax.swing.JTextField JCalleTextSocio;
-    public javax.swing.JSpinner JCantidad;
     public javax.swing.JCheckBox JCheckApellidoM;
     public javax.swing.JCheckBox JCheckApellidoM1;
     public javax.swing.JCheckBox JCheckApellidoP;
@@ -1440,11 +1429,8 @@ public class VAdministrador extends javax.swing.JFrame {
     public javax.swing.JCheckBox JCheckEstado;
     public javax.swing.JCheckBox JCheckISBN;
     public javax.swing.JCheckBox JCheckMunicipio;
-    public javax.swing.JCheckBox JCheckNPag;
     public javax.swing.JCheckBox JCheckNombre;
-    public javax.swing.JCheckBox JCheckNombre1;
     public javax.swing.JCheckBox JCheckNombre2;
-    public javax.swing.JCheckBox JCheckTelefono;
     public javax.swing.JCheckBox JCheckTitulo;
     public javax.swing.JComboBox<String> JComboEstatusArea;
     public javax.swing.JComboBox<String> JComboEstatusAutor;
@@ -1475,7 +1461,7 @@ public class VAdministrador extends javax.swing.JFrame {
     private javax.swing.JInternalFrame JInternalSocio;
     public javax.swing.JList<String> JListAutor;
     public javax.swing.JList<String> JListEditorial;
-    private javax.swing.JComboBox<String> JLocalizacionLibro;
+    public javax.swing.JComboBox<String> JLocalizacionLibro;
     public javax.swing.JTextField JLocalizacionText;
     private javax.swing.JMenuItem JMenuSalir;
     public javax.swing.JButton JModificarArea;
@@ -1490,6 +1476,7 @@ public class VAdministrador extends javax.swing.JFrame {
     public javax.swing.JTextField JNombreTextEditorial;
     public javax.swing.JTextField JNombreTextSocio;
     private javax.swing.JButton JRegresar;
+    public javax.swing.JSpinner JSpinnerCantidad;
     public javax.swing.JSpinner JSpinnerNPag;
     private javax.swing.JTabbedPane JTabbedAdminLibros;
     private javax.swing.JTabbedPane JTabbedBusquedaSocios;
@@ -1502,6 +1489,7 @@ public class VAdministrador extends javax.swing.JFrame {
     public javax.swing.JTable JTableRSocio;
     public javax.swing.JTable JTableRSocio1;
     public javax.swing.JTextField JTelefonoTextSocio;
+    private javax.swing.JTextField JTextUsuario;
     public javax.swing.JTextField JTituloText;
     private javax.swing.JLabel jISBN;
     private javax.swing.JLabel jISBN1;
@@ -1518,6 +1506,7 @@ public class VAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
