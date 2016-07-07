@@ -1,7 +1,4 @@
-
 package Vista;
-
-import Controlador.SalirControlador;
 
 public class VBuscarLibro extends javax.swing.JFrame {
 
@@ -45,11 +42,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         JRegresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        JMenuSalir = new javax.swing.JMenuItem();
-        JMenuAcciones = new javax.swing.JMenu();
-        JMenuBuscarPrestamos = new javax.swing.JMenuItem();
-        JMenuBuscarSocios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,7 +52,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Titulo", "ISBN", "N° Pag", "Autor", "Editorial", "Localización", "Área", "Estado", "Existencias"
+                "Id", "ISBN", "Titulo", "N° Pag", "Estado", "Autor", "Editorial", "Localización", "Área", "Existencias"
             }
         ));
         jScrollPane1.setViewportView(JTableBLibro);
@@ -214,41 +206,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
                 JRegresarActionPerformed(evt);
             }
         });
-
-        jMenu1.setText("Opciones");
-        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        JMenuSalir.setText("Salir");
-        JMenuSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMenuSalirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(JMenuSalir);
-
-        jMenuBar1.add(jMenu1);
-
-        JMenuAcciones.setText("Editar");
-        JMenuAcciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        JMenuBuscarPrestamos.setText("Saltar a Prestamos");
-        JMenuBuscarPrestamos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMenuBuscarPrestamosActionPerformed(evt);
-            }
-        });
-        JMenuAcciones.add(JMenuBuscarPrestamos);
-
-        JMenuBuscarSocios.setText("Saltar a Buscar Socios");
-        JMenuBuscarSocios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMenuBuscarSociosActionPerformed(evt);
-            }
-        });
-        JMenuAcciones.add(JMenuBuscarSocios);
-
-        jMenuBar1.add(JMenuAcciones);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -341,60 +298,10 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRegresarActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformedReturn(evt);
         this.setVisible(false);
     }//GEN-LAST:event_JRegresarActionPerformed
 
-    private void JMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuSalirActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformed(evt);
-        this.setVisible(false);
-    }//GEN-LAST:event_JMenuSalirActionPerformed
-
-    private void JMenuBuscarPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuBuscarPrestamosActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformedVPrestamo(evt);
-        this.setVisible(false);
-    }//GEN-LAST:event_JMenuBuscarPrestamosActionPerformed
-
-    private void JMenuBuscarSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuBuscarSociosActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformedVBuscarSocio(evt);
-        this.setVisible(false);
-    }//GEN-LAST:event_JMenuBuscarSociosActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VBuscarLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VBuscarLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VBuscarLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VBuscarLibro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VBuscarLibro().setVisible(true);
@@ -414,10 +321,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
     private javax.swing.JInternalFrame JInternalEditar1;
     public javax.swing.JList<String> JListAutor;
     public javax.swing.JList<String> JListEditorial;
-    private javax.swing.JMenu JMenuAcciones;
-    private javax.swing.JMenuItem JMenuBuscarPrestamos;
-    private javax.swing.JMenuItem JMenuBuscarSocios;
-    private javax.swing.JMenuItem JMenuSalir;
     private javax.swing.JButton JModificarLibroTabla;
     public javax.swing.JTextField JNPagText;
     private javax.swing.JButton JRegresar;
@@ -431,7 +334,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel jNPag;
     private javax.swing.JLabel jRegistrarLibro;

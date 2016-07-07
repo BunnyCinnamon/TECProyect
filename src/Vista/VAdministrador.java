@@ -1,13 +1,20 @@
 package Vista;
 
 import Controlador.AdministradorControlador;
-import Controlador.SalirControlador;
+import Controlador.CargarInfoControlador;
 import javax.swing.table.DefaultTableModel;
 
 public class VAdministrador extends javax.swing.JFrame {
 
+    CargarInfoControlador Cargar = new CargarInfoControlador();
+    
     public VAdministrador() {
         initComponents();
+        JLocalizacionLibro.removeAllItems();
+        JAreaLibro.removeAllItems();
+        JListAutor.setListData(new String[0]);
+        JListEditorial.setListData(new String[0]);
+        Cargar.CargarInfo(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -18,7 +25,6 @@ public class VAdministrador extends javax.swing.JFrame {
         jIconLeeyAprende = new javax.swing.JLabel();
         jRegistrarLibro = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        JRegresar = new javax.swing.JButton();
         JTabbedRegistroLibro = new javax.swing.JTabbedPane();
         JInternalLibro = new javax.swing.JInternalFrame();
         jTitulo = new javax.swing.JLabel();
@@ -85,8 +91,7 @@ public class VAdministrador extends javax.swing.JFrame {
         JCheckApellidoP = new javax.swing.JCheckBox();
         JCheckApellidoM = new javax.swing.JCheckBox();
         JBuscarSocio = new javax.swing.JButton();
-        JCheckEstado = new javax.swing.JCheckBox();
-        JCheckMunicipio = new javax.swing.JCheckBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPane4 = new javax.swing.JScrollPane();
         JTableRSocio = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -109,7 +114,7 @@ public class VAdministrador extends javax.swing.JFrame {
         JCheckNombre2 = new javax.swing.JCheckBox();
         JCheckApellidoP1 = new javax.swing.JCheckBox();
         JCheckApellidoM1 = new javax.swing.JCheckBox();
-        JBuscarSocio1 = new javax.swing.JButton();
+        JBuscarAutor = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         JTableRSocio1 = new javax.swing.JTable();
         jTitulo10 = new javax.swing.JLabel();
@@ -143,9 +148,8 @@ public class VAdministrador extends javax.swing.JFrame {
         JTableRArea = new javax.swing.JTable();
         jScrollPane10 = new javax.swing.JScrollPane();
         JTableRLocalizacion = new javax.swing.JTable();
+        JRegresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        JMenuSalir = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -155,14 +159,6 @@ public class VAdministrador extends javax.swing.JFrame {
 
         jRegistrarLibro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jRegistrarLibro.setText("Administrador");
-
-        JRegresar.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        JRegresar.setText("Regresar");
-        JRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JRegresarActionPerformed(evt);
-            }
-        });
 
         JInternalLibro.setVisible(true);
 
@@ -178,22 +174,12 @@ public class VAdministrador extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("Autor");
 
-        JListAutor.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Default", "J", "H" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         JListAutor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane2.setViewportView(JListAutor);
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel2.setText("Editorial");
 
-        JListEditorial.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Default", "Santillana", "RanaSabia" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         JListEditorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane3.setViewportView(JListEditorial);
 
@@ -337,10 +323,6 @@ public class VAdministrador extends javax.swing.JFrame {
         jISBN4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jISBN4.setText("Área:");
 
-        JLocalizacionLibro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "A1", "A2" }));
-
-        JAreaLibro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Aventura", "Accion" }));
-
         jISBN5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jISBN5.setText("Estado:");
 
@@ -402,7 +384,7 @@ public class VAdministrador extends javax.swing.JFrame {
                                         .addGroup(JInternalLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(JSpinnerCantidad)
                                             .addComponent(JEstadoLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(JTabbedAdminLibros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -442,8 +424,8 @@ public class VAdministrador extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(JTabbedAdminLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
 
         JTabbedRegistroLibro.addTab("Registros de Libro", JInternalLibro);
@@ -558,13 +540,9 @@ public class VAdministrador extends javax.swing.JFrame {
             }
         });
 
-        JCheckEstado.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckEstado.setSelected(true);
-        JCheckEstado.setText("Estado");
-
-        JCheckMunicipio.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckMunicipio.setSelected(true);
-        JCheckMunicipio.setText("Municipio");
+        jCheckBox1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("Usuario");
 
         javax.swing.GroupLayout JInternalBuscar1Layout = new javax.swing.GroupLayout(JInternalBuscar1.getContentPane());
         JInternalBuscar1.getContentPane().setLayout(JInternalBuscar1Layout);
@@ -577,15 +555,14 @@ public class VAdministrador extends javax.swing.JFrame {
             .addGroup(JInternalBuscar1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JInternalBuscar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JCheckApellidoM)
+                    .addGroup(JInternalBuscar1Layout.createSequentialGroup()
+                        .addComponent(JCheckApellidoM)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JInternalBuscar1Layout.createSequentialGroup()
                         .addComponent(JCheckNombre)
                         .addGap(18, 18, 18)
-                        .addComponent(JCheckApellidoP))
-                    .addGroup(JInternalBuscar1Layout.createSequentialGroup()
-                        .addComponent(JCheckEstado)
-                        .addGap(7, 7, 7)
-                        .addComponent(JCheckMunicipio)))
+                        .addComponent(JCheckApellidoP)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JInternalBuscar1Layout.setVerticalGroup(
@@ -596,14 +573,12 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addComponent(JCheckNombre)
                     .addComponent(JCheckApellidoP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JCheckApellidoM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JInternalBuscar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JCheckMunicipio)
-                    .addComponent(JCheckEstado))
-                .addGap(13, 13, 13)
+                    .addComponent(JCheckApellidoM)
+                    .addComponent(jCheckBox1))
+                .addGap(40, 40, 40)
                 .addComponent(JBuscarSocio)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         JTabbedBusquedaSocios.addTab("Buscar", JInternalBuscar1);
@@ -720,7 +695,7 @@ public class VAdministrador extends javax.swing.JFrame {
                             .addComponent(jTitulo5)
                             .addComponent(JTelefonoTextSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
 
@@ -814,10 +789,10 @@ public class VAdministrador extends javax.swing.JFrame {
         JCheckApellidoM1.setSelected(true);
         JCheckApellidoM1.setText("Apellido Materno");
 
-        JBuscarSocio1.setText("Buscar");
-        JBuscarSocio1.addActionListener(new java.awt.event.ActionListener() {
+        JBuscarAutor.setText("Buscar");
+        JBuscarAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBuscarSocio1ActionPerformed(evt);
+                JBuscarAutorActionPerformed(evt);
             }
         });
 
@@ -827,7 +802,7 @@ public class VAdministrador extends javax.swing.JFrame {
             JInternalBuscar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JInternalBuscar2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JBuscarSocio1)
+                .addComponent(JBuscarAutor)
                 .addGap(101, 101, 101))
             .addGroup(JInternalBuscar2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -849,7 +824,7 @@ public class VAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JCheckApellidoM1)
                 .addGap(38, 38, 38)
-                .addComponent(JBuscarSocio1)
+                .addComponent(JBuscarAutor)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -926,7 +901,7 @@ public class VAdministrador extends javax.swing.JFrame {
                             .addComponent(jTitulo10)
                             .addComponent(JComboEstatusAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1158,27 +1133,21 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addComponent(JEliminarArea))
                 .addGap(19, 19, 19)
                 .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         JTabbedRegistroLibro.addTab("Registros de Editorial/Localización/Área", jInternalFrame4);
 
-        jMenu1.setText("Opciones");
-        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        JMenuSalir.setText("Salir");
-        JMenuSalir.addActionListener(new java.awt.event.ActionListener() {
+        JRegresar.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        JRegresar.setText("Regresar");
+        JRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMenuSalirActionPerformed(evt);
+                JRegresarActionPerformed(evt);
             }
         });
-        jMenu1.add(JMenuSalir);
-
-        jMenuBar1.add(jMenu1);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1208,30 +1177,16 @@ public class VAdministrador extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addComponent(jRegistrarLibro))
                     .addComponent(jIconLeeyAprende)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(JRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(JRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTabbedRegistroLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTabbedRegistroLibro, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void JRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRegresarActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformedReturn(evt);
-        this.setVisible(false);
-    }//GEN-LAST:event_JRegresarActionPerformed
-
-    private void JMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuSalirActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformed(evt);
-        this.setVisible(false);
-    }//GEN-LAST:event_JMenuSalirActionPerformed
 
     /**
      * Registros de Libro*
@@ -1270,15 +1225,20 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarSocioActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJIngresarSocio(model, this);
     }//GEN-LAST:event_JIngresarSocioActionPerformed
 
     private void JModificarSocioTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarSocioTablaActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        AdministradorControlador.actionPerformedJModificarSocio(this);
     }//GEN-LAST:event_JModificarSocioTablaActionPerformed
 
     private void JEliminarSocioTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarSocioTablaActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJEliminarLibro(model, this);
     }//GEN-LAST:event_JEliminarSocioTablaActionPerformed
 
     /**
@@ -1286,7 +1246,9 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JBuscarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarSocioActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJBuscarSocio(model, this);
     }//GEN-LAST:event_JBuscarSocioActionPerformed
 
     ////////////////////////////////////////////////////////////////////////////
@@ -1295,24 +1257,31 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarAutorActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJIngresarAutor(model, this);
     }//GEN-LAST:event_JIngresarAutorActionPerformed
 
     private void JModificarAutorTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarAutorTablaActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        AdministradorControlador.actionPerformedJModificarAutor(this);
     }//GEN-LAST:event_JModificarAutorTablaActionPerformed
 
     private void JEliminarAutorTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarAutorTablaActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJEliminarAutor(model, this);
     }//GEN-LAST:event_JEliminarAutorTablaActionPerformed
 
     /**
      * Busqueda de Autor*
      */
 
-    private void JBuscarSocio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarSocio1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JBuscarSocio1ActionPerformed
+    private void JBuscarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarAutorActionPerformed
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJBuscarAutor(model, this);
+    }//GEN-LAST:event_JBuscarAutorActionPerformed
 
     ////////////////////////////////////////////////////////////////////////////
     /**
@@ -1320,15 +1289,20 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarNuevoEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarNuevoEditorialActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJIngresarEditorial(model, this);
     }//GEN-LAST:event_JIngresarNuevoEditorialActionPerformed
 
     private void JModificarEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarEditorialActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        AdministradorControlador.actionPerformedJModificarEditorial(this);
     }//GEN-LAST:event_JModificarEditorialActionPerformed
 
     private void JEliminarEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarEditorialActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJEliminarEditorial(model, this);
     }//GEN-LAST:event_JEliminarEditorialActionPerformed
 
     ////////////////////////////////////////////////////////////////////////////
@@ -1337,15 +1311,20 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarNuevoLocalizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarNuevoLocalizacionActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJIngresarLocalizacion(model, this);
     }//GEN-LAST:event_JIngresarNuevoLocalizacionActionPerformed
 
     private void JModificarLocalizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarLocalizacionActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        AdministradorControlador.actionPerformedJModificarLocalizacion(this);
     }//GEN-LAST:event_JModificarLocalizacionActionPerformed
 
     private void JEliminarLocalizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarLocalizacionActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJEliminarLocalizacion(model, this);
     }//GEN-LAST:event_JEliminarLocalizacionActionPerformed
 
     ////////////////////////////////////////////////////////////////////////////
@@ -1354,61 +1333,34 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarNuevaAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarNuevaAreaActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJIngresarArea(model, this);
     }//GEN-LAST:event_JIngresarNuevaAreaActionPerformed
 
     private void JModificarAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarAreaActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        AdministradorControlador.actionPerformedJModificarArea(this);
     }//GEN-LAST:event_JModificarAreaActionPerformed
 
     private void JEliminarAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarAreaActionPerformed
-        // TODO add your handling code here:
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
+        AdministradorControlador.actionPerformedJEliminarArea(model, this);
     }//GEN-LAST:event_JEliminarAreaActionPerformed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+    private void JRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRegresarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_JRegresarActionPerformed
 
-        /* Create and display the form */
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VAdministrador().setVisible(true);
             }
         });
     }
-
-//        public void InsertValuesJTableRLibro(String a, String b, int c, String d, String e, String f, String g, String h, int i){
-//        DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
-//        model.insertRow(0, new Object[] {a,b,c,d,e,f,g,h,i});
-//    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField JApellidoMText1;
     public javax.swing.JTextField JApellidoMTextSocio;
@@ -1416,9 +1368,9 @@ public class VAdministrador extends javax.swing.JFrame {
     public javax.swing.JTextField JApellidoPTextSocio;
     public javax.swing.JComboBox<String> JAreaLibro;
     public javax.swing.JTextField JAreaText;
+    private javax.swing.JButton JBuscarAutor;
     private javax.swing.JButton JBuscarLibro;
     private javax.swing.JButton JBuscarSocio;
-    private javax.swing.JButton JBuscarSocio1;
     public javax.swing.JTextField JCalleTextSocio;
     public javax.swing.JCheckBox JCheckApellidoM;
     public javax.swing.JCheckBox JCheckApellidoM1;
@@ -1426,9 +1378,7 @@ public class VAdministrador extends javax.swing.JFrame {
     public javax.swing.JCheckBox JCheckApellidoP1;
     public javax.swing.JCheckBox JCheckAutor;
     public javax.swing.JCheckBox JCheckEditorial;
-    public javax.swing.JCheckBox JCheckEstado;
     public javax.swing.JCheckBox JCheckISBN;
-    public javax.swing.JCheckBox JCheckMunicipio;
     public javax.swing.JCheckBox JCheckNombre;
     public javax.swing.JCheckBox JCheckNombre2;
     public javax.swing.JCheckBox JCheckTitulo;
@@ -1463,7 +1413,6 @@ public class VAdministrador extends javax.swing.JFrame {
     public javax.swing.JList<String> JListEditorial;
     public javax.swing.JComboBox<String> JLocalizacionLibro;
     public javax.swing.JTextField JLocalizacionText;
-    private javax.swing.JMenuItem JMenuSalir;
     public javax.swing.JButton JModificarArea;
     private javax.swing.JButton JModificarAutorTabla;
     public javax.swing.JButton JModificarEditorial;
@@ -1491,6 +1440,7 @@ public class VAdministrador extends javax.swing.JFrame {
     public javax.swing.JTextField JTelefonoTextSocio;
     private javax.swing.JTextField JTextUsuario;
     public javax.swing.JTextField JTituloText;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jISBN;
     private javax.swing.JLabel jISBN1;
     private javax.swing.JLabel jISBN2;
@@ -1511,7 +1461,6 @@ public class VAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel jNPag;

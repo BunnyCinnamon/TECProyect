@@ -1,8 +1,6 @@
 
 package Vista;
 
-import Controlador.SalirControlador;
-
 public class VPrestamos extends javax.swing.JFrame {
 
     public VPrestamos() {
@@ -27,11 +25,6 @@ public class VPrestamos extends javax.swing.JFrame {
         JRegresar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        JMenuSalir = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        JMenuBuscarLibros = new javax.swing.JMenuItem();
-        JMenuBuscarUsuarios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,41 +92,6 @@ public class VPrestamos extends javax.swing.JFrame {
         });
 
         jButton1.setText("Recargar");
-
-        jMenu1.setText("Opciones");
-        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        JMenuSalir.setText("Salir");
-        JMenuSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMenuSalirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(JMenuSalir);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Editar");
-        jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        JMenuBuscarLibros.setText("Saltar a Buscar Libros");
-        JMenuBuscarLibros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMenuBuscarLibrosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(JMenuBuscarLibros);
-
-        JMenuBuscarUsuarios.setText("Saltar a Buscar Usuarios");
-        JMenuBuscarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMenuBuscarUsuariosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(JMenuBuscarUsuarios);
-
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -177,7 +135,7 @@ public class VPrestamos extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addComponent(JTabbedPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
@@ -192,60 +150,10 @@ public class VPrestamos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRegresarActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformedReturn(evt);
         this.setVisible(false);
     }//GEN-LAST:event_JRegresarActionPerformed
 
-    private void JMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuSalirActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformed(evt);
-        this.setVisible(false);
-    }//GEN-LAST:event_JMenuSalirActionPerformed
-
-    private void JMenuBuscarLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuBuscarLibrosActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformedVBuscarLibro(evt);
-        this.setVisible(false);
-    }//GEN-LAST:event_JMenuBuscarLibrosActionPerformed
-
-    private void JMenuBuscarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuBuscarUsuariosActionPerformed
-        SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformedVBuscarSocio(evt);
-        this.setVisible(false);
-    }//GEN-LAST:event_JMenuBuscarUsuariosActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VPrestamos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VPrestamos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VPrestamos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VPrestamos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VPrestamos().setVisible(true);
@@ -255,9 +163,6 @@ public class VPrestamos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame JInternalEditar1;
-    private javax.swing.JMenuItem JMenuBuscarLibros;
-    private javax.swing.JMenuItem JMenuBuscarUsuarios;
-    private javax.swing.JMenuItem JMenuSalir;
     private javax.swing.JButton JRegresar;
     private javax.swing.JTabbedPane JTabbedPrestamos;
     public javax.swing.JTable JTablePrestamos;
@@ -267,8 +172,6 @@ public class VPrestamos extends javax.swing.JFrame {
     private javax.swing.JLabel jIconLeeyAprende;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel jRegistrarLibro;
     private javax.swing.JScrollPane jScrollPane1;

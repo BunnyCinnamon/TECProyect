@@ -32,28 +32,27 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jContraseña" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="JUsuarioInicio" max="32767" attributes="0"/>
+                                  <Component id="JContraseñaInicio" alignment="0" pref="199" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="JSesionIcon" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Component id="JRecordarUsuario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="JIngresar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="JIngresar" min="-2" max="-2" attributes="0"/>
-                          <Component id="JUsuarioInicio" max="32767" attributes="0"/>
-                          <Component id="JContraseñaInicio" alignment="0" pref="199" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="JSesionIcon" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -90,9 +89,9 @@
                   <Component id="JSesionIcon" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="JRecordarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="JIngresar" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="JIngresar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="JRecordarUsuario" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="35" max="32767" attributes="0"/>
               <Component id="JAnounce" min="-2" max="-2" attributes="0"/>
@@ -181,8 +180,11 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="JRecordarUsuario">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Recordar Usuario"/>
+        <Property name="text" type="java.lang.String" value="Ingresar como Administrador"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="JIngresar">
       <Properties>

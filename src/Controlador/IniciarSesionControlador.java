@@ -1,34 +1,41 @@
 package Controlador;
 
 import Classes.Beans.AdministradorBean;
+import Classes.Beans.SocioBean;
 import Modelo.IniciarSesionDAO;
-import Vista.VOpciones;
+import Vista.VOpcionesAdmin;
 import Vista.VIniciarSesion;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import Vista.VOpcionesSocio;
 
-public class IniciarSesionControlador implements ActionListener {
+public class IniciarSesionControlador {
 
-    public VIniciarSesion is = new VIniciarSesion();
-    public VOpciones o = new VOpciones();
+    public VOpcionesAdmin vo = new VOpcionesAdmin();
+    public VOpcionesSocio vs = new VOpcionesSocio();
     public IniciarSesionDAO isd = new IniciarSesionDAO();
 
-    public IniciarSesionControlador(VIniciarSesion n) {
-        this.is = n;
-        this.is.JIngresar.addActionListener(this);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent n) {
+    public void actionPerformed(VIniciarSesion vis) {
         AdministradorBean adm = new AdministradorBean();
-        adm.setUsuario(is.JUsuarioInicio.getText());
-        adm.setContraseña(is.JContraseñaInicio.getText());
-        if (isd.CheckPassword(adm)) {
-            is.setVisible(false);
-            o.setVisible(true);
-            o.setLocationRelativeTo(null);
+        SocioBean s = new SocioBean();
+        if (vis.JRecordarUsuario.isSelected()) {
+            adm.setUsuario(vis.JUsuarioInicio.getText());
+            adm.setContraseña(vis.JContraseñaInicio.getText());
+            if (isd.CheckPasswordAdmin(adm)) {
+                vis.setVisible(false);
+                vo.setVisible(true);
+                vo.setLocationRelativeTo(null);
+            } else {
+                vis.JAnounce.setText("Usuario o Contraseña incorrecto");
+            }
         } else {
-            is.JAnounce.setText("Usuario o Contraseña incorrecto");
+            s.setUsuario(vis.JUsuarioInicio.getText());
+            s.setContraseña(vis.JContraseñaInicio.getText());
+            if (isd.CheckPasswordSocio(s)) {
+            vis.setVisible(false);
+            vs.setVisible(true);
+            vs.setLocationRelativeTo(null);
+        } else {
+            vis.JAnounce.setText("Usuario o Contraseña incorrecto");
+            }
         }
     }
 }
