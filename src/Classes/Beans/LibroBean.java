@@ -1,8 +1,7 @@
-
 package Classes.Beans;
 
-public class LibroBean implements java.io.Serializable{
-    
+public class LibroBean implements java.io.Serializable {
+
     private int idLibro;
     private String isbn;
     private String titulo;
@@ -14,10 +13,10 @@ public class LibroBean implements java.io.Serializable{
     private int Area;
     private int Localizacion;
 
-    public LibroBean(){}
-    
+    public LibroBean() {
+    }
+
     //Setters for the class LibroBeans
-    
     public void setIdLibro(int idLibro) {
         this.idLibro = idLibro;
     }
@@ -37,9 +36,9 @@ public class LibroBean implements java.io.Serializable{
     public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
-    
-    public void setAutor(int Autor){
-    this.Autor=Autor;
+
+    public void setAutor(int Autor) {
+        this.Autor = Autor;
     }
 
     public void setNumeroPrestamos(int numeroPrestamos) {
@@ -57,9 +56,8 @@ public class LibroBean implements java.io.Serializable{
     public void setLocalizacion(int Localizacion) {
         this.Localizacion = Localizacion;
     }
-    
+
     // Getters for the class LibroBeans
-    
     public int getIdLibro() {
         return idLibro;
     }
@@ -79,8 +77,8 @@ public class LibroBean implements java.io.Serializable{
     public String getEstatus() {
         return estatus;
     }
-    
-    public int getAutor(){
+
+    public int getAutor() {
         return Autor;
     }
 

@@ -1,17 +1,16 @@
-
 package Classes.Beans;
 
-public class PenalizacionBean implements java.io.Serializable{
-    
+public class PenalizacionBean implements java.io.Serializable {
+
     private int idPenalizacion;
     private String descripcion;
     private float costo;
     private int Prestamo_idPrestamo;
-    
-    public PenalizacionBean(){}
-    
-//    Setters for class PenalizacionBean
 
+    public PenalizacionBean() {
+    }
+
+//    Setters for class PenalizacionBean
     public void setIdPenalizacion(int idPenalizacion) {
         this.idPenalizacion = idPenalizacion;
     }
@@ -23,9 +22,8 @@ public class PenalizacionBean implements java.io.Serializable{
     public void setCosto(float costo) {
         this.costo = costo;
     }
-    
-//    Getters for class PenalizacionBean
 
+//    Getters for class PenalizacionBean
     public int getIdPenalizacion() {
         return idPenalizacion;
     }

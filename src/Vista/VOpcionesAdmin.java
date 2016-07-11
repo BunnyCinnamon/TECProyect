@@ -5,12 +5,13 @@ import Controlador.SalirControlador;
 
 /**
  *
- * @author Snack
+ * @author Arekkuusu
  */
 public class VOpcionesAdmin extends javax.swing.JFrame {
 
     public VOpcionesAdmin() {
         initComponents();
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

@@ -1,18 +1,17 @@
-
 package Classes.Beans;
 
-public class AutorBean implements java.io.Serializable{
-    
+public class AutorBean implements java.io.Serializable {
+
     private int idAutor;
     private String nombre;
     private String apellidoP;
     private String apellidoM;
     private int status;
-    
-    public AutorBean(){}
+
+    public AutorBean() {
+    }
 
 //    Setters for class autor
-    
     public void setIdAutor(int idAutor) {
         this.idAutor = idAutor;
     }
@@ -34,7 +33,6 @@ public class AutorBean implements java.io.Serializable{
     }
 
 //    Getters for class autor
-
     public int getIdAutor() {
         return idAutor;
     }

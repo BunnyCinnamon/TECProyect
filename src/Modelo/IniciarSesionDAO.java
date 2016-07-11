@@ -18,7 +18,6 @@ public class IniciarSesionDAO {
     private final String SQL_CHECK_PASSWORD_ADMIN = "SELECT IdAdministrador FROM Administrador WHERE Usuario=? AND Contraseña=?";
     private final String SQL_CHECK_PASSWORD_SOCIO = "SELECT * FROM Socio WHERE Usuario=? AND Constraseña=?";
 
-
     public boolean CheckPasswordAdmin(AdministradorBean adm) {
         boolean CORRECT = false;
         try {
@@ -45,8 +44,8 @@ public class IniciarSesionDAO {
         }
         return CORRECT;
     }
-    
-    public boolean CheckPasswordSocio(SocioBean adm) {
+
+    public Object[] CheckPasswordSocio(SocioBean adm) {
         boolean CORRECT = false;
         try {
             conn = Connexion.getConnection();
@@ -56,6 +55,15 @@ public class IniciarSesionDAO {
             rs = prs.executeQuery();
             if (rs.next()) {
                 adm.setIdUsuario(rs.getInt(1));
+                adm.setNormbre(rs.getString(2));
+                adm.setApellidoP(rs.getString(3));
+                adm.setApellidoM(rs.getString(4));
+                adm.setEstado(rs.getString(5));
+                adm.setMunicipio(rs.getString(6));
+                adm.setCalle(rs.getString(7));
+                adm.setNumero(rs.getInt(8));
+                adm.setTelefono(rs.getInt(9));
+                adm.setUsuario(rs.getString(10));
                 CORRECT = true;
                 rs.close();
                 prs.close();
@@ -70,6 +78,6 @@ public class IniciarSesionDAO {
                 Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
             }
         }
-        return CORRECT;
+        return new Object[]{adm,CORRECT};
     }
 }

@@ -1,17 +1,16 @@
-
 package Classes.Beans;
 
-public class EjemplarBean implements java.io.Serializable{
-    
+public class EjemplarBean implements java.io.Serializable {
+
     private int idEjemplar;
     private String existencias;
     private String estante;
     private int Libro_idLibro;
-    
-    public EjemplarBean(){}
-    
-//    Setters for class EjemplarBean
 
+    public EjemplarBean() {
+    }
+
+//    Setters for class EjemplarBean
     public void setIdEjemplar(int idEjemplar) {
         this.idEjemplar = idEjemplar;
     }
@@ -23,9 +22,8 @@ public class EjemplarBean implements java.io.Serializable{
     public void setEstante(String estante) {
         this.estante = estante;
     }
-    
-//    Getters for class EjemplarBean
 
+//    Getters for class EjemplarBean
     public int getIdEjemplar() {
         return idEjemplar;
     }

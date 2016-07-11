@@ -1,8 +1,7 @@
-
 package Classes.Beans;
 
-public class SocioBean implements java.io.Serializable{
-    
+public class SocioBean implements java.io.Serializable {
+
     private int idUsuario;
     private String normbre;
     private String apellidoP;
@@ -13,12 +12,13 @@ public class SocioBean implements java.io.Serializable{
     private int numero;
     private int telefono;
     private String usuario;
+    private String Estatus;
     private String contraseña;
-    
-    public SocioBean(){}
-    
-//    Setters for class SocioBean
 
+    public SocioBean() {
+    }
+
+//    Setters for class SocioBean
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -58,13 +58,16 @@ public class SocioBean implements java.io.Serializable{
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+    
+    public void setEstatus(String usuario) {
+        this.Estatus = usuario;
+    }
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    
-//    Getters for clas SocioBean
 
+//    Getters for clas SocioBean
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -103,6 +106,10 @@ public class SocioBean implements java.io.Serializable{
 
     public String getUsuario() {
         return usuario;
+    }
+    
+    public String getEstatus() {
+        return Estatus;
     }
 
     public String getContraseña() {

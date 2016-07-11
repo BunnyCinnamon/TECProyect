@@ -10,7 +10,6 @@ import Vista.VOpcionesSocio;
 public class IniciarSesionControlador {
 
     public VOpcionesAdmin vo = new VOpcionesAdmin();
-    public VOpcionesSocio vs = new VOpcionesSocio();
     public IniciarSesionDAO isd = new IniciarSesionDAO();
 
     public void actionPerformed(VIniciarSesion vis) {
@@ -21,20 +20,24 @@ public class IniciarSesionControlador {
             adm.setContraseña(vis.JContraseñaInicio.getText());
             if (isd.CheckPasswordAdmin(adm)) {
                 vis.setVisible(false);
-                vo.setVisible(true);
                 vo.setLocationRelativeTo(null);
+                vo.setVisible(true);
             } else {
                 vis.JAnounce.setText("Usuario o Contraseña incorrecto");
             }
         } else {
             s.setUsuario(vis.JUsuarioInicio.getText());
             s.setContraseña(vis.JContraseñaInicio.getText());
-            if (isd.CheckPasswordSocio(s)) {
-            vis.setVisible(false);
-            vs.setVisible(true);
-            vs.setLocationRelativeTo(null);
-        } else {
-            vis.JAnounce.setText("Usuario o Contraseña incorrecto");
+            Object[] temp = isd.CheckPasswordSocio(s);
+            SocioBean ABean = (SocioBean) temp[0];
+            boolean TRUE = (boolean) temp[1];
+            if (TRUE) {
+                VOpcionesSocio vs = new VOpcionesSocio(ABean);
+                vis.setVisible(false);
+                vs.setLocationRelativeTo(null);
+                vs.setVisible(true);
+            } else {
+                vis.JAnounce.setText("Usuario o Contraseña incorrecto");
             }
         }
     }

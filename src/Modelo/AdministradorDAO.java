@@ -1,6 +1,7 @@
 package Modelo;
 
 import Classes.Beans.LibroBean;
+import Classes.Beans.SocioBean;
 import Utils.Connexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,14 +20,24 @@ public class AdministradorDAO {
     /**
      * Funciones de Libro*
      */
-    
     private final String SQL_ADD_BOOKS = "INSERT INTO Libro (IdLibro,Isbn,Titulo,Paginas,Estatus,NumeroPrestamos,Editorial,Area,Localizacion)";
-    private final String SQL_MODIFY_BOOKS = "UPDATE Libro SET (Isbn,Titulo,Paginas,Estatus,NumeroPrestamos,Editorial,Area,Localizacion)";
-    private final String SQL_REMOVE_BOOKS = "DELETE FROM Libro WHERE IdLibro=?";
-    private final String SQL_SEARCH_BOOKS = "SELECT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND F.Libro=A.IdLibro";
+    private final String SQL_SEARCH_IDLIBRO = "SELECT IdLibro FROM Libro WHERE Isbn=? AND Titulo=? AND Paginas=? AND Estatus=?";
+    private final String SQL_ADD_AUTOR_TO_LIBRO = "INSERT INTO Escribe values (?,?)";
+    private final String SQL_ADD_LIBRO_TO_EJEMPLAR = "INSERT INTO Ejemplar values(null,?,?)";
+    ////////////////////////////////////////////////////////////////////////////
+    private final String SQL_MODIFY_BOOKS = "UPDATE Libro SET Isbn=?, Titulo=?, Paginas=?, Estatus=?, Editorial=?, Area=?, Localizacion=? WHERE IdLibro=?";
+    private final String SQL_REMOVE_BOOKS = "UPDATE Libro SET Estatus='Inactivo' WHERE IdLibro=?";
+    private final String SQL_SEARCH_BOOKS = "SELECT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo,Existencias FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F,Ejemplar G WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND G.Libro=IdLibro AND F.Libro=A.IdLibro";
 
-    public boolean IngresarLibro(DefaultTableModel t, LibroBean Bean) {
-        boolean SUCCESS = false;
+    /**
+     *
+     * @param Bean
+     * @return
+     */
+    public boolean IngresarLibro(LibroBean Bean) {
+        boolean SUCCESSI = false;
+        boolean SUCCESSM = false;
+        boolean SUCCESSF = false;
         try {
             conn = Connexion.getConnection();
             PreparedStatement prs = conn.prepareStatement(SQL_ADD_BOOKS + " values (null,?,?,?,?,?,?,?,?)");
@@ -34,11 +45,11 @@ public class AdministradorDAO {
             prs.setString(2, Bean.getTitulo());
             prs.setInt(3, Bean.getPaginas());
             prs.setString(4, Bean.getEstatus());
-            prs.setInt(5, Bean.getNumeroPrestamos());
+            prs.setInt(5, 0);
             prs.setInt(6, Bean.getEditorial());
             prs.setInt(7, Bean.getArea());
             prs.setInt(8, Bean.getLocalizacion());
-            SUCCESS = prs.executeUpdate() == 1;
+            SUCCESSI = prs.executeUpdate() == 1;
             prs.close();
         } catch (SQLException n) {
             Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
@@ -49,23 +60,88 @@ public class AdministradorDAO {
                 Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
             }
         }
-        return SUCCESS;
-    }
-
-    public boolean ModificarLibro(LibroBean Bean) {
-        boolean SUCCESS = false;
+        ////////////////////////////////////////////////////////////////////////
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_BOOKS + " values (?,?,?,?,?,?,?,?) WHERE IdLibro=?");
+            ResultSet rs;
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_IDLIBRO);
             prs.setString(1, Bean.getIsbn());
             prs.setString(2, Bean.getTitulo());
             prs.setInt(3, Bean.getPaginas());
             prs.setString(4, Bean.getEstatus());
-            prs.setInt(5, Bean.getNumeroPrestamos());
-            prs.setInt(6, Bean.getEditorial());
-            prs.setInt(7, Bean.getArea());
-            prs.setInt(8, Bean.getLocalizacion());
-            prs.setInt(9, Bean.getIdLibro());
+            rs = prs.executeQuery();
+            if (rs.next()) {
+                Bean.setIdLibro(rs.getInt(1));
+                rs.close();
+                prs.close();
+            }
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_ADD_AUTOR_TO_LIBRO);
+            prs.setInt(1, Bean.getAutor());
+            prs.setInt(2, Bean.getIdLibro());
+            SUCCESSM = prs.executeUpdate() == 1;
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_ADD_LIBRO_TO_EJEMPLAR);
+            prs.setInt(1, Bean.getNumeroPrestamos());
+            prs.setInt(2, Bean.getIdLibro());
+            SUCCESSM = prs.executeUpdate() == 1;
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        if (SUCCESSI && SUCCESSM) {
+            SUCCESSF = true;
+        }
+        return SUCCESSF;
+    }
+
+    /**
+     *
+     * @param Bean
+     * @return
+     */
+    public boolean ModificarLibro(LibroBean Bean) {
+        boolean SUCCESS = false;
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_BOOKS);
+            prs.setString(1, Bean.getIsbn());
+            prs.setString(2, Bean.getTitulo());
+            prs.setInt(3, Bean.getPaginas());
+            prs.setString(4, Bean.getEstatus());
+            prs.setInt(5, Bean.getEditorial());
+            prs.setInt(6, Bean.getArea());
+            prs.setInt(7, Bean.getLocalizacion());
+            prs.setInt(8, Bean.getIdLibro());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
         } catch (SQLException n) {
@@ -80,6 +156,11 @@ public class AdministradorDAO {
         return SUCCESS;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean EliminarLibro(String id) {
         boolean SUCCESS = true;
         try {
@@ -100,6 +181,14 @@ public class AdministradorDAO {
         return SUCCESS;
     }
 
+    /**
+     *
+     * @param t
+     * @param Bean
+     * @param Editorial
+     * @param Autor
+     * @param action
+     */
     public void BuscarLibro(DefaultTableModel t, LibroBean Bean, String Editorial, String Autor, int action) {
         ArrayList<String> Array = new ArrayList<String>();
         try {
@@ -219,8 +308,6 @@ public class AdministradorDAO {
                     rs = prs.executeQuery();
                     break;
                 }
-                default:
-                    break;
             }
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -244,4 +331,96 @@ public class AdministradorDAO {
             }
         }
     }
+
+    /**
+     * Funciones de Socio*
+     */
+    private final String SQL_ADD_SOCIO = "INSERT INTO Socio values(null,?,?,?,?,?,?,?,?,?,'Activo',?)";
+    private final String SQL_MODIFY_SOCIO = "UPDATE Socio SET Nombre=?, ApellidoP=?, ApellidoM=?, Estado=?, Municipio=?, Calle=?, Numero=?, Telefono=?, Usuario=?, Estatus=?, Contraseña=? WHERE IdSocio=?";
+    private final String SQL_DELETE_SOCIO = "UPDATE Socio SET Estado='Inactivo' WHERE IdSocio=?";
+
+    /**
+     *
+     * @param Bean
+     * @return
+     */
+    public boolean IngresarSocio(SocioBean Bean) {
+        boolean SUCCESS = false;
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_ADD_SOCIO);
+            prs.setString(1, Bean.getNormbre());
+            prs.setString(2, Bean.getApellidoP());
+            prs.setString(3, Bean.getApellidoM());
+            prs.setString(4, Bean.getEstado());
+            prs.setString(5, Bean.getMunicipio());
+            prs.setString(6, Bean.getCalle());
+            prs.setInt(7, Bean.getNumero());
+            prs.setInt(8, Bean.getTelefono());
+            prs.setString(9, Bean.getUsuario());
+            prs.setString(10, Bean.getContraseña());
+            SUCCESS = prs.executeUpdate() == 1;
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        return SUCCESS;
+    }
+
+    public boolean ModificarSocio(SocioBean Bean) {
+        boolean SUCCESS = false;
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_SOCIO);
+            prs.setString(1, Bean.getNormbre());
+            prs.setString(2, Bean.getApellidoP());
+            prs.setString(3, Bean.getApellidoM());
+            prs.setString(4, Bean.getEstado());
+            prs.setString(5, Bean.getMunicipio());
+            prs.setString(6, Bean.getCalle());
+            prs.setInt(7, Bean.getNumero());
+            prs.setInt(8, Bean.getTelefono());
+            prs.setString(9, Bean.getUsuario());
+            prs.setString(10, Bean.getEstatus());
+            prs.setString(11, Bean.getContraseña());
+            SUCCESS = prs.executeUpdate() == 1;
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        return SUCCESS;
+    }
+
+    public boolean EliminarSocio(int id) {
+        boolean SUCCESS = true;
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_DELETE_SOCIO);
+            prs.setInt(1, id);
+            SUCCESS = prs.executeUpdate() == 1;
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        return SUCCESS;
+    }
+
 }

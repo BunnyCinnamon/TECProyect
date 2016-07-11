@@ -1,9 +1,36 @@
 package Vista;
 
+import Classes.Beans.SocioBean;
+import Controlador.BuscarLibroControlador;
+import Controlador.CargarInfoControlador;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Arekkuusu
+ */
 public class VBuscarLibro extends javax.swing.JFrame {
 
-    public VBuscarLibro() {
+    public VBuscarLibro(SocioBean Bean) {
+        /**
+         * VBuscar Libro*
+         */
+        CargarInfoControlador Cargar = new CargarInfoControlador();
         initComponents();
+        this.setResizable(false);
+        SetBean(Bean);
+        JListAutor.setListData(new String[0]);
+        JListEditorial.setListData(new String[0]);
+        Cargar.CargarInfoListas(this);
+    }
+
+    /**
+     * Bean de Socio*
+     */
+    private static SocioBean Bean;
+
+    private void SetBean(SocioBean Bean) {
+        this.Bean = Bean;
     }
 
     @SuppressWarnings("unchecked")
@@ -32,14 +59,13 @@ public class VBuscarLibro extends javax.swing.JFrame {
         JBuscarLibro = new javax.swing.JButton();
         JCheckTitulo = new javax.swing.JCheckBox();
         JCheckISBN = new javax.swing.JCheckBox();
-        JCheckNPag = new javax.swing.JCheckBox();
         JCheckAutor = new javax.swing.JCheckBox();
         JCheckEditorial = new javax.swing.JCheckBox();
         JInternalEditar1 = new javax.swing.JInternalFrame();
         jLabel4 = new javax.swing.JLabel();
-        JModificarLibroTabla = new javax.swing.JButton();
+        JDetalles = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        JAsignar = new javax.swing.JButton();
         JRegresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -67,13 +93,10 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jISBN.setText("ISBN:");
 
         jNPag.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jNPag.setText("N° Pág:");
+        jNPag.setText("Usuario:");
 
-        JListAutor.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "William Shakespeare", "Agatha Christie", "Barbara Cartland", "Danielle Steel" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        JNPagText.setEnabled(false);
+
         JListAutor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane2.setViewportView(JListAutor);
 
@@ -83,17 +106,17 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel2.setText("Editorial");
 
-        JListEditorial.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Editorial Santillana", "Penguin Random House Grupo Editorial", "Editorial Planeta", "Cafebrería el Péndulo" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         JListEditorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane3.setViewportView(JListEditorial);
 
         JInternalBuscar.setVisible(true);
 
         JBuscarLibro.setText("Buscar");
+        JBuscarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBuscarLibroActionPerformed(evt);
+            }
+        });
 
         JCheckTitulo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCheckTitulo.setSelected(true);
@@ -102,10 +125,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
         JCheckISBN.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCheckISBN.setSelected(true);
         JCheckISBN.setText("ISBN");
-
-        JCheckNPag.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckNPag.setSelected(true);
-        JCheckNPag.setText("N° Pag");
 
         JCheckAutor.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCheckAutor.setSelected(true);
@@ -121,20 +140,17 @@ public class VBuscarLibro extends javax.swing.JFrame {
             JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JInternalBuscarLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addComponent(JBuscarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addComponent(JBuscarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(105, 105, 105))
             .addGroup(JInternalBuscarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JCheckNPag)
-                    .addGroup(JInternalBuscarLayout.createSequentialGroup()
-                        .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCheckTitulo)
-                            .addComponent(JCheckISBN))
-                        .addGap(18, 18, 18)
-                        .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCheckEditorial)
-                            .addComponent(JCheckAutor))))
+                    .addComponent(JCheckTitulo)
+                    .addComponent(JCheckISBN))
+                .addGap(18, 18, 18)
+                .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JCheckEditorial)
+                    .addComponent(JCheckAutor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JInternalBuscarLayout.setVerticalGroup(
@@ -148,9 +164,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
                 .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JCheckISBN)
                     .addComponent(JCheckEditorial))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JCheckNPag)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(JBuscarLibro)
                 .addContainerGap())
         );
@@ -161,12 +175,22 @@ public class VBuscarLibro extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467285836_OFFice-33.png"))); // NOI18N
 
-        JModificarLibroTabla.setText("Detalles");
+        JDetalles.setText("Estadisticas");
+        JDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JDetallesActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel5.setText("Selección:");
 
-        jButton2.setText("Asignar a Socio");
+        JAsignar.setText("Asignar a Socio");
+        JAsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JAsignarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JInternalEditar1Layout = new javax.swing.GroupLayout(JInternalEditar1.getContentPane());
         JInternalEditar1.getContentPane().setLayout(JInternalEditar1Layout);
@@ -176,9 +200,9 @@ public class VBuscarLibro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(JInternalEditar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(JModificarLibroTabla)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                    .addComponent(JDetalles)
+                    .addComponent(JAsignar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addContainerGap())
         );
@@ -191,9 +215,9 @@ public class VBuscarLibro extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(JAsignar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JModificarLibroTabla)))
+                        .addComponent(JDetalles)))
                 .addGap(0, 4, Short.MAX_VALUE))
         );
 
@@ -243,13 +267,13 @@ public class VBuscarLibro extends javax.swing.JFrame {
                                     .addComponent(jISBN)
                                     .addComponent(jTitulo)
                                     .addComponent(jNPag))
-                                .addGap(2, 2, 2)
+                                .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(JNPagText, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(JTituloText, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(JISBNText, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(17, 17, 17)
-                        .addComponent(JTabbedBusquedaLibros)))
+                        .addComponent(JTabbedBusquedaLibros, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -301,33 +325,47 @@ public class VBuscarLibro extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_JRegresarActionPerformed
 
+    private void JBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarLibroActionPerformed
+        BuscarLibroControlador BuscarLibroControlador = new BuscarLibroControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableBLibro.getModel();
+        BuscarLibroControlador.actionPerformedJBuscarLibro(model, this);
+    }//GEN-LAST:event_JBuscarLibroActionPerformed
+
+    private void JAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAsignarActionPerformed
+        BuscarLibroControlador BuscarLibroControlador = new BuscarLibroControlador();
+        BuscarLibroControlador.actionPerformedJPrestamo(Bean, this);
+    }//GEN-LAST:event_JAsignarActionPerformed
+
+    private void JDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JDetallesActionPerformed
+        CargarInfoControlador Cargar = new CargarInfoControlador();
+        Cargar.CargarInfoEstadisticas();
+    }//GEN-LAST:event_JDetallesActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VBuscarLibro().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JAsignar;
     private javax.swing.JButton JBuscarLibro;
     public javax.swing.JCheckBox JCheckAutor;
     public javax.swing.JCheckBox JCheckEditorial;
     public javax.swing.JCheckBox JCheckISBN;
-    public javax.swing.JCheckBox JCheckNPag;
     public javax.swing.JCheckBox JCheckTitulo;
+    private javax.swing.JButton JDetalles;
     public javax.swing.JTextField JISBNText;
     private javax.swing.JInternalFrame JInternalBuscar;
     private javax.swing.JInternalFrame JInternalEditar1;
     public javax.swing.JList<String> JListAutor;
     public javax.swing.JList<String> JListEditorial;
-    private javax.swing.JButton JModificarLibroTabla;
     public javax.swing.JTextField JNPagText;
     private javax.swing.JButton JRegresar;
     private javax.swing.JTabbedPane JTabbedBusquedaLibros;
     public javax.swing.JTable JTableBLibro;
     public javax.swing.JTextField JTituloText;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jISBN;
     private javax.swing.JLabel jIconLeeyAprende;
     private javax.swing.JLabel jLabel1;

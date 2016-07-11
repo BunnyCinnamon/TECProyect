@@ -1,16 +1,15 @@
-
 package Classes.Beans;
 
-public class AreaBean implements java.io.Serializable{
-    
+public class AreaBean implements java.io.Serializable {
+
     private int idArea;
     private String seccion;
     private String estatus;
-    
-    public AreaBean(){}
-    
-//    Setters for class AreaBean
 
+    public AreaBean() {
+    }
+
+//    Setters for class AreaBean
     public void setIdArea(int idArea) {
         this.idArea = idArea;
     }
@@ -22,9 +21,8 @@ public class AreaBean implements java.io.Serializable{
     public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
-    
-//    Getters for class AreaBean
 
+//    Getters for class AreaBean
     public int getIdArea() {
         return idArea;
     }

@@ -1,8 +1,10 @@
 package Controlador;
 
 import Classes.Beans.LibroBean;
+import Classes.Beans.SocioBean;
 import Modelo.AdministradorDAO;
 import Vista.VAdministrador;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
@@ -24,17 +26,15 @@ public class AdministradorControlador {
         Bean.setPaginas(Integer.parseInt(va.JSpinnerNPag.getValue().toString()));
         Bean.setEstatus(va.JEstadoLibro.getSelectedItem().toString());
         Bean.setAutor(va.JListAutor.getSelectedIndex());
-        Bean.setNumeroPrestamos(0);
+        Bean.setNumeroPrestamos(Integer.parseInt(va.JSpinnerCantidad.getValue().toString()));
         Bean.setEditorial(va.JListEditorial.getSelectedIndex());
         Bean.setArea(va.JAreaLibro.getSelectedIndex());
         Bean.setLocalizacion(va.JLocalizacionLibro.getSelectedIndex());
-        System.out.println(Bean.getIsbn() + Bean.getTitulo() + Bean.getPaginas() + Bean.getEstatus() + Bean.getNumeroPrestamos() + Bean.getEditorial() + Bean.getArea() + Bean.getLocalizacion());
-//        ae.addRow(new Object[]{Bean.getIdLibro(), Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), va.JListAutor.getSelectedValue(), va.JListEditorial.getSelectedValue(), va.JAreaLibro.getSelectedItem().toString(), va.JLocalizacionLibro.getSelectedItem().toString(), va.JSpinnerCantidad.getValue().toString()});
-        if (adm.IngresarLibro(ae, Bean)) {
-            ae.addRow(new Object[]{Bean.getIdLibro(), Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), va.JListAutor.getSelectedValue(), va.JListEditorial.getSelectedValue(), va.JAreaLibro.getSelectedItem().toString(), va.JLocalizacionLibro.getSelectedItem().toString(), va.JSpinnerCantidad.getValue().toString()});
+        if (adm.IngresarLibro(Bean)) {
+            ae.addRow(new Object[]{Bean.getIdLibro(), Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), va.JListAutor.getSelectedValue(), va.JListEditorial.getSelectedValue(), va.JAreaLibro.getSelectedItem().toString(), va.JLocalizacionLibro.getSelectedItem().toString(), Bean.getNumeroPrestamos()});
             JOptionPane.showMessageDialog(null, "El Libro ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "No se agregó el Libro", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se agregó el Libro correctamente", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -47,19 +47,20 @@ public class AdministradorControlador {
     public void actionPerformedJModificarLibro(VAdministrador va) {
         LibroBean Bean = new LibroBean();
         int Select = va.JTableRLibro.getSelectedRow();
-        Bean.setIdLibro(Select);
-        Bean.setIsbn(va.JISBNText.getText());
-        Bean.setTitulo(va.JTituloText.getText());
-        Bean.setPaginas(Integer.parseInt(va.JSpinnerNPag.getValue().toString()));
-        Bean.setEstatus(va.JEstadoLibro.getSelectedItem().toString());
-        Bean.setAutor(va.JListAutor.getSelectedIndex());
-        Bean.setNumeroPrestamos(0);
-        Bean.setEditorial(va.JListEditorial.getSelectedIndex());
-        Bean.setArea(va.JAreaLibro.getSelectedIndex());
-        Bean.setLocalizacion(va.JLocalizacionLibro.getSelectedIndex());
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
+
+            Bean.setIdLibro(Integer.parseInt(va.JTableRLibro.getValueAt(Select, 0).toString()));
+            Bean.setIsbn(va.JISBNText.getText());
+            Bean.setTitulo(va.JTituloText.getText());
+            Bean.setPaginas(Integer.parseInt(va.JSpinnerNPag.getValue().toString()));
+            Bean.setEstatus(va.JEstadoLibro.getSelectedItem().toString());
+            Bean.setAutor(va.JListAutor.getSelectedIndex());
+            Bean.setEditorial(va.JListEditorial.getSelectedIndex());
+            Bean.setArea(va.JAreaLibro.getSelectedIndex());
+            Bean.setLocalizacion(va.JLocalizacionLibro.getSelectedIndex());
+
             if (adm.ModificarLibro(Bean)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             }
@@ -77,7 +78,7 @@ public class AdministradorControlador {
         int Select = va.JTableRLibro.getSelectedRow();
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
-        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? ")) {
+        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? (Inactivo)")) {
             if (adm.EliminarLibro(va.JTableRLibro.getValueAt(Select, 0).toString())) {
                 ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
@@ -130,7 +131,6 @@ public class AdministradorControlador {
         } else if (va.JCheckEditorial.isSelected() && va.JCheckAutor.isSelected() && va.JCheckTitulo.isSelected() && va.JCheckISBN.isSelected()) {
             action = 15;
         }
-        System.out.println(action);
         adm.BuscarLibro(ae, Bean, Editorial, Autor, action);
     }
 
@@ -143,7 +143,23 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJIngresarSocio(DefaultTableModel ae, VAdministrador va) {
-
+        SocioBean Bean = new SocioBean();
+        Bean.setNormbre(va.JNombreTextSocio.getText());
+        Bean.setApellidoP(va.JApellidoPTextSocio.getText());
+        Bean.setApellidoM(va.JApellidoMTextSocio.getText());
+        Bean.setEstado(va.JEstadoTextSocio.getText());
+        Bean.setMunicipio(va.JMunicipioTextSocio.getText());
+        Bean.setCalle(va.JCalleTextSocio.getText());
+        Bean.setNumero(Integer.parseInt(va.JNCalleTextSocio.getText()));
+        Bean.setTelefono(Integer.parseInt(va.JTelefonoTextSocio.getText()));
+        Bean.setUsuario(va.JTextUsuario.getText());
+        Bean.setContraseña(va.JTextContraseñaSocio.getText());
+        if (adm.IngresarSocio(Bean)) {
+            ae.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNormbre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + "#" + Bean.getNumero(), Bean.getTelefono(), "Activo", "**********"});
+            JOptionPane.showMessageDialog(null, "El Libro ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se agregó el Libro correctamente", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -153,7 +169,29 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJModificarSocio(VAdministrador va) {
+        int Select = va.JTableRLibro.getSelectedRow();
+        SocioBean Bean = new SocioBean();
+        if (Select < 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
 
+            Bean.setIdUsuario(Integer.parseInt(va.JTableRSocio.getValueAt(Select, 0).toString()));
+            Bean.setNormbre(va.JNombreTextSocio.getText());
+            Bean.setApellidoP(va.JApellidoPTextSocio.getText());
+            Bean.setApellidoM(va.JApellidoMTextSocio.getText());
+            Bean.setEstado(va.JEstadoTextSocio.getText());
+            Bean.setMunicipio(va.JMunicipioTextSocio.getText());
+            Bean.setCalle(va.JCalleTextSocio.getText());
+            Bean.setNumero(Integer.parseInt(va.JNCalleTextSocio.getText()));
+            Bean.setTelefono(Integer.parseInt(va.JTelefonoTextSocio.getText()));
+            Bean.setUsuario(va.JTextUsuario.getText());
+            Bean.setEstatus(va.JEstatusSocio.getSelectedItem().toString());
+            Bean.setContraseña(va.JTextContraseñaSocio.getText());
+
+            if (adm.ModificarSocio(Bean)) {
+                JOptionPane.showMessageDialog(null, "Registro Modificado");
+            }
+        }
     }
 
     /**
@@ -164,7 +202,15 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJEliminarSocio(DefaultTableModel ae, VAdministrador va) {
-
+        int Select = va.JTableRLibro.getSelectedRow();
+        if (Select < 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? (Inactivo)")) {
+            int id = Integer.parseInt(va.JTableRSocio.getValueAt(Select, 0).toString());
+            if (adm.EliminarSocio(id)) {
+                JOptionPane.showMessageDialog(null, "Registro Modificado");
+            }
+        }
     }
 
     /**
@@ -222,132 +268,102 @@ public class AdministradorControlador {
 
     }
 
-    ////////////////////////////////////////////////////////////////////////////
-    /**
-     * Ingresar Editorial
-     *
-     *
-     * @param ae
-     * @param va
-     */
-    public void actionPerformedJIngresarEditorial(DefaultTableModel ae, VAdministrador va) {
-
-    }
-
-    /**
-     * Modificar Editorial
-     *
-     *
-     * @param va
-     */
-    public void actionPerformedJModificarEditorial(VAdministrador va) {
-
-    }
-
-    /**
-     * Eliminar Editorial
-     *
-     *
-     * @param ae
-     * @param va
-     */
-    public void actionPerformedJEliminarEditorial(DefaultTableModel ae, VAdministrador va) {
-
-    }
-
-    /**
-     * Buscar Editorial
-     *
-     *
-     * @param ae
-     */
-    public void actionPerformedJBuscarEditorial(DefaultTableModel ae) {
-
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    /**
-     * Ingresar Localización
-     *
-     *
-     * @param ae
-     * @param va
-     */
-    public void actionPerformedJIngresarLocalizacion(DefaultTableModel ae, VAdministrador va) {
-
-    }
-
-    /**
-     * Modificar Localización
-     *
-     *
-     * @param va
-     */
-    public void actionPerformedJModificarLocalizacion(VAdministrador va) {
-
-    }
-
-    /**
-     * Eliminar Localización
-     *
-     *
-     * @param ae
-     * @param va
-     */
-    public void actionPerformedJEliminarLocalizacion(DefaultTableModel ae, VAdministrador va) {
-
-    }
-
-    /**
-     * Buscar Localización
-     *
-     *
-     * @param ae
-     */
-    public void actionPerformedJBuscarLocalizacion(DefaultTableModel ae) {
-
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    /**
-     * Ingresar Área
-     *
-     *
-     * @param ae
-     * @param va
-     */
-    public void actionPerformedJIngresarArea(DefaultTableModel ae, VAdministrador va) {
-
-    }
-
-    /**
-     * Modificar Área
-     *
-     *
-     * @param va
-     */
-    public void actionPerformedJModificarArea(VAdministrador va) {
-
-    }
-
-    /**
-     * Eliminar Área
-     *
-     *
-     * @param ae
-     * @param va
-     */
-    public void actionPerformedJEliminarArea(DefaultTableModel ae, VAdministrador va) {
-
-    }
-
-    /**
-     * Buscar Área
-     *
-     *
-     * @param ae
-     */
-    public void actionPerformedJBuscarArea(DefaultTableModel ae) {
-
-    }
+//    ////////////////////////////////////////////////////////////////////////////
+//    /**
+//     * Ingresar Editorial
+//     *
+//     *
+//     * @param ae
+//     * @param va
+//     */
+//    public void actionPerformedJIngresarEditorial(DefaultTableModel ae, VAdministrador va) {
+//
+//    }
+//
+//    /**
+//     * Modificar Editorial
+//     *
+//     *
+//     * @param va
+//     */
+//    public void actionPerformedJModificarEditorial(VAdministrador va) {
+//
+//    }
+//
+//    /**
+//     * Eliminar Editorial
+//     *
+//     *
+//     * @param ae
+//     * @param va
+//     */
+//    public void actionPerformedJEliminarEditorial(DefaultTableModel ae, VAdministrador va) {
+//
+//    }
+//
+//    ////////////////////////////////////////////////////////////////////////////
+//    /**
+//     * Ingresar Localización
+//     *
+//     *
+//     * @param ae
+//     * @param va
+//     */
+//    public void actionPerformedJIngresarLocalizacion(DefaultTableModel ae, VAdministrador va) {
+//
+//    }
+//
+//    /**
+//     * Modificar Localización
+//     *
+//     *
+//     * @param va
+//     */
+//    public void actionPerformedJModificarLocalizacion(VAdministrador va) {
+//
+//    }
+//
+//    /**
+//     * Eliminar Localización
+//     *
+//     *
+//     * @param ae
+//     * @param va
+//     */
+//    public void actionPerformedJEliminarLocalizacion(DefaultTableModel ae, VAdministrador va) {
+//
+//    }
+//
+//    ////////////////////////////////////////////////////////////////////////////
+//    /**
+//     * Ingresar Área
+//     *
+//     *
+//     * @param ae
+//     * @param va
+//     */
+//    public void actionPerformedJIngresarArea(DefaultTableModel ae, VAdministrador va) {
+//
+//    }
+//
+//    /**
+//     * Modificar Área
+//     *
+//     *
+//     * @param va
+//     */
+//    public void actionPerformedJModificarArea(VAdministrador va) {
+//
+//    }
+//
+//    /**
+//     * Eliminar Área
+//     *
+//     *
+//     * @param ae
+//     * @param va
+//     */
+//    public void actionPerformedJEliminarArea(DefaultTableModel ae, VAdministrador va) {
+//
+//    }
 }

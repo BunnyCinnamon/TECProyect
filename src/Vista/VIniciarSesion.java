@@ -1,9 +1,12 @@
-
 package Vista;
 
 import Controlador.IniciarSesionControlador;
 import java.util.ResourceBundle;
 
+/**
+ *
+ * @author Arekkuusu
+ */
 public class VIniciarSesion extends javax.swing.JFrame {
 
     private static String usuario;
@@ -11,18 +14,19 @@ public class VIniciarSesion extends javax.swing.JFrame {
 
     public VIniciarSesion() {
         initComponents();
+        this.setResizable(false);
         ReadFile();
     }
-    
-    private void ReadFile(){
-    if(propertiesLogins == null){
-             propertiesLogins = ResourceBundle.getBundle("logins");
+
+    private void ReadFile() {
+        if (propertiesLogins == null) {
+            propertiesLogins = ResourceBundle.getBundle("logins");
             try {
-                if(propertiesLogins.getString("login").equals("true")){
-                JRecordarUsuario.setSelected(true);
-                usuario = propertiesLogins.getString("usuario");
-                JUsuarioInicio.setText(usuario);
-                } else if(!propertiesLogins.getString("login").equals("true") && !propertiesLogins.getString("login").equals("false")){
+                if (propertiesLogins.getString("login").equals("true")) {
+                    JRecordarUsuario.setSelected(true);
+                    usuario = propertiesLogins.getString("usuario");
+                    JUsuarioInicio.setText(usuario);
+                } else if (!propertiesLogins.getString("login").equals("true") && !propertiesLogins.getString("login").equals("false")) {
                     JAnounce.setText("Error in configuration file: Cannot reach TRUE or FALSE value");
                 }
             } catch (java.util.MissingResourceException e) {
