@@ -7,6 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Pr&#xe9;stamos"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -117,7 +118,7 @@
                 <Column editable="false" title="Socio" type="java.lang.Object"/>
                 <Column editable="false" title="Titulo" type="java.lang.Object"/>
                 <Column editable="false" title="ISBN" type="java.lang.Object"/>
-                <Column editable="true" title="Fecha Inicial" type="java.lang.Object"/>
+                <Column editable="false" title="Fecha Inicial" type="java.lang.Object"/>
                 <Column editable="false" title="Expira" type="java.lang.Object"/>
               </Table>
             </Property>
@@ -198,6 +199,7 @@
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="JDetalles" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="JLiberarSeleccion" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="JCheckExpirado" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel3" max="32767" attributes="0"/>
@@ -214,6 +216,8 @@
                       <Component id="JDetalles" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="JLiberarSeleccion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="JCheckExpirado" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Component id="jLabel3" alignment="0" pref="132" max="32767" attributes="0"/>
@@ -250,6 +254,11 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Resources/1467284813_OFFice-90.png"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="JCheckExpirado">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Expirado"/>
               </Properties>
             </Component>
           </SubComponents>

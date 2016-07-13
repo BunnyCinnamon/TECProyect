@@ -26,9 +26,9 @@ public class CargarInfoDAO {
     private final String SQL_SEARCH_AUTOR = "SELECT NombreAutor FROM Autor";
     private final String SQL_SEARCH_EDITORIAL = "SELECT NombreEditorial FROM Editorial";
     ////////////////////////////////////////////////////////////////////////////
-    private final String SQL_SEARCH_ALL_LOCALIZACION = "SELECT * FROM Localizacion";
-    private final String SQL_SEARCH_ALL_AREA = "SELECT * FROM Area";
-    private final String SQL_SEARCH_ALL_EDITORIAL = "SELECT * FROM Editorial";
+    private final String SQL_SEARCH_ALL_LOCALIZACION = "SELECT * FROM Localizacion  ORDER BY IdLocalizacion";
+    private final String SQL_SEARCH_ALL_AREA = "SELECT * FROM Area ORDER BY IdArea";
+    private final String SQL_SEARCH_ALL_EDITORIAL = "SELECT * FROM Editorial ORDER BY IdEditorial";
     ////////////////////////////////////////////////////////////////////////////
     private final String SQL_SEARCH_ALL_PRESTAMOS = "SELECT IdPrestamo,Usuario,Titulo,Isbn,FechaPrestamo,FechaDevolucion FROM Prestamo AS P JOIN Libro L,Ejemplar E,Socio S WHERE P.Socio=S.IdSocio AND E.IdEjemplar=P.Ejemplar AND E.Libro=L.IdLibro";
     private final String SQL_SEARCH_SOME_PRESTAMOS = "SELECT IdPrestamo,Usuario,Titulo,Isbn,FechaPrestamo,FechaDevolucion FROM Prestamo AS P JOIN Libro L,Ejemplar E,Socio S WHERE S.IdSocio=? AND P.Socio=S.IdSocio AND E.IdEjemplar=P.Ejemplar AND E.Libro=L.IdLibro";
@@ -50,7 +50,7 @@ public class CargarInfoDAO {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_LOCALIZACION + " WHERE EstatusLocalizacion='Activo'");
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_LOCALIZACION + " WHERE EstatusLocalizacion='Activo' ORDER BY IdLocalizacion");
             ResultSet rs = prs.executeQuery();
             ea.JLocalizacionLibro.addItem("Sin Selección");
             while (rs.next()) {
@@ -71,7 +71,7 @@ public class CargarInfoDAO {
         ////////////////////////////////////////////////////////////////////////
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AREA + " WHERE EstatusArea='Activo'");
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AREA + " WHERE EstatusArea='Activo' ORDER BY IdArea");
             ResultSet rs = prs.executeQuery();
             ea.JAreaLibro.addItem("Sin Selección");
             while (rs.next()) {
@@ -92,7 +92,7 @@ public class CargarInfoDAO {
         ////////////////////////////////////////////////////////////////////////
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE EstatusAutor='Activo'");
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE EstatusAutor='Activo'  ORDER BY IdAutor");
             ResultSet rs = prs.executeQuery();
             ModelAutor.addElement("Sin Selección");
             while (rs.next()) {
@@ -114,7 +114,7 @@ public class CargarInfoDAO {
         ////////////////////////////////////////////////////////////////////////
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo'");
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo'  ORDER BY IdEditorial");
             ResultSet rs = prs.executeQuery();
             ModelEditorial.addElement("Sin Selección");
             while (rs.next()) {
@@ -143,7 +143,7 @@ public class CargarInfoDAO {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE EstatusAutor='Activo'");
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE EstatusAutor='Activo' ORDER BY IdAutor");
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {
                 ModelAutor.addElement(rs.getString(1));
@@ -164,7 +164,7 @@ public class CargarInfoDAO {
         ////////////////////////////////////////////////////////////////////////
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo'");
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo' ORDER BY IdEditorial");
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {
                 ModelEditorial.addElement(rs.getString(1));
@@ -224,7 +224,6 @@ public class CargarInfoDAO {
                 Array.add(2, "Editorial con Menos Existencias:");
                 Array.add(3, "Editorial: " + rs.getString(1) + " Cantidad: " + rs.getString(2));
             }
-            Array.clear();
 
         } catch (SQLException n) {
             Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
@@ -242,11 +241,13 @@ public class CargarInfoDAO {
             ResultSet rs = prs.executeQuery();
             if (rs.next()) {
                 Array.add(4, "Libro con más Préstamos:");
-                Array.add(5, "Título: " + rs.getString(1) + " ISBN: " + rs.getString(2) + " Editorial: " + rs.getString(3) + " Cantidad: " + rs.getInt(4));
-                for (int i = 6; i <= 10; i++) {
+                Array.add(5, "Título: " + rs.getString(1) + " ISBN: " + rs.getString(2));
+                Array.add(6,"");
+                Array.add(7, "Editorial: " + rs.getString(3) + " Cantidad: " + rs.getInt(4));
+                for (int i = 8; i <= 10; i++) {
                     Array.add("");
                 }
-                ea.LoadData("Información de Ejemplar, Editorial y Prestamos", Array);
+                ea.LoadData("Información", Array);
             }
             Array.clear();
             SUCCESS = true;
@@ -388,13 +389,20 @@ public class CargarInfoDAO {
      * @param t
      * @return
      */
-    public boolean LoadPrestamos(VPrestamos ea, DefaultTableModel t) {
+    public boolean LoadPrestamos(VPrestamos ea, DefaultTableModel t, int accion) {
         ArrayList<String> Array = new ArrayList<String>();
         boolean SUCCESS = false;
+        PreparedStatement prs = null;
+        ResultSet rs = null;
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_ALL_PRESTAMOS);
-            ResultSet rs = prs.executeQuery();
+            if (accion == 0) {
+                prs = conn.prepareStatement(SQL_SEARCH_ALL_PRESTAMOS);
+                rs = prs.executeQuery();
+            } else if (accion == 1) {
+                prs = conn.prepareStatement(SQL_SEARCH_ALL_PRESTAMOS + " AND FechaDevolucion<=CURDATE()");
+                rs = prs.executeQuery();
+            }
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
             t.setRowCount(0);
@@ -420,14 +428,22 @@ public class CargarInfoDAO {
         return SUCCESS;
     }
 
-    public boolean LoadPrestamos(VPrestamos ea, DefaultTableModel t, SocioBean Bean) {
+    public boolean LoadPrestamos(VPrestamos ea, DefaultTableModel t, SocioBean Bean, int accion) {
         ArrayList<String> Array = new ArrayList<String>();
         boolean SUCCESS = false;
+        PreparedStatement prs = null;
+        ResultSet rs = null;
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_SOME_PRESTAMOS);
-            prs.setInt(1, Bean.getIdUsuario());
-            ResultSet rs = prs.executeQuery();
+            if (accion == 0) {
+                prs = conn.prepareStatement(SQL_SEARCH_SOME_PRESTAMOS);
+                prs.setInt(1, Bean.getIdUsuario());
+                rs = prs.executeQuery();
+            } else if (accion == 1) {
+                prs = conn.prepareStatement(SQL_SEARCH_SOME_PRESTAMOS + " AND FechaDevolucion<=CURDATE()");
+                prs.setInt(1, Bean.getIdUsuario());
+                rs = prs.executeQuery();
+            }
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
             t.setRowCount(0);

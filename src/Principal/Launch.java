@@ -6,7 +6,7 @@ public class Launch {
 
     public static void main(String[] args) {
         VIniciarSesion IniciarSesion = new VIniciarSesion();
-        IniciarSesion.setVisible(true);
         IniciarSesion.setLocationRelativeTo(null);
+        IniciarSesion.setVisible(true);
     }
 }

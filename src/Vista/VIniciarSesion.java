@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.IniciarSesionControlador;
 import java.util.ResourceBundle;
+import javax.swing.UIManager;
 
 /**
  *
@@ -16,6 +17,11 @@ public class VIniciarSesion extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         ReadFile();
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void ReadFile() {
@@ -40,6 +46,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTattooUtilities1 = new com.jtattoo.plaf.JTattooUtilities();
         jSeparator1 = new javax.swing.JSeparator();
         JCodeWorkIcon = new javax.swing.JPanel();
         jIconCodeWork = new javax.swing.JLabel();
@@ -56,6 +63,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
         JAnounce = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Iniciar Sesión");
 
         jIconCodeWork.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Logo.jpg"))); // NOI18N
 
@@ -211,6 +219,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jIconLeeyAprende;
     private javax.swing.JLabel jIconSession;
     private javax.swing.JSeparator jSeparator1;
+    private com.jtattoo.plaf.JTattooUtilities jTattooUtilities1;
     private javax.swing.JLabel jUsuario;
     // End of variables declaration//GEN-END:variables
 }

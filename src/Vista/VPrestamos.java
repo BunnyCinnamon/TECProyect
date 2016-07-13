@@ -2,6 +2,9 @@ package Vista;
 
 import Classes.Beans.SocioBean;
 import Controlador.CargarInfoControlador;
+import Controlador.PrestamosControlador;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,27 +20,27 @@ public class VPrestamos extends javax.swing.JFrame {
     public VPrestamos() {
         initComponents();
         this.setResizable(false);
-        IniciarAdmin();
+        IniciarAdmin(0);
     }
 
     public VPrestamos(SocioBean Bean) {
         initComponents();
         this.Stat = Bean;
         this.Login = 1;
-        IniciarSocio(Bean);
+        IniciarSocio(Bean, 0);
     }
 
     /**
      * VRegistro de Prestamos*
      */
-    private void IniciarAdmin() {
+    private void IniciarAdmin(int accion) {
         DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
-        Cargar.CargarInfoPrestamos(this, Area);
+        Cargar.CargarInfoPrestamos(this, Area, accion);
     }
 
-    private void IniciarSocio(SocioBean Bean) {
+    private void IniciarSocio(SocioBean Bean, int accion) {
         DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
-        Cargar.CargarInfoPrestamos(this, Area, Bean);
+        Cargar.CargarInfoPrestamos(this, Area, Bean, accion);
     }
 
     @SuppressWarnings("unchecked")
@@ -55,11 +58,13 @@ public class VPrestamos extends javax.swing.JFrame {
         JDetalles = new javax.swing.JButton();
         JLiberarSeleccion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        JCheckExpirado = new javax.swing.JCheckBox();
         JRegresar = new javax.swing.JButton();
         JRecargar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Préstamos");
 
         jIconLeeyAprende.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/LibraryIcon.png"))); // NOI18N
 
@@ -72,7 +77,7 @@ public class VPrestamos extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -106,6 +111,8 @@ public class VPrestamos extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467284813_OFFice-90.png"))); // NOI18N
 
+        JCheckExpirado.setText("Expirado");
+
         javax.swing.GroupLayout JInternalEditar1Layout = new javax.swing.GroupLayout(JInternalEditar1.getContentPane());
         JInternalEditar1.getContentPane().setLayout(JInternalEditar1Layout);
         JInternalEditar1Layout.setHorizontalGroup(
@@ -115,7 +122,8 @@ public class VPrestamos extends javax.swing.JFrame {
                 .addGroup(JInternalEditar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(JDetalles)
-                    .addComponent(JLiberarSeleccion))
+                    .addComponent(JLiberarSeleccion)
+                    .addComponent(JCheckExpirado))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
@@ -129,6 +137,8 @@ public class VPrestamos extends javax.swing.JFrame {
                 .addComponent(JDetalles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JLiberarSeleccion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JCheckExpirado)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
         );
@@ -215,14 +225,20 @@ public class VPrestamos extends javax.swing.JFrame {
     }//GEN-LAST:event_JDetallesActionPerformed
 
     private void JLiberarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JLiberarSeleccionActionPerformed
-
+        PrestamosControlador PrestamosControlador = new PrestamosControlador();
+        DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
+        PrestamosControlador.JLiberarSeleccionActionPerformed(Area,this);
     }//GEN-LAST:event_JLiberarSeleccionActionPerformed
 
     private void JRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRecargarActionPerformed
+        int accion = 0;
+        if (JCheckExpirado.isSelected()) {
+            accion = 1;
+        }
         if (Login != 0) {
-            IniciarSocio(Stat);
+            IniciarSocio(Stat, accion);
         } else {
-            IniciarAdmin();
+            IniciarAdmin(accion);
         }
     }//GEN-LAST:event_JRecargarActionPerformed
 
@@ -231,9 +247,16 @@ public class VPrestamos extends javax.swing.JFrame {
             public void run() {
             }
         });
+        try {
+            JFrame.setDefaultLookAndFeelDecorated(true);
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox JCheckExpirado;
     private javax.swing.JButton JDetalles;
     private javax.swing.JInternalFrame JInternalEditar1;
     private javax.swing.JButton JLiberarSeleccion;

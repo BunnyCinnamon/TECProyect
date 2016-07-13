@@ -1,6 +1,8 @@
 package Vista;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  *
@@ -59,6 +61,7 @@ public class VDetalles extends javax.swing.JFrame {
         JMenuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Detalles");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467286183_bookshelf.png"))); // NOI18N
 
@@ -229,6 +232,12 @@ public class VDetalles extends javax.swing.JFrame {
                 new VDetalles().setVisible(true);
             }
         });
+        try {
+            JFrame.setDefaultLookAndFeelDecorated(true);
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

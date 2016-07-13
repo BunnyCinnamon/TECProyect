@@ -16,8 +16,9 @@ public class AsignarSocioDAO {
 
     private final String SQL_CHECK_AVALIABLE = "SELECT Existencias FROM Ejemplar WHERE Libro=? AND Existencias>3";
     private final String SQL_CHECK_REPEATED = "SELECT COUNT(Socio) FROM Prestamo WHERE Socio=?";
-    private final String SQL_ADD_PRESTAMO = "INSERT INTO Prestamo values(null,CURDATE(),STR_TO_DATE('01/01/2016','%m/%d/%Y'),?,?)";
+    private final String SQL_ADD_PRESTAMO = "INSERT INTO Prestamo values(null,CURDATE(),CURDATE() + INTERVAL 3 DAY,?,?)";
     private final String SQL_INCREASE_BOOK_PRESTAMO = "UPDATE Libro SET NumeroPrestamos=NumeroPrestamos+1 WHERE IdLibro=?";
+    private final String SQL_INCREASE_PRESTAMOS = "UPDATE Socio SET Prestamos=Prestamos+1 WHERE IdSocio=?";
 
     public boolean AsignarSocioDAO(Object[] U) {
         SocioBean SocioBean = (SocioBean) U[0];
@@ -87,6 +88,22 @@ public class AsignarSocioDAO {
                     conn = Connexion.getConnection();
                     PreparedStatement prs = conn.prepareStatement(SQL_INCREASE_BOOK_PRESTAMO);
                     prs.setInt(1, Integer.parseInt(Array.get(0).toString()));
+                    prs.executeUpdate();
+                    prs.close();
+                } catch (SQLException n) {
+                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException m) {
+                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+                    }
+                }
+                ////////////////////////////////////////////////////////////////
+                try {
+                    conn = Connexion.getConnection();
+                    PreparedStatement prs = conn.prepareStatement(SQL_INCREASE_PRESTAMOS);
+                    prs.setInt(1, SocioBean.getIdUsuario());
                     prs.executeUpdate();
                     prs.close();
                 } catch (SQLException n) {

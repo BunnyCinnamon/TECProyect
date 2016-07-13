@@ -12,6 +12,7 @@ public class SocioBean implements java.io.Serializable {
     private int numero;
     private int telefono;
     private String usuario;
+    private int Prestamos;
     private String Estatus;
     private String contraseña;
 
@@ -66,6 +67,10 @@ public class SocioBean implements java.io.Serializable {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+    
+    public void setPrestamos(int contraseña) {
+        this.Prestamos = contraseña;
+    }
 
 //    Getters for clas SocioBean
     public int getIdUsuario() {
@@ -114,5 +119,9 @@ public class SocioBean implements java.io.Serializable {
 
     public String getContraseña() {
         return contraseña;
+    }
+    
+    public int getPrestamos() {
+        return Prestamos;
     }
 }

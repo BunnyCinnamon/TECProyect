@@ -38,14 +38,14 @@ public class CargarInfoControlador {
      * @param va
      * @param t
      */
-    public void CargarInfoPrestamos(VPrestamos va, DefaultTableModel t) {
-        if (!Cargar.LoadPrestamos(va, t)) {
+    public void CargarInfoPrestamos(VPrestamos va, DefaultTableModel t, int accion) {
+        if (!Cargar.LoadPrestamos(va, t, accion)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public void CargarInfoPrestamos(VPrestamos va, DefaultTableModel t, SocioBean Bean) {
-        if (!Cargar.LoadPrestamos(va, t, Bean)) {
+    public void CargarInfoPrestamos(VPrestamos va, DefaultTableModel t, SocioBean Bean, int accion) {
+        if (!Cargar.LoadPrestamos(va, t, Bean, accion)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }

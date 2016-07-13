@@ -3,6 +3,8 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.BuscarLibroControlador;
 import Controlador.CargarInfoControlador;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -70,6 +72,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Búsqueda de Libros");
 
         jIconLeeyAprende.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/LibraryIcon.png"))); // NOI18N
 
@@ -325,12 +328,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_JRegresarActionPerformed
 
-    private void JBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarLibroActionPerformed
-        BuscarLibroControlador BuscarLibroControlador = new BuscarLibroControlador();
-        DefaultTableModel model = (DefaultTableModel) JTableBLibro.getModel();
-        BuscarLibroControlador.actionPerformedJBuscarLibro(model, this);
-    }//GEN-LAST:event_JBuscarLibroActionPerformed
-
     private void JAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAsignarActionPerformed
         BuscarLibroControlador BuscarLibroControlador = new BuscarLibroControlador();
         BuscarLibroControlador.actionPerformedJPrestamo(Bean, this);
@@ -340,6 +337,12 @@ public class VBuscarLibro extends javax.swing.JFrame {
         CargarInfoControlador Cargar = new CargarInfoControlador();
         Cargar.CargarInfoEstadisticas();
     }//GEN-LAST:event_JDetallesActionPerformed
+
+    private void JBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarLibroActionPerformed
+        BuscarLibroControlador BuscarLibroControlador = new BuscarLibroControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableBLibro.getModel();
+        BuscarLibroControlador.actionPerformedJBuscarLibro(model, this);
+    }//GEN-LAST:event_JBuscarLibroActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

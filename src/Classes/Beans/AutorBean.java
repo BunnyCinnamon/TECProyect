@@ -6,7 +6,7 @@ public class AutorBean implements java.io.Serializable {
     private String nombre;
     private String apellidoP;
     private String apellidoM;
-    private int status;
+    private String status;
 
     public AutorBean() {
     }
@@ -28,7 +28,7 @@ public class AutorBean implements java.io.Serializable {
         this.apellidoM = apellidoM;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -49,7 +49,7 @@ public class AutorBean implements java.io.Serializable {
         return apellidoM;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 }

@@ -29,78 +29,78 @@ public class BuscarLibroDAO {
             PreparedStatement prs = null;
             switch (action) {
                 case 0: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS);
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " ORDER BY IdLibro");
                     rs = prs.executeQuery();
                     break;
                 }
                 case 1: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 2: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, '%' + Bean.getIsbn() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 3: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 4: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 5: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 6: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 7: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ? AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, '%' + Bean.getIsbn() + "%");
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 8: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getIsbn() + "%");
                     rs = prs.executeQuery();
                     break;
                 }
                 case 9: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getIsbn() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 10: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND E.NombreAutor=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND E.NombreAutor=? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     prs.setString(2, Autor);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 11: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -108,7 +108,7 @@ public class BuscarLibroDAO {
                     break;
                 }
                 case 12: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -116,7 +116,7 @@ public class BuscarLibroDAO {
                     break;
                 }
                 case 13: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -124,7 +124,7 @@ public class BuscarLibroDAO {
                     break;
                 }
                 case 14: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getTitulo() + '%');
@@ -132,7 +132,7 @@ public class BuscarLibroDAO {
                     break;
                 }
                 case 15: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getTitulo() + '%');

@@ -3,6 +3,8 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.AsignarSocioControlador;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,6 +50,7 @@ public class VAsignarSocio extends javax.swing.JFrame {
         JMenuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Préstamos");
 
         jIconLeeyAprende.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/LibraryIcon.png"))); // NOI18N
 
@@ -215,6 +218,12 @@ public class VAsignarSocio extends javax.swing.JFrame {
             public void run() {
             }
         });
+        try {
+            JFrame.setDefaultLookAndFeelDecorated(true);
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

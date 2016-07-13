@@ -1,15 +1,15 @@
 package Controlador;
 
+import Classes.Beans.AutorBean;
 import Classes.Beans.LibroBean;
 import Classes.Beans.SocioBean;
 import Modelo.AdministradorDAO;
 import Vista.VAdministrador;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
 public class AdministradorControlador {
-
+    
     public AdministradorDAO adm = new AdministradorDAO();
 
     /**
@@ -50,7 +50,7 @@ public class AdministradorControlador {
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-
+            
             Bean.setIdLibro(Integer.parseInt(va.JTableRLibro.getValueAt(Select, 0).toString()));
             Bean.setIsbn(va.JISBNText.getText());
             Bean.setTitulo(va.JTituloText.getText());
@@ -60,7 +60,7 @@ public class AdministradorControlador {
             Bean.setEditorial(va.JListEditorial.getSelectedIndex());
             Bean.setArea(va.JAreaLibro.getSelectedIndex());
             Bean.setLocalizacion(va.JLocalizacionLibro.getSelectedIndex());
-
+            
             if (adm.ModificarLibro(Bean)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             }
@@ -79,7 +79,7 @@ public class AdministradorControlador {
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? (Inactivo)")) {
-            if (adm.EliminarLibro(va.JTableRLibro.getValueAt(Select, 0).toString())) {
+            if (adm.EliminarLibro(Integer.parseInt(va.JTableRLibro.getValueAt(Select, 0).toString()))) {
                 ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }
@@ -155,7 +155,7 @@ public class AdministradorControlador {
         Bean.setUsuario(va.JTextUsuario.getText());
         Bean.setContraseña(va.JTextContraseñaSocio.getText());
         if (adm.IngresarSocio(Bean)) {
-            ae.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNormbre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + "#" + Bean.getNumero(), Bean.getTelefono(), "Activo", "**********"});
+            ae.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNormbre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + "#" + Bean.getNumero(), Bean.getTelefono(), "Activo", Bean.getPrestamos(),Bean.getUsuario(), "**********"});
             JOptionPane.showMessageDialog(null, "El Libro ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "No se agregó el Libro correctamente", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -169,12 +169,12 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJModificarSocio(VAdministrador va) {
-        int Select = va.JTableRLibro.getSelectedRow();
+        int Select = va.JTableRSocio.getSelectedRow();
         SocioBean Bean = new SocioBean();
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-
+            
             Bean.setIdUsuario(Integer.parseInt(va.JTableRSocio.getValueAt(Select, 0).toString()));
             Bean.setNormbre(va.JNombreTextSocio.getText());
             Bean.setApellidoP(va.JApellidoPTextSocio.getText());
@@ -187,7 +187,7 @@ public class AdministradorControlador {
             Bean.setUsuario(va.JTextUsuario.getText());
             Bean.setEstatus(va.JEstatusSocio.getSelectedItem().toString());
             Bean.setContraseña(va.JTextContraseñaSocio.getText());
-
+            
             if (adm.ModificarSocio(Bean)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             }
@@ -202,13 +202,13 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJEliminarSocio(DefaultTableModel ae, VAdministrador va) {
-        int Select = va.JTableRLibro.getSelectedRow();
+        int Select = va.JTableRSocio.getSelectedRow();
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
-        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? (Inactivo)")) {
+        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? (Inactivo)")) {
             int id = Integer.parseInt(va.JTableRSocio.getValueAt(Select, 0).toString());
             if (adm.EliminarSocio(id)) {
-                JOptionPane.showMessageDialog(null, "Registro Modificado");
+                JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }
         }
     }
@@ -221,7 +221,44 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJBuscarSocio(DefaultTableModel ae, VAdministrador va) {
-
+        int action = 0;
+        SocioBean Bean = new SocioBean();
+        Bean.setNormbre(va.JNombreTextSocio.getText());
+        Bean.setApellidoP(va.JApellidoPTextSocio.getText());
+        Bean.setApellidoM(va.JApellidoMTextSocio.getText());
+        Bean.setUsuario(va.JTextUsuario.getText());
+        if (va.JCheckNombre.isSelected() && (!va.JCheckApellidoP.isSelected() && !va.JCheckApellidoM.isSelected() && !va.JCheckUsuario.isSelected())) {
+            action = 1;
+        } else if (va.JCheckApellidoM.isSelected() && (!va.JCheckApellidoP.isSelected() && !va.JCheckNombre.isSelected() && !va.JCheckUsuario.isSelected())) {
+            action = 2;
+        } else if (va.JCheckApellidoP.isSelected() && (!va.JCheckNombre.isSelected() && !va.JCheckApellidoM.isSelected() && !va.JCheckUsuario.isSelected())) {
+            action = 3;
+        } else if (va.JCheckUsuario.isSelected() && (!va.JCheckNombre.isSelected() && !va.JCheckApellidoM.isSelected() && !va.JCheckApellidoP.isSelected())) {
+            action = 4;
+        } else if (va.JCheckUsuario.isSelected() && va.JCheckNombre.isSelected() && (!va.JCheckApellidoM.isSelected() && !va.JCheckApellidoP.isSelected())) {
+            action = 5;
+        } else if (va.JCheckApellidoP.isSelected() && va.JCheckNombre.isSelected() && (!va.JCheckApellidoM.isSelected() && !va.JCheckUsuario.isSelected())) {
+            action = 6;
+        } else if (va.JCheckApellidoM.isSelected() && va.JCheckNombre.isSelected() && (!va.JCheckUsuario.isSelected() && !va.JCheckApellidoP.isSelected())) {
+            action = 7;
+        } else if (va.JCheckApellidoM.isSelected() && va.JCheckApellidoP.isSelected() && (!va.JCheckUsuario.isSelected() && !va.JCheckNombre.isSelected())) {
+            action = 8;
+        } else if (va.JCheckApellidoM.isSelected() && va.JCheckUsuario.isSelected() && (!va.JCheckNombre.isSelected() && !va.JCheckApellidoP.isSelected())) {
+            action = 9;
+        } else if (va.JCheckUsuario.isSelected() && va.JCheckApellidoP.isSelected() && (!va.JCheckNombre.isSelected() && !va.JCheckApellidoM.isSelected())) {
+            action = 10;
+        } else if (va.JCheckNombre.isSelected() && va.JCheckApellidoM.isSelected() && va.JCheckApellidoP.isSelected() && (!va.JCheckUsuario.isSelected())) {
+            action = 11;
+        } else if (va.JCheckNombre.isSelected() && va.JCheckApellidoM.isSelected() && va.JCheckUsuario.isSelected() && (!va.JCheckApellidoP.isSelected())) {
+            action = 12;
+        } else if (va.JCheckApellidoM.isSelected() && va.JCheckApellidoP.isSelected() && va.JCheckUsuario.isSelected() && (!va.JCheckNombre.isSelected())) {
+            action = 13;
+        } else if (va.JCheckNombre.isSelected() && va.JCheckApellidoP.isSelected() && va.JCheckUsuario.isSelected() && (!va.JCheckApellidoM.isSelected())) {
+            action = 14;
+        } else if (va.JCheckUsuario.isSelected() && va.JCheckApellidoP.isSelected() && va.JCheckNombre.isSelected() && va.JCheckApellidoM.isSelected()) {
+            action = 15;
+        }
+        adm.BuscarSocio(ae, Bean, action);
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -233,7 +270,17 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJIngresarAutor(DefaultTableModel ae, VAdministrador va) {
-
+        AutorBean Bean = new AutorBean();
+        Bean.setNombre(va.JNombreTextAutor.getText());
+        Bean.setApellidoP(va.JApellidoPAutor.getText());
+        Bean.setApellidoM(va.JApellidoMAutor.getText());
+        System.out.println(Bean.getNombre());
+        if (adm.IngresarAutor(ae, Bean)) {
+            ae.addRow(new Object[]{Bean.getIdAutor(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), "Activo"});
+            JOptionPane.showMessageDialog(null, "El autor ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se agregó el autor", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -243,7 +290,20 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJModificarAutor(VAdministrador va) {
-
+        AutorBean Bean = new AutorBean();
+        int Select = va.JTableRAutor.getSelectedRow();
+        Bean.setIdAutor(Integer.parseInt(va.JTableRAutor.getValueAt(Select, 0).toString()));
+        Bean.setNombre(va.JNombreTextAutor.getText());
+        Bean.setApellidoP(va.JApellidoPAutor.getText());
+        Bean.setApellidoM(va.JApellidoMAutor.getText());
+        Bean.setStatus(va.JComboEstatusAutor.getSelectedItem().toString());
+        if (Select < 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
+            if (adm.ModificarAutor(Bean)) {
+                JOptionPane.showMessageDialog(null, "Registro Modificado");
+            }
+        }
     }
 
     /**
@@ -254,7 +314,15 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJEliminarAutor(DefaultTableModel ae, VAdministrador va) {
-
+        int Select = va.JTableRAutor.getSelectedRow();
+        if (Select < 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? ")) {
+            if (adm.EliminarAutor(Integer.parseInt(va.JTableRAutor.getValueAt(Select, 0).toString()))) {
+                ae.removeRow(Integer.parseInt(va.JTableRAutor.getValueAt(Select, 0).toString()));
+                JOptionPane.showMessageDialog(null, "Registro Eliminado");
+            }
+        }
     }
 
     /**
@@ -265,105 +333,24 @@ public class AdministradorControlador {
      * @param va
      */
     public void actionPerformedJBuscarAutor(DefaultTableModel ae, VAdministrador va) {
-
+        int action = 0;
+        AutorBean Bean = new AutorBean();
+        Bean.setNombre(va.JNombreTextSocio.getText());
+        Bean.setApellidoP(va.JApellidoPTextSocio.getText());
+        Bean.setApellidoM(va.JApellidoMTextSocio.getText());
+        if (va.JCheckNombreAutor.isSelected() && (!va.JCheckApellidoP.isSelected() && !va.JCheckApellidoM.isSelected())) {
+            action = 1;
+        } else if (va.JCheckApellidoM.isSelected() && (!va.JCheckApellidoP.isSelected() && !va.JCheckNombre.isSelected())) {
+            action = 2;
+        } else if (va.JCheckApellidoP.isSelected() && (!va.JCheckNombre.isSelected() && !va.JCheckApellidoM.isSelected())) {
+            action = 3;
+        } else if (va.JCheckApellidoM.isSelected() && va.JCheckNombre.isSelected() && (!va.JCheckApellidoM.isSelected())) {
+            action = 4;
+        } else if (va.JCheckApellidoP.isSelected() && va.JCheckNombre.isSelected() && (!va.JCheckApellidoP.isSelected())) {
+            action = 5;
+        } else if (va.JCheckApellidoP.isSelected() && va.JCheckApellidoM.isSelected() && (!va.JCheckNombre.isSelected())) {
+            action = 6;
+        }
+        adm.BuscarAutor(ae, Bean, action);
     }
-
-//    ////////////////////////////////////////////////////////////////////////////
-//    /**
-//     * Ingresar Editorial
-//     *
-//     *
-//     * @param ae
-//     * @param va
-//     */
-//    public void actionPerformedJIngresarEditorial(DefaultTableModel ae, VAdministrador va) {
-//
-//    }
-//
-//    /**
-//     * Modificar Editorial
-//     *
-//     *
-//     * @param va
-//     */
-//    public void actionPerformedJModificarEditorial(VAdministrador va) {
-//
-//    }
-//
-//    /**
-//     * Eliminar Editorial
-//     *
-//     *
-//     * @param ae
-//     * @param va
-//     */
-//    public void actionPerformedJEliminarEditorial(DefaultTableModel ae, VAdministrador va) {
-//
-//    }
-//
-//    ////////////////////////////////////////////////////////////////////////////
-//    /**
-//     * Ingresar Localización
-//     *
-//     *
-//     * @param ae
-//     * @param va
-//     */
-//    public void actionPerformedJIngresarLocalizacion(DefaultTableModel ae, VAdministrador va) {
-//
-//    }
-//
-//    /**
-//     * Modificar Localización
-//     *
-//     *
-//     * @param va
-//     */
-//    public void actionPerformedJModificarLocalizacion(VAdministrador va) {
-//
-//    }
-//
-//    /**
-//     * Eliminar Localización
-//     *
-//     *
-//     * @param ae
-//     * @param va
-//     */
-//    public void actionPerformedJEliminarLocalizacion(DefaultTableModel ae, VAdministrador va) {
-//
-//    }
-//
-//    ////////////////////////////////////////////////////////////////////////////
-//    /**
-//     * Ingresar Área
-//     *
-//     *
-//     * @param ae
-//     * @param va
-//     */
-//    public void actionPerformedJIngresarArea(DefaultTableModel ae, VAdministrador va) {
-//
-//    }
-//
-//    /**
-//     * Modificar Área
-//     *
-//     *
-//     * @param va
-//     */
-//    public void actionPerformedJModificarArea(VAdministrador va) {
-//
-//    }
-//
-//    /**
-//     * Eliminar Área
-//     *
-//     *
-//     * @param ae
-//     * @param va
-//     */
-//    public void actionPerformedJEliminarArea(DefaultTableModel ae, VAdministrador va) {
-//
-//    }
 }

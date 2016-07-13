@@ -1,5 +1,6 @@
 package Modelo;
 
+import Classes.Beans.AutorBean;
 import Classes.Beans.LibroBean;
 import Classes.Beans.SocioBean;
 import Utils.Connexion;
@@ -161,12 +162,12 @@ public class AdministradorDAO {
      * @param id
      * @return
      */
-    public boolean EliminarLibro(String id) {
+    public boolean EliminarLibro(int id) {
         boolean SUCCESS = true;
         try {
             conn = Connexion.getConnection();
             PreparedStatement prs = conn.prepareStatement(SQL_REMOVE_BOOKS);
-            prs.setString(1, id);
+            prs.setInt(1, id);
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
         } catch (SQLException n) {
@@ -197,78 +198,78 @@ public class AdministradorDAO {
             PreparedStatement prs = null;
             switch (action) {
                 case 0: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS);
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " ORDER BY IdLibro");
                     rs = prs.executeQuery();
                     break;
                 }
                 case 1: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 2: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, '%' + Bean.getIsbn() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 3: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 4: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 5: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 6: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 7: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ? AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, '%' + Bean.getIsbn() + "%");
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 8: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getIsbn() + "%");
                     rs = prs.executeQuery();
                     break;
                 }
                 case 9: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getIsbn() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 10: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND E.NombreAutor=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND E.NombreAutor=? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     prs.setString(2, Autor);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 11: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -276,7 +277,7 @@ public class AdministradorDAO {
                     break;
                 }
                 case 12: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -284,7 +285,7 @@ public class AdministradorDAO {
                     break;
                 }
                 case 13: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -292,7 +293,7 @@ public class AdministradorDAO {
                     break;
                 }
                 case 14: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getTitulo() + '%');
@@ -300,7 +301,7 @@ public class AdministradorDAO {
                     break;
                 }
                 case 15: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ? ORDER BY IdLibro");
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getTitulo() + '%');
@@ -335,9 +336,10 @@ public class AdministradorDAO {
     /**
      * Funciones de Socio*
      */
-    private final String SQL_ADD_SOCIO = "INSERT INTO Socio values(null,?,?,?,?,?,?,?,?,?,'Activo',?)";
+    private final String SQL_ADD_SOCIO = "INSERT INTO Socio values(null,?,?,?,?,?,?,?,?,?,'Activo',?,0)";
     private final String SQL_MODIFY_SOCIO = "UPDATE Socio SET Nombre=?, ApellidoP=?, ApellidoM=?, Estado=?, Municipio=?, Calle=?, Numero=?, Telefono=?, Usuario=?, Estatus=?, Contraseña=? WHERE IdSocio=?";
     private final String SQL_DELETE_SOCIO = "UPDATE Socio SET Estado='Inactivo' WHERE IdSocio=?";
+    private final String SQL_SEARCH_SOCIO = "SELECT IdSocio,Nombre,ApellidoP,ApellidoM,CONCAT(Estado,Municipio,Calle,Numero),Telefono,Estatus,Prestamos,Usuario FROM Socio";
 
     /**
      *
@@ -373,6 +375,11 @@ public class AdministradorDAO {
         return SUCCESS;
     }
 
+    /**
+     *
+     * @param Bean
+     * @return
+     */
     public boolean ModificarSocio(SocioBean Bean) {
         boolean SUCCESS = false;
         try {
@@ -403,6 +410,11 @@ public class AdministradorDAO {
         return SUCCESS;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean EliminarSocio(int id) {
         boolean SUCCESS = true;
         try {
@@ -412,15 +424,361 @@ public class AdministradorDAO {
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
         } catch (SQLException n) {
-            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
             }
         }
         return SUCCESS;
     }
 
+    /**
+     *
+     * @param t
+     * @param Bean
+     * @param action
+     */
+    public void BuscarSocio(DefaultTableModel t, SocioBean Bean, int action) {
+        ArrayList<String> Array = new ArrayList<String>();
+        try {
+            conn = Connexion.getConnection();
+            ResultSet rs = null;
+            PreparedStatement prs = null;
+            switch (action) {
+                case 0: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " ORDER BY Prestamos DESC");
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 1: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Nombre like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getNormbre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 2: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoP like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 3: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 4: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Usuario like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 5: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND Nombre like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 6: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? Nombre like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 7: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoP like ? AND Nombre like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoP() + "%");
+                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 8: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND ApellidoP like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getApellidoP() + "%");
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 9: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND ApellidoP like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    prs.setString(2, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 10: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND ApellidoM like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    prs.setString(2, '%' + Bean.getApellidoM() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 11: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Nombre like ? AND ApellidoP like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    prs.setString(3, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 12: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Usuario like ? AND Nombre like ? AND ApellidoP like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    prs.setString(3, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 13: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Usuario like ? AND ApellidoP like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getUsuario() + '%');
+                    prs.setString(3, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 14: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Usuario like ? AND Nombre like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getUsuario() + '%');
+                    prs.setString(3, '%' + Bean.getNormbre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 15: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Usuario like ? AND Nombre like ? AND ApellidoP like ? ORDER BY Prestamos DESC");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getUsuario() + '%');
+                    prs.setString(3, '%' + Bean.getNormbre() + '%');
+                    prs.setString(4, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+            }
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            t.setRowCount(0);
+            while (rs.next()) {
+                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    Array.add(rs.getString(columnIndex));
+                }
+                Array.add("**********");
+                t.addRow(Array.toArray());
+                Array.clear();
+            }
+            rs.close();
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+    }
+
+    /**
+     * Funciones de Autor*
+     */
+    private final String SQL_ADD_AUTOR = "INSERT INTO Autor (IdAutor,NombreAutor,ApellidoPAutor,ApellidoMAutor,EstatusAutor)";
+    private final String SQL_ID_AUTOR = "Select IdAutor FROM Autor WHERE NombreAutor=? AND ApellidoPAutor=? AND ApellidoMAutor=? AND EstatusAutor='Activo'";
+    private final String SQL_MODIFY_AUTOR = "UPDATE Autor SET";
+    private final String SQL_REMOVE_AUTOR = "UPDATE Autor SET";
+    private final String SQL_SEARCH_AUTOR = "SELECT * FROM Autor";
+
+    /**
+     *
+     * @param t
+     * @param Bean
+     * @return
+     */
+    public boolean IngresarAutor(DefaultTableModel t, AutorBean Bean) {
+        boolean SUCCESS = false;
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_ADD_AUTOR + " values(null,?,?,?,'Activo')");
+            prs.setString(1, Bean.getNombre());
+            prs.setString(2, Bean.getApellidoP());
+            prs.setString(3, Bean.getApellidoM());
+            SUCCESS = prs.executeUpdate() == 1;
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////
+        try {
+            conn = Connexion.getConnection();
+            ResultSet rs;
+            PreparedStatement prs = conn.prepareStatement(SQL_ID_AUTOR);
+            prs.setString(1, Bean.getNombre());
+            prs.setString(2, Bean.getApellidoP());
+            prs.setString(3, Bean.getApellidoM());
+            rs = prs.executeQuery();
+            if (rs.next()) {
+                Bean.setIdAutor(rs.getInt(1));
+                rs.close();
+                prs.close();
+            }
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        return SUCCESS;
+    }
+
+    /**
+     *
+     * @param Bean
+     * @return
+     */
+    public boolean ModificarAutor(AutorBean Bean) {
+        boolean SUCCESS = false;
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_AUTOR + " NombreAutor=?,ApellidoPAutor=?,ApellidoMAutor=?,EstatusAutor=? WHERE IdAutor=?");
+            prs.setString(1, Bean.getNombre());
+            prs.setString(2, Bean.getApellidoP());
+            prs.setString(3, Bean.getApellidoM());
+            prs.setString(4, Bean.getStatus());
+            prs.setInt(5, Bean.getIdAutor());
+            SUCCESS = prs.executeUpdate() == 1;
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        return SUCCESS;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public boolean EliminarAutor(int id) {
+        boolean SUCCESS = true;
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_REMOVE_AUTOR + " EstatusAutor='Inactivo' WHERE IdAutor=?");
+            prs.setInt(1, id);
+            SUCCESS = prs.executeUpdate() == 1;
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+        return SUCCESS;
+    }
+
+    public void BuscarAutor(DefaultTableModel t, AutorBean Bean, int action) {
+        ArrayList<String> Array = new ArrayList<String>();
+        try {
+            conn = Connexion.getConnection();
+            ResultSet rs = null;
+            PreparedStatement prs = null;
+            switch (action) {
+                case 0: {
+                    prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " ORDER BY IdAutor");
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 1: {
+                    prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE NombreAutor like ? ORDER BY IdAutor");
+                    prs.setString(1, '%' + Bean.getNombre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 2: {
+                    prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE ApellidoPAutor like ? ORDER BY IdAutor");
+                    prs.setString(1, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 3: {
+                    prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE ApellidoMAutor like ? ORDER BY IdAutor");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 4: {
+                    prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE ApellidoMAutor like ? NombreAutor like ? ORDER BY IdAutor");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 5: {
+                    prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE ApellidoPAutor like ? AND NombreAutor like ? ORDER BY IdAutor");
+                    prs.setString(1, '%' + Bean.getApellidoP() + "%");
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 6: {
+                    prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE ApellidoMAutor like ? AND ApellidoPAutor like ? ORDER BY IdAutor");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getApellidoP() + "%");
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 7: {
+                    prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE ApellidoMAutor like ? AND NombreAutor like ? AND ApellidoPAutor like ? ORDER BY IdAutor");
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
+                    prs.setString(3, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+            }
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            t.setRowCount(0);
+            while (rs.next()) {
+                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    Array.add(rs.getString(columnIndex));
+                }
+                t.addRow(Array.toArray());
+                Array.clear();
+            }
+            rs.close();
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+            }
+        }
+    }
 }

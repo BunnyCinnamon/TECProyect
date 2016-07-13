@@ -3,6 +3,8 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.OpcionesControladorSocio;
 import Controlador.SalirControlador;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  *
@@ -53,6 +55,7 @@ public class VOpcionesSocio extends javax.swing.JFrame {
         jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Socio");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jIconLeeyAprende.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/LibraryIcon.png"))); // NOI18N
@@ -211,6 +214,12 @@ public class VOpcionesSocio extends javax.swing.JFrame {
             public void run() {
             }
         });
+        try {
+            JFrame.setDefaultLookAndFeelDecorated(true);
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
