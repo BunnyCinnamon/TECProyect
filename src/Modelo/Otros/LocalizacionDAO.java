@@ -36,7 +36,7 @@ public class LocalizacionDAO {
      * @param Bean
      * @return
      */
-    public boolean IngresarLocalizacion(DefaultTableModel t,LocalizacionBean Bean) {
+    public boolean IngresarLocalizacion(DefaultTableModel t, LocalizacionBean Bean) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
@@ -44,13 +44,14 @@ public class LocalizacionDAO {
             prs.setString(1, Bean.getPasillo());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         try {
@@ -59,18 +60,20 @@ public class LocalizacionDAO {
             PreparedStatement prs = conn.prepareStatement(SQL_ID_LOCALIZACION);
             prs.setString(1, Bean.getPasillo());
             rs = prs.executeQuery();
-            if(rs.next()){
-            Bean.setIdLocalización(rs.getInt(1));
+            if (rs.next()) {
+                Bean.setIdLocalización(rs.getInt(1));
             }
-            t.addRow(new Object[]{Bean.getIdLocalización(),Bean.getPasillo(),"Activo"});
+            t.addRow(new Object[]{Bean.getIdLocalización(), Bean.getPasillo(), "Activo"});
+            rs.close();
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -91,13 +94,14 @@ public class LocalizacionDAO {
             prs.setInt(3, Bean.getIdLocalización());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -116,13 +120,14 @@ public class LocalizacionDAO {
             prs.setInt(1, id);
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(LocalizacionDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;

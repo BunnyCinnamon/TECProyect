@@ -58,14 +58,14 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
-
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         ////////////////////////////////////////////////////////////////////////
@@ -79,14 +79,14 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
-
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         ////////////////////////////////////////////////////////////////////////
@@ -100,15 +100,15 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
+            conn.close();
             ea.JListAutor.setModel(ModelAutor);
-
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         ////////////////////////////////////////////////////////////////////////
@@ -122,16 +122,16 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
+            conn.close();
             ea.JListEditorial.setModel(ModelEditorial);
             SUCCESS = true;
-
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -150,15 +150,15 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
+            conn.close();
             ea.JListAutor.setModel(ModelAutor);
-
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         ////////////////////////////////////////////////////////////////////////
@@ -171,16 +171,16 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
+            conn.close();
             ea.JListEditorial.setModel(ModelEditorial);
             SUCCESS = true;
-
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -204,15 +204,17 @@ public class CargarInfoDAO {
                 Array.add(0, "Ejemplar con Más Existencias:");
                 Array.add(1, "Libro: " + rs.getString(1) + " Cantidad: " + rs.getString(2));
             }
+            rs.close();
+            prs.close();
+            conn.close();
             SUCCESS = true;
-
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         ////////////////////////////////////////////////////////////////////////
@@ -224,14 +226,16 @@ public class CargarInfoDAO {
                 Array.add(2, "Editorial con Menos Existencias:");
                 Array.add(3, "Editorial: " + rs.getString(1) + " Cantidad: " + rs.getString(2));
             }
-
+            rs.close();
+            prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         ////////////////////////////////////////////////////////////////////////
@@ -242,23 +246,26 @@ public class CargarInfoDAO {
             if (rs.next()) {
                 Array.add(4, "Libro con más Préstamos:");
                 Array.add(5, "Título: " + rs.getString(1) + " ISBN: " + rs.getString(2));
-                Array.add(6,"");
+                Array.add(6, "");
                 Array.add(7, "Editorial: " + rs.getString(3) + " Cantidad: " + rs.getInt(4));
                 for (int i = 8; i <= 10; i++) {
                     Array.add("");
                 }
+                rs.close();
+                prs.close();
+                conn.close();
                 ea.LoadData("Información", Array);
             }
             Array.clear();
             SUCCESS = true;
 
         } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -289,15 +296,17 @@ public class CargarInfoDAO {
                 t.addRow(Array.toArray());
                 Array.clear();
             }
+            rs.close();
+            prs.close();
+            conn.close();
             SUCCESS = true;
-
         } catch (SQLException n) {
-            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -328,15 +337,17 @@ public class CargarInfoDAO {
                 t.addRow(Array.toArray());
                 Array.clear();
             }
+            rs.close();
+            prs.close();
+            conn.close();
             SUCCESS = true;
-
         } catch (SQLException n) {
-            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -367,15 +378,17 @@ public class CargarInfoDAO {
                 t.addRow(Array.toArray());
                 Array.clear();
             }
+            rs.close();
+            prs.close();
+            conn.close();
             SUCCESS = true;
-
         } catch (SQLException n) {
-            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -413,15 +426,17 @@ public class CargarInfoDAO {
                 t.addRow(Array.toArray());
                 Array.clear();
             }
+            rs.close();
+            prs.close();
+            conn.close();
             SUCCESS = true;
-
         } catch (SQLException n) {
-            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
 
@@ -454,15 +469,17 @@ public class CargarInfoDAO {
                 t.addRow(Array.toArray());
                 Array.clear();
             }
+            rs.close();
+            prs.close();
+            conn.close();
             SUCCESS = true;
-
         } catch (SQLException n) {
-            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
 

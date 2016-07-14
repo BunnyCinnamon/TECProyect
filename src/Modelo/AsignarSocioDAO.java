@@ -34,13 +34,14 @@ public class AsignarSocioDAO {
                 AVAILABLE = true;
             }
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         if (AVAILABLE) {
@@ -57,13 +58,14 @@ public class AsignarSocioDAO {
                     }
                 }
                 prs.close();
+                conn.close();
             } catch (SQLException n) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
             } finally {
                 try {
                     conn.close();
                 } catch (SQLException m) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
                 }
             }
             if (AVAILABLE) {
@@ -74,13 +76,14 @@ public class AsignarSocioDAO {
                     prs.setInt(2, Integer.parseInt(Array.get(0).toString()));
                     SUCCESS = prs.executeUpdate() == 1;
                     prs.close();
+                    conn.close();
                 } catch (SQLException n) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
                 } finally {
                     try {
                         conn.close();
                     } catch (SQLException m) {
-                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
                     }
                 }
                 ////////////////////////////////////////////////////////////////
@@ -90,13 +93,14 @@ public class AsignarSocioDAO {
                     prs.setInt(1, Integer.parseInt(Array.get(0).toString()));
                     prs.executeUpdate();
                     prs.close();
+                    conn.close();
                 } catch (SQLException n) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
                 } finally {
                     try {
                         conn.close();
                     } catch (SQLException m) {
-                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
                     }
                 }
                 ////////////////////////////////////////////////////////////////
@@ -106,13 +110,14 @@ public class AsignarSocioDAO {
                     prs.setInt(1, SocioBean.getIdUsuario());
                     prs.executeUpdate();
                     prs.close();
+                    conn.close();
                 } catch (SQLException n) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
                 } finally {
                     try {
                         conn.close();
                     } catch (SQLException m) {
-                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
                     }
                 }
             }

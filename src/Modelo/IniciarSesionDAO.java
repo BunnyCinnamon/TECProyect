@@ -29,17 +29,17 @@ public class IniciarSesionDAO {
             if (rs.next()) {
                 adm.setidAdministrador(rs.getInt(1));
                 CORRECT = true;
-                rs.close();
-                prs.close();
             }
-
+            rs.close();
+            prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return CORRECT;
@@ -65,19 +65,19 @@ public class IniciarSesionDAO {
                 adm.setTelefono(rs.getInt(9));
                 adm.setUsuario(rs.getString(10));
                 CORRECT = true;
-                rs.close();
-                prs.close();
             }
-
+            rs.close();
+            prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
-        return new Object[]{adm,CORRECT};
+        return new Object[]{adm, CORRECT};
     }
 }

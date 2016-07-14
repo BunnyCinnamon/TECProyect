@@ -35,13 +35,14 @@ public class EditorialDAO {
             prs.setString(1, Bean.getNombre());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", m);
             }
         }
         try {
@@ -50,18 +51,20 @@ public class EditorialDAO {
             PreparedStatement prs = conn.prepareStatement(SQL_ID_EDITORIAL);
             prs.setString(1, Bean.getNombre());
             rs = prs.executeQuery();
-            if(rs.next()){
-            Bean.setIdEditorial(rs.getInt(1));
+            if (rs.next()) {
+                Bean.setIdEditorial(rs.getInt(1));
             }
-            t.addRow(new Object[]{Bean.getIdEditorial(),Bean.getNombre(),"Activo"});
+            t.addRow(new Object[]{Bean.getIdEditorial(), Bean.getNombre(), "Activo"});
+            rs.close();
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", m);
             }
         }
         return SUCCESS;
@@ -82,13 +85,14 @@ public class EditorialDAO {
             prs.setInt(3, Bean.getIdEditorial());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", m);
             }
         }
         return SUCCESS;
@@ -107,13 +111,14 @@ public class EditorialDAO {
             prs.setInt(1, id);
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", m);
             }
         }
         return SUCCESS;

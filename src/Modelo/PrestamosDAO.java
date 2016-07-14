@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 public class PrestamosDAO {
 
     Connection conn;
-    
-    private final String SQL_ELIMINAR_PRESTAMO="DELETE FROM Prestamo WHERE IdPrestamo=?";
-    
+
+    private final String SQL_ELIMINAR_PRESTAMO = "DELETE FROM Prestamo WHERE IdPrestamo=?";
+
     public boolean EliminarPrestamo(int id) {
         boolean SUCCESS = true;
         try {
@@ -21,13 +21,14 @@ public class PrestamosDAO {
             prs.setInt(1, id);
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(PrestamosDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(PrestamosDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;

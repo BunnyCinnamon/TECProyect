@@ -44,13 +44,14 @@ public class AreaDAO {
             prs.setString(1, Bean.getSeccion());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         try {
@@ -59,18 +60,20 @@ public class AreaDAO {
             PreparedStatement prs = conn.prepareStatement(SQL_ID_AREA);
             prs.setString(1, Bean.getSeccion());
             rs = prs.executeQuery();
-            if(rs.next()){
-            Bean.setIdArea(rs.getInt(1));
+            if (rs.next()) {
+                Bean.setIdArea(rs.getInt(1));
             }
-            t.addRow(new Object[]{Bean.getIdArea(),Bean.getSeccion(),"Activo"});
+            t.addRow(new Object[]{Bean.getIdArea(), Bean.getSeccion(), "Activo"});
+            rs.close();
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -91,13 +94,14 @@ public class AreaDAO {
             prs.setInt(3, Bean.getIdArea());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
@@ -116,13 +120,14 @@ public class AreaDAO {
             prs.setInt(1, id);
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(AreaDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;

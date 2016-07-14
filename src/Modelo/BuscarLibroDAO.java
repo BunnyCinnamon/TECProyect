@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class BuscarLibroDAO {
 
     Connection conn;
-    
+
     /**
      * Funciones de Libro*
      */
@@ -153,13 +153,14 @@ public class BuscarLibroDAO {
             }
             rs.close();
             prs.close();
+            conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
     }

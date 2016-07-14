@@ -1393,7 +1393,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
     private void JModificarSocioTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarSocioTablaActionPerformed
         String A;
-        A = JMunicipioTextSocio.getText() + JNombreTextSocio.getText() + JTextUsuario.getText() + JApellidoPTextSocio.getText() + JApellidoMTextSocio.getText() + JEstadoTextSocio.getText();
+        A = JMunicipioTextSocio.getText() + JNombreTextSocio.getText() + JApellidoPTextSocio.getText() + JApellidoMTextSocio.getText() + JEstadoTextSocio.getText();
         String B;
         B = JTelefonoTextSocio.getText() + JNCalleTextSocio.getText();
         if (ValidadorTexto(A) && ValidadorNumero(B)) {
