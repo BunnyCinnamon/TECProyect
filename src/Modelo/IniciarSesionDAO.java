@@ -16,7 +16,7 @@ public class IniciarSesionDAO {
     ResultSet rs;
 
     private final String SQL_CHECK_PASSWORD_ADMIN = "SELECT IdAdministrador FROM Administrador WHERE Usuario=? AND Contraseña=?";
-    private final String SQL_CHECK_PASSWORD_SOCIO = "SELECT * FROM Socio WHERE Usuario=? AND Constraseña=?";
+    private final String SQL_CHECK_PASSWORD_SOCIO = "SELECT * FROM Socio WHERE Usuario=? AND Contraseña=?";
 
     public boolean CheckPasswordAdmin(AdministradorBean adm) {
         boolean CORRECT = false;

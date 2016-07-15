@@ -21,12 +21,15 @@ public class VOpcionesSocio extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         SetBean(Bean);
+        ////////////////////////////////////////////////////////////////////////
+        JLibrosOpen.setToolTipText("Buscar y Adquirir Libros");
+        JPrestamosOpen.setToolTipText("Ver Préstamos Pendientes");
     }
     
     private static SocioBean Bean;
-
-    private void SetBean(SocioBean Bean){
-        this.Bean=Bean;
+    
+    private void SetBean(SocioBean Bean) {
+        this.Bean = Bean;
     }
     
     @SuppressWarnings("unchecked")

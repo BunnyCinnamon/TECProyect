@@ -1,6 +1,8 @@
 package Vista;
 
 import Controlador.IniciarSesionControlador;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
 import javax.swing.UIManager;
 
@@ -21,7 +23,11 @@ public class VIniciarSesion extends javax.swing.JFrame {
             UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
         } catch (Exception e) {
             e.printStackTrace();
+            JIngresar.setToolTipText("La Textura del Programa no se ha podido cargar, proceda con normalidad");
+            JIngresar.setForeground(Color.magenta);
         }
+        ////////////////////////////////////////////////////////////////////////
+        JRecordarUsuario.setToolTipText("Desactivar en caso de ser Socio");
     }
 
     private void ReadFile() {
@@ -101,10 +107,10 @@ public class VIniciarSesion extends javax.swing.JFrame {
         );
 
         jUsuario.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jUsuario.setText("Usuario");
+        jUsuario.setText("Usuario:");
 
         jContraseña.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jContraseña.setText("Contraseña");
+        jContraseña.setText("Contraseña:");
 
         JRecordarUsuario.setText("Ingresar como Administrador");
 
@@ -112,6 +118,12 @@ public class VIniciarSesion extends javax.swing.JFrame {
         JIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JIngresarActionPerformed(evt);
+            }
+        });
+
+        JUsuarioInicio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JUsuarioInicioKeyPressed(evt);
             }
         });
 
@@ -142,24 +154,23 @@ public class VIniciarSesion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jUsuario)
-                                    .addComponent(jContraseña))
-                                .addGap(47, 47, 47)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(JUsuarioInicio)
-                                    .addComponent(JContraseñaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-                                .addGap(26, 26, 26)
-                                .addComponent(JSesionIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(JRecordarUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JIngresar)))
+                            .addComponent(jUsuario)
+                            .addComponent(jContraseña))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JContraseñaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addComponent(JSesionIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JRecordarUsuario)
+                                .addGap(30, 30, 30)
+                                .addComponent(JIngresar))
+                            .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -182,7 +193,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
                             .addComponent(JContraseñaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(JSesionIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JIngresar)
                     .addComponent(JRecordarUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
@@ -196,6 +207,12 @@ public class VIniciarSesion extends javax.swing.JFrame {
         IniciarSesionControlador IniciarSesionControlador = new IniciarSesionControlador();
         IniciarSesionControlador.actionPerformed(this);
     }//GEN-LAST:event_JIngresarActionPerformed
+
+    private void JUsuarioInicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JUsuarioInicioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            JContraseñaInicio.requestFocus();
+        }
+    }//GEN-LAST:event_JUsuarioInicioKeyPressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

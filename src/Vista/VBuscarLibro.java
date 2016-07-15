@@ -3,8 +3,6 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.BuscarLibroControlador;
 import Controlador.CargarInfoControlador;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,11 +17,17 @@ public class VBuscarLibro extends javax.swing.JFrame {
          */
         CargarInfoControlador Cargar = new CargarInfoControlador();
         initComponents();
-        this.setResizable(false);
+        this.setResizable(false);       
         SetBean(Bean);
         JListAutor.setListData(new String[0]);
         JListEditorial.setListData(new String[0]);
         Cargar.CargarInfoListas(this);
+        ////////////////////////////////////////////////////////////////////////
+        JBuscarLibro.setToolTipText("Buscar Libro con datos parecidos");
+        JAsignar.setToolTipText("Pedir Libro Seleccionado");
+        JDetalles.setToolTipText("Ver las Estadísticas de Biblioteca");
+        JNPagText.setToolTipText("Usuario loggeado al sistema");
+        JNPagText.setText(Bean.getUsuario());
     }
 
     /**
@@ -63,9 +67,9 @@ public class VBuscarLibro extends javax.swing.JFrame {
         JCheckISBN = new javax.swing.JCheckBox();
         JCheckAutor = new javax.swing.JCheckBox();
         JCheckEditorial = new javax.swing.JCheckBox();
+        JDetalles = new javax.swing.JButton();
         JInternalEditar1 = new javax.swing.JInternalFrame();
         jLabel4 = new javax.swing.JLabel();
-        JDetalles = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         JAsignar = new javax.swing.JButton();
         JRegresar = new javax.swing.JButton();
@@ -137,24 +141,34 @@ public class VBuscarLibro extends javax.swing.JFrame {
         JCheckEditorial.setSelected(true);
         JCheckEditorial.setText("Editorial");
 
+        JDetalles.setText("Estadisticas");
+        JDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JDetallesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JInternalBuscarLayout = new javax.swing.GroupLayout(JInternalBuscar.getContentPane());
         JInternalBuscar.getContentPane().setLayout(JInternalBuscarLayout);
         JInternalBuscarLayout.setHorizontalGroup(
             JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JInternalBuscarLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(JBuscarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(105, 105, 105))
-            .addGroup(JInternalBuscarLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JCheckTitulo)
-                    .addComponent(JCheckISBN))
-                .addGap(18, 18, 18)
-                .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JCheckEditorial)
-                    .addComponent(JCheckAutor))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(JInternalBuscarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCheckTitulo)
+                            .addComponent(JCheckISBN))
+                        .addGap(18, 18, 18)
+                        .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCheckEditorial)
+                            .addComponent(JCheckAutor)))
+                    .addGroup(JInternalBuscarLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(JBuscarLibro)
+                        .addGap(18, 18, 18)
+                        .addComponent(JDetalles)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         JInternalBuscarLayout.setVerticalGroup(
             JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,9 +181,11 @@ public class VBuscarLibro extends javax.swing.JFrame {
                 .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JCheckISBN)
                     .addComponent(JCheckEditorial))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(JBuscarLibro)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JBuscarLibro)
+                    .addComponent(JDetalles))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         JTabbedBusquedaLibros.addTab("Buscar", JInternalBuscar);
@@ -177,13 +193,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
         JInternalEditar1.setVisible(true);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467285836_OFFice-33.png"))); // NOI18N
-
-        JDetalles.setText("Estadisticas");
-        JDetalles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JDetallesActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel5.setText("Selección:");
@@ -203,7 +212,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(JInternalEditar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(JDetalles)
                     .addComponent(JAsignar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(jLabel4)
@@ -218,9 +226,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JAsignar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JDetalles)))
+                        .addComponent(JAsignar)))
                 .addGap(0, 4, Short.MAX_VALUE))
         );
 

@@ -2,6 +2,7 @@ package Vista;
 
 import Classes.Beans.SocioBean;
 import Controlador.AsignarSocioControlador;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -22,6 +23,11 @@ public class VAsignarSocio extends javax.swing.JFrame {
         LoadData(Bean, Array);
         this.SocioBean = Bean;
         this.ArrayList = Array;
+        ////////////////////////////////////////////////////////////////////////
+        JTableBLibro.setToolTipText("Libro Seleccionado Previamente");
+        JTableBSocio.setToolTipText("Socio loggeado en el sistema");
+        JAceptarAsignar.setForeground(Color.red);
+        JAbortar.setForeground(Color.red);
     }
 
     private void LoadData(SocioBean Bean, ArrayList Array) {

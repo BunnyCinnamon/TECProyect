@@ -10,12 +10,14 @@ import javax.swing.UIManager;
  * @author Arekkuusu
  */
 public class VOpcionesAdmin extends javax.swing.JFrame {
-
+    
     public VOpcionesAdmin() {
         initComponents();
         this.setResizable(false);
+        JBibliotecaOpen.setToolTipText("Agregar, Modificar, y Eliminar Registros");
+        JPrestamosOpen.setToolTipText("Ver todos los Préstamos pendientes");
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -165,7 +167,7 @@ public class VOpcionesAdmin extends javax.swing.JFrame {
         SalirControlador.actionPerformed(evt);
         this.setVisible(false);
     }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
-
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

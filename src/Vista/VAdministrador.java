@@ -5,6 +5,7 @@ import Controlador.CargarInfoControlador;
 import Controlador.Otros.AreaControlador;
 import Controlador.Otros.EditorialControlador;
 import Controlador.Otros.LocalizacionControlador;
+import java.awt.Color;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -20,6 +21,42 @@ public class VAdministrador extends javax.swing.JFrame {
         initComponents();
         Iniciar();
         this.setResizable(false);
+        ////////////////////////////////////////////////////////////////////////
+        JIngresarLibro.setToolTipText("Ingresar datos a la Tabla");
+        JModificarLibroTabla.setToolTipText("Modificar Selección con datos");
+        JEliminarLibroTabla.setToolTipText("Dar de Baja la Selección");
+        JEliminarLibroTabla.setForeground(Color.red);
+        JBuscarLibro.setToolTipText("Buscar Libro con datos parecidos");
+        JEstadisticas.setToolTipText("Ver las Estadísticas de Biblioteca");
+        ////////////////////////////////////////////////////////////////////////
+        JIngresarSocio.setToolTipText("Ingresar datos a la Tabla");
+        JModificarSocioTabla.setToolTipText("Modificar Selección con datos");
+        JEliminarSocioTabla.setToolTipText("Dar de Baja la Selección");
+        JEliminarSocioTabla.setForeground(Color.red);
+        JBuscarSocio.setToolTipText("Buscar Socio con datos parecidos");
+        ////////////////////////////////////////////////////////////////////////
+        JIngresarAutor.setToolTipText("Ingresar datos a la Tabla");
+        JModificarAutorTabla.setToolTipText("Modificar Selección con datos");
+        JEliminarAutorTabla.setToolTipText("Dar de Baja la Selección");
+        JEliminarAutorTabla.setForeground(Color.red);
+        JBuscarAutor.setToolTipText("Buscar Autor con datos parecidos");
+        ////////////////////////////////////////////////////////////////////////
+        JIngresarNuevoEditorial.setToolTipText("Ingresar datos a la Tabla");
+        JModificarEditorial.setToolTipText("Modificar Selección con datos");
+        JEliminarEditorial.setToolTipText("Dar de Baja la Selección");
+        JEliminarEditorial.setForeground(Color.red);
+        ////////////////////////////////////////////////////////////////////////
+        JIngresarNuevoLocalizacion.setToolTipText("Ingresar datos a la Tabla");
+        JModificarLocalizacion.setToolTipText("Modificar Selección con datos");
+        JEliminarLocalizacion.setToolTipText("Dar de Baja la Selección");
+        JEliminarLocalizacion.setForeground(Color.red);
+        ////////////////////////////////////////////////////////////////////////
+        JIngresarNuevaArea.setToolTipText("Ingresar datos a la Tabla");
+        JModificarArea.setToolTipText("Modificar Selección con datos");
+        JEliminarArea.setToolTipText("Dar de Baja la Selección");
+        JEliminarArea.setForeground(Color.red);
+        ////////////////////////////////////////////////////////////////////////
+        JActualizar.setToolTipText("Actualizar todos los datos en la ventana");
     }
 
     @SuppressWarnings("unchecked")
@@ -1335,6 +1372,13 @@ public class VAdministrador extends javax.swing.JFrame {
         return mat.matches();
     }
 
+    /**
+     * Verificar Número Válido de Socio
+     *
+     *
+     * @param a
+     * @return
+     */
     private static boolean ValidadorNumero(String a) {
         Pattern pat = Pattern.compile(".*\\d+.*");
         Matcher mat = pat.matcher(a);
@@ -1415,9 +1459,9 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JBuscarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarSocioActionPerformed
-            AdministradorControlador AdministradorControlador = new AdministradorControlador();
-            DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
-            AdministradorControlador.actionPerformedJBuscarSocio(model, this);
+        AdministradorControlador AdministradorControlador = new AdministradorControlador();
+        DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
+        AdministradorControlador.actionPerformedJBuscarSocio(model, this);
     }//GEN-LAST:event_JBuscarSocioActionPerformed
 
     ////////////////////////////////////////////////////////////////////////////

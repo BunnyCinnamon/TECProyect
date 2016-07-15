@@ -3,6 +3,7 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.CargarInfoControlador;
 import Controlador.PrestamosControlador;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +22,7 @@ public class VPrestamos extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         IniciarAdmin(0);
+        SetToolTipText();
     }
 
     public VPrestamos(SocioBean Bean) {
@@ -28,6 +30,15 @@ public class VPrestamos extends javax.swing.JFrame {
         this.Stat = Bean;
         this.Login = 1;
         IniciarSocio(Bean, 0);
+        SetToolTipText();
+    }
+
+    private void SetToolTipText() {
+        JDetalles.setToolTipText("Ver Detalles del Préstamo Seleccionado");
+        JLiberarSeleccion.setToolTipText("Devolver Libro/Pagar Penalización");
+        JLiberarSeleccion.setForeground(Color.red);
+        ////////////////////////////////////////////////////////////////////////
+        JRecargar.setToolTipText("Recargar Tabla");
     }
 
     /**
@@ -227,7 +238,7 @@ public class VPrestamos extends javax.swing.JFrame {
     private void JLiberarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JLiberarSeleccionActionPerformed
         PrestamosControlador PrestamosControlador = new PrestamosControlador();
         DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
-        PrestamosControlador.JLiberarSeleccionActionPerformed(Area,this);
+        PrestamosControlador.JLiberarSeleccionActionPerformed(Area, this);
     }//GEN-LAST:event_JLiberarSeleccionActionPerformed
 
     private void JRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRecargarActionPerformed

@@ -39,30 +39,28 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jContraseña" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="JUsuarioInicio" max="32767" attributes="0"/>
-                                  <Component id="JContraseñaInicio" alignment="0" pref="199" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="JSesionIcon" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="JRecordarUsuario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="JIngresar" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jUsuario" min="-2" max="-2" attributes="0"/>
+                          <Component id="jContraseña" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="JContraseñaInicio" min="-2" pref="199" max="-2" attributes="0"/>
+                          <Component id="JUsuarioInicio" min="-2" pref="199" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="JSesionIcon" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JAnounce" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="JRecordarUsuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="JIngresar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="JAnounce" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -94,9 +92,9 @@
                   <Component id="JSesionIcon" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="JIngresar" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="JRecordarUsuario" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="JIngresar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JRecordarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="35" max="32767" attributes="0"/>
               <Component id="JAnounce" min="-2" max="-2" attributes="0"/>
@@ -172,7 +170,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Consolas" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Usuario"/>
+        <Property name="text" type="java.lang.String" value="Usuario:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jContrase&#xf1;a">
@@ -180,7 +178,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Consolas" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
+        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="JRecordarUsuario">
@@ -203,6 +201,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="JUsuarioInicio">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JUsuarioInicioKeyPressed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
