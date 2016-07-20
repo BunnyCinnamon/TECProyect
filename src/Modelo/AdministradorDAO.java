@@ -345,7 +345,7 @@ public class AdministradorDAO {
      */
     private final String SQL_ADD_SOCIO = "INSERT INTO Socio values(null,?,?,?,?,?,?,?,?,?,'Activo',?,0)";
     private final String SQL_MODIFY_SOCIO = "UPDATE Socio SET Nombre=?, ApellidoP=?, ApellidoM=?, Estado=?, Municipio=?, Calle=?, Numero=?, Telefono=?, Usuario=?, Estatus=?, Contraseña=? WHERE IdSocio=?";
-    private final String SQL_DELETE_SOCIO = "UPDATE Socio SET Estado='Inactivo' WHERE IdSocio=?";
+    private final String SQL_DELETE_SOCIO = "UPDATE Socio SET Estatus='Inactivo' WHERE IdSocio=?";
     private final String SQL_SEARCH_SOCIO = "SELECT IdSocio,Nombre,ApellidoP,ApellidoM,CONCAT(Estado,Municipio,Calle,Numero),Telefono,Estatus,Prestamos,Usuario FROM Socio";
 
     /**

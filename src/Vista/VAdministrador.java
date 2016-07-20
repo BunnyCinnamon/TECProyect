@@ -1451,7 +1451,7 @@ public class VAdministrador extends javax.swing.JFrame {
     private void JEliminarSocioTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarSocioTablaActionPerformed
         AdministradorControlador AdministradorControlador = new AdministradorControlador();
         DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
-        AdministradorControlador.actionPerformedJEliminarLibro(model, this);
+        AdministradorControlador.actionPerformedJEliminarSocio(model, this);
     }//GEN-LAST:event_JEliminarSocioTablaActionPerformed
 
     /**

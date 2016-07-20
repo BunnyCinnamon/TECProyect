@@ -68,6 +68,7 @@ public class VAsignarSocio extends javax.swing.JFrame {
             }
         });
 
+        JTableBLibro.setForeground(new java.awt.Color(186, 57, 169));
         JTableBLibro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -88,6 +89,7 @@ public class VAsignarSocio extends javax.swing.JFrame {
         JTableBLibro.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(JTableBLibro);
 
+        JTableBSocio.setForeground(new java.awt.Color(0, 208, 40));
         JTableBSocio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

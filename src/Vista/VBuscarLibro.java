@@ -102,6 +102,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jNPag.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jNPag.setText("Usuario:");
 
+        JNPagText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JNPagText.setEnabled(false);
 
         JListAutor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

@@ -17,7 +17,7 @@ public class AsignarSocioDAO {
     private final String SQL_CHECK_AVALIABLE = "SELECT Existencias FROM Ejemplar WHERE Libro=? AND Existencias>3";
     private final String SQL_CHECK_REPEATED = "SELECT COUNT(Socio) FROM Prestamo WHERE Socio=?";
     private final String SQL_ADD_PRESTAMO = "INSERT INTO Prestamo values(null,CURDATE(),CURDATE() + INTERVAL 3 DAY,?,?)";
-    private final String SQL_INCREASE_BOOK_PRESTAMO = "UPDATE Libro SET NumeroPrestamos=NumeroPrestamos+1 WHERE IdLibro=?";
+    private final String SQL_INCREASE_BOOK_PRESTAMO = "UPDATE Libro,Ejemplar SET NumeroPrestamos=NumeroPrestamos+1, Existencias=Existencias-1 WHERE IdLibro=Libro AND IdLibro=?";
     private final String SQL_INCREASE_PRESTAMOS = "UPDATE Socio SET Prestamos=Prestamos+1 WHERE IdSocio=?";
 
     public boolean AsignarSocioDAO(Object[] U) {
