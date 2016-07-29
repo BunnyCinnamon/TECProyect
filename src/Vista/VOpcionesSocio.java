@@ -178,7 +178,7 @@ public class VOpcionesSocio extends javax.swing.JFrame {
 
     private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
         SalirControlador SalirControlador = new SalirControlador();
-        SalirControlador.actionPerformed(evt);
+        SalirControlador.actionPerformed();
         this.setVisible(false);
     }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
 

@@ -446,9 +446,9 @@ public class VAdministrador extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JInternalLibroLayout.createSequentialGroup()
                                         .addGap(4, 4, 4)
-                                        .addComponent(jISBN4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JAreaLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jISBN4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(JAreaLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jISBN5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1352,16 +1352,15 @@ public class VAdministrador extends javax.swing.JFrame {
          * VRegistro de Editorial/Localizacion/Area*
          */
         DefaultTableModel Editorial = (DefaultTableModel) JTableREditorial.getModel();
-        Cargar.CargarEditorial(this, Editorial);
+        Cargar.CargarEditorial(Editorial);
         DefaultTableModel Localizacion = (DefaultTableModel) JTableRLocalizacion.getModel();
-        Cargar.CargarLocalizacion(this, Localizacion);
+        Cargar.CargarLocalizacion(Localizacion);
         DefaultTableModel Area = (DefaultTableModel) JTableRArea.getModel();
-        Cargar.CargarArea(this, Area);
+        Cargar.CargarArea(Area);
     }
 
     /**
      * Verificar Nombre Válido de Socio
-     *
      *
      * @param a
      * @return
@@ -1374,7 +1373,6 @@ public class VAdministrador extends javax.swing.JFrame {
 
     /**
      * Verificar Número Válido de Socio
-     *
      *
      * @param a
      * @return
@@ -1604,7 +1602,7 @@ public class VAdministrador extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VAdministrador().setVisible(true);
+                System.out.println("DONT CHEAT YOU BAKA");
             }
         });
     }

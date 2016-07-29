@@ -1,13 +1,16 @@
 package Controlador;
 
-import java.awt.event.ActionEvent;
 import Vista.VIniciarSesion;
 
 public class SalirControlador {
 
     VIniciarSesion vis = new VIniciarSesion();
 
-    public void actionPerformed(ActionEvent ae) {
+    /**
+     * Abre una nueva ventana de Iniciar Sesión
+     *
+     */
+    public void actionPerformed() {
         vis.setLocationRelativeTo(null);
         vis.setVisible(true);
     }

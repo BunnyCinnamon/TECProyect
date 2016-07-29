@@ -5,7 +5,6 @@ import Modelo.CargarInfoDAO;
 import Vista.VAdministrador;
 import Vista.VBuscarLibro;
 import Vista.VDetalles;
-import Vista.VPrestamos;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,8 +13,7 @@ public class CargarInfoControlador {
     public CargarInfoDAO Cargar = new CargarInfoDAO();
 
     /**
-     * Cargar Información
-     *
+     * Cargar Información de las Listas en Vista Administador
      *
      * @param va
      */
@@ -25,6 +23,11 @@ public class CargarInfoControlador {
         }
     }
 
+    /**
+     * Cargar Información de las Listas en Vista Socio
+     *
+     * @param va
+     */
     public void CargarInfoListas(VBuscarLibro va) {
         if (!Cargar.LoadInfoVSocio(va)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -32,27 +35,35 @@ public class CargarInfoControlador {
     }
 
     /**
-     * Cargar Prestamos
+     * Cargar Información de Prestamos en Vista Administrador. Si ocurre un
+     * error se manda un Texto en JOptionPane
      *
-     *
-     * @param va
-     * @param t
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param accion // Contiene el tipo de acción
      */
-    public void CargarInfoPrestamos(VPrestamos va, DefaultTableModel t, int accion) {
-        if (!Cargar.LoadPrestamos(va, t, accion)) {
-            JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public void CargarInfoPrestamos(VPrestamos va, DefaultTableModel t, SocioBean Bean, int accion) {
-        if (!Cargar.LoadPrestamos(va, t, Bean, accion)) {
+    public void CargarInfoPrestamos(DefaultTableModel t, int accion) {
+        if (!Cargar.LoadPrestamos(t, accion)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Cargar Estadisticas
+     * Cargar Información de Prestamos en Vista Administrador. Si ocurre un
+     * error se manda un Texto en JOptionPane
      *
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene los datos del Socio
+     * @param accion // Contiene el tipo de acción
+     */
+    public void CargarInfoPrestamos(DefaultTableModel t, SocioBean Bean, int accion) {
+        if (!Cargar.LoadPrestamos(t, Bean, accion)) {
+            JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Cargar Información de Estadisticas. Si ocurre un error se manda un Texto
+     * en JOptionPane
      *
      */
     public void CargarInfoEstadisticas() {
@@ -65,40 +76,37 @@ public class CargarInfoControlador {
     }
 
     /**
-     * Buscar Localizacion
+     * Buscar Información de Localizacion. Si ocurre un error se manda un Texto
+     * en JOptionPane
      *
-     *
-     * @param va
-     * @param t
+     * @param t // Contiene el objeto Tabla de la Vista
      */
-    public void CargarLocalizacion(VAdministrador va, DefaultTableModel t) {
-        if (!Cargar.LoadLocalizacion(va, t)) {
+    public void CargarLocalizacion(DefaultTableModel t) {
+        if (!Cargar.LoadLocalizacion(t)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Localización!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Buscar Area
+     * Buscar Información de Area. Si ocurre un error se manda un Texto en
+     * JOptionPane
      *
-     *
-     * @param va
-     * @param t
+     * @param t // Contiene el objeto Tabla de la Vista
      */
-    public void CargarArea(VAdministrador va, DefaultTableModel t) {
-        if (!Cargar.LoadArea(va, t)) {
+    public void CargarArea(DefaultTableModel t) {
+        if (!Cargar.LoadArea(t)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Área!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Buscar Editorial
+     * Buscar Información de Editorial. Si ocurre un error se manda un Texto en
+     * JOptionPane
      *
-     *
-     * @param va
-     * @param t
+     * @param t // Contiene el objeto Tabla de la Vista
      */
-    public void CargarEditorial(VAdministrador va, DefaultTableModel t) {
-        if (!Cargar.LoadEditorial(va, t)) {
+    public void CargarEditorial(DefaultTableModel t) {
+        if (!Cargar.LoadEditorial(t)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Editorial!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }

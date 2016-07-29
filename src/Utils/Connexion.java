@@ -26,12 +26,12 @@ public class Connexion {
             System.out.println("Conexión Exitosa!");
         } catch (SQLException n) {
             System.out.println("Conexión Erronea!");
-            Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, n, null);
+            Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, m, null);
+                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
     }

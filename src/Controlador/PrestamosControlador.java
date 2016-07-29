@@ -6,10 +6,16 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class PrestamosControlador {
-    
+
     public PrestamosDAO adm = new PrestamosDAO();
-    
-    public void JLiberarSeleccionActionPerformed(DefaultTableModel t, VPrestamos vis){
+
+    /**
+     * Abre una nueva ventana de Iniciar Sesión
+     *
+     * @param t //Contiene el objeto Tabla de la Vista
+     * @param vis //Contiene la Vista
+     */
+    public void JLiberarSeleccionActionPerformed(DefaultTableModel t, VPrestamos vis) {
         int Select = vis.JTablePrestamos.getSelectedRow();
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
@@ -20,5 +26,5 @@ public class PrestamosControlador {
             }
         }
     }
-    
+
 }

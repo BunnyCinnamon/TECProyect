@@ -20,6 +20,19 @@ public class AsignarSocioDAO {
     private final String SQL_INCREASE_BOOK_PRESTAMO = "UPDATE Libro,Ejemplar SET NumeroPrestamos=NumeroPrestamos+1, Existencias=Existencias-1 WHERE IdLibro=Libro AND IdLibro=?";
     private final String SQL_INCREASE_PRESTAMOS = "UPDATE Socio SET Prestamos=Prestamos+1 WHERE IdSocio=?";
 
+    /**
+     * Registra un Prestamo en la base de datos con los datos del Libro y del
+     * Socio, en el ArrayList y el Bean respectivamente. Busca si el libro tiene
+     * más de 3 existencias, si es true busca el número de préstamos del socio y
+     * envia true o false si el socio tiene menos-igual o más de 3 libros
+     * respectivamente, si es true se añade el préstamo con el id del socio y el
+     * id del libro, si se añade exitosamente se incrementa el número de
+     * préstamos del libro y reduce las existencias por 1, si es exitoso
+     * icrementa el número de préstamos que ha hecho el socio
+     *
+     * @param U // Contiene el objeto Bean y ArrayList
+     * @return // Regresa true si es exitosa y false si ocurre un error
+     */
     public boolean AsignarSocioDAO(Object[] U) {
         SocioBean SocioBean = (SocioBean) U[0];
         ArrayList Array = (ArrayList) U[1];

@@ -9,16 +9,21 @@ import Vista.VOpcionesSocio;
 
 public class IniciarSesionControlador {
 
-    public VOpcionesAdmin vo = new VOpcionesAdmin();
     public IniciarSesionDAO isd = new IniciarSesionDAO();
 
+    /**
+     * Abre una nueva ventana de Opciones. Si el checkbox está activado ingresa
+     * como administrador, si no lo está ingresa como socio.
+     *
+     * @param vis // Contiene el objeto Vista
+     */
     public void actionPerformed(VIniciarSesion vis) {
-        AdministradorBean adm = new AdministradorBean();
-        SocioBean s = new SocioBean();
-        if (vis.JRecordarUsuario.isSelected()) {
+        if (vis.JUsuario.isSelected()) {
+            AdministradorBean adm = new AdministradorBean();
             adm.setUsuario(vis.JUsuarioInicio.getText());
             adm.setContraseña(vis.JContraseñaInicio.getText());
             if (isd.CheckPasswordAdmin(adm)) {
+                VOpcionesAdmin vo = new VOpcionesAdmin();
                 vis.setVisible(false);
                 vo.setLocationRelativeTo(null);
                 vo.setVisible(true);
@@ -26,6 +31,7 @@ public class IniciarSesionControlador {
                 vis.JAnounce.setText("Usuario o Contraseña incorrecto");
             }
         } else {
+            SocioBean s = new SocioBean();
             s.setUsuario(vis.JUsuarioInicio.getText());
             s.setContraseña(vis.JContraseñaInicio.getText());
             Object[] temp = isd.CheckPasswordSocio(s);

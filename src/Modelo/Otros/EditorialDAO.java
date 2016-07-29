@@ -22,10 +22,13 @@ public class EditorialDAO {
     private final String SQL_MODIFY_REMOVE_EDITORIAL = "UPDATE Editorial SET";
 
     /**
+     * Registra una Editorial en la base de datos con los datos: id, nombre y
+     * estatus, en el Bean. Busca el id de la nueva Editorial y la ingresa en la
+     * Tabla junto con sus datos.
      *
-     * @param t
-     * @param Bean
-     * @return
+     * @param t //Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene el nombre del área
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean IngresarEditorial(DefaultTableModel t, EditorialBean Bean) {
         boolean SUCCESS = false;
@@ -37,12 +40,12 @@ public class EditorialDAO {
             prs.close();
             conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", n);
+            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", m);
+                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         try {
@@ -59,21 +62,23 @@ public class EditorialDAO {
             prs.close();
             conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", n);
+            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", m);
+                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
     }
 
     /**
+     * Modifica una Editorial con id específico en la base de datos con los
+     * datos: nombre y estatus, en el Bean.
      *
-     * @param Bean
-     * @return
+     * @param Bean // Contiene el id, nombre y estatus de la Editorial
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean ModificarEditorial(EditorialBean Bean) {
         boolean SUCCESS = false;
@@ -87,21 +92,22 @@ public class EditorialDAO {
             prs.close();
             conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", n);
+            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", m);
+                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;
     }
 
     /**
+     * Elimina una Editorial con id específico en la base de datos.
      *
-     * @param id
-     * @return
+     * @param id // Contiene el id de la Editorial
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean EliminarEditorial(int id) {
         boolean SUCCESS = true;
@@ -113,12 +119,12 @@ public class EditorialDAO {
             prs.close();
             conn.close();
         } catch (SQLException n) {
-            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", n);
+            Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
             try {
                 conn.close();
             } catch (SQLException m) {
-                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE,"Error", m);
+                Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
         return SUCCESS;

@@ -21,6 +21,19 @@ public class BuscarLibroDAO {
      */
     private final String SQL_SEARCH_BOOKS = "SELECT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo,Existencias FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F,Ejemplar G WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND G.Libro=IdLibro AND F.Libro=A.IdLibro";
 
+    /**
+     * Busca todos Libros con los datos de titulo, isbn, autor y editorial,
+     * accion, en la base de datos. Con la acción, busca los libros que tienen
+     * los datos similares. Ingresa los datos encontrados con los datos del
+     * libro en un array list. Ingresa el array list en la tabla, elimina los
+     * datos del array list y repite hasta encontrar todos los datos
+     *
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene los datos del Libro
+     * @param Editorial // Contiene la editorial
+     * @param Autor // Contiene el Autor
+     * @param action // Contiene el tipo de acción 0-15 segun la búsqueda
+     */
     public void BuscarLibro(DefaultTableModel t, LibroBean Bean, String Editorial, String Autor, int action) {
         ArrayList<String> Array = new ArrayList<String>();
         try {

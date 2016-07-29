@@ -24,7 +24,7 @@ public class SocioBean implements java.io.Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public void setNormbre(String normbre) {
+    public void setNombre(String normbre) {
         this.normbre = normbre;
     }
 
@@ -77,7 +77,7 @@ public class SocioBean implements java.io.Serializable {
         return idUsuario;
     }
 
-    public String getNormbre() {
+    public String getNombre() {
         return normbre;
     }
 

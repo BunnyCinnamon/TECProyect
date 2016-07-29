@@ -14,11 +14,12 @@ public class BuscarLibroControlador {
     BuscarLibroDAO adm = new BuscarLibroDAO();
 
     /**
-     * Buscar Libro
+     * Buscar Libro. Crea un nuevo libro bean e introduce los datos a buscar,
+     * dependiendo de los check box seleccionados da una acción a la variable
+     * action, finalmente envia los datos al dao correspondiente
      *
-     *
-     * @param ae
-     * @param va
+     * @param ae // Contiene el objeto Tabla de la Vista
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJBuscarLibro(DefaultTableModel ae, VBuscarLibro va) {
         int action = 0;
@@ -61,6 +62,15 @@ public class BuscarLibroControlador {
         adm.BuscarLibro(ae, Bean, Editorial, Autor, action);
     }
 
+    /**
+     * Pedir Prestamo de Libro. Si no hay un libro seleccionado un Texto se
+     * muestra en JOptionPane, si hay un libro seleccionado los datos en la
+     * tabla se introducen en un array y son enviados junto con el bean del
+     * socio a el dao correspondiente
+     *
+     * @param SocioBean // Contiene los datos del Socio
+     * @param va // Contiene el objeto Vista
+     */
     public void actionPerformedJPrestamo(SocioBean SocioBean, VBuscarLibro va) {
         int Select = va.JTableBLibro.getSelectedRow();
         if (Select < 0) {

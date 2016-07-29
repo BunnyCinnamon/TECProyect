@@ -31,10 +31,13 @@ public class AreaDAO {
     private final String SQL_MODIFY_REMOVE_AREA = "UPDATE Area SET";
 
     /**
+     * Registra un Área en la base de datos con los datos: id, nombre y estatus,
+     * en el Bean. Busca el id de la nueva área y la ingresa en la Tabla junto
+     * con sus datos
      *
-     * @param t
-     * @param Bean
-     * @return
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene el nombre del área
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean IngresarArea(DefaultTableModel t, AreaBean Bean) {
         boolean SUCCESS = false;
@@ -80,9 +83,11 @@ public class AreaDAO {
     }
 
     /**
+     * Modifica un Área con id específico en la base de datos con los datos:
+     * nombre y estatus, en el Bean.
      *
-     * @param Bean
-     * @return
+     * @param Bean // Contiene el id, nombre y estatus del área
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean ModificarArea(AreaBean Bean) {
         boolean SUCCESS = false;
@@ -108,9 +113,10 @@ public class AreaDAO {
     }
 
     /**
+     * Elimina un Área con id específico en la base de datos.
      *
-     * @param id
-     * @return
+     * @param id // Contiene el id del área
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean EliminarArea(int id) {
         boolean SUCCESS = true;

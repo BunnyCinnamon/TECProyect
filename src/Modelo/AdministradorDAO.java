@@ -22,7 +22,7 @@ public class AdministradorDAO {
      * Funciones de Libro*
      */
     private final String SQL_ADD_BOOKS = "INSERT INTO Libro (IdLibro,Isbn,Titulo,Paginas,Estatus,NumeroPrestamos,Editorial,Area,Localizacion)";
-    private final String SQL_SEARCH_IDLIBRO = "SELECT IdLibro FROM Libro WHERE Isbn=? AND Titulo=? AND Paginas=? AND Estatus=?";
+    private final String SQL_SEARCH_IDLIBRO = "SELECT last_insert_id() AS last_id FROM Libro";
     private final String SQL_ADD_AUTOR_TO_LIBRO = "INSERT INTO Escribe values (?,?)";
     private final String SQL_ADD_LIBRO_TO_EJEMPLAR = "INSERT INTO Ejemplar values(null,?,?)";
     ////////////////////////////////////////////////////////////////////////////
@@ -31,9 +31,14 @@ public class AdministradorDAO {
     private final String SQL_SEARCH_BOOKS = "SELECT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo,Existencias FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F,Ejemplar G WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND G.Libro=IdLibro AND F.Libro=A.IdLibro";
 
     /**
+     * Registra un Libro en la base de datos con los datos: id, isbn, titulo,
+     * paginas, estatus, prestamos, editorial, area, localizacion, en el Bean.
+     * Ingresa el libro con los datos del bean y busca el id del nuevo libro.
+     * Relaciona el nuevo libro con un autor. Relaciona el nuevo libro con un
+     * ejemplar nuevo.
      *
-     * @param Bean
-     * @return
+     * @param Bean // Contiene los datos del Libro
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean IngresarLibro(LibroBean Bean) {
         boolean SUCCESSI = false;
@@ -41,7 +46,7 @@ public class AdministradorDAO {
         boolean SUCCESSF = false;
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_ADD_BOOKS + " values (null,?,?,?,?,?,?,?,?)");
+            PreparedStatement prs = conn.prepareStatement(SQL_ADD_BOOKS + " values (null,?,?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             prs.setString(1, Bean.getIsbn());
             prs.setString(2, Bean.getTitulo());
             prs.setInt(3, Bean.getPaginas());
@@ -51,88 +56,75 @@ public class AdministradorDAO {
             prs.setInt(7, Bean.getArea());
             prs.setInt(8, Bean.getLocalizacion());
             SUCCESSI = prs.executeUpdate() == 1;
-            prs.close();
-            conn.close();
-        } catch (SQLException n) {
-            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        try {
-            conn = Connexion.getConnection();
-            ResultSet rs;
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_IDLIBRO);
-            prs.setString(1, Bean.getIsbn());
-            prs.setString(2, Bean.getTitulo());
-            prs.setInt(3, Bean.getPaginas());
-            prs.setString(4, Bean.getEstatus());
-            rs = prs.executeQuery();
+            
+            ResultSet rs = prs.getGeneratedKeys();
             if (rs.next()) {
                 Bean.setIdLibro(rs.getInt(1));
-                rs.close();
+            }
+            prs.close();
+            conn.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////
+        if (SUCCESSI) {
+            try {
+                conn = Connexion.getConnection();
+                PreparedStatement prs = conn.prepareStatement(SQL_ADD_AUTOR_TO_LIBRO);
+                prs.setInt(1, Bean.getAutor());
+                prs.setInt(2, Bean.getIdLibro());
+                SUCCESSM = prs.executeUpdate() == 1;
                 prs.close();
                 conn.close();
+            } catch (SQLException n) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException m) {
+                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                }
             }
-        } catch (SQLException n) {
-            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+            ////////////////////////////////////////////////////////////////////////
+            if (SUCCESSM) {
+                try {
+                    conn = Connexion.getConnection();
+                    PreparedStatement prs = conn.prepareStatement(SQL_ADD_LIBRO_TO_EJEMPLAR);
+                    prs.setInt(1, Bean.getNumeroPrestamos());
+                    prs.setInt(2, Bean.getIdLibro());
+                    SUCCESSM = prs.executeUpdate() == 1;
+                    prs.close();
+                    conn.close();
+                } catch (SQLException n) {
+                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException m) {
+                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                    }
+                }
             }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        try {
-            conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_ADD_AUTOR_TO_LIBRO);
-            prs.setInt(1, Bean.getAutor());
-            prs.setInt(2, Bean.getIdLibro());
-            SUCCESSM = prs.executeUpdate() == 1;
-            prs.close();
-            conn.close();
-        } catch (SQLException n) {
-            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+            if (SUCCESSI && SUCCESSM) {
+                SUCCESSF = true;
             }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        try {
-            conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_ADD_LIBRO_TO_EJEMPLAR);
-            prs.setInt(1, Bean.getNumeroPrestamos());
-            prs.setInt(2, Bean.getIdLibro());
-            SUCCESSM = prs.executeUpdate() == 1;
-            prs.close();
-            conn.close();
-        } catch (SQLException n) {
-            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        if (SUCCESSI && SUCCESSM) {
-            SUCCESSF = true;
         }
         return SUCCESSF;
     }
 
     /**
+     * Modifica un Libro con id específico en la base de datos con los datos:
+     * isbn, titulo, paginas, estatus, prestamos, editorial, area, localizacion,
+     * en el Bean.
      *
-     * @param Bean
-     * @return
+     * @param Bean // Contiene los datos del Libro
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean ModificarLibro(LibroBean Bean) {
         boolean SUCCESS = false;
@@ -163,9 +155,10 @@ public class AdministradorDAO {
     }
 
     /**
+     * Elimina un Libro con id específico en la base de datos
      *
-     * @param id
-     * @return
+     * @param id // Contiene el id del Libro
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean EliminarLibro(int id) {
         boolean SUCCESS = true;
@@ -189,12 +182,17 @@ public class AdministradorDAO {
     }
 
     /**
+     * Busca todos Libros con los datos de titulo, isbn, autor, editorial,
+     * accion en la base de datos. Con la acción, busca los libros que tienen
+     * los datos similares. Ingresa los datos encontrados con los datos del
+     * libro en un array list. Ingresa el array list en la tabla, elimina los
+     * datos del array list y repite hasta encontrar todos los datos
      *
-     * @param t
-     * @param Bean
-     * @param Editorial
-     * @param Autor
-     * @param action
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene los datos del Libro
+     * @param Editorial // Contiene la editorial
+     * @param Autor // Contiene el Autor
+     * @param action // Contiene el tipo de acción 0-15 segun la búsqueda
      */
     public void BuscarLibro(DefaultTableModel t, LibroBean Bean, String Editorial, String Autor, int action) {
         ArrayList<String> Array = new ArrayList<String>();
@@ -344,21 +342,25 @@ public class AdministradorDAO {
      * Funciones de Socio*
      */
     private final String SQL_ADD_SOCIO = "INSERT INTO Socio values(null,?,?,?,?,?,?,?,?,?,'Activo',?,0)";
+    private final String SQL_SEARCH_IDSOCIO = "SELECT IdSocio FROM Socio WHERE Nombre=? AND ApellidoP=? AND ApellidoM=? AND Telefono=? AND Usuario=?";
     private final String SQL_MODIFY_SOCIO = "UPDATE Socio SET Nombre=?, ApellidoP=?, ApellidoM=?, Estado=?, Municipio=?, Calle=?, Numero=?, Telefono=?, Usuario=?, Estatus=?, Contraseña=? WHERE IdSocio=?";
     private final String SQL_DELETE_SOCIO = "UPDATE Socio SET Estatus='Inactivo' WHERE IdSocio=?";
     private final String SQL_SEARCH_SOCIO = "SELECT IdSocio,Nombre,ApellidoP,ApellidoM,CONCAT(Estado,Municipio,Calle,Numero),Telefono,Estatus,Prestamos,Usuario FROM Socio";
 
     /**
+     * Registra un Socio en la base de datos con los datos: id, nombre, apellido
+     * paterno, apellido materno, estado, municipio, calle, numero, telefono,
+     * usuario, estatus, contraseña, en el Bean. Busca el id del nuevo socio.
      *
-     * @param Bean
-     * @return
+     * @param Bean // Contiene los datos del socio
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean IngresarSocio(SocioBean Bean) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_ADD_SOCIO);
-            prs.setString(1, Bean.getNormbre());
+            PreparedStatement prs = conn.prepareStatement(SQL_ADD_SOCIO, PreparedStatement.RETURN_GENERATED_KEYS);
+            prs.setString(1, Bean.getNombre());
             prs.setString(2, Bean.getApellidoP());
             prs.setString(3, Bean.getApellidoM());
             prs.setString(4, Bean.getEstado());
@@ -369,6 +371,35 @@ public class AdministradorDAO {
             prs.setString(9, Bean.getUsuario());
             prs.setString(10, Bean.getContraseña());
             SUCCESS = prs.executeUpdate() == 1;
+            
+            ResultSet rs = prs.getGeneratedKeys();
+            if (rs.next()) {
+                Bean.setIdUsuario(rs.getInt(1));
+            }
+            prs.close();
+            conn.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+            }
+        }
+        try {
+            conn = Connexion.getConnection();
+            ResultSet rs;
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_IDSOCIO);
+            prs.setString(1, Bean.getNombre());
+            prs.setString(2, Bean.getApellidoP());
+            prs.setString(3, Bean.getApellidoM());
+            prs.setInt(4, Bean.getTelefono());
+            prs.setString(5, Bean.getUsuario());
+            rs = prs.executeQuery();
+            if (rs.next()) {
+                Bean.setIdUsuario(rs.getInt(1));
+            }
             prs.close();
             conn.close();
         } catch (SQLException n) {
@@ -384,16 +415,19 @@ public class AdministradorDAO {
     }
 
     /**
+     * Modifica un Socio con id específico en la base de datos con los datos:
+     * id, nombre, apellido paterno, apellido materno, estado, municipio, calle,
+     * numero, telefono, usuario, estatus, contraseña, en el Bean.
      *
-     * @param Bean
-     * @return
+     * @param Bean // Contiene los datos del socio
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean ModificarSocio(SocioBean Bean) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
             PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_SOCIO);
-            prs.setString(1, Bean.getNormbre());
+            prs.setString(1, Bean.getNombre());
             prs.setString(2, Bean.getApellidoP());
             prs.setString(3, Bean.getApellidoM());
             prs.setString(4, Bean.getEstado());
@@ -421,9 +455,10 @@ public class AdministradorDAO {
     }
 
     /**
+     * Elimina un Socio con id específico en la base de datos.
      *
-     * @param id
-     * @return
+     * @param id // Contiene el id del socio
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean EliminarSocio(int id) {
         boolean SUCCESS = true;
@@ -447,10 +482,15 @@ public class AdministradorDAO {
     }
 
     /**
+     * Busca todos Socios con los datos de nombre, apellido paterno, apellido
+     * materno, usuario, accion en la base de datos. Con la acción, busca los
+     * socios que tienen los datos similares. Ingresa los datos encontrados con
+     * los datos del socio en un array list. Ingresa el array list en la tabla,
+     * elimina los datos del array list y repite hasta encontrar todos los datos
      *
-     * @param t
-     * @param Bean
-     * @param action
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene los datos del Libro
+     * @param action // Contiene el tipo de acción 0-15 segun la búsqueda
      */
     public void BuscarSocio(DefaultTableModel t, SocioBean Bean, int action) {
         ArrayList<String> Array = new ArrayList<String>();
@@ -466,7 +506,7 @@ public class AdministradorDAO {
                 }
                 case 1: {
                     prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Nombre like ? ORDER BY Prestamos DESC");
-                    prs.setString(1, '%' + Bean.getNormbre() + '%');
+                    prs.setString(1, '%' + Bean.getNombre() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
@@ -491,21 +531,21 @@ public class AdministradorDAO {
                 case 5: {
                     prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND Nombre like ? ORDER BY Prestamos DESC");
                     prs.setString(1, '%' + Bean.getUsuario() + '%');
-                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 6: {
                     prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? Nombre like ? ORDER BY Prestamos DESC");
                     prs.setString(1, '%' + Bean.getApellidoM() + '%');
-                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 7: {
                     prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoP like ? AND Nombre like ? ORDER BY Prestamos DESC");
                     prs.setString(1, '%' + Bean.getApellidoP() + "%");
-                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
@@ -533,7 +573,7 @@ public class AdministradorDAO {
                 case 11: {
                     prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Nombre like ? AND ApellidoP like ? ORDER BY Prestamos DESC");
                     prs.setString(1, '%' + Bean.getApellidoM() + '%');
-                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
                     prs.setString(3, '%' + Bean.getApellidoP() + '%');
                     rs = prs.executeQuery();
                     break;
@@ -541,7 +581,7 @@ public class AdministradorDAO {
                 case 12: {
                     prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Usuario like ? AND Nombre like ? AND ApellidoP like ? ORDER BY Prestamos DESC");
                     prs.setString(1, '%' + Bean.getUsuario() + '%');
-                    prs.setString(2, '%' + Bean.getNormbre() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
                     prs.setString(3, '%' + Bean.getApellidoP() + '%');
                     rs = prs.executeQuery();
                     break;
@@ -558,7 +598,7 @@ public class AdministradorDAO {
                     prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Usuario like ? AND Nombre like ? ORDER BY Prestamos DESC");
                     prs.setString(1, '%' + Bean.getApellidoM() + '%');
                     prs.setString(2, '%' + Bean.getUsuario() + '%');
-                    prs.setString(3, '%' + Bean.getNormbre() + '%');
+                    prs.setString(3, '%' + Bean.getNombre() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
@@ -566,7 +606,7 @@ public class AdministradorDAO {
                     prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Usuario like ? AND Nombre like ? AND ApellidoP like ? ORDER BY Prestamos DESC");
                     prs.setString(1, '%' + Bean.getApellidoM() + '%');
                     prs.setString(2, '%' + Bean.getUsuario() + '%');
-                    prs.setString(3, '%' + Bean.getNormbre() + '%');
+                    prs.setString(3, '%' + Bean.getNombre() + '%');
                     prs.setString(4, '%' + Bean.getApellidoP() + '%');
                     rs = prs.executeQuery();
                     break;
@@ -607,20 +647,28 @@ public class AdministradorDAO {
     private final String SQL_SEARCH_AUTOR = "SELECT * FROM Autor";
 
     /**
+     * Registra un Autor en la base de datos con los datos: id, nombre, apellido
+     * paterno, apellido materno y estatus, en el Bean. Busca el id de la nueva
+     * área y la ingresa en la Tabla junto con sus datos
      *
-     * @param t
-     * @param Bean
-     * @return
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene el nombre del autor
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean IngresarAutor(DefaultTableModel t, AutorBean Bean) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_ADD_AUTOR + " values(null,?,?,?,'Activo')");
+            PreparedStatement prs = conn.prepareStatement(SQL_ADD_AUTOR + " values(null,?,?,?,'Activo')", PreparedStatement.RETURN_GENERATED_KEYS);
             prs.setString(1, Bean.getNombre());
             prs.setString(2, Bean.getApellidoP());
             prs.setString(3, Bean.getApellidoM());
             SUCCESS = prs.executeUpdate() == 1;
+            
+            ResultSet rs = prs.getGeneratedKeys();
+            if (rs.next()) {
+                Bean.setIdAutor(rs.getInt(1));
+            }
             prs.close();
             conn.close();
         } catch (SQLException n) {
@@ -660,9 +708,12 @@ public class AdministradorDAO {
     }
 
     /**
+     * Modifica un Autor con id específico en la base de datos con los datos:
+     * nombre, apellido paterno, apellido materno y estatus, en el Bean.
      *
-     * @param Bean
-     * @return
+     * @param Bean // Contiene el id, nombre, apellido paterno, apellido materno
+     * y estatus del autor
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean ModificarAutor(AutorBean Bean) {
         boolean SUCCESS = false;
@@ -690,9 +741,10 @@ public class AdministradorDAO {
     }
 
     /**
+     * Elimina un Autor con id específico en la base de datos.
      *
-     * @param id
-     * @return
+     * @param id // Contiene el id del autor
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean EliminarAutor(int id) {
         boolean SUCCESS = true;
@@ -715,6 +767,17 @@ public class AdministradorDAO {
         return SUCCESS;
     }
 
+    /**
+     * Busca todos Autores con los datos de nombre, apellido paterno, apellido
+     * materno, accion en la base de datos. Con la acción, busca los autores que
+     * tienen los datos similares. Ingresa los datos encontrados con los datos
+     * del socio en un array list. Ingresa el array list en la tabla, elimina
+     * los datos del array list y repite hasta encontrar todos los datos
+     *
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene los datos del autor
+     * @param action // Contiene el tipo de acción 0-7 segun la búsqueda
+     */
     public void BuscarAutor(DefaultTableModel t, AutorBean Bean, int action) {
         ArrayList<String> Array = new ArrayList<String>();
         try {

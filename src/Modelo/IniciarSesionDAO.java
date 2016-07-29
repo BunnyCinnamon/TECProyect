@@ -18,6 +18,14 @@ public class IniciarSesionDAO {
     private final String SQL_CHECK_PASSWORD_ADMIN = "SELECT IdAdministrador FROM Administrador WHERE Usuario=? AND Contraseña=?";
     private final String SQL_CHECK_PASSWORD_SOCIO = "SELECT * FROM Socio WHERE Usuario=? AND Contraseña=?";
 
+    /**
+     * Busca un Administrador en la base de datos con los datos: usuario y
+     * contraseña, en el Bean. Consigue el id del Administrador y lo almacena en
+     * el Bean.
+     *
+     * @param adm // Contiene el usuario y contraseña del Administrador
+     * @return // Regresa true si es exitosa y false si ocurre un error
+     */
     public boolean CheckPasswordAdmin(AdministradorBean adm) {
         boolean CORRECT = false;
         try {
@@ -45,6 +53,14 @@ public class IniciarSesionDAO {
         return CORRECT;
     }
 
+    /**
+     * Busca un Socio en la base de datos con los datos: usuario y contraseña,
+     * en el Bean. Consigue todos los datos del Socio y lo almacena en el Bean.
+     *
+     * @param adm // Contiene el usuario y contraseña del Socio
+     * @return // Regresa un Objeto con el Bean del Socio junto con true si es
+     * exitosa y false si ocurre un error
+     */
     public Object[] CheckPasswordSocio(SocioBean adm) {
         boolean CORRECT = false;
         try {
@@ -55,7 +71,7 @@ public class IniciarSesionDAO {
             rs = prs.executeQuery();
             if (rs.next()) {
                 adm.setIdUsuario(rs.getInt(1));
-                adm.setNormbre(rs.getString(2));
+                adm.setNombre(rs.getString(2));
                 adm.setApellidoP(rs.getString(3));
                 adm.setApellidoM(rs.getString(4));
                 adm.setEstado(rs.getString(5));

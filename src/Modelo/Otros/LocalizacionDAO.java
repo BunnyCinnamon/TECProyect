@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.Otros;
 
 import Classes.Beans.LocalizacionBean;
@@ -31,10 +26,13 @@ public class LocalizacionDAO {
     private final String SQL_MODIFY_REMOVE_LOCALIZACION = "UPDATE Localizacion SET";
 
     /**
+     * Registra una Localización en la base de datos con los datos: id, nombre y
+     * estatus, en el Bean. Busca el id de la nueva Localizacion y la ingresa en
+     * la Tabla junto con sus datos.
      *
-     * @param t
-     * @param Bean
-     * @return
+     * @param t //Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene el nombre de la Localización
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean IngresarLocalizacion(DefaultTableModel t, LocalizacionBean Bean) {
         boolean SUCCESS = false;
@@ -80,9 +78,11 @@ public class LocalizacionDAO {
     }
 
     /**
+     * Modifica una Localización con id específico en la base de datos con los
+     * datos: nombre y estatus, en el Bean.
      *
-     * @param Bean
-     * @return
+     * @param Bean // Contiene el id, nombre y estatus de la Localización
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean ModificarLocalizacion(LocalizacionBean Bean) {
         boolean SUCCESS = false;
@@ -108,9 +108,10 @@ public class LocalizacionDAO {
     }
 
     /**
+     * Elimina una Localización con id específico en la base de datos.
      *
-     * @param id
-     * @return
+     * @param id // Contiene el id de la Localización
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean EliminarLocalizacion(int id) {
         boolean SUCCESS = true;

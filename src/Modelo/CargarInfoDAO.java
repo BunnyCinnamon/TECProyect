@@ -5,7 +5,6 @@ import Utils.Connexion;
 import Vista.VAdministrador;
 import Vista.VBuscarLibro;
 import Vista.VDetalles;
-import Vista.VPrestamos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,10 +20,10 @@ public class CargarInfoDAO {
 
     Connection conn;
 
-    private final String SQL_SEARCH_LOCALIZACION = "SELECT Pasillo FROM Localizacion";
-    private final String SQL_SEARCH_AREA = "SELECT Seccion FROM Area";
-    private final String SQL_SEARCH_AUTOR = "SELECT NombreAutor FROM Autor";
-    private final String SQL_SEARCH_EDITORIAL = "SELECT NombreEditorial FROM Editorial";
+    private final String SQL_SEARCH_LOCALIZACION = "SELECT idLocalizacion, Pasillo FROM Localizacion";
+    private final String SQL_SEARCH_AREA = "SELECT idArea, Seccion FROM Area";
+    private final String SQL_SEARCH_AUTOR = "SELECT idAutor, NombreAutor FROM Autor";
+    private final String SQL_SEARCH_EDITORIAL = "SELECT IdEditorial, NombreEditorial FROM Editorial";
     ////////////////////////////////////////////////////////////////////////////
     private final String SQL_SEARCH_ALL_LOCALIZACION = "SELECT * FROM Localizacion  ORDER BY IdLocalizacion";
     private final String SQL_SEARCH_ALL_AREA = "SELECT * FROM Area ORDER BY IdArea";
@@ -38,11 +37,16 @@ public class CargarInfoDAO {
     private final String SQL_SEARCH_MAX_PRESTAMO_LIBRO = "SELECT Titulo,Isbn,NombreEditorial,NumeroPrestamos FROM Libro JOIN Editorial WHERE NumeroPrestamos=(SELECT MAX(NumeroPrestamos) FROM Libro) AND Editorial=IdEditorial";
 
     /**
-     * DAO de Localizacion
+     * Busca todos los datos de Localización, Area, Autor y Editorial, en la
+     * base de datos. Ingresa los datos encontrados de la localización en el
+     * Combo box de la vista administrador. Ingresa los datos encontrados del
+     * área en el Combo box de la vista administrador. Ingresa los datos
+     * encontrados del autor en el List Model de la vista administrador. Ingresa
+     * los datos encontrados de la editorial en el List Model de la vista
+     * administrador
      *
-     *
-     * @param ea
-     * @return
+     * @param ea //Contiene el objeto Vista
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean LoadInfoVAdmin(VAdministrador ea) {
         DefaultListModel ModelAutor = new DefaultListModel();
@@ -54,7 +58,7 @@ public class CargarInfoDAO {
             ResultSet rs = prs.executeQuery();
             ea.JLocalizacionLibro.addItem("Sin Selección");
             while (rs.next()) {
-                ea.JLocalizacionLibro.addItem(rs.getString(1));
+                ea.JLocalizacionLibro.addItem(rs.getString(1) + ": " + rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -75,7 +79,7 @@ public class CargarInfoDAO {
             ResultSet rs = prs.executeQuery();
             ea.JAreaLibro.addItem("Sin Selección");
             while (rs.next()) {
-                ea.JAreaLibro.addItem(rs.getString(1));
+                ea.JAreaLibro.addItem("" + rs.getString(1) + ": " + rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -96,7 +100,7 @@ public class CargarInfoDAO {
             ResultSet rs = prs.executeQuery();
             ModelAutor.addElement("Sin Selección");
             while (rs.next()) {
-                ModelAutor.addElement(rs.getString(1));
+                ModelAutor.addElement(rs.getString(1) + ": " + rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -118,7 +122,7 @@ public class CargarInfoDAO {
             ResultSet rs = prs.executeQuery();
             ModelEditorial.addElement("Sin Selección");
             while (rs.next()) {
-                ModelEditorial.addElement(rs.getString(1));
+                ModelEditorial.addElement(rs.getString(1) + ": " + rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -137,6 +141,15 @@ public class CargarInfoDAO {
         return SUCCESS;
     }
 
+    /**
+     * Busca todos los datos de Autor y Editorial en la base de datos. Ingresa
+     * los datos encontrados del autor en el List Model de la vista buscar
+     * libro. Ingresa los datos encontrados de la editorial en el List Model de
+     * la vista administrador
+     *
+     * @param ea //Contiene el objeto Vista
+     * @return // Regresa true si es exitosa y false si ocurre un error
+     */
     public boolean LoadInfoVSocio(VBuscarLibro ea) {
         DefaultListModel ModelAutor = new DefaultListModel();
         DefaultListModel ModelEditorial = new DefaultListModel();
@@ -146,7 +159,7 @@ public class CargarInfoDAO {
             PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE EstatusAutor='Activo' ORDER BY IdAutor");
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {
-                ModelAutor.addElement(rs.getString(1));
+                ModelAutor.addElement(rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -167,7 +180,7 @@ public class CargarInfoDAO {
             PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo' ORDER BY IdEditorial");
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {
-                ModelEditorial.addElement(rs.getString(1));
+                ModelEditorial.addElement(rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -187,11 +200,17 @@ public class CargarInfoDAO {
     }
 
     /**
-     * DAO de Localizacion
+     * Busca el Libro con más existencias, la Editorial con menos existencias, y
+     * el Libro con más préstamos en la base de datos. Ingresa los datos
+     * encontrados del libro con más existencias en un array list e introduce
+     * texto descriptivo. Ingresa los datos encontrados de la editorial con
+     * menos existencias en un array list e introduce texto descriptivo. Ingresa
+     * los datos encontrados del libro con más préstamos en un array list e
+     * introduce texto descriptivo Envia el Array junto con el titulo a la vista
+     * detalles
      *
-     *
-     * @param ea
-     * @return
+     * @param ea //Contiene el objeto Vista
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
     public boolean LoadDetalles(VDetalles ea) {
         ArrayList<String> Array = new ArrayList<String>();
@@ -272,14 +291,15 @@ public class CargarInfoDAO {
     }
 
     /**
-     * DAO de Localizacion
+     * Busca todos los datos de Localización en la base de datos. Ingresa los
+     * datos encontrados de la localización en un array list. Ingresa el array
+     * list en la tabla, elimina los datos del array list y repite hasta
+     * encontrar todos los datos
      *
-     *
-     * @param ea
-     * @param t
-     * @return
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean LoadLocalizacion(VAdministrador ea, DefaultTableModel t) {
+    public boolean LoadLocalizacion(DefaultTableModel t) {
         ArrayList<String> Array = new ArrayList<String>();
         boolean SUCCESS = false;
         try {
@@ -313,14 +333,14 @@ public class CargarInfoDAO {
     }
 
     /**
-     * DAO de Area
+     * Busca todos los datos de Area en la base de datos. Ingresa los datos
+     * encontrados del área en un array list. Ingresa el array list en la tabla,
+     * elimina los datos del array list y repite hasta encontrar todos los datos
      *
-     *
-     * @param ea
-     * @param t
-     * @return
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean LoadArea(VAdministrador ea, DefaultTableModel t) {
+    public boolean LoadArea(DefaultTableModel t) {
         ArrayList<String> Array = new ArrayList<String>();
         boolean SUCCESS = false;
         try {
@@ -354,14 +374,15 @@ public class CargarInfoDAO {
     }
 
     /**
-     * DAO de Editorial
+     * Busca todos los datos de Editorial en la base de datos. Ingresa los datos
+     * encontrados de la editorial en un array list. Ingresa el array list en la
+     * tabla, elimina los datos del array list y repite hasta encontrar todos
+     * los datos
      *
-     *
-     * @param ea
-     * @param t
-     * @return
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean LoadEditorial(VAdministrador ea, DefaultTableModel t) {
+    public boolean LoadEditorial(DefaultTableModel t) {
         ArrayList<String> Array = new ArrayList<String>();
         boolean SUCCESS = false;
         try {
@@ -395,14 +416,17 @@ public class CargarInfoDAO {
     }
 
     /**
-     * DAO de Prestamos
+     * Busca todos los datos de Prestamos en la base de datos. Ingresa los datos
+     * encontrados de prestamos en un array list. Ingresa el array list en la
+     * tabla, elimina los datos del array list y repite hasta encontrar todos
+     * los datos
      *
-     *
-     * @param ea
-     * @param t
-     * @return
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param accion // Contiene el tipo de accion 1 o 2 segun la búsqueda sin y
+     * con fecha atrasada
+     * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean LoadPrestamos(VPrestamos ea, DefaultTableModel t, int accion) {
+    public boolean LoadPrestamos(DefaultTableModel t, int accion) {
         ArrayList<String> Array = new ArrayList<String>();
         boolean SUCCESS = false;
         PreparedStatement prs = null;
@@ -443,7 +467,19 @@ public class CargarInfoDAO {
         return SUCCESS;
     }
 
-    public boolean LoadPrestamos(VPrestamos ea, DefaultTableModel t, SocioBean Bean, int accion) {
+    /**
+     * Busca los datos de Prestamos del el Socio en la base de datos. Ingresa
+     * los datos encontrados de prestamos en un array list. Ingresa el array
+     * list en la tabla, elimina los datos del array list y repite hasta
+     * encontrar todos los datos
+     *
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene los datos del Socio
+     * @param accion // Contiene el tipo de acción 0 o 1 segun la búsqueda sin y
+     * con fecha atrasada
+     * @return // Regresa true si es exitosa y false si ocurre un error
+     */
+    public boolean LoadPrestamos(DefaultTableModel t, SocioBean Bean, int accion) {
         ArrayList<String> Array = new ArrayList<String>();
         boolean SUCCESS = false;
         PreparedStatement prs = null;

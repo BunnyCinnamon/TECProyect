@@ -3,7 +3,14 @@ package Vista;
 import Controlador.IniciarSesionControlador;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -14,28 +21,36 @@ public class VIniciarSesion extends javax.swing.JFrame {
 
     private static String usuario;
     private static ResourceBundle propertiesLogins;
+    private String filePath;
 
+    /**
+     * Inicia los componentes de la vista y lee el archivo logins.properties.
+     *
+     */
     public VIniciarSesion() {
         initComponents();
         this.setResizable(false);
         ReadFile();
-        try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-            JIngresar.setToolTipText("La Textura del Programa no se ha podido cargar, proceda con normalidad");
-            JIngresar.setForeground(Color.magenta);
-        }
         ////////////////////////////////////////////////////////////////////////
-        JRecordarUsuario.setToolTipText("Desactivar en caso de ser Socio");
+        JUsuario.setToolTipText("Desactivar en caso de ser Socio");
+        JRecordar.setToolTipText("Recuerda tu nombre de Usuario");
     }
 
+    /**
+     * Lee el contenido del archivo logins.properties y busca por errores en la
+     * configuración. Si la vista tiene el recordar usuario activado el programa
+     * lee el usuario y lo inserta en la vista. Si la vita si no puede leer el
+     * archivo, manda un mensaje a la vista.
+     *
+     */
     private void ReadFile() {
         if (propertiesLogins == null) {
             propertiesLogins = ResourceBundle.getBundle("logins");
             try {
+                filePath = propertiesLogins.getString("path");
                 if (propertiesLogins.getString("login").equals("true")) {
-                    JRecordarUsuario.setSelected(true);
+                    JUsuario.setSelected(true);
+                    JRecordar.setSelected(true);
                     usuario = propertiesLogins.getString("usuario");
                     JUsuarioInicio.setText(usuario);
                 } else if (!propertiesLogins.getString("login").equals("true") && !propertiesLogins.getString("login").equals("false")) {
@@ -44,6 +59,43 @@ public class VIniciarSesion extends javax.swing.JFrame {
             } catch (java.util.MissingResourceException e) {
                 System.err.println("Error in configuration file: " + e.getMessage());
                 JAnounce.setText("Error in configuration file: " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Encuentra el archivo y lo edita. Busca el archivo, lo carga como un
+     * archivo de propiedades y lo cierra. Después busca la ubicación de
+     * guardado, edita el usuario a "n" y login a "true" si el check box esta
+     * seleccionado, si no lo esta edita el login a "false". Finalmente inserta
+     * la fecha de modificación y un texo informativo en el archivo
+     *
+     */
+    private void saveFile() {
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(filePath);
+            Properties props = new Properties();
+            props.load(in);
+            in.close();
+            FileOutputStream out = new FileOutputStream(filePath);
+            if (JRecordar.isSelected()) {
+                props.setProperty("usuario", JUsuarioInicio.getText());
+                props.setProperty("login", "true");
+            } else {
+                props.setProperty("login", "false");
+            }
+            props.store(out, "--UsuarioDefault es \"usuario\" | Booleano-\"true-o-False\" es \"login\" | PathFile es \"path\"");
+            out.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(VIniciarSesion.class.getName()).log(Level.SEVERE, "Error", ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VIniciarSesion.class.getName()).log(Level.SEVERE, "Error", ex);
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(VIniciarSesion.class.getName()).log(Level.SEVERE, "Error", ex);
             }
         }
     }
@@ -60,13 +112,14 @@ public class VIniciarSesion extends javax.swing.JFrame {
         jIconLeeyAprende = new javax.swing.JLabel();
         jUsuario = new javax.swing.JLabel();
         jContraseña = new javax.swing.JLabel();
-        JRecordarUsuario = new javax.swing.JCheckBox();
+        JUsuario = new javax.swing.JCheckBox();
         JIngresar = new javax.swing.JButton();
         JUsuarioInicio = new javax.swing.JTextField();
         JContraseñaInicio = new javax.swing.JPasswordField();
         JSesionIcon = new javax.swing.JPanel();
         jIconSession = new javax.swing.JLabel();
         JAnounce = new javax.swing.JLabel();
+        JRecordar = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Sesión");
@@ -112,7 +165,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
         jContraseña.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jContraseña.setText("Contraseña:");
 
-        JRecordarUsuario.setText("Ingresar como Administrador");
+        JUsuario.setText("Ingresar como Administrador");
 
         JIngresar.setText("Ingresar");
         JIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +193,8 @@ public class VIniciarSesion extends javax.swing.JFrame {
             .addComponent(jIconSession, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        JRecordar.setText("Recordar Usuario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,11 +221,17 @@ public class VIniciarSesion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(JRecordarUsuario)
-                                .addGap(30, 30, 30)
-                                .addComponent(JIngresar))
-                            .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(JUsuario)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(JRecordar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(193, 193, 193)
+                                        .addComponent(JIngresar)))
+                                .addGap(4, 187, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -193,10 +254,12 @@ public class VIniciarSesion extends javax.swing.JFrame {
                             .addComponent(JContraseñaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(JSesionIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
+                .addComponent(JIngresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JIngresar)
-                    .addComponent(JRecordarUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                    .addComponent(JUsuario)
+                    .addComponent(JRecordar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JAnounce))
         );
 
@@ -205,6 +268,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
 
     private void JIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarActionPerformed
         IniciarSesionControlador IniciarSesionControlador = new IniciarSesionControlador();
+        saveFile();
         IniciarSesionControlador.actionPerformed(this);
     }//GEN-LAST:event_JIngresarActionPerformed
 
@@ -228,8 +292,9 @@ public class VIniciarSesion extends javax.swing.JFrame {
     public javax.swing.JPasswordField JContraseñaInicio;
     public javax.swing.JButton JIngresar;
     private javax.swing.JPanel JLeeyAprendeIcon;
-    public javax.swing.JCheckBox JRecordarUsuario;
+    private javax.swing.JCheckBox JRecordar;
     private javax.swing.JPanel JSesionIcon;
+    public javax.swing.JCheckBox JUsuario;
     public javax.swing.JTextField JUsuarioInicio;
     private javax.swing.JLabel jContraseña;
     private javax.swing.JLabel jIconCodeWork;

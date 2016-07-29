@@ -46,12 +46,12 @@ public class VPrestamos extends javax.swing.JFrame {
      */
     private void IniciarAdmin(int accion) {
         DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
-        Cargar.CargarInfoPrestamos(this, Area, accion);
+        Cargar.CargarInfoPrestamos(Area, accion);
     }
 
     private void IniciarSocio(SocioBean Bean, int accion) {
         DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
-        Cargar.CargarInfoPrestamos(this, Area, Bean, accion);
+        Cargar.CargarInfoPrestamos(Area, Bean, accion);
     }
 
     @SuppressWarnings("unchecked")

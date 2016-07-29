@@ -19,10 +19,9 @@ public class VDetalles extends javax.swing.JFrame {
     }
 
     /**
-     * Creates new form Detalles
-     *
-     * @param Titulo
-     * @param A
+     * Inserta texto en el Titulo y Array a Detalles
+     * @param Titulo // Título de la vista
+     * @param A // Array list con la información encontrada
      */
     public void LoadData(String Titulo, ArrayList A) {
         JTitulo.setText(Titulo);

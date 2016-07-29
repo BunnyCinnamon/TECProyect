@@ -13,6 +13,12 @@ public class PrestamosDAO {
 
     private final String SQL_ELIMINAR_PRESTAMO = "DELETE FROM Prestamo WHERE IdPrestamo=?";
 
+    /**
+     * Elimina un Préstamo con id específico en la base de datos.
+     *
+     * @param id // Contiene el id del Préstamo
+     * @return // Regresa true si es exitosa y false si ocurre un error
+     */
     public boolean EliminarPrestamo(int id) {
         boolean SUCCESS = true;
         try {
