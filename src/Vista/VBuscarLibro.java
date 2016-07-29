@@ -3,12 +3,10 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.BuscarLibroControlador;
 import Controlador.CargarInfoControlador;
+import Utils.CleanupDone;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Arekkuusu
- */
+@CleanupDone
 public class VBuscarLibro extends javax.swing.JFrame {
 
     public VBuscarLibro(SocioBean Bean) {
@@ -17,7 +15,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
          */
         CargarInfoControlador Cargar = new CargarInfoControlador();
         initComponents();
-        this.setResizable(false);       
+        this.setResizable(false);
         SetBean(Bean);
         JListAutor.setListData(new String[0]);
         JListEditorial.setListData(new String[0]);

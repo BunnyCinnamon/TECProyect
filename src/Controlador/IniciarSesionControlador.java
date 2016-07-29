@@ -3,10 +3,12 @@ package Controlador;
 import Classes.Beans.AdministradorBean;
 import Classes.Beans.SocioBean;
 import Modelo.IniciarSesionDAO;
+import Utils.CleanupDone;
 import Vista.VOpcionesAdmin;
 import Vista.VIniciarSesion;
 import Vista.VOpcionesSocio;
 
+@CleanupDone
 public class IniciarSesionControlador {
 
     public IniciarSesionDAO isd = new IniciarSesionDAO();

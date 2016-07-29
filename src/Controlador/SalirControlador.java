@@ -1,17 +1,18 @@
 package Controlador;
 
+import Utils.CleanupDone;
 import Vista.VIniciarSesion;
 
+@CleanupDone
 public class SalirControlador {
-
-    VIniciarSesion vis = new VIniciarSesion();
 
     /**
      * Abre una nueva ventana de Iniciar Sesión
      *
      */
     public void actionPerformed() {
-        vis.setLocationRelativeTo(null);
-        vis.setVisible(true);
+        VIniciarSesion IniciarSesion = new VIniciarSesion();
+        IniciarSesion.setLocationRelativeTo(null);
+        IniciarSesion.setVisible(true);
     }
 }

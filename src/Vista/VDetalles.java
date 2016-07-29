@@ -1,13 +1,11 @@
 package Vista;
 
+import Utils.CleanupDone;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-/**
- *
- * @author Arekkuusu
- */
+@CleanupDone
 public class VDetalles extends javax.swing.JFrame {
 
     /**
@@ -20,6 +18,7 @@ public class VDetalles extends javax.swing.JFrame {
 
     /**
      * Inserta texto en el Titulo y Array a Detalles
+     *
      * @param Titulo // Título de la vista
      * @param A // Array list con la información encontrada
      */

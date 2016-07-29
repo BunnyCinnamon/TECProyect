@@ -1,30 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador.Otros;
 
 import Classes.Beans.LocalizacionBean;
 import Modelo.Otros.LocalizacionDAO;
+import Utils.CleanupDone;
 import Vista.VAdministrador;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Josaded
- */
+@CleanupDone
 public class LocalizacionControlador {
 
     public LocalizacionDAO adm = new LocalizacionDAO();
 
     /**
-     * Ingresar Editorial
+     * Ingresar Localizacion. Crea un nuevo localizacion bean y le ingresa los
+     * datos en los text field, envia el bean al dao correspondiente, si es
+     * exitoso envia un JOptionPane con texto correcto, si no es exitoso envia
+     * un texto erroneo
      *
-     *
-     * @param ae
-     * @param va
+     * @param ae // Contiene el objeto Tabla de la Vista
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJIngresarLocalizacion(DefaultTableModel ae, VAdministrador va) {
         LocalizacionBean Bean = new LocalizacionBean();
@@ -37,10 +32,13 @@ public class LocalizacionControlador {
     }
 
     /**
-     * Modificar Editorial
+     * Modificar Localizacion. Crea un nuevo localizacion bean, Si la tabla está
+     * seleccionada consigue el id de la localizacion seleccionada y lo ingresa
+     * en el bean con todos los valores en los text field. Envia los datos al
+     * dao correspondiente, si es exitoso envia un JOptionPane con texto
+     * correcto, si no es exitoso envia un texto erroneo
      *
-     *
-     * @param va
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJModificarLocalizacion(VAdministrador va) {
         LocalizacionBean Bean = new LocalizacionBean();
@@ -58,11 +56,13 @@ public class LocalizacionControlador {
     }
 
     /**
-     * Eliminar Editorial
+     * Eliminar Localizacion. Si la tabla está seleccionada consigue el id de la
+     * Localizacion seleccionada. Envia el id al dao correspondiente, si es
+     * exitoso envia un JOptionPane con texto correcto, si no es exitoso envia
+     * un texto erroneo
      *
-     *
-     * @param ae
-     * @param va
+     * @param ae // Contiene el objeto Tabla de Vista
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJEliminarLocalizacion(DefaultTableModel ae, VAdministrador va) {
         int Select = va.JTableRLocalizacion.getSelectedRow();

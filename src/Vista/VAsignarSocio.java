@@ -2,16 +2,14 @@ package Vista;
 
 import Classes.Beans.SocioBean;
 import Controlador.AsignarSocioControlador;
+import Utils.CleanupDone;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Arekkuusu
- */
+@CleanupDone
 public class VAsignarSocio extends javax.swing.JFrame {
 
     private final SocioBean SocioBean;

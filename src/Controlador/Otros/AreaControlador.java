@@ -1,30 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador.Otros;
 
 import Classes.Beans.AreaBean;
 import Modelo.Otros.AreaDAO;
+import Utils.CleanupDone;
 import Vista.VAdministrador;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Josaded
- */
+@CleanupDone
 public class AreaControlador {
 
     public AreaDAO adm = new AreaDAO();
 
     /**
-     * Ingresar Editorial
+     * Ingresar Area. Crea un nuevo area bean y le ingresa los datos en los text
+     * field, envia el bean al dao correspondiente, si es exitoso envia un
+     * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo
      *
-     *
-     * @param ae
-     * @param va
+     * @param ae // Contiene el objeto Tabla de la Vista
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJIngresarArea(DefaultTableModel ae, VAdministrador va) {
         AreaBean Bean = new AreaBean();
@@ -37,10 +31,13 @@ public class AreaControlador {
     }
 
     /**
-     * Modificar Editorial
+     * Modificar Area. Crea un nuevo area bean, Si la tabla está seleccionada
+     * consigue el id de la area seleccionada y lo ingresa en el bean con todos
+     * los valores en los text field. Envia los datos al dao correspondiente, si
+     * es exitoso envia un JOptionPane con texto correcto, si no es exitoso
+     * envia un texto erroneo
      *
-     *
-     * @param va
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJModificarArea(VAdministrador va) {
         AreaBean Bean = new AreaBean();
@@ -58,11 +55,12 @@ public class AreaControlador {
     }
 
     /**
-     * Eliminar Editorial
+     * Eliminar Area. Si la tabla está seleccionada consigue el id de la area
+     * seleccionada. Envia el id al dao correspondiente, si es exitoso envia un
+     * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo
      *
-     *
-     * @param ae
-     * @param va
+     * @param ae // Contiene el objeto Tabla de Vista
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJEliminarArea(DefaultTableModel ae, VAdministrador va) {
         int Select = va.JTableRArea.getSelectedRow();

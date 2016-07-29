@@ -1,6 +1,7 @@
 package Modelo;
 
 import Classes.Beans.SocioBean;
+import Utils.CleanupDone;
 import Utils.Connexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@CleanupDone
 public class AsignarSocioDAO {
 
     Connection conn;

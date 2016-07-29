@@ -5,16 +5,14 @@ import Controlador.CargarInfoControlador;
 import Controlador.Otros.AreaControlador;
 import Controlador.Otros.EditorialControlador;
 import Controlador.Otros.LocalizacionControlador;
+import Utils.CleanupDone;
 import java.awt.Color;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Arekkuusu
- */
+@CleanupDone
 public class VAdministrador extends javax.swing.JFrame {
 
     public VAdministrador() {

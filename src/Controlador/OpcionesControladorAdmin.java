@@ -1,13 +1,13 @@
 package Controlador;
 
 import Modelo.IniciarSesionDAO;
+import Utils.CleanupDone;
 import Vista.VAdministrador;
 import Vista.VPrestamos;
 
+@CleanupDone
 public class OpcionesControladorAdmin {
 
-    public VAdministrador vad = new VAdministrador();
-    public VPrestamos vp = new VPrestamos();
     public IniciarSesionDAO isd = new IniciarSesionDAO();
 
     /**
@@ -15,6 +15,7 @@ public class OpcionesControladorAdmin {
      *
      */
     public void actionPerformedJPrestamosOpen() {
+        VPrestamos vp = new VPrestamos();
         vp.setLocationRelativeTo(null);
         vp.setVisible(true);
     }
@@ -24,6 +25,7 @@ public class OpcionesControladorAdmin {
      *
      */
     public void actionPerformedJBibliotecaOpen() {
+        VAdministrador vad = new VAdministrador();
         vad.setLocationRelativeTo(null);
         vad.setVisible(true);
     }

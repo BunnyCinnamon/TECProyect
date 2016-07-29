@@ -1,10 +1,12 @@
 package Controlador;
 
 import Modelo.PrestamosDAO;
+import Utils.CleanupDone;
 import Vista.VPrestamos;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+@CleanupDone
 public class PrestamosControlador {
 
     public PrestamosDAO adm = new PrestamosDAO();

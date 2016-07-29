@@ -3,13 +3,11 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.OpcionesControladorSocio;
 import Controlador.SalirControlador;
+import Utils.CleanupDone;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-/**
- *
- * @author Arekkuusu
- */
+@CleanupDone
 public class VOpcionesSocio extends javax.swing.JFrame {
 
     /**
@@ -25,13 +23,13 @@ public class VOpcionesSocio extends javax.swing.JFrame {
         JLibrosOpen.setToolTipText("Buscar y Adquirir Libros");
         JPrestamosOpen.setToolTipText("Ver Préstamos Pendientes");
     }
-    
+
     private static SocioBean Bean;
-    
+
     private void SetBean(SocioBean Bean) {
         this.Bean = Bean;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

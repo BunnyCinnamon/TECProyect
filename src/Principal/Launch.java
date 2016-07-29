@@ -1,9 +1,11 @@
 package Principal;
 
+import Utils.CleanupDone;
 import Vista.VIniciarSesion;
 import java.awt.Color;
 import javax.swing.UIManager;
 
+@CleanupDone
 public class Launch {
 
     private static boolean isLoaded;

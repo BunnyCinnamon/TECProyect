@@ -3,12 +3,14 @@ package Controlador;
 import Classes.Beans.LibroBean;
 import Classes.Beans.SocioBean;
 import Modelo.BuscarLibroDAO;
+import Utils.CleanupDone;
 import Vista.VAsignarSocio;
 import Vista.VBuscarLibro;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+@CleanupDone
 public class BuscarLibroControlador {
 
     BuscarLibroDAO adm = new BuscarLibroDAO();

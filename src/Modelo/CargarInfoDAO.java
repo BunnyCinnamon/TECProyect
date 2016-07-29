@@ -1,6 +1,7 @@
 package Modelo;
 
 import Classes.Beans.SocioBean;
+import Utils.CleanupDone;
 import Utils.Connexion;
 import Vista.VAdministrador;
 import Vista.VBuscarLibro;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
+@CleanupDone
 public class CargarInfoDAO {
 
     Connection conn;

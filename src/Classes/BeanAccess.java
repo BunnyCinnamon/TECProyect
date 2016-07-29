@@ -1,4 +1,3 @@
-
 package Classes;
 
 import Classes.Beans.AdministradorBean;
@@ -11,9 +10,11 @@ import Classes.Beans.EjemplarBean;
 import Classes.Beans.PenalizacionBean;
 import Classes.Beans.PrestamoBean;
 import Classes.Beans.SocioBean;
+import Utils.CleanupDone;
 
+@CleanupDone
 public class BeanAccess {
-    
+
     AutorBean Autorbean = new AutorBean();
     LibroBean LibroBean = new LibroBean();
     EditorialBean EditorialBean = new EditorialBean();
@@ -24,5 +25,5 @@ public class BeanAccess {
     EjemplarBean EjemplarBean = new EjemplarBean();
     PrestamoBean PrestamoBean = new PrestamoBean();
     PenalizacionBean PenalizacionBean = new PenalizacionBean();
-    
+
 }

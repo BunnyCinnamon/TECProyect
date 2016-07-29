@@ -2,20 +2,24 @@ package Controlador.Otros;
 
 import Classes.Beans.EditorialBean;
 import Modelo.Otros.EditorialDAO;
+import Utils.CleanupDone;
 import Vista.VAdministrador;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
+@CleanupDone
 public class EditorialControlador {
 
     public EditorialDAO adm = new EditorialDAO();
 
     /**
-     * Ingresar Editorial
+     * Ingresar Editorial. Crea un nuevo editorial bean y le ingresa los datos
+     * en los text field, envia el bean al dao correspondiente, si es exitoso
+     * envia un JOptionPane con texto correcto, si no es exitoso envia un texto
+     * erroneo
      *
-     *
-     * @param ae
-     * @param va
+     * @param ae // Contiene el objeto Tabla de la Vista
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJIngresarEditorial(DefaultTableModel ae, VAdministrador va) {
         EditorialBean Bean = new EditorialBean();
@@ -28,10 +32,13 @@ public class EditorialControlador {
     }
 
     /**
-     * Modificar Editorial
+     * Modificar Editorial. Crea un nuevo editorial bean, Si la tabla está
+     * seleccionada consigue el id de la editorial seleccionada y lo ingresa en
+     * el bean con todos los valores en los text field. Envia los datos al dao
+     * correspondiente, si es exitoso envia un JOptionPane con texto correcto,
+     * si no es exitoso envia un texto erroneo
      *
-     *
-     * @param va
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJModificarEditorial(VAdministrador va) {
         EditorialBean Bean = new EditorialBean();
@@ -49,11 +56,13 @@ public class EditorialControlador {
     }
 
     /**
-     * Eliminar Editorial
+     * Eliminar Editorial. Si la tabla está seleccionada consigue el id de la
+     * editorial seleccionada. Envia el id al dao correspondiente, si es exitoso
+     * envia un JOptionPane con texto correcto, si no es exitoso envia un texto
+     * erroneo
      *
-     *
-     * @param ae
-     * @param va
+     * @param ae // Contiene el objeto Tabla de Vista
+     * @param va // Contiene el objeto Vista
      */
     public void actionPerformedJEliminarEditorial(DefaultTableModel ae, VAdministrador va) {
         int Select = va.JTableREditorial.getSelectedRow();

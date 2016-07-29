@@ -4,15 +4,17 @@ import Classes.Beans.AutorBean;
 import Classes.Beans.LibroBean;
 import Classes.Beans.SocioBean;
 import Modelo.AdministradorDAO;
+import Utils.CleanupDone;
 import Vista.VAdministrador;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
+@CleanupDone
 public class AdministradorControlador {
 
-    public AdministradorDAO adm = new AdministradorDAO();
+    private final AdministradorDAO adm = new AdministradorDAO();
 
     /**
      * Transforma el String a un id al inicio del texto. El matcher busca el

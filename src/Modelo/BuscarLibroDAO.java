@@ -1,6 +1,7 @@
 package Modelo;
 
 import Classes.Beans.LibroBean;
+import Utils.CleanupDone;
 import Utils.Connexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
+@CleanupDone
 public class BuscarLibroDAO {
 
     Connection conn;

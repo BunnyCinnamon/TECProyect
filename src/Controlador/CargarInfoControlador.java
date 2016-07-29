@@ -2,12 +2,14 @@ package Controlador;
 
 import Classes.Beans.SocioBean;
 import Modelo.CargarInfoDAO;
+import Utils.CleanupDone;
 import Vista.VAdministrador;
 import Vista.VBuscarLibro;
 import Vista.VDetalles;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+@CleanupDone
 public class CargarInfoControlador {
 
     public CargarInfoDAO Cargar = new CargarInfoDAO();

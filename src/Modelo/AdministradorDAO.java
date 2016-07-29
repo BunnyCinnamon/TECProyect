@@ -3,6 +3,7 @@ package Modelo;
 import Classes.Beans.AutorBean;
 import Classes.Beans.LibroBean;
 import Classes.Beans.SocioBean;
+import Utils.CleanupDone;
 import Utils.Connexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
+@CleanupDone
 public class AdministradorDAO {
 
     Connection conn;
@@ -22,7 +24,6 @@ public class AdministradorDAO {
      * Funciones de Libro*
      */
     private final String SQL_ADD_BOOKS = "INSERT INTO Libro (IdLibro,Isbn,Titulo,Paginas,Estatus,NumeroPrestamos,Editorial,Area,Localizacion)";
-    private final String SQL_SEARCH_IDLIBRO = "SELECT last_insert_id() AS last_id FROM Libro";
     private final String SQL_ADD_AUTOR_TO_LIBRO = "INSERT INTO Escribe values (?,?)";
     private final String SQL_ADD_LIBRO_TO_EJEMPLAR = "INSERT INTO Ejemplar values(null,?,?)";
     ////////////////////////////////////////////////////////////////////////////
@@ -56,7 +57,7 @@ public class AdministradorDAO {
             prs.setInt(7, Bean.getArea());
             prs.setInt(8, Bean.getLocalizacion());
             SUCCESSI = prs.executeUpdate() == 1;
-            
+
             ResultSet rs = prs.getGeneratedKeys();
             if (rs.next()) {
                 Bean.setIdLibro(rs.getInt(1));
@@ -342,7 +343,6 @@ public class AdministradorDAO {
      * Funciones de Socio*
      */
     private final String SQL_ADD_SOCIO = "INSERT INTO Socio values(null,?,?,?,?,?,?,?,?,?,'Activo',?,0)";
-    private final String SQL_SEARCH_IDSOCIO = "SELECT IdSocio FROM Socio WHERE Nombre=? AND ApellidoP=? AND ApellidoM=? AND Telefono=? AND Usuario=?";
     private final String SQL_MODIFY_SOCIO = "UPDATE Socio SET Nombre=?, ApellidoP=?, ApellidoM=?, Estado=?, Municipio=?, Calle=?, Numero=?, Telefono=?, Usuario=?, Estatus=?, Contraseña=? WHERE IdSocio=?";
     private final String SQL_DELETE_SOCIO = "UPDATE Socio SET Estatus='Inactivo' WHERE IdSocio=?";
     private final String SQL_SEARCH_SOCIO = "SELECT IdSocio,Nombre,ApellidoP,ApellidoM,CONCAT(Estado,Municipio,Calle,Numero),Telefono,Estatus,Prestamos,Usuario FROM Socio";
@@ -371,32 +371,8 @@ public class AdministradorDAO {
             prs.setString(9, Bean.getUsuario());
             prs.setString(10, Bean.getContraseña());
             SUCCESS = prs.executeUpdate() == 1;
-            
+
             ResultSet rs = prs.getGeneratedKeys();
-            if (rs.next()) {
-                Bean.setIdUsuario(rs.getInt(1));
-            }
-            prs.close();
-            conn.close();
-        } catch (SQLException n) {
-            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        try {
-            conn = Connexion.getConnection();
-            ResultSet rs;
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_IDSOCIO);
-            prs.setString(1, Bean.getNombre());
-            prs.setString(2, Bean.getApellidoP());
-            prs.setString(3, Bean.getApellidoM());
-            prs.setInt(4, Bean.getTelefono());
-            prs.setString(5, Bean.getUsuario());
-            rs = prs.executeQuery();
             if (rs.next()) {
                 Bean.setIdUsuario(rs.getInt(1));
             }
@@ -641,7 +617,6 @@ public class AdministradorDAO {
      * Funciones de Autor*
      */
     private final String SQL_ADD_AUTOR = "INSERT INTO Autor (IdAutor,NombreAutor,ApellidoPAutor,ApellidoMAutor,EstatusAutor)";
-    private final String SQL_ID_AUTOR = "Select IdAutor FROM Autor WHERE NombreAutor=? AND ApellidoPAutor=? AND ApellidoMAutor=? AND EstatusAutor='Activo'";
     private final String SQL_MODIFY_AUTOR = "UPDATE Autor SET";
     private final String SQL_REMOVE_AUTOR = "UPDATE Autor SET";
     private final String SQL_SEARCH_AUTOR = "SELECT * FROM Autor";
@@ -664,35 +639,11 @@ public class AdministradorDAO {
             prs.setString(2, Bean.getApellidoP());
             prs.setString(3, Bean.getApellidoM());
             SUCCESS = prs.executeUpdate() == 1;
-            
+
             ResultSet rs = prs.getGeneratedKeys();
             if (rs.next()) {
                 Bean.setIdAutor(rs.getInt(1));
             }
-            prs.close();
-            conn.close();
-        } catch (SQLException n) {
-            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        try {
-            conn = Connexion.getConnection();
-            ResultSet rs;
-            PreparedStatement prs = conn.prepareStatement(SQL_ID_AUTOR);
-            prs.setString(1, Bean.getNombre());
-            prs.setString(2, Bean.getApellidoP());
-            prs.setString(3, Bean.getApellidoM());
-            rs = prs.executeQuery();
-            if (rs.next()) {
-                Bean.setIdAutor(rs.getInt(1));
-            }
-            rs.close();
             prs.close();
             conn.close();
         } catch (SQLException n) {

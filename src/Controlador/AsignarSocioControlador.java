@@ -2,10 +2,12 @@ package Controlador;
 
 import Classes.Beans.SocioBean;
 import Modelo.AsignarSocioDAO;
+import Utils.CleanupDone;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+@CleanupDone
 public class AsignarSocioControlador {
 
     /**

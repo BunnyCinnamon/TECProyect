@@ -1,15 +1,12 @@
 package Controlador;
 
 import Classes.Beans.SocioBean;
-import Modelo.IniciarSesionDAO;
-import Vista.VAdministrador;
+import Utils.CleanupDone;
 import Vista.VBuscarLibro;
 import Vista.VPrestamos;
 
+@CleanupDone
 public class OpcionesControladorSocio {
-
-    public VAdministrador vad = new VAdministrador();
-    public IniciarSesionDAO isd = new IniciarSesionDAO();
 
     /**
      * Abre una nueva ventana de Buscar Libros

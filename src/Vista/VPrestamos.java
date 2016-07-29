@@ -3,15 +3,13 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.CargarInfoControlador;
 import Controlador.PrestamosControlador;
+import Utils.CleanupDone;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Arekkuusu
- */
+@CleanupDone
 public class VPrestamos extends javax.swing.JFrame {
 
     CargarInfoControlador Cargar = new CargarInfoControlador();

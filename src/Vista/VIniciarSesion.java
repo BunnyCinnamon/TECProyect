@@ -1,7 +1,7 @@
 package Vista;
 
 import Controlador.IniciarSesionControlador;
-import java.awt.Color;
+import Utils.CleanupDone;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,14 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
 
-/**
- *
- * @author Arekkuusu
- */
+@CleanupDone
 public class VIniciarSesion extends javax.swing.JFrame {
 
     private static String usuario;
@@ -88,14 +82,20 @@ public class VIniciarSesion extends javax.swing.JFrame {
             props.store(out, "--UsuarioDefault es \"usuario\" | Booleano-\"true-o-False\" es \"login\" | PathFile es \"path\"");
             out.close();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(VIniciarSesion.class.getName()).log(Level.SEVERE, "Error", ex);
+            System.err.println("Error in configuration file: " + ex.getMessage());
+            JAnounce.setText("Error in configuration file: " + ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(VIniciarSesion.class.getName()).log(Level.SEVERE, "Error", ex);
+            System.err.println("Error in configuration file: " + ex.getMessage());
+            JAnounce.setText("Error in configuration file: " + ex.getMessage());
         } finally {
             try {
+                if (in == null) {
+                    return; // This prevents null File from erroring the close method
+                }
                 in.close();
             } catch (IOException ex) {
-                Logger.getLogger(VIniciarSesion.class.getName()).log(Level.SEVERE, "Error", ex);
+                System.err.println("Error in configuration file: " + ex.getMessage());
+                JAnounce.setText("Error in configuration file: " + ex.getMessage());
             }
         }
     }
@@ -222,15 +222,13 @@ public class VIniciarSesion extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(JIngresar)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(JUsuario)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(JRecordar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(193, 193, 193)
-                                        .addComponent(JIngresar)))
+                                        .addComponent(JRecordar)))
                                 .addGap(4, 187, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -253,13 +251,13 @@ public class VIniciarSesion extends javax.swing.JFrame {
                             .addComponent(jContraseña)
                             .addComponent(JContraseñaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(JSesionIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JIngresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JUsuario)
-                    .addComponent(JRecordar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(JRecordar)
+                    .addComponent(JUsuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(JAnounce))
         );
 
