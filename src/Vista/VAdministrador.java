@@ -5,8 +5,10 @@ import Controlador.CargarInfoControlador;
 import Controlador.Otros.AreaControlador;
 import Controlador.Otros.EditorialControlador;
 import Controlador.Otros.LocalizacionControlador;
+import Utils.Autocompleter;
 import Utils.CleanupDone;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -1334,10 +1336,14 @@ public class VAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Iniciar Página*
+     * Iniciar Página. Crea un objeto Controlador, remueve cualquier texto
+     * remanente en combo box y list, Carga la información a los mismos. Un
+     * try-catch que llama al método de autocompletar
+     *
      */
     private void Iniciar() {
         CargarInfoControlador Cargar = new CargarInfoControlador();
+
         /**
          * VRegistro de Libro*
          */
@@ -1346,6 +1352,11 @@ public class VAdministrador extends javax.swing.JFrame {
         JListAutor.setListData(new String[0]);
         JListEditorial.setListData(new String[0]);
         Cargar.CargarInfoListas(this);
+        try {
+            loadAuto(Cargar.CargarTexts());
+        } catch (java.lang.ExceptionInInitializerError ex) {
+            System.err.println("Error in JTatoo file: " + ex.getLocalizedMessage());
+        }
         /**
          * VRegistro de Editorial/Localizacion/Area*
          */
@@ -1355,6 +1366,19 @@ public class VAdministrador extends javax.swing.JFrame {
         Cargar.CargarLocalizacion(Localizacion);
         DefaultTableModel Area = (DefaultTableModel) JTableRArea.getModel();
         Cargar.CargarArea(Area);
+
+    }
+
+    /**
+     * Cargar libreria Autocompleter. Si la libreria no se encuentra presente,
+     * el programa inicia con normalidad pero sin las funciones de
+     * autocompletado
+     *
+     * @param array
+     */
+    private void loadAuto(ArrayList array) throws java.lang.ExceptionInInitializerError {
+        Autocompleter Autocompleter;
+        Autocompleter = new Autocompleter(JTituloText, array);
     }
 
     /**

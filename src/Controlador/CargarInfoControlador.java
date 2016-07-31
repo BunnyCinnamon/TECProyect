@@ -6,6 +6,7 @@ import Utils.CleanupDone;
 import Vista.VAdministrador;
 import Vista.VBuscarLibro;
 import Vista.VDetalles;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -111,5 +112,16 @@ public class CargarInfoControlador {
         if (!Cargar.LoadEditorial(t)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Editorial!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    /**
+     * Buscar Texto de Libros. Si ocurre un error se manda un Texto en
+     * JOptionPane
+     *
+     * @return // Regresa los Textos encontrados
+     */
+    public ArrayList<String> CargarTexts() {
+        ArrayList array = Cargar.LoadTexts();
+        return array;
     }
 }

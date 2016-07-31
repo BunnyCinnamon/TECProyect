@@ -1,7 +1,6 @@
 package Principal;
 
 import Utils.CleanupDone;
-import Vista.VIniciarSesion;
 import java.awt.Color;
 import javax.swing.UIManager;
 
@@ -16,7 +15,7 @@ public class Launch {
      */
     public static void main(String[] args) {
         isLoaded = loadTexture();
-        VIniciarSesion IniciarSesion = new VIniciarSesion();
+        Vista.VIniciarSesion IniciarSesion = new Vista.VIniciarSesion();
         IniciarSesion.setLocationRelativeTo(null);
         IniciarSesion.setVisible(true);
         if (!isLoaded) {

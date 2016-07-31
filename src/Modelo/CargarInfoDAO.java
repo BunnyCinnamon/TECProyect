@@ -37,6 +37,8 @@ public class CargarInfoDAO {
     private final String SQL_SEARCH_MAX_EXISTENCIA_LIBRO = "SELECT Titulo,Existencias FROM Libro JOIN Ejemplar WHERE IdLibro=Libro AND Existencias=(SELECT MAX(Existencias) FROM Ejemplar)";
     private final String SQL_SEARCH_MIN_EXISTENCIA_EDITORIAL = "SELECT NombreEditorial,Existencias FROM Libro JOIN Ejemplar,Editorial WHERE IdLibro=Libro AND Editorial=IdEditorial AND Existencias=(SELECT MIN(Existencias) FROM Ejemplar)";
     private final String SQL_SEARCH_MAX_PRESTAMO_LIBRO = "SELECT Titulo,Isbn,NombreEditorial,NumeroPrestamos FROM Libro JOIN Editorial WHERE NumeroPrestamos=(SELECT MAX(NumeroPrestamos) FROM Libro) AND Editorial=IdEditorial";
+    ////////////////////////////////////////////////////////////////////////////
+    private final String SQL_SEARCH_TITULO_LIBRO = "SELECT Titulo FROM Libro";
 
     /**
      * Busca todos los datos de Localización, Area, Autor y Editorial, en la
@@ -522,6 +524,40 @@ public class CargarInfoDAO {
         }
 
         return SUCCESS;
+    }
+
+    /**
+     * Busca los Titulos de Libros en la base de datos. Ingresa los datos
+     * encontrados de Libros en un array list, repite hasta encontrar todos los
+     * datos
+     *
+     * @return // Regresa true si es exitosa y false si ocurre un error
+     */
+    public ArrayList LoadTexts() {
+        ArrayList<String> Array = new ArrayList<String>();
+        PreparedStatement prs;
+        ResultSet rs;
+        try {
+            conn = Connexion.getConnection();
+            prs = conn.prepareStatement(SQL_SEARCH_TITULO_LIBRO);
+            rs = prs.executeQuery();
+            while (rs.next()) {
+                Array.add(rs.getString(1));
+            }
+            rs.close();
+            prs.close();
+            conn.close();
+        } catch (SQLException n) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+            }
+        }
+
+        return Array;
     }
 
 }

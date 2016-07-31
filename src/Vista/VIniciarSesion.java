@@ -23,17 +23,20 @@ public class VIniciarSesion extends javax.swing.JFrame {
      */
     public VIniciarSesion() {
         initComponents();
-        this.setResizable(false);
         ReadFile();
         ////////////////////////////////////////////////////////////////////////
         JUsuario.setToolTipText("Desactivar en caso de ser Socio");
         JRecordar.setToolTipText("Recuerda tu nombre de Usuario");
+        JUsuario.setSelected(true);
+    }
+
+    private void loadTexture() {
     }
 
     /**
      * Lee el contenido del archivo logins.properties y busca por errores en la
      * configuración. Si la vista tiene el recordar usuario activado el programa
-     * lee el usuario y lo inserta en la vista. Si la vita si no puede leer el
+     * lee el usuario y lo inserta en la vista. Si la vista si no puede leer el
      * archivo, manda un mensaje a la vista.
      *
      */
@@ -43,7 +46,6 @@ public class VIniciarSesion extends javax.swing.JFrame {
             try {
                 filePath = propertiesLogins.getString("path");
                 if (propertiesLogins.getString("login").equals("true")) {
-                    JUsuario.setSelected(true);
                     JRecordar.setSelected(true);
                     usuario = propertiesLogins.getString("usuario");
                     JUsuarioInicio.setText(usuario);
@@ -89,9 +91,6 @@ public class VIniciarSesion extends javax.swing.JFrame {
             JAnounce.setText("Error in configuration file: " + ex.getMessage());
         } finally {
             try {
-                if (in == null) {
-                    return; // This prevents null File from erroring the close method
-                }
                 in.close();
             } catch (IOException ex) {
                 System.err.println("Error in configuration file: " + ex.getMessage());
@@ -104,7 +103,6 @@ public class VIniciarSesion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTattooUtilities1 = new com.jtattoo.plaf.JTattooUtilities();
         jSeparator1 = new javax.swing.JSeparator();
         JCodeWorkIcon = new javax.swing.JPanel();
         jIconCodeWork = new javax.swing.JLabel();
@@ -223,13 +221,11 @@ public class VIniciarSesion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JIngresar)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(JUsuario)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(JRecordar)))
-                                .addGap(4, 187, Short.MAX_VALUE)))))
+                                .addComponent(JUsuario)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JRecordar)
+                                    .addComponent(JIngresar))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -253,11 +249,11 @@ public class VIniciarSesion extends javax.swing.JFrame {
                     .addComponent(JSesionIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JIngresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JRecordar)
                     .addComponent(JUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(JAnounce))
         );
 
@@ -266,7 +262,12 @@ public class VIniciarSesion extends javax.swing.JFrame {
 
     private void JIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarActionPerformed
         IniciarSesionControlador IniciarSesionControlador = new IniciarSesionControlador();
-        saveFile();
+        try {
+            saveFile();
+        } catch (NullPointerException n) {
+            System.err.println("Error in: " + n.getMessage());
+        }
+
         IniciarSesionControlador.actionPerformed(this);
     }//GEN-LAST:event_JIngresarActionPerformed
 
@@ -299,7 +300,6 @@ public class VIniciarSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jIconLeeyAprende;
     private javax.swing.JLabel jIconSession;
     private javax.swing.JSeparator jSeparator1;
-    private com.jtattoo.plaf.JTattooUtilities jTattooUtilities1;
     private javax.swing.JLabel jUsuario;
     // End of variables declaration//GEN-END:variables
 }
