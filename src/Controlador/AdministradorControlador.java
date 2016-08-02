@@ -5,6 +5,7 @@ import Classes.Beans.LibroBean;
 import Classes.Beans.SocioBean;
 import Modelo.AdministradorDAO;
 import Utils.CleanupDone;
+import Utils.TextChecker;
 import Vista.VAdministrador;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 public class AdministradorControlador {
 
     private final AdministradorDAO adm = new AdministradorDAO();
+    private static final TextChecker TEXT_CHECKER = new TextChecker();
 
     /**
      * Transforma el String a un id al inicio del texto. El matcher busca el
@@ -23,7 +25,7 @@ public class AdministradorControlador {
      *
      * @param a // Contiene el texto
      */
-    private int getId(String a) {
+    private int getId(String a) throws NullPointerException {
         Matcher m = Pattern.compile("[^0-9]*([0-9]+).*").matcher(a);
         int id = 0;
         if (m.matches()) {
@@ -59,17 +61,27 @@ public class AdministradorControlador {
      */
     public void actionPerformedJIngresarLibro(DefaultTableModel ae, VAdministrador va) {
         LibroBean Bean = new LibroBean();
-        Bean.setIsbn(va.JISBNText.getText());
-        Bean.setTitulo(va.JTituloText.getText());
-        Bean.setPaginas(Integer.parseInt(va.JSpinnerNPag.getValue().toString()));
-        Bean.setEstatus(va.JEstadoLibro.getSelectedItem().toString());
-        Bean.setAutor(getId(va.JListAutor.getSelectedValue()));
-        Bean.setNumeroPrestamos(Integer.parseInt(va.JSpinnerCantidad.getValue().toString()));
-        Bean.setEditorial(getId(va.JListEditorial.getSelectedValue()));
-        Bean.setArea(getId(va.JAreaLibro.getSelectedItem().toString()));
-        Bean.setLocalizacion(getId(va.JLocalizacionLibro.getSelectedItem().toString()));
+        Object[] texts = new Object[]{va.JISBNText.getText(), va.JTituloText.getText(), va.JSpinnerNPag.getValue().toString(), va.JEstadoLibro.getSelectedItem().toString(), va.JSpinnerCantidad.getValue().toString()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Bean.setIsbn(texts[0].toString());
+        Bean.setTitulo(texts[1].toString());
+        Bean.setPaginas(Integer.parseInt(texts[2].toString()));
+        Bean.setEstatus(texts[3].toString());
+        Bean.setNumeroPrestamos(Integer.parseInt(texts[4].toString()));
+        try {
+            Bean.setAutor(getId(va.JListAutor.getSelectedValue()));
+            Bean.setEditorial(getId(va.JListEditorial.getSelectedValue()));
+            Bean.setArea(getId(va.JAreaLibro.getSelectedItem().toString()));
+            Bean.setLocalizacion(getId(va.JLocalizacionLibro.getSelectedItem().toString()));
+        } catch (NullPointerException n) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         if (Bean.getArea() == 0 || Bean.getEditorial() == 0 || Bean.getAutor() == 0 || Bean.getLocalizacion() == 0) {
-            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del libro", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else if (adm.IngresarLibro(Bean)) {
             ae.addRow(new Object[]{Bean.getIdLibro(), Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), getString(va.JListAutor.getSelectedValue()), getString(va.JListEditorial.getSelectedValue()), getString(va.JAreaLibro.getSelectedItem().toString()), getString(va.JLocalizacionLibro.getSelectedItem().toString()), Bean.getNumeroPrestamos()});
             JOptionPane.showMessageDialog(null, "El Libro ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
@@ -89,21 +101,30 @@ public class AdministradorControlador {
     public void actionPerformedJModificarLibro(VAdministrador va) {
         LibroBean Bean = new LibroBean();
         int Select = va.JTableRLibro.getSelectedRow();
-        if (Select < 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
-        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-
-            Bean.setIdLibro(Integer.parseInt(va.JTableRLibro.getValueAt(Select, 0).toString()));
-            Bean.setIsbn(va.JISBNText.getText());
-            Bean.setTitulo(va.JTituloText.getText());
-            Bean.setPaginas(Integer.parseInt(va.JSpinnerNPag.getValue().toString()));
-            Bean.setEstatus(va.JEstadoLibro.getSelectedItem().toString());
+        Object[] texts = new Object[]{va.JISBNText.getText(), va.JTituloText.getText(), va.JSpinnerNPag.getValue().toString(), va.JEstadoLibro.getSelectedItem().toString(), va.JSpinnerCantidad.getValue().toString()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Bean.setIsbn(texts[0].toString());
+        Bean.setTitulo(texts[1].toString());
+        Bean.setPaginas(Integer.parseInt(texts[2].toString()));
+        Bean.setEstatus(texts[3].toString());
+        Bean.setNumeroPrestamos(Integer.parseInt(texts[4].toString()));
+        try {
             Bean.setAutor(getId(va.JListAutor.getSelectedValue()));
             Bean.setEditorial(getId(va.JListEditorial.getSelectedValue()));
             Bean.setArea(getId(va.JAreaLibro.getSelectedItem().toString()));
             Bean.setLocalizacion(getId(va.JLocalizacionLibro.getSelectedItem().toString()));
+        } catch (NullPointerException n) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (Select < 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
             if (Bean.getArea() == 0 || Bean.getEditorial() == 0 || Bean.getAutor() == 0 || Bean.getLocalizacion() == 0) {
-                JOptionPane.showMessageDialog(null, "Ingresa todos los datos del libro", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ingresa todos los datos del libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else if (adm.ModificarLibro(Bean)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             }
@@ -193,16 +214,21 @@ public class AdministradorControlador {
      */
     public void actionPerformedJIngresarSocio(DefaultTableModel ae, VAdministrador va) {
         SocioBean Bean = new SocioBean();
-        Bean.setNombre(va.JNombreTextSocio.getText());
-        Bean.setApellidoP(va.JApellidoPTextSocio.getText());
+        Object[] texts = new Object[]{va.JNombreTextSocio.getText(), va.JApellidoPTextSocio.getText(), va.JEstadoTextSocio.getText(), va.JMunicipioTextSocio.getText(), va.JCalleTextSocio.getText(), va.JNCalleTextSocio.getText(), va.JTelefonoTextSocio.getText(), va.JTextUsuario.getText(), va.JTextContraseñaSocio.getText()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Socio", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Bean.setNombre(texts[0].toString());
+        Bean.setApellidoP(texts[1].toString());
         Bean.setApellidoM(va.JApellidoMTextSocio.getText());
-        Bean.setEstado(va.JEstadoTextSocio.getText());
-        Bean.setMunicipio(va.JMunicipioTextSocio.getText());
-        Bean.setCalle(va.JCalleTextSocio.getText());
-        Bean.setNumero(Integer.parseInt(va.JNCalleTextSocio.getText()));
-        Bean.setTelefono(Integer.parseInt(va.JTelefonoTextSocio.getText()));
-        Bean.setUsuario(va.JTextUsuario.getText());
-        Bean.setContraseña(va.JTextContraseñaSocio.getText());
+        Bean.setEstado(texts[2].toString());
+        Bean.setMunicipio(texts[3].toString());
+        Bean.setCalle(texts[4].toString());
+        Bean.setNumero(Integer.parseInt(texts[5].toString()));
+        Bean.setTelefono(Integer.parseInt(texts[6].toString()));
+        Bean.setUsuario(texts[7].toString());
+        Bean.setContraseña(texts[8].toString());
         if (adm.IngresarSocio(Bean)) {
             ae.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + "#" + Bean.getNumero(), Bean.getTelefono(), "Activo", Bean.getPrestamos(), Bean.getUsuario(), "**********"});
             JOptionPane.showMessageDialog(null, "El Libro ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
@@ -221,23 +247,24 @@ public class AdministradorControlador {
     public void actionPerformedJModificarSocio(VAdministrador va) {
         int Select = va.JTableRSocio.getSelectedRow();
         SocioBean Bean = new SocioBean();
+        Object[] texts = new Object[]{va.JNombreTextSocio.getText(), va.JApellidoPTextSocio.getText(), va.JEstadoTextSocio.getText(), va.JMunicipioTextSocio.getText(), va.JCalleTextSocio.getText(), va.JNCalleTextSocio.getText(), va.JTelefonoTextSocio.getText(), va.JTextUsuario.getText(), va.JTextContraseñaSocio.getText()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Socio", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Bean.setNombre(texts[0].toString());
+        Bean.setApellidoP(texts[1].toString());
+        Bean.setApellidoM(va.JApellidoMTextSocio.getText());
+        Bean.setEstado(texts[2].toString());
+        Bean.setMunicipio(texts[3].toString());
+        Bean.setCalle(texts[4].toString());
+        Bean.setNumero(Integer.parseInt(texts[5].toString()));
+        Bean.setTelefono(Integer.parseInt(texts[6].toString()));
+        Bean.setUsuario(texts[7].toString());
+        Bean.setContraseña(texts[8].toString());
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-
-            Bean.setIdUsuario(Integer.parseInt(va.JTableRSocio.getValueAt(Select, 0).toString()));
-            Bean.setNombre(va.JNombreTextSocio.getText());
-            Bean.setApellidoP(va.JApellidoPTextSocio.getText());
-            Bean.setApellidoM(va.JApellidoMTextSocio.getText());
-            Bean.setEstado(va.JEstadoTextSocio.getText());
-            Bean.setMunicipio(va.JMunicipioTextSocio.getText());
-            Bean.setCalle(va.JCalleTextSocio.getText());
-            Bean.setNumero(Integer.parseInt(va.JNCalleTextSocio.getText()));
-            Bean.setTelefono(Integer.parseInt(va.JTelefonoTextSocio.getText()));
-            Bean.setUsuario(va.JTextUsuario.getText());
-            Bean.setEstatus(va.JEstatusSocio.getSelectedItem().toString());
-            Bean.setContraseña(va.JTextContraseñaSocio.getText());
-
             if (adm.ModificarSocio(Bean)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             }
@@ -259,6 +286,7 @@ public class AdministradorControlador {
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? (Inactivo)")) {
             int id = Integer.parseInt(va.JTableRSocio.getValueAt(Select, 0).toString());
             if (adm.EliminarSocio(id)) {
+                ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }
         }
@@ -324,8 +352,13 @@ public class AdministradorControlador {
      */
     public void actionPerformedJIngresarAutor(DefaultTableModel ae, VAdministrador va) {
         AutorBean Bean = new AutorBean();
-        Bean.setNombre(va.JNombreTextAutor.getText());
-        Bean.setApellidoP(va.JApellidoPAutor.getText());
+        Object[] texts = new Object[]{va.JNombreTextAutor.getText(), va.JApellidoPAutor.getText()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Autor", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Bean.setNombre(texts[0].toString());
+        Bean.setApellidoP(texts[1].toString());
         Bean.setApellidoM(va.JApellidoMAutor.getText());
         if (adm.IngresarAutor(ae, Bean)) {
             ae.addRow(new Object[]{Bean.getIdAutor(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), "Activo"});
@@ -347,9 +380,14 @@ public class AdministradorControlador {
     public void actionPerformedJModificarAutor(VAdministrador va) {
         AutorBean Bean = new AutorBean();
         int Select = va.JTableRAutor.getSelectedRow();
+        Object[] texts = new Object[]{va.JNombreTextAutor.getText(), va.JApellidoPAutor.getText()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Autor", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Bean.setIdAutor(Integer.parseInt(va.JTableRAutor.getValueAt(Select, 0).toString()));
-        Bean.setNombre(va.JNombreTextAutor.getText());
-        Bean.setApellidoP(va.JApellidoPAutor.getText());
+        Bean.setNombre(texts[0].toString());
+        Bean.setApellidoP(texts[1].toString());
         Bean.setApellidoM(va.JApellidoMAutor.getText());
         Bean.setStatus(va.JComboEstatusAutor.getSelectedItem().toString());
         if (Select < 0) {
@@ -374,8 +412,9 @@ public class AdministradorControlador {
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? ")) {
-            if (adm.EliminarAutor(Integer.parseInt(va.JTableRAutor.getValueAt(Select, 0).toString()))) {
-                ae.removeRow(Integer.parseInt(va.JTableRAutor.getValueAt(Select, 0).toString()));
+            int id = Integer.parseInt(va.JTableRAutor.getValueAt(Select, 0).toString());
+            if (adm.EliminarAutor(id)) {
+                ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }
         }

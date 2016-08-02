@@ -3,15 +3,23 @@ package Vista;
 import Controlador.OpcionesControladorAdmin;
 import Controlador.SalirControlador;
 import Utils.CleanupDone;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 
 @CleanupDone
+/**
+ * Vista de Administrador
+ *
+ */
 public class VOpcionesAdmin extends javax.swing.JFrame {
 
     public VOpcionesAdmin() {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         JBibliotecaOpen.setToolTipText("Agregar, Modificar, y Eliminar Registros");
         JPrestamosOpen.setToolTipText("Ver todos los Préstamos pendientes");
     }

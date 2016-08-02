@@ -8,16 +8,20 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 @CleanupDone
+/**
+ * Runnable de Cierre de Sesión
+ *
+ */
 public class RunnableCode implements Runnable {
 
     @Override
     public void run() {
-        timerJPane(2).start();
+        timerJPane(1).start();
         JOptionPane.showOptionDialog(null, "Reiniciando...", "Restart", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{}, null);
     }
 
     /**
-     * Muestra JOptionPane por segundos
+     * Muestra JOptionPane por segundos, luego lo elimina
      *
      * @param n // Tiempo de vida del mensaje
      */

@@ -1,11 +1,19 @@
 package Vista;
 
 import Utils.CleanupDone;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 
 @CleanupDone
+/**
+ * Vista de Detalles
+ *
+ */
 public class VDetalles extends javax.swing.JFrame {
 
     /**
@@ -13,7 +21,15 @@ public class VDetalles extends javax.swing.JFrame {
      */
     public VDetalles() {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent ev) {
+                dispose();
+            }
+        });
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
     }
 
     /**
@@ -193,7 +209,7 @@ public class VDetalles extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTerminadoActionPerformed
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_JTerminadoActionPerformed
 
     /**

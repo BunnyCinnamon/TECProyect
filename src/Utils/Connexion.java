@@ -8,6 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @CleanupDone
+/**
+ * Conexión a la base de datos
+ *
+ */
 public class Connexion {
 
     private static String ipAddress;

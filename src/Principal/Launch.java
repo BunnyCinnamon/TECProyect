@@ -3,6 +3,7 @@ package Principal;
 import Utils.CleanupDone;
 import java.awt.Color;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 @CleanupDone
 public class Launch {
@@ -12,6 +13,8 @@ public class Launch {
     /**
      * Llama el método de Textura y carga una nueva ventana Iniciar Sesión. Si
      * isloaded es false manda un aviso a la vista inicio
+     * 
+     * @param args // Carga el Programa
      */
     public static void main(String[] args) {
         isLoaded = loadTexture();
@@ -32,7 +35,7 @@ public class Launch {
     private static boolean loadTexture() {
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
             return false;
         }

@@ -3,6 +3,7 @@ package Controlador.Otros;
 import Classes.Beans.LocalizacionBean;
 import Modelo.Otros.LocalizacionDAO;
 import Utils.CleanupDone;
+import Utils.TextChecker;
 import Vista.VAdministrador;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -10,7 +11,8 @@ import javax.swing.table.DefaultTableModel;
 @CleanupDone
 public class LocalizacionControlador {
 
-    public LocalizacionDAO adm = new LocalizacionDAO();
+    private final LocalizacionDAO adm = new LocalizacionDAO();
+    private static final TextChecker TEXT_CHECKER = new TextChecker();
 
     /**
      * Ingresar Localizacion. Crea un nuevo localizacion bean y le ingresa los
@@ -23,7 +25,12 @@ public class LocalizacionControlador {
      */
     public void actionPerformedJIngresarLocalizacion(DefaultTableModel ae, VAdministrador va) {
         LocalizacionBean Bean = new LocalizacionBean();
-        Bean.setPasillo(va.JLocalizacionText.getText());
+        Object[] texts = new Object[]{va.JAreaText.getText()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos de Localizacion", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Bean.setPasillo(texts[0].toString());
         if (adm.IngresarLocalizacion(ae, Bean)) {
             JOptionPane.showMessageDialog(null, "La localización ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -43,8 +50,13 @@ public class LocalizacionControlador {
     public void actionPerformedJModificarLocalizacion(VAdministrador va) {
         LocalizacionBean Bean = new LocalizacionBean();
         int Select = va.JTableRLocalizacion.getSelectedRow();
+        Object[] texts = new Object[]{va.JAreaText.getText()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos de Localizacion", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Bean.setIdLocalización(Integer.parseInt(va.JTableRLocalizacion.getValueAt(Select, 0).toString()));
-        Bean.setPasillo(va.JLocalizacionText.getText());
+        Bean.setPasillo(texts[0].toString());
         Bean.setEstatus(va.JComboEstatusLocalizacion.getSelectedItem().toString());
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");

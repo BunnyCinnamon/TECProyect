@@ -18,7 +18,7 @@ public class CargarInfoControlador {
     /**
      * Cargar Información de las Listas en Vista Administador
      *
-     * @param va
+     * @param va // Contiene el objeto Vista
      */
     public void CargarInfoListas(VAdministrador va) {
         if (!Cargar.LoadInfoVAdmin(va)) {
@@ -29,7 +29,7 @@ public class CargarInfoControlador {
     /**
      * Cargar Información de las Listas en Vista Socio
      *
-     * @param va
+     * @param va // Contiene el objeto Vista
      */
     public void CargarInfoListas(VBuscarLibro va) {
         if (!Cargar.LoadInfoVSocio(va)) {

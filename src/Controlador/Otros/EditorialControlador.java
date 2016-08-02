@@ -3,6 +3,7 @@ package Controlador.Otros;
 import Classes.Beans.EditorialBean;
 import Modelo.Otros.EditorialDAO;
 import Utils.CleanupDone;
+import Utils.TextChecker;
 import Vista.VAdministrador;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
@@ -10,7 +11,8 @@ import javax.swing.JOptionPane;
 @CleanupDone
 public class EditorialControlador {
 
-    public EditorialDAO adm = new EditorialDAO();
+    private final EditorialDAO adm = new EditorialDAO();
+    private static final TextChecker TEXT_CHECKER = new TextChecker();
 
     /**
      * Ingresar Editorial. Crea un nuevo editorial bean y le ingresa los datos
@@ -23,7 +25,12 @@ public class EditorialControlador {
      */
     public void actionPerformedJIngresarEditorial(DefaultTableModel ae, VAdministrador va) {
         EditorialBean Bean = new EditorialBean();
-        Bean.setNombre(va.JNombreTextEditorial.getText());
+        Object[] texts = new Object[]{va.JAreaText.getText()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos de la Editorial", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Bean.setNombre(texts[0].toString());
         if (adm.IngresarEditorial(ae, Bean)) {
             JOptionPane.showMessageDialog(null, "La editorial ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -43,8 +50,13 @@ public class EditorialControlador {
     public void actionPerformedJModificarEditorial(VAdministrador va) {
         EditorialBean Bean = new EditorialBean();
         int Select = va.JTableREditorial.getSelectedRow();
+        Object[] texts = new Object[]{va.JAreaText.getText()};
+        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos de la Editorial", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Bean.setIdEditorial(Integer.parseInt(va.JTableREditorial.getValueAt(Select, 0).toString()));
-        Bean.setNombre(va.JNombreTextEditorial.getText());
+        Bean.setNombre(texts[0].toString());
         Bean.setEstatus(va.JComboEstatusEditorial.getSelectedItem().toString());
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");

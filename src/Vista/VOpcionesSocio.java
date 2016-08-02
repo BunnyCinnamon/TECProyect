@@ -4,10 +4,16 @@ import Classes.Beans.SocioBean;
 import Controlador.OpcionesControladorSocio;
 import Controlador.SalirControlador;
 import Utils.CleanupDone;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 
 @CleanupDone
+/**
+ * Vista de Socio
+ *
+ */
 public class VOpcionesSocio extends javax.swing.JFrame {
 
     /**
@@ -17,7 +23,9 @@ public class VOpcionesSocio extends javax.swing.JFrame {
      */
     public VOpcionesSocio(SocioBean Bean) {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         SetBean(Bean);
         ////////////////////////////////////////////////////////////////////////
         JLibrosOpen.setToolTipText("Buscar y Adquirir Libros");

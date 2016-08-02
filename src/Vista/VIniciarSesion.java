@@ -9,8 +9,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import javax.swing.ImageIcon;
 
 @CleanupDone
+/**
+ * Vista de Inicio
+ *
+ */
 public class VIniciarSesion extends javax.swing.JFrame {
 
     private static String usuario;
@@ -23,6 +28,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
      */
     public VIniciarSesion() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         ReadFile();
         ////////////////////////////////////////////////////////////////////////
         JUsuario.setToolTipText("Desactivar en caso de ser Socio");

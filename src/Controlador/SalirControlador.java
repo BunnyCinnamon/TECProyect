@@ -36,24 +36,24 @@ public class SalirControlador {
     public static void reiniciarApli(Runnable run) throws IOException {
         try {
             String java = System.getProperty("java.home") + "/bin/java";
-            List<String> vmArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
+            List<String> vmArgumentos = ManagementFactory.getRuntimeMXBean().getInputArguments();
             StringBuffer vmArgsOneLine = new StringBuffer();
-            vmArguments.stream().filter((arg) -> (!arg.contains("-agentlib"))).map((arg) -> {
+            vmArgumentos.stream().filter((arg) -> (!arg.contains("-agentlib"))).map((arg) -> {
                 vmArgsOneLine.append(arg);
                 return arg;
             }).forEach((_item) -> {
                 vmArgsOneLine.append(" ");
             });
             final StringBuffer cmd = new StringBuffer("\"" + java + "\" " + vmArgsOneLine);
-            String[] mainCommand = System.getProperty(SUN_JAVA_COMMAND).split(" ");
-            if (mainCommand[0].endsWith(".jar")) {
-                cmd.append("-jar ").append(new File(mainCommand[0]).getPath());
+            String[] comando = System.getProperty(SUN_JAVA_COMMAND).split(" ");
+            if (comando[0].endsWith(".jar")) {
+                cmd.append("-jar ").append(new File(comando[0]).getPath());
             } else {
-                cmd.append("-cp \"").append(System.getProperty("java.class.path")).append("\" ").append(mainCommand[0]);
+                cmd.append("-cp \"").append(System.getProperty("java.class.path")).append("\" ").append(comando[0]);
             }
-            for (int i = 1; i < mainCommand.length; i++) {
+            for (int i = 1; i < comando.length; i++) {
                 cmd.append(" ");
-                cmd.append(mainCommand[i]);
+                cmd.append(comando[i]);
             }
             Runtime.getRuntime().addShutdownHook(new Thread() {
                 @Override

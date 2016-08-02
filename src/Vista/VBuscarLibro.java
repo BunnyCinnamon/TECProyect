@@ -5,10 +5,18 @@ import Controlador.BuscarLibroControlador;
 import Controlador.CargarInfoControlador;
 import Utils.Autocompleter;
 import Utils.CleanupDone;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 @CleanupDone
+/**
+ * Vista de Buscar Libros, búsqueda y préstamo de libros
+ *
+ */
 public class VBuscarLibro extends javax.swing.JFrame {
 
     public VBuscarLibro(SocioBean Bean) {
@@ -16,7 +24,15 @@ public class VBuscarLibro extends javax.swing.JFrame {
          * VBuscar Libro*
          */
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent ev) {
+                dispose();
+            }
+        });
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         SetBean(Bean);
         Iniciar();
         ////////////////////////////////////////////////////////////////////////
@@ -364,7 +380,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRegresarActionPerformed
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_JRegresarActionPerformed
 
     private void JAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAsignarActionPerformed
