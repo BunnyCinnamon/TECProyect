@@ -1,14 +1,11 @@
 package Controlador;
 
-import Modelo.IniciarSesionDAO;
 import Utils.CleanupDone;
 import Vista.VAdministrador;
 import Vista.VPrestamos;
 
 @CleanupDone
 public class OpcionesControladorAdmin {
-
-    public IniciarSesionDAO isd = new IniciarSesionDAO();
 
     /**
      * Abre una nueva ventana de Ver Prestamos

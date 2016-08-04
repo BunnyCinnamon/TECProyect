@@ -6,8 +6,6 @@ import Utils.CleanupDone;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,8 +16,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VAsignarSocio extends javax.swing.JFrame {
 
-    private final SocioBean SocioBean;
-    private final ArrayList ArrayList;
+    private static final AsignarSocioControlador ASIGNAR_SOCIO_CONTROLER = new AsignarSocioControlador();
+    private final SocioBean SOCIO_BEAN;
+    private final ArrayList ARRAY_LIST;
 
     public VAsignarSocio(SocioBean Bean, ArrayList Array) {
         initComponents();
@@ -27,8 +26,8 @@ public class VAsignarSocio extends javax.swing.JFrame {
         this.setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         LoadData(Bean, Array);
-        this.SocioBean = Bean;
-        this.ArrayList = Array;
+        this.SOCIO_BEAN = Bean;
+        this.ARRAY_LIST = Array;
         ////////////////////////////////////////////////////////////////////////
         JTableBLibro.setToolTipText("Libro Seleccionado Previamente");
         JTableBSocio.setToolTipText("Socio loggeado en el sistema");
@@ -39,8 +38,7 @@ public class VAsignarSocio extends javax.swing.JFrame {
     private void LoadData(SocioBean Bean, ArrayList Array) {
         DefaultTableModel model = (DefaultTableModel) JTableBLibro.getModel();
         DefaultTableModel model0 = (DefaultTableModel) JTableBSocio.getModel();
-        AsignarSocioControlador AsignarSocioControlador = new AsignarSocioControlador();
-        AsignarSocioControlador.LoadData(new Object[]{model, model0, Bean, Array});
+        ASIGNAR_SOCIO_CONTROLER.LoadData(new Object[]{model, model0, Bean, Array});
     }
 
     @SuppressWarnings("unchecked")
@@ -195,55 +193,13 @@ public class VAsignarSocio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JAceptarAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAceptarAsignarActionPerformed
-        this.setVisible(false);
-        AsignarSocioControlador AsignarSocioControlador = new AsignarSocioControlador();
-        AsignarSocioControlador.actionPerformedJAceptarPrestamo(new Object[]{SocioBean, ArrayList});
+        ASIGNAR_SOCIO_CONTROLER.actionPerformedJAceptarPrestamo(new Object[]{SOCIO_BEAN, ARRAY_LIST});
+        dispose();
     }//GEN-LAST:event_JAceptarAsignarActionPerformed
 
     private void JAbortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAbortarActionPerformed
         dispose();
     }//GEN-LAST:event_JAbortarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VAsignarSocio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VAsignarSocio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VAsignarSocio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VAsignarSocio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            }
-        });
-        try {
-            JFrame.setDefaultLookAndFeelDecorated(true);
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JAbortar;

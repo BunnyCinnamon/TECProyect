@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JList;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
  *
  */
 public class VBuscarLibro extends javax.swing.JFrame {
+
+    private static final BuscarLibroControlador BUSCAR_LIBRO_CONTROLER = new BuscarLibroControlador();
 
     public VBuscarLibro(SocioBean Bean) {
         /**
@@ -61,9 +64,8 @@ public class VBuscarLibro extends javax.swing.JFrame {
         /**
          * VRegistro de Libro*
          */
-        Autocompleter Autocompleter;
-        Cargar.CargarInfoListas(this);
-        Autocompleter = new Autocompleter(JTituloText, Cargar.CargarTexts());
+        JList[] jFieldList = new JList[]{JListAutor, JListEditorial};
+        Cargar.CargarInfoListas(jFieldList);
     }
 
     /**
@@ -175,19 +177,15 @@ public class VBuscarLibro extends javax.swing.JFrame {
         });
 
         JCheckTitulo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckTitulo.setSelected(true);
         JCheckTitulo.setText("Título");
 
         JCheckISBN.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckISBN.setSelected(true);
         JCheckISBN.setText("ISBN");
 
         JCheckAutor.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckAutor.setSelected(true);
         JCheckAutor.setText("Autor");
 
         JCheckEditorial.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckEditorial.setSelected(true);
         JCheckEditorial.setText("Editorial");
 
         JDetalles.setText("Estadisticas");
@@ -384,8 +382,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }//GEN-LAST:event_JRegresarActionPerformed
 
     private void JAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAsignarActionPerformed
-        BuscarLibroControlador BuscarLibroControlador = new BuscarLibroControlador();
-        BuscarLibroControlador.actionPerformedJPrestamo(Bean, this);
+        BUSCAR_LIBRO_CONTROLER.actionPerformedJPrestamo(Bean, JTableBLibro);
     }//GEN-LAST:event_JAsignarActionPerformed
 
     private void JDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JDetallesActionPerformed
@@ -394,17 +391,11 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }//GEN-LAST:event_JDetallesActionPerformed
 
     private void JBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarLibroActionPerformed
-        BuscarLibroControlador BuscarLibroControlador = new BuscarLibroControlador();
         DefaultTableModel model = (DefaultTableModel) JTableBLibro.getModel();
-        BuscarLibroControlador.actionPerformedJBuscarLibro(model, this);
+        Object[] jField = new Object[]{JTituloText.getText(), JISBNText.getText(), JListEditorial.getSelectedValue(), JListAutor.getSelectedValue()};
+        boolean[] jSelect = {JCheckTitulo.isSelected(), JCheckAutor.isSelected(), JCheckISBN.isSelected(), JCheckEditorial.isSelected()};
+        BUSCAR_LIBRO_CONTROLER.actionPerformedJBuscarLibro(model, jField, jSelect);
     }//GEN-LAST:event_JBuscarLibroActionPerformed
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JAsignar;

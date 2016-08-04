@@ -3,8 +3,6 @@ package Modelo;
 import Classes.Beans.SocioBean;
 import Utils.CleanupDone;
 import Utils.Connexion;
-import Vista.VAdministrador;
-import Vista.VBuscarLibro;
 import Vista.VDetalles;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +13,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 
 @CleanupDone
@@ -49,10 +49,11 @@ public class CargarInfoDAO {
      * los datos encontrados de la editorial en el List Model de la vista
      * administrador
      *
-     * @param ea //Contiene el objeto Vista
+     * @param jFieldCombo // Contiene los objetos ComboBox
+     * @param jFieldList // Contiene los objetos List
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean LoadInfoVAdmin(VAdministrador ea) {
+    public boolean LoadInfoVAdmin(JComboBox[] jFieldCombo, JList[] jFieldList) {
         DefaultListModel ModelAutor = new DefaultListModel();
         DefaultListModel ModelEditorial = new DefaultListModel();
         boolean SUCCESS = false;
@@ -60,9 +61,9 @@ public class CargarInfoDAO {
             conn = Connexion.getConnection();
             PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_LOCALIZACION + " WHERE EstatusLocalizacion='Activo' ORDER BY IdLocalizacion");
             ResultSet rs = prs.executeQuery();
-            ea.JLocalizacionLibro.addItem("Sin Selección");
+            jFieldCombo[0].addItem("Sin Selección");
             while (rs.next()) {
-                ea.JLocalizacionLibro.addItem(rs.getString(1) + ": " + rs.getString(2));
+                jFieldCombo[0].addItem(rs.getString(1) + ": " + rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -81,9 +82,9 @@ public class CargarInfoDAO {
             conn = Connexion.getConnection();
             PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AREA + " WHERE EstatusArea='Activo' ORDER BY IdArea");
             ResultSet rs = prs.executeQuery();
-            ea.JAreaLibro.addItem("Sin Selección");
+            jFieldCombo[1].addItem("Sin Selección");
             while (rs.next()) {
-                ea.JAreaLibro.addItem("" + rs.getString(1) + ": " + rs.getString(2));
+                jFieldCombo[1].addItem("" + rs.getString(1) + ": " + rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -109,7 +110,7 @@ public class CargarInfoDAO {
             rs.close();
             prs.close();
             conn.close();
-            ea.JListAutor.setModel(ModelAutor);
+            jFieldList[0].setModel(ModelAutor);
         } catch (SQLException n) {
             Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
@@ -131,7 +132,7 @@ public class CargarInfoDAO {
             rs.close();
             prs.close();
             conn.close();
-            ea.JListEditorial.setModel(ModelEditorial);
+            jFieldList[1].setModel(ModelEditorial);
             SUCCESS = true;
         } catch (SQLException n) {
             Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
@@ -151,10 +152,10 @@ public class CargarInfoDAO {
      * libro. Ingresa los datos encontrados de la editorial en el List Model de
      * la vista administrador
      *
-     * @param ea //Contiene el objeto Vista
+     * @param jFieldList // Contiene los objetos List
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean LoadInfoVSocio(VBuscarLibro ea) {
+    public boolean LoadInfoVSocio(JList[] jFieldList) {
         DefaultListModel ModelAutor = new DefaultListModel();
         DefaultListModel ModelEditorial = new DefaultListModel();
         boolean SUCCESS = false;
@@ -168,7 +169,7 @@ public class CargarInfoDAO {
             rs.close();
             prs.close();
             conn.close();
-            ea.JListAutor.setModel(ModelAutor);
+            jFieldList[0].setModel(ModelAutor);
         } catch (SQLException n) {
             Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
@@ -189,7 +190,7 @@ public class CargarInfoDAO {
             rs.close();
             prs.close();
             conn.close();
-            ea.JListEditorial.setModel(ModelEditorial);
+            jFieldList[1].setModel(ModelEditorial);
             SUCCESS = true;
         } catch (SQLException n) {
             Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);

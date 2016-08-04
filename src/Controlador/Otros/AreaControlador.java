@@ -4,8 +4,8 @@ import Classes.Beans.AreaBean;
 import Modelo.Otros.AreaDAO;
 import Utils.CleanupDone;
 import Utils.TextChecker;
-import Vista.VAdministrador;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 @CleanupDone
@@ -19,21 +19,20 @@ public class AreaControlador {
      * field, envia el bean al dao correspondiente, si es exitoso envia un
      * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo
      *
-     * @param ae // Contiene el objeto Tabla de la Vista
-     * @param va // Contiene el objeto Vista
+     * @param jModel // Contiene el objeto Tabla de la Vista
+     * @param jField // Contiene el objeto Texto
      */
-    public void actionPerformedJIngresarArea(DefaultTableModel ae, VAdministrador va) {
+    public void actionPerformedJIngresarArea(DefaultTableModel jModel, Object[] jField) {
         AreaBean Bean = new AreaBean();
-        Object[] texts = new Object[]{va.JAreaText.getText()};
-        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+        if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Area", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Bean.setSeccion(texts[0].toString());
-        if (adm.IngresarArea(ae, Bean)) {
-            JOptionPane.showMessageDialog(null, "El autor ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+        Bean.setSeccion(jField[0].toString());
+        if (adm.IngresarArea(jModel, Bean)) {
+            JOptionPane.showMessageDialog(null, "El área ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "No se agregó el autor", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se agregó el área", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -44,19 +43,19 @@ public class AreaControlador {
      * es exitoso envia un JOptionPane con texto correcto, si no es exitoso
      * envia un texto erroneo
      *
-     * @param va // Contiene el objeto Vista
+     * @param jTableRArea // Contiene el objeto de Tabla de la Vista
+     * @param jField // Contiene los objetos Text
      */
-    public void actionPerformedJModificarArea(VAdministrador va) {
+    public void actionPerformedJModificarArea(JTable jTableRArea, Object[] jField) {
         AreaBean Bean = new AreaBean();
-        int Select = va.JTableRArea.getSelectedRow();
-        Object[] texts = new Object[]{va.JAreaText.getText()};
-        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+        int Select = jTableRArea.getSelectedRow();
+        if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Area", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Bean.setIdArea(Integer.parseInt(va.JTableRArea.getValueAt(Select, 0).toString()));
-        Bean.setSeccion(texts[0].toString());
-        Bean.setEstatus(va.JComboEstatusArea.getSelectedItem().toString());
+        Bean.setIdArea(Integer.parseInt(jTableRArea.getValueAt(Select, 0).toString()));
+        Bean.setSeccion(jField[0].toString());
+        Bean.setEstatus(jField[1].toString());
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
@@ -71,15 +70,15 @@ public class AreaControlador {
      * seleccionada. Envia el id al dao correspondiente, si es exitoso envia un
      * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo
      *
-     * @param ae // Contiene el objeto Tabla de Vista
-     * @param va // Contiene el objeto Vista
+     * @param jTableRArea // Contiene el objeto Tabla de la Vista
      */
-    public void actionPerformedJEliminarArea(DefaultTableModel ae, VAdministrador va) {
-        int Select = va.JTableRArea.getSelectedRow();
+    public void actionPerformedJEliminarArea(JTable jTableRArea) {
+        DefaultTableModel ae = (DefaultTableModel) jTableRArea.getModel();
+        int Select = jTableRArea.getSelectedRow();
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? ")) {
-            if (adm.EliminarArea(Integer.parseInt(va.JTableRArea.getValueAt(Select, 0).toString()))) {
+            if (adm.EliminarArea(Integer.parseInt(jTableRArea.getValueAt(Select, 0).toString()))) {
                 ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }

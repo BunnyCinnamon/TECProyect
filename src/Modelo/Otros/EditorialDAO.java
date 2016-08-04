@@ -26,11 +26,10 @@ public class EditorialDAO {
      * estatus, en el Bean. Busca el id de la nueva Editorial y la ingresa en la
      * Tabla junto con sus datos.
      *
-     * @param t //Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene el nombre del área
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean IngresarEditorial(DefaultTableModel t, EditorialBean Bean) {
+    public boolean IngresarEditorial(EditorialBean Bean) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
@@ -57,7 +56,6 @@ public class EditorialDAO {
             if (rs.next()) {
                 Bean.setIdEditorial(rs.getInt(1));
             }
-            t.addRow(new Object[]{Bean.getIdEditorial(), Bean.getNombre(), "Activo"});
             rs.close();
             prs.close();
             conn.close();

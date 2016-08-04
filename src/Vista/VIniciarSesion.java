@@ -2,13 +2,8 @@ package Vista;
 
 import Controlador.IniciarSesionControlador;
 import Utils.CleanupDone;
+import Utils.FileReader;
 import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 
 @CleanupDone
@@ -18,9 +13,9 @@ import javax.swing.ImageIcon;
  */
 public class VIniciarSesion extends javax.swing.JFrame {
 
-    private static String usuario;
-    private static ResourceBundle propertiesLogins;
-    private String filePath;
+    private final FileReader FileReader = new FileReader();
+    private String user = "";
+    private String login = "";
 
     /**
      * Inicia los componentes de la vista y lee el archivo logins.properties.
@@ -36,9 +31,6 @@ public class VIniciarSesion extends javax.swing.JFrame {
         JUsuario.setSelected(true);
     }
 
-    private void loadTexture() {
-    }
-
     /**
      * Lee el contenido del archivo logins.properties y busca por errores en la
      * configuración. Si la vista tiene el recordar usuario activado el programa
@@ -46,63 +38,33 @@ public class VIniciarSesion extends javax.swing.JFrame {
      * archivo, manda un mensaje a la vista.
      *
      */
+    @SuppressWarnings("SuspiciousIndentAfterControlStatement")
     private void ReadFile() {
-        if (propertiesLogins == null) {
-            propertiesLogins = ResourceBundle.getBundle("logins");
-            try {
-                filePath = propertiesLogins.getString("path");
-                if (propertiesLogins.getString("login").equals("true")) {
-                    JRecordar.setSelected(true);
-                    usuario = propertiesLogins.getString("usuario");
-                    JUsuarioInicio.setText(usuario);
-                } else if (!propertiesLogins.getString("login").equals("true") && !propertiesLogins.getString("login").equals("false")) {
-                    JAnounce.setText("Error in configuration file: Cannot reach TRUE or FALSE value");
-                }
-            } catch (java.util.MissingResourceException e) {
-                System.err.println("Error in configuration file: " + e.getMessage());
-                JAnounce.setText("Error in configuration file: " + e.getMessage());
+        if (FileReader.readXML()) {
+            if (FileReader.getLogin().equals("true")) {
+                JUsuarioInicio.setText(FileReader.getUser());
+                JRecordar.setSelected(true);
             }
+        } else {
+            JAnounce.setText("Error en el archivo de Login");
         }
     }
 
     /**
-     * Encuentra el archivo y lo edita. Busca el archivo, lo carga como un
-     * archivo de propiedades y lo cierra. Después busca la ubicación de
-     * guardado, edita el usuario a "n" y login a "true" si el check box esta
-     * seleccionado, si no lo esta edita el login a "false". Finalmente inserta
-     * la fecha de modificación y un texo informativo en el archivo
+     * Encuentra el archivo y lo edita. Busca la ubicación de guardado, edita el
+     * usuario a "n" y login a "true" si el check box esta seleccionado, si no
+     * lo esta edita el login a "false".
      *
      */
     private void saveFile() {
-        FileInputStream in = null;
-        try {
-            in = new FileInputStream(filePath);
-            Properties props = new Properties();
-            props.load(in);
-            in.close();
-            FileOutputStream out = new FileOutputStream(filePath);
-            if (JRecordar.isSelected()) {
-                props.setProperty("usuario", JUsuarioInicio.getText());
-                props.setProperty("login", "true");
-            } else {
-                props.setProperty("login", "false");
-            }
-            props.store(out, "--UsuarioDefault es \"usuario\" | Booleano-\"true-o-False\" es \"login\" | PathFile es \"path\"");
-            out.close();
-        } catch (FileNotFoundException ex) {
-            System.err.println("Error in configuration file: " + ex.getMessage());
-            JAnounce.setText("Error in configuration file: " + ex.getMessage());
-        } catch (IOException ex) {
-            System.err.println("Error in configuration file: " + ex.getMessage());
-            JAnounce.setText("Error in configuration file: " + ex.getMessage());
-        } finally {
-            try {
-                in.close();
-            } catch (IOException ex) {
-                System.err.println("Error in configuration file: " + ex.getMessage());
-                JAnounce.setText("Error in configuration file: " + ex.getMessage());
-            }
+        if (JRecordar.isSelected()) {
+            user = JUsuarioInicio.getText();
+            login = "true";
+        } else {
+            user = "";
+            login = "false";
         }
+        FileReader.saveToXML(user, login);
     }
 
     @SuppressWarnings("unchecked")
@@ -268,12 +230,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
 
     private void JIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarActionPerformed
         IniciarSesionControlador IniciarSesionControlador = new IniciarSesionControlador();
-        try {
-            saveFile();
-        } catch (NullPointerException n) {
-            System.err.println("Error in: " + n.getMessage());
-        }
-
+        saveFile();
         IniciarSesionControlador.actionPerformed(this);
     }//GEN-LAST:event_JIngresarActionPerformed
 
@@ -282,14 +239,6 @@ public class VIniciarSesion extends javax.swing.JFrame {
             JContraseñaInicio.requestFocus();
         }
     }//GEN-LAST:event_JUsuarioInicioKeyPressed
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VIniciarSesion().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel JAnounce;

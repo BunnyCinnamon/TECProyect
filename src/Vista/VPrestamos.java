@@ -8,8 +8,6 @@ import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VPrestamos extends javax.swing.JFrame {
 
-    CargarInfoControlador Cargar = new CargarInfoControlador();
+    private final CargarInfoControlador CARGAR = new CargarInfoControlador();
+    private final PrestamosControlador PRESTAMOS_CONTROLER = new PrestamosControlador();
     private int Login = 0;
     private SocioBean Stat;
 
@@ -41,6 +40,15 @@ public class VPrestamos extends javax.swing.JFrame {
 
     public VPrestamos(SocioBean Bean) {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent ev) {
+                dispose();
+            }
+        });
+        this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         this.Stat = Bean;
         this.Login = 1;
         IniciarSocio(Bean, 0);
@@ -60,12 +68,12 @@ public class VPrestamos extends javax.swing.JFrame {
      */
     private void IniciarAdmin(int accion) {
         DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
-        Cargar.CargarInfoPrestamos(Area, accion);
+        CARGAR.CargarInfoPrestamos(Area, accion);
     }
 
     private void IniciarSocio(SocioBean Bean, int accion) {
         DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
-        Cargar.CargarInfoPrestamos(Area, Bean, accion);
+        CARGAR.CargarInfoPrestamos(Area, Bean, accion);
     }
 
     @SuppressWarnings("unchecked")
@@ -246,13 +254,11 @@ public class VPrestamos extends javax.swing.JFrame {
     }//GEN-LAST:event_JRegresarActionPerformed
 
     private void JDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JDetallesActionPerformed
-
+        PRESTAMOS_CONTROLER.JDetallesActionPerformed(JTablePrestamos);
     }//GEN-LAST:event_JDetallesActionPerformed
 
     private void JLiberarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JLiberarSeleccionActionPerformed
-        PrestamosControlador PrestamosControlador = new PrestamosControlador();
-        DefaultTableModel Area = (DefaultTableModel) JTablePrestamos.getModel();
-        PrestamosControlador.JLiberarSeleccionActionPerformed(Area, this);
+        PRESTAMOS_CONTROLER.JLiberarSeleccionActionPerformed(JTablePrestamos);
     }//GEN-LAST:event_JLiberarSeleccionActionPerformed
 
     private void JRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRecargarActionPerformed
@@ -266,19 +272,6 @@ public class VPrestamos extends javax.swing.JFrame {
             IniciarAdmin(accion);
         }
     }//GEN-LAST:event_JRecargarActionPerformed
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            }
-        });
-        try {
-            JFrame.setDefaultLookAndFeelDecorated(true);
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox JCheckExpirado;

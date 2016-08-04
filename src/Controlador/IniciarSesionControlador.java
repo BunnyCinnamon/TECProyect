@@ -26,7 +26,7 @@ public class IniciarSesionControlador {
             adm.setContraseña(vis.JContraseñaInicio.getText());
             if (isd.CheckPasswordAdmin(adm)) {
                 VOpcionesAdmin vo = new VOpcionesAdmin();
-                vis.setVisible(false);
+                vis.dispose();
                 vo.setLocationRelativeTo(null);
                 vo.setVisible(true);
             } else {
@@ -41,7 +41,7 @@ public class IniciarSesionControlador {
             boolean TRUE = (boolean) temp[1];
             if (TRUE) {
                 VOpcionesSocio vs = new VOpcionesSocio(ABean);
-                vis.setVisible(false);
+                vis.dispose();
                 vs.setLocationRelativeTo(null);
                 vs.setVisible(true);
             } else {

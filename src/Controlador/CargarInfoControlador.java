@@ -3,10 +3,10 @@ package Controlador;
 import Classes.Beans.SocioBean;
 import Modelo.CargarInfoDAO;
 import Utils.CleanupDone;
-import Vista.VAdministrador;
-import Vista.VBuscarLibro;
 import Vista.VDetalles;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,10 +18,11 @@ public class CargarInfoControlador {
     /**
      * Cargar Información de las Listas en Vista Administador
      *
-     * @param va // Contiene el objeto Vista
+     * @param jFieldCombo // Contiene los objetos ComboBox
+     * @param jFieldList // Contiene los objetos List
      */
-    public void CargarInfoListas(VAdministrador va) {
-        if (!Cargar.LoadInfoVAdmin(va)) {
+    public void CargarInfoListas(JComboBox[] jFieldCombo, JList[] jFieldList) {
+        if (!Cargar.LoadInfoVAdmin(jFieldCombo, jFieldList)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -29,10 +30,10 @@ public class CargarInfoControlador {
     /**
      * Cargar Información de las Listas en Vista Socio
      *
-     * @param va // Contiene el objeto Vista
+     * @param jFieldList // Contiene los objetos List
      */
-    public void CargarInfoListas(VBuscarLibro va) {
-        if (!Cargar.LoadInfoVSocio(va)) {
+    public void CargarInfoListas(JList[] jFieldList) {
+        if (!Cargar.LoadInfoVSocio(jFieldList)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }

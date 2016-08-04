@@ -4,8 +4,8 @@ import Classes.Beans.LocalizacionBean;
 import Modelo.Otros.LocalizacionDAO;
 import Utils.CleanupDone;
 import Utils.TextChecker;
-import Vista.VAdministrador;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 @CleanupDone
@@ -20,18 +20,17 @@ public class LocalizacionControlador {
      * exitoso envia un JOptionPane con texto correcto, si no es exitoso envia
      * un texto erroneo
      *
-     * @param ae // Contiene el objeto Tabla de la Vista
-     * @param va // Contiene el objeto Vista
+     * @param jModel // Contiene el objeto Tabla de la Vista
+     * @param jField // Contiene el objeto Texto
      */
-    public void actionPerformedJIngresarLocalizacion(DefaultTableModel ae, VAdministrador va) {
+    public void actionPerformedJIngresarLocalizacion(DefaultTableModel jModel, Object[] jField) {
         LocalizacionBean Bean = new LocalizacionBean();
-        Object[] texts = new Object[]{va.JAreaText.getText()};
-        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+        if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos de Localizacion", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Bean.setPasillo(texts[0].toString());
-        if (adm.IngresarLocalizacion(ae, Bean)) {
+        Bean.setPasillo(jField[0].toString());
+        if (adm.IngresarLocalizacion(jModel, Bean)) {
             JOptionPane.showMessageDialog(null, "La localización ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "No se agregó la localización", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -45,22 +44,22 @@ public class LocalizacionControlador {
      * dao correspondiente, si es exitoso envia un JOptionPane con texto
      * correcto, si no es exitoso envia un texto erroneo
      *
-     * @param va // Contiene el objeto Vista
+     * @param jTableRLocalizacion // Contiene el objeto de Tabla de la Vista
+     * @param jField // Contiene los objetos Text
      */
-    public void actionPerformedJModificarLocalizacion(VAdministrador va) {
+    public void actionPerformedJModificarLocalizacion(JTable jTableRLocalizacion, Object[] jField) {
         LocalizacionBean Bean = new LocalizacionBean();
-        int Select = va.JTableRLocalizacion.getSelectedRow();
-        Object[] texts = new Object[]{va.JAreaText.getText()};
-        if (TEXT_CHECKER.checkIfEmpty(texts)) {
+        int Select = jTableRLocalizacion.getSelectedRow();
+        if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos de Localizacion", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Bean.setIdLocalización(Integer.parseInt(va.JTableRLocalizacion.getValueAt(Select, 0).toString()));
-        Bean.setPasillo(texts[0].toString());
-        Bean.setEstatus(va.JComboEstatusLocalizacion.getSelectedItem().toString());
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
+            Bean.setIdLocalización(Integer.parseInt(jTableRLocalizacion.getValueAt(Select, 0).toString()));
+            Bean.setPasillo(jField[0].toString());
+            Bean.setEstatus(jField[1].toString());
             if (adm.ModificarLocalizacion(Bean)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             }
@@ -73,15 +72,15 @@ public class LocalizacionControlador {
      * exitoso envia un JOptionPane con texto correcto, si no es exitoso envia
      * un texto erroneo
      *
-     * @param ae // Contiene el objeto Tabla de Vista
-     * @param va // Contiene el objeto Vista
+     * @param jTableRLocalizacion // Contiene el objeto Tabla de la Vista
      */
-    public void actionPerformedJEliminarLocalizacion(DefaultTableModel ae, VAdministrador va) {
-        int Select = va.JTableRLocalizacion.getSelectedRow();
+    public void actionPerformedJEliminarLocalizacion(JTable jTableRLocalizacion) {
+        DefaultTableModel ae = (DefaultTableModel) jTableRLocalizacion.getModel();
+        int Select = jTableRLocalizacion.getSelectedRow();
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? ")) {
-            if (adm.EliminarLocalizacion(Integer.parseInt(va.JTableRLocalizacion.getValueAt(Select, 0).toString()))) {
+            if (adm.EliminarLocalizacion(Integer.parseInt(jTableRLocalizacion.getValueAt(Select, 0).toString()))) {
                 ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }

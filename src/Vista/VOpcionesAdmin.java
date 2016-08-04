@@ -4,8 +4,6 @@ import Controlador.OpcionesControladorAdmin;
 import Controlador.SalirControlador;
 import Utils.CleanupDone;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 @CleanupDone
@@ -14,6 +12,8 @@ import javax.swing.WindowConstants;
  *
  */
 public class VOpcionesAdmin extends javax.swing.JFrame {
+
+    private static final OpcionesControladorAdmin OPCIONES_CONTROLER = new OpcionesControladorAdmin();
 
     public VOpcionesAdmin() {
         initComponents();
@@ -159,13 +159,11 @@ public class VOpcionesAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JPrestamosOpenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPrestamosOpenMouseClicked
-        OpcionesControladorAdmin OpcionesControlador = new OpcionesControladorAdmin();
-        OpcionesControlador.actionPerformedJPrestamosOpen();
+        OPCIONES_CONTROLER.actionPerformedJPrestamosOpen();
     }//GEN-LAST:event_JPrestamosOpenMouseClicked
 
     private void JBibliotecaOpenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBibliotecaOpenMouseClicked
-        OpcionesControladorAdmin OpcionesControlador = new OpcionesControladorAdmin();
-        OpcionesControlador.actionPerformedJBibliotecaOpen();
+        OPCIONES_CONTROLER.actionPerformedJBibliotecaOpen();
     }//GEN-LAST:event_JBibliotecaOpenMouseClicked
 
     private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
@@ -173,20 +171,6 @@ public class VOpcionesAdmin extends javax.swing.JFrame {
         SalirControlador.actionPerformed();
         this.setVisible(false);
     }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VOpcionesAdmin().setVisible(true);
-            }
-        });
-        try {
-            JFrame.setDefaultLookAndFeelDecorated(true);
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel JBibliotecaOpen;
