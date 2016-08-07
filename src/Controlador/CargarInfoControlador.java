@@ -10,119 +10,150 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Descripción: Controlador para Cargador de textos
+ *
+ */
 @CleanupDone
 public class CargarInfoControlador {
 
-    public CargarInfoDAO Cargar = new CargarInfoDAO();
+    private static final CargarInfoDAO CARGAR = new CargarInfoDAO();
 
     /**
-     * Cargar Información de las Listas en Vista Administador
+     * Uso: CARGAR Información de las Listas en Vista Administador.
+     *
+     * Descripción: Envia los objetos para ser llenados con información.
+     *
+     * Variables:
      *
      * @param jFieldCombo // Contiene los objetos ComboBox
      * @param jFieldList // Contiene los objetos List
      */
     public void CargarInfoListas(JComboBox[] jFieldCombo, JList[] jFieldList) {
-        if (!Cargar.LoadInfoVAdmin(jFieldCombo, jFieldList)) {
+        if (!CARGAR.LoadInfoVAdmin(jFieldCombo, jFieldList)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Cargar Información de las Listas en Vista Socio
+     * Uso: CARGAR Información de las Listas en Vista Socio.
+     *
+     * Descripción: Envia los objetos para ser llenados con información.
+     *
+     * Variables:
      *
      * @param jFieldList // Contiene los objetos List
      */
     public void CargarInfoListas(JList[] jFieldList) {
-        if (!Cargar.LoadInfoVSocio(jFieldList)) {
+        if (!CARGAR.LoadInfoVSocio(jFieldList)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Cargar Información de Prestamos en Vista Administrador. Si ocurre un
-     * error se manda un Texto en JOptionPane
+     * Uso: CARGAR Información de Prestamos en Vista Administrador.
+     *
+     * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
+     *
+     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param accion // Contiene el tipo de acción
      */
     public void CargarInfoPrestamos(DefaultTableModel t, int accion) {
-        if (!Cargar.LoadPrestamos(t, accion)) {
+        if (!CARGAR.LoadPrestamos(t, accion)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Cargar Información de Prestamos en Vista Administrador. Si ocurre un
-     * error se manda un Texto en JOptionPane
+     * Uso: CARGAR Información de Prestamos en Vista Administrador.
+     *
+     * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
+     *
+     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Socio
      * @param accion // Contiene el tipo de acción
      */
     public void CargarInfoPrestamos(DefaultTableModel t, SocioBean Bean, int accion) {
-        if (!Cargar.LoadPrestamos(t, Bean, accion)) {
+        if (!CARGAR.LoadPrestamos(t, Bean, accion)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Cargar Información de Estadisticas. Si ocurre un error se manda un Texto
-     * en JOptionPane
+     * Uso: CARGAR Información de Estadisticas.
+     *
+     * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
      *
      */
     public void CargarInfoEstadisticas() {
         VDetalles Detalles = new VDetalles();
         Detalles.setLocationRelativeTo(null);
         Detalles.setVisible(true);
-        if (!Cargar.LoadDetalles(Detalles)) {
+        if (!CARGAR.LoadDetalles(Detalles)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Información!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Buscar Información de Localizacion. Si ocurre un error se manda un Texto
-     * en JOptionPane
+     * Uso: Buscar Información de Localizacion.
+     *
+     * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
+     *
+     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      */
     public void CargarLocalizacion(DefaultTableModel t) {
-        if (!Cargar.LoadLocalizacion(t)) {
+        if (!CARGAR.LoadLocalizacion(t)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Localización!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Buscar Información de Area. Si ocurre un error se manda un Texto en
-     * JOptionPane
+     * Uso: Buscar Información de Area.
+     *
+     * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
+     *
+     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      */
     public void CargarArea(DefaultTableModel t) {
-        if (!Cargar.LoadArea(t)) {
+        if (!CARGAR.LoadArea(t)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Área!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Buscar Información de Editorial. Si ocurre un error se manda un Texto en
-     * JOptionPane
+     * Uso: Buscar Información de Editorial.
+     *
+     * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
+     *
+     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      */
     public void CargarEditorial(DefaultTableModel t) {
-        if (!Cargar.LoadEditorial(t)) {
+        if (!CARGAR.LoadEditorial(t)) {
             JOptionPane.showMessageDialog(null, "Error al cargar Editorial!", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Buscar Texto de Libros. Si ocurre un error se manda un Texto en
-     * JOptionPane
+     * Uso: Buscar Texto de Libros.
+     *
+     * Descripción: Busca información y la ingresa en un arraylist.
+     *
+     * Variables:
      *
      * @return // Regresa los Textos encontrados
      */
     public ArrayList<String> CargarTexts() {
-        ArrayList array = Cargar.LoadTexts();
+        ArrayList array = CARGAR.LoadTexts();
         return array;
     }
 }

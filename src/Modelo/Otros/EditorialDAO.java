@@ -1,6 +1,7 @@
 package Modelo.Otros;
 
 import Classes.Beans.EditorialBean;
+import Utils.CleanupDone;
 import Utils.Connexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 
+/**
+ * Descripción: MYQSL para Editorial
+ *
+ */
+@CleanupDone
 public class EditorialDAO {
 
     Connection conn;
@@ -22,9 +27,13 @@ public class EditorialDAO {
     private final String SQL_MODIFY_REMOVE_EDITORIAL = "UPDATE Editorial SET";
 
     /**
-     * Registra una Editorial en la base de datos con los datos: id, nombre y
-     * estatus, en el Bean. Busca el id de la nueva Editorial y la ingresa en la
-     * Tabla junto con sus datos.
+     * Uso: Registra una Editorial en la base de datos con los datos: id, nombre
+     * y estatus, en el Bean.
+     *
+     * Descripción: Busca el id de la nueva Editorial y la ingresa en la Tabla
+     * junto con sus datos.
+     *
+     * Variables:
      *
      * @param Bean // Contiene el nombre del área
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -72,8 +81,10 @@ public class EditorialDAO {
     }
 
     /**
-     * Modifica una Editorial con id específico en la base de datos con los
-     * datos: nombre y estatus, en el Bean.
+     * Descripción: Modifica una Editorial con id específico en la base de datos
+     * con los datos: nombre y estatus, en el Bean.
+     *
+     * Variables:
      *
      * @param Bean // Contiene el id, nombre y estatus de la Editorial
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -102,7 +113,9 @@ public class EditorialDAO {
     }
 
     /**
-     * Elimina una Editorial con id específico en la base de datos.
+     * Descripción: Elimina una Editorial con id específico en la base de datos.
+     *
+     * Variables:
      *
      * @param id // Contiene el id de la Editorial
      * @return // Regresa true si es exitosa y false si ocurre un error

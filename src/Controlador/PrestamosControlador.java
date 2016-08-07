@@ -6,13 +6,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Descripción: Controlador para Prestamos
+ *
+ */
 @CleanupDone
 public class PrestamosControlador {
 
-    private final PrestamosDAO adm = new PrestamosDAO();
+    private static final PrestamosDAO ADM = new PrestamosDAO();
 
     /**
-     * Elimina el Préstamo de la base de datos
+     * Descripción: Elimina el Préstamo de la base de datos.
+     *
+     * Variables:
      *
      * @param jTablePrestamos //Contiene el objeto Tabla de la Vista
      */
@@ -23,7 +29,7 @@ public class PrestamosControlador {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro por completo?")) {
             int id = Integer.parseInt(jTablePrestamos.getValueAt(Select, 0).toString());
-            if (adm.EliminarPrestamo(id)) {
+            if (ADM.EliminarPrestamo(id)) {
                 Area.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }
@@ -31,7 +37,9 @@ public class PrestamosControlador {
     }
 
     /**
-     * Abre una nueva ventana de Detalles
+     * Descripción: Abre una nueva ventana de Detalles.
+     *
+     * Variables:
      *
      * @param jTablePrestamos //Contiene el objeto Tabla de la Vista
      */

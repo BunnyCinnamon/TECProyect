@@ -11,33 +11,44 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Descripción: MYQSL para IniciarSesión
+ *
+ */
 @CleanupDone
 public class IniciarSesionDAO {
 
     Connection conn;
     ResultSet rs;
 
-    private final String SQL_CHECK_PASSWORD_ADMIN = "SELECT IdAdministrador FROM Administrador WHERE Usuario=? AND Contraseña=?";
+    private final String SQL_CHECK_PASSWORD_ADMIN = "SELECT IdAdministrador, Nombre, ApellidoP, ApellidoM FROM Administrador WHERE Usuario=? AND Contraseña=?";
     private final String SQL_CHECK_PASSWORD_SOCIO = "SELECT * FROM Socio WHERE Usuario=? AND Contraseña=?";
 
     /**
-     * Busca un Administrador en la base de datos con los datos: usuario y
-     * contraseña, en el Bean. Consigue el id del Administrador y lo almacena en
-     * el Bean.
+     * Uso: Busca un Administrador en la base de datos con los datos: usuario y
+     * contraseña, en el Bean.
+     *
+     * Descripción: Consigue el id del Administrador y lo almacena en el Bean.
+     *
+     * Variables:
      *
      * @param adm // Contiene el usuario y contraseña del Administrador
+     * @param secretPass // Contraseña segura del Admin
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean CheckPasswordAdmin(AdministradorBean adm) {
+    public boolean CheckPasswordAdmin(AdministradorBean adm, char[] secretPass) {
         boolean CORRECT = false;
         try {
             conn = Connexion.getConnection();
             PreparedStatement prs = conn.prepareStatement(SQL_CHECK_PASSWORD_ADMIN);
             prs.setString(1, adm.getUsuario());
-            prs.setString(2, adm.getContraseña());
+            prs.setString(2, new String(secretPass));
             rs = prs.executeQuery();
             if (rs.next()) {
                 adm.setidAdministrador(rs.getInt(1));
+                adm.setNombre(rs.getString(2));
+                adm.setApellidoP(rs.getString(3));
+                adm.setApellidoM(rs.getString(4));
                 CORRECT = true;
             }
             rs.close();
@@ -56,20 +67,25 @@ public class IniciarSesionDAO {
     }
 
     /**
-     * Busca un Socio en la base de datos con los datos: usuario y contraseña,
-     * en el Bean. Consigue todos los datos del Socio y lo almacena en el Bean.
+     * Uso: Busca un Socio en la base de datos con los datos: usuario y
+     * contraseña, en el Bean.
+     *
+     * Descripción: Consigue todos los datos del Socio y lo almacena en el Bean.
+     *
+     * Variables:
      *
      * @param adm // Contiene el usuario y contraseña del Socio
+     * @param secretPass // Contraseña segura del Socio
      * @return // Regresa un Objeto con el Bean del Socio junto con true si es
      * exitosa y false si ocurre un error
      */
-    public Object[] CheckPasswordSocio(SocioBean adm) {
+    public Object[] CheckPasswordSocio(SocioBean adm, char[] secretPass) {
         boolean CORRECT = false;
         try {
             conn = Connexion.getConnection();
             PreparedStatement prs = conn.prepareStatement(SQL_CHECK_PASSWORD_SOCIO);
             prs.setString(1, adm.getUsuario());
-            prs.setString(2, adm.getContraseña());
+            prs.setString(2, new String(secretPass));
             rs = prs.executeQuery();
             if (rs.next()) {
                 adm.setIdUsuario(rs.getInt(1));

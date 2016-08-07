@@ -7,11 +7,11 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-@CleanupDone
 /**
- * Runnable de Cierre de Sesión
+ * Descripción: Runnable de Cierre de Sesión
  *
  */
+@CleanupDone
 public class RunnableCode implements Runnable {
 
     @Override
@@ -21,7 +21,9 @@ public class RunnableCode implements Runnable {
     }
 
     /**
-     * Muestra JOptionPane por segundos, luego lo elimina
+     * Descripción: Muestra JOptionPane por segundos, luego lo elimina
+     *
+     * Variables:
      *
      * @param n // Tiempo de vida del mensaje
      */

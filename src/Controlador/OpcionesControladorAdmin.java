@@ -1,14 +1,20 @@
 package Controlador;
 
+import Classes.Beans.AdministradorBean;
 import Utils.CleanupDone;
 import Vista.VAdministrador;
+import Vista.VBuscarLibroAdmin;
 import Vista.VPrestamos;
 
+/**
+ * Descripción: Controlador para Administrador
+ *
+ */
 @CleanupDone
 public class OpcionesControladorAdmin {
 
     /**
-     * Abre una nueva ventana de Ver Prestamos
+     * Descripción: Abre una nueva ventana de Ver Prestamos.
      *
      */
     public void actionPerformedJPrestamosOpen() {
@@ -18,7 +24,20 @@ public class OpcionesControladorAdmin {
     }
 
     /**
-     * Abre una nueva ventana de Administrador
+     * Descripción: Abre una nueva ventana de Buscar Libros.
+     *
+     * Variables:
+     *
+     * @param Bean // Contiene el Bean Socio
+     */
+    public void actionPerformedJLibrosOpen(AdministradorBean Bean) {
+        VBuscarLibroAdmin vbl = new VBuscarLibroAdmin(Bean);
+        vbl.setLocationRelativeTo(null);
+        vbl.setVisible(true);
+    }
+
+    /**
+     * Descripción: Abre una nueva ventana de Administrador.
      *
      */
     public void actionPerformedJBibliotecaOpen() {

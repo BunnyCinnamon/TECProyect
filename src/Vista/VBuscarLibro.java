@@ -5,35 +5,39 @@ import Controlador.BuscarLibroControlador;
 import Controlador.CargarInfoControlador;
 import Utils.Autocompleter;
 import Utils.CleanupDone;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
-import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-@CleanupDone
 /**
- * Vista de Buscar Libros, búsqueda y préstamo de libros
+ * Descripción: Vista de BuscarLibro
  *
  */
+@CleanupDone
 public class VBuscarLibro extends javax.swing.JFrame {
 
     private static final BuscarLibroControlador BUSCAR_LIBRO_CONTROLER = new BuscarLibroControlador();
 
+    /**
+     * Descripción: Inicializa la Vista.
+     *
+     * Variables:
+     *
+     * @param Bean // Contiene el Bean de Socio
+     */
     public VBuscarLibro(SocioBean Bean) {
         /**
          * VBuscar Libro*
          */
         initComponents();
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent ev) {
-                dispose();
-            }
-        });
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        addWindowListener(new WindowAdapter() {
+//            @Override
+//            public void windowClosing(WindowEvent ev) {
+//                dispose();
+//            }
+//        });
         this.setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         SetBean(Bean);
@@ -47,9 +51,11 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }
 
     /**
-     * Iniciar Página. Crea un objeto Controlador, remueve cualquier texto
+     * Uso: Iniciar Página.
+     *
+     * Descripción: Crea un objeto Controlador, remueve cualquier texto
      * remanente en combo box y list, Carga la información a los mismos. Un
-     * try-catch que llama al método de autocompletar
+     * try-catch que llama al método de autocompletar.
      *
      */
     private void Iniciar() {
@@ -83,7 +89,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
     /**
      * Bean de Socio*
      */
-    private static SocioBean Bean;
+    private SocioBean Bean;
 
     private void SetBean(SocioBean Bean) {
         this.Bean = Bean;
@@ -119,9 +125,9 @@ public class VBuscarLibro extends javax.swing.JFrame {
         JCheckEditorial = new javax.swing.JCheckBox();
         JDetalles = new javax.swing.JButton();
         JInternalEditar1 = new javax.swing.JInternalFrame();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         JAsignar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         JRegresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -137,7 +143,21 @@ public class VBuscarLibro extends javax.swing.JFrame {
             new String [] {
                 "Id", "ISBN", "Titulo", "N° Pag", "Estado", "Autor", "Editorial", "Localización", "Área", "Existencias"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        JTableBLibro.getTableHeader().setReorderingAllowed(false);
+        JTableBLibro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTableBLibroMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTableBLibro);
 
         jRegistrarLibro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
@@ -239,17 +259,17 @@ public class VBuscarLibro extends javax.swing.JFrame {
 
         JInternalEditar1.setVisible(true);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467285836_OFFice-33.png"))); // NOI18N
-
         jLabel5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel5.setText("Selección:");
 
-        JAsignar.setText("Asignar a Socio");
+        JAsignar.setText("Detalles");
         JAsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JAsignarActionPerformed(evt);
             }
         });
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/IconLibros.png"))); // NOI18N
 
         javax.swing.GroupLayout JInternalEditar1Layout = new javax.swing.GroupLayout(JInternalEditar1.getContentPane());
         JInternalEditar1.getContentPane().setLayout(JInternalEditar1Layout);
@@ -260,20 +280,20 @@ public class VBuscarLibro extends javax.swing.JFrame {
                 .addGroup(JInternalEditar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(JAsignar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jLabel6)
                 .addContainerGap())
         );
         JInternalEditar1Layout.setVerticalGroup(
             JInternalEditar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JInternalEditar1Layout.createSequentialGroup()
                 .addGroup(JInternalEditar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addGroup(JInternalEditar1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JAsignar)))
+                        .addComponent(JAsignar))
+                    .addComponent(jLabel6))
                 .addGap(0, 4, Short.MAX_VALUE))
         );
 
@@ -329,7 +349,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
                                     .addComponent(JTituloText, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(JISBNText, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(17, 17, 17)
-                        .addComponent(JTabbedBusquedaLibros, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)))
+                        .addComponent(JTabbedBusquedaLibros)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -382,7 +402,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }//GEN-LAST:event_JRegresarActionPerformed
 
     private void JAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAsignarActionPerformed
-        BUSCAR_LIBRO_CONTROLER.actionPerformedJPrestamo(Bean, JTableBLibro);
+        
     }//GEN-LAST:event_JAsignarActionPerformed
 
     private void JDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JDetallesActionPerformed
@@ -396,6 +416,13 @@ public class VBuscarLibro extends javax.swing.JFrame {
         boolean[] jSelect = {JCheckTitulo.isSelected(), JCheckAutor.isSelected(), JCheckISBN.isSelected(), JCheckEditorial.isSelected()};
         BUSCAR_LIBRO_CONTROLER.actionPerformedJBuscarLibro(model, jField, jSelect);
     }//GEN-LAST:event_JBuscarLibroActionPerformed
+
+    private void JTableBLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableBLibroMouseClicked
+        if (evt.getClickCount() == 2) {
+            Object[] jField = new Object[]{JISBNText, JTituloText, null, null, JListAutor, JListEditorial};
+            BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableBLibro, jField, 3);
+        }
+    }//GEN-LAST:event_JTableBLibroMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JAsignar;
@@ -419,8 +446,8 @@ public class VBuscarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jIconLeeyAprende;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel jNPag;
     private javax.swing.JLabel jRegistrarLibro;

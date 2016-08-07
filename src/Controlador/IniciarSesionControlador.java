@@ -8,14 +8,22 @@ import Vista.VOpcionesAdmin;
 import Vista.VIniciarSesion;
 import Vista.VOpcionesSocio;
 
+/**
+ * Descripción: Controlador para Iniciar Sesión
+ *
+ */
 @CleanupDone
 public class IniciarSesionControlador {
 
-    public IniciarSesionDAO isd = new IniciarSesionDAO();
+    private static final IniciarSesionDAO ISD = new IniciarSesionDAO();
 
     /**
-     * Abre una nueva ventana de Opciones. Si el checkbox está activado ingresa
-     * como administrador, si no lo está ingresa como socio.
+     * Uso: Abre una nueva ventana de Opciones.
+     *
+     * Descripción: Si el checkbox está activado ingresa como administrador, si
+     * no lo está ingresa como socio.
+     *
+     * Variables:
      *
      * @param vis // Contiene el objeto Vista
      */
@@ -23,9 +31,9 @@ public class IniciarSesionControlador {
         if (vis.JUsuario.isSelected()) {
             AdministradorBean adm = new AdministradorBean();
             adm.setUsuario(vis.JUsuarioInicio.getText());
-            adm.setContraseña(vis.JContraseñaInicio.getText());
-            if (isd.CheckPasswordAdmin(adm)) {
-                VOpcionesAdmin vo = new VOpcionesAdmin();
+            char[] secretPass = vis.JContraseñaInicio.getText().toCharArray();
+            if (ISD.CheckPasswordAdmin(adm, secretPass)) {
+                VOpcionesAdmin vo = new VOpcionesAdmin(adm);
                 vis.dispose();
                 vo.setLocationRelativeTo(null);
                 vo.setVisible(true);
@@ -35,8 +43,8 @@ public class IniciarSesionControlador {
         } else {
             SocioBean s = new SocioBean();
             s.setUsuario(vis.JUsuarioInicio.getText());
-            s.setContraseña(vis.JContraseñaInicio.getText());
-            Object[] temp = isd.CheckPasswordSocio(s);
+            char[] secretPass = vis.JContraseñaInicio.getText().toCharArray();
+            Object[] temp = ISD.CheckPasswordSocio(s, secretPass);
             SocioBean ABean = (SocioBean) temp[0];
             boolean TRUE = (boolean) temp[1];
             if (TRUE) {

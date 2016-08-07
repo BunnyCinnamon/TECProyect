@@ -4,17 +4,20 @@ import com.mxrck.autocompleter.TextAutoCompleter;
 import java.util.ArrayList;
 import javax.swing.JTextField;
 
-@CleanupDone
 /**
- * Autocompletar Textos con la información
- *
+ * Descripción: Autocompletar Textos con la información encontrada
+ * 
  */
+@CleanupDone
 public class Autocompleter {
 
     TextAutoCompleter autocompleter;
 
     /**
-     * Muestra JOptionPane por segundos
+     * Descripción: Añade los Textos encontrados y crea un nuevo Autocompleter
+     * de un TextField.
+     *
+     * Variables:
      *
      * @param r // Text field para autocompletado
      * @param array // Contiene el objeto de Arrays
@@ -25,7 +28,9 @@ public class Autocompleter {
     }
 
     /**
-     * Añade los textos al autocompletado
+     * Descripción: Añade los textos al autocompletado del TextField
+     *
+     * Variables:
      *
      * @param array // Contiene el objeto de Arrays
      */

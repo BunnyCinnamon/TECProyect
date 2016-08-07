@@ -42,6 +42,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="JContraseñaInicio" min="-2" pref="199" max="-2" attributes="0"/>
                           <Component id="JUsuarioInicio" min="-2" pref="199" max="-2" attributes="0"/>
+                          <Component id="JIngresar" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Component id="JSesionIcon" min="-2" max="-2" attributes="0"/>
@@ -54,10 +55,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="JUsuario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="JRecordar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JIngresar" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="JRecordar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -76,23 +74,23 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="JUsuarioInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="JContraseñaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="JSesionIcon" max="32767" attributes="0"/>
+                  <Component id="JSesionIcon" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="JIngresar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="JRecordar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="JUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -224,7 +222,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jIconSession" alignment="0" max="32767" attributes="0"/>
+              <Component id="jIconSession" alignment="0" pref="66" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

@@ -3,13 +3,20 @@ package Controlador;
 import Classes.Beans.SocioBean;
 import Utils.CleanupDone;
 import Vista.VBuscarLibro;
+import Vista.VBuscarLibroAdmin;
 import Vista.VPrestamos;
 
+/**
+ * Descripción: Controlador para Socio
+ *
+ */
 @CleanupDone
 public class OpcionesControladorSocio {
 
     /**
-     * Abre una nueva ventana de Buscar Libros
+     * Descripción: Abre una nueva ventana de Buscar Libros.
+     *
+     * Variables:
      *
      * @param Bean // Contiene el Bean Socio
      */
@@ -20,7 +27,9 @@ public class OpcionesControladorSocio {
     }
 
     /**
-     * Abre una nueva ventana de Ver Prestamos
+     * Descripción: Abre una nueva ventana de Ver Prestamos.
+     *
+     * Variables:
      *
      * @param Bean // Contiene el Bean Socio
      */

@@ -15,6 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Descripción: MYQSL para Administrador
+ *
+ */
 @CleanupDone
 public class AdministradorDAO {
 
@@ -28,15 +32,21 @@ public class AdministradorDAO {
     private final String SQL_ADD_LIBRO_TO_EJEMPLAR = "INSERT INTO Ejemplar values(null,?,?)";
     ////////////////////////////////////////////////////////////////////////////
     private final String SQL_MODIFY_BOOKS = "UPDATE Libro SET Isbn=?, Titulo=?, Paginas=?, Estatus=?, Editorial=?, Area=?, Localizacion=? WHERE IdLibro=?";
+    private final String SQL_MODIFY_ESCRIBE = "UPDATE Escribe SET Autor=? WHERE Libro=?";
     private final String SQL_REMOVE_BOOKS = "UPDATE Libro SET Estatus='Inactivo' WHERE IdLibro=?";
-    private final String SQL_SEARCH_BOOKS = "SELECT DISTINCT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo,Existencias FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F,Ejemplar G WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND G.Libro=IdLibro AND F.Libro=A.IdLibro";
+    private final String SQL_SEARCH_BOOKS = "SELECT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo,Existencias FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F,Ejemplar G WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND G.Libro=IdLibro AND F.Libro=A.IdLibro";
+    private static final String ORDER = " ORDER BY IdLibro";
 
     /**
-     * Registra un Libro en la base de datos con los datos: id, isbn, titulo,
-     * paginas, estatus, prestamos, editorial, area, localizacion, en el Bean.
-     * Ingresa el libro con los datos del bean y busca el id del nuevo libro.
-     * Relaciona el nuevo libro con un autor. Relaciona el nuevo libro con un
-     * ejemplar nuevo.
+     * Uso: Registra un Libro en la base de datos con los datos: id, isbn,
+     * titulo, paginas, estatus, prestamos, editorial, area, localizacion, en el
+     * Bean.
+     *
+     * Descripción: Ingresa el libro con los datos del bean y busca el id del
+     * nuevo libro. Relaciona el nuevo libro con un autor. Relaciona el nuevo
+     * libro con un ejemplar nuevo.
+     *
+     * Variables:
      *
      * @param Bean // Contiene los datos del Libro
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -97,7 +107,7 @@ public class AdministradorDAO {
                 try {
                     conn = Connexion.getConnection();
                     PreparedStatement prs = conn.prepareStatement(SQL_ADD_LIBRO_TO_EJEMPLAR);
-                    prs.setInt(1, Bean.getNumeroPrestamos());
+                    prs.setInt(1, Bean.getNumero());
                     prs.setInt(2, Bean.getIdLibro());
                     SUCCESSM = prs.executeUpdate() == 1;
                     prs.close();
@@ -120,9 +130,11 @@ public class AdministradorDAO {
     }
 
     /**
-     * Modifica un Libro con id específico en la base de datos con los datos:
-     * isbn, titulo, paginas, estatus, prestamos, editorial, area, localizacion,
-     * en el Bean.
+     * Descripción: Modifica un Libro con id específico en la base de datos con
+     * los datos: isbn, titulo, paginas, estatus, prestamos, editorial, area,
+     * localizacion, en el Bean.
+     *
+     * Variables:
      *
      * @param Bean // Contiene los datos del Libro
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -152,11 +164,32 @@ public class AdministradorDAO {
                 Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
             }
         }
+        if (SUCCESS) {
+            try {
+                conn = Connexion.getConnection();
+                PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_ESCRIBE);
+                prs.setInt(1, Bean.getAutor());
+                prs.setInt(2, Bean.getIdLibro());
+                SUCCESS = prs.executeUpdate() == 1;
+                prs.close();
+                conn.close();
+            } catch (SQLException n) {
+                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", n);
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException m) {
+                    Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                }
+            }
+        }
         return SUCCESS;
     }
 
     /**
-     * Elimina un Libro con id específico en la base de datos
+     * Descripción: Elimina un Libro con id específico en la base de datos.
+     *
+     * Variables:
      *
      * @param id // Contiene el id del Libro
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -183,11 +216,15 @@ public class AdministradorDAO {
     }
 
     /**
-     * Busca todos Libros con los datos de titulo, isbn, autor, editorial,
-     * accion en la base de datos. Con la acción, busca los libros que tienen
-     * los datos similares. Ingresa los datos encontrados con los datos del
-     * libro en un array list. Ingresa el array list en la tabla, elimina los
-     * datos del array list y repite hasta encontrar todos los datos
+     * Uso: Busca todos Libros con los datos de titulo, isbn, autor, editorial,
+     * accion en la base de datos.
+     *
+     * Descripción: Con la acción, busca los libros que tienen los datos
+     * similares. Ingresa los datos encontrados con los datos del libro en un
+     * array list. Ingresa el array list en la tabla, elimina los datos del
+     * array list y repite hasta encontrar todos los datos.
+     *
+     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Libro
@@ -203,78 +240,78 @@ public class AdministradorDAO {
             PreparedStatement prs = null;
             switch (action) {
                 case 0: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS);
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + ORDER);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 1: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Titulo like ? " + ORDER);
                     prs.setString(1, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 2: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ?" + ORDER);
                     prs.setString(1, '%' + Bean.getIsbn() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 3: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=?" + ORDER);
                     prs.setString(1, Autor);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 4: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=?" + ORDER);
                     prs.setString(1, Editorial);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 5: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ?" + ORDER);
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 6: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ?" + ORDER);
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 7: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND A.Isbn like ? AND A.Titulo like ?" + ORDER);
                     prs.setString(1, '%' + Bean.getIsbn() + "%");
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 8: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Isbn like ?" + ORDER);
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getIsbn() + "%");
                     rs = prs.executeQuery();
                     break;
                 }
                 case 9: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Isbn like? " + ORDER);
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getIsbn() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 10: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND E.NombreAutor=?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND E.NombreAutor=?" + ORDER);
                     prs.setString(1, Editorial);
                     prs.setString(2, Autor);
                     rs = prs.executeQuery();
                     break;
                 }
                 case 11: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND A.Titulo like ? AND A.Isbn like ?" + ORDER);
                     prs.setString(1, Autor);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -282,7 +319,7 @@ public class AdministradorDAO {
                     break;
                 }
                 case 12: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ?" + ORDER);
                     prs.setString(1, Editorial);
                     prs.setString(2, '%' + Bean.getTitulo() + '%');
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -290,7 +327,7 @@ public class AdministradorDAO {
                     break;
                 }
                 case 13: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Isbn like ?" + ORDER);
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getIsbn() + '%');
@@ -298,7 +335,7 @@ public class AdministradorDAO {
                     break;
                 }
                 case 14: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ?" + ORDER);
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getTitulo() + '%');
@@ -306,7 +343,7 @@ public class AdministradorDAO {
                     break;
                 }
                 case 15: {
-                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ?");
+                    prs = conn.prepareStatement(SQL_SEARCH_BOOKS + " AND E.NombreAutor=? AND B.NombreEditorial=? AND A.Titulo like ? AND A.Isbn like ?" + ORDER);
                     prs.setString(1, Autor);
                     prs.setString(2, Editorial);
                     prs.setString(3, '%' + Bean.getTitulo() + '%');
@@ -345,18 +382,22 @@ public class AdministradorDAO {
     private final String SQL_ADD_SOCIO = "INSERT INTO Socio values(null,?,?,?,?,?,?,?,?,?,'Activo',?,0)";
     private final String SQL_MODIFY_SOCIO = "UPDATE Socio SET Nombre=?, ApellidoP=?, ApellidoM=?, Estado=?, Municipio=?, Calle=?, Numero=?, Telefono=?, Usuario=?, Estatus=?, Contraseña=? WHERE IdSocio=?";
     private final String SQL_DELETE_SOCIO = "UPDATE Socio SET Estatus='Inactivo' WHERE IdSocio=?";
-    private final String SQL_SEARCH_SOCIO = "SELECT IdSocio,Nombre,ApellidoP,ApellidoM,CONCAT(Estado,Municipio,Calle,Numero),Telefono,Estatus,Prestamos,Usuario FROM Socio";
+    private final String SQL_SEARCH_SOCIO = "SELECT IdSocio,Nombre,ApellidoP,ApellidoM,CONCAT(Estado,' ',Municipio,' ',Calle,' ',Numero),Telefono,Estatus,Prestamos,Usuario FROM Socio";
     private final String ORDER_SOCIO = " ORDER BY Prestamos DESC";
-    
+
     /**
-     * Registra un Socio en la base de datos con los datos: id, nombre, apellido
-     * paterno, apellido materno, estado, municipio, calle, numero, telefono,
-     * usuario, estatus, contraseña, en el Bean. Busca el id del nuevo socio.
+     * Descripción: Registra un Socio en la base de datos con los datos: id,
+     * nombre, apellido paterno, apellido materno, estado, municipio, calle,
+     * numero, telefono, usuario, estatus, contraseña, en el Bean. Busca el id
+     * del nuevo socio.
+     *
+     * Variables:
      *
      * @param Bean // Contiene los datos del socio
+     * @param secretPass // Contraseña segura del Socio
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean IngresarSocio(SocioBean Bean) {
+    public boolean IngresarSocio(SocioBean Bean, char[] secretPass) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
@@ -370,7 +411,7 @@ public class AdministradorDAO {
             prs.setInt(7, Bean.getNumero());
             prs.setInt(8, Bean.getTelefono());
             prs.setString(9, Bean.getUsuario());
-            prs.setString(10, Bean.getContraseña());
+            prs.setString(10, new String(secretPass));
             SUCCESS = prs.executeUpdate() == 1;
 
             ResultSet rs = prs.getGeneratedKeys();
@@ -392,9 +433,12 @@ public class AdministradorDAO {
     }
 
     /**
-     * Modifica un Socio con id específico en la base de datos con los datos:
-     * id, nombre, apellido paterno, apellido materno, estado, municipio, calle,
-     * numero, telefono, usuario, estatus, contraseña, en el Bean.
+     * Descripción: Modifica un Socio con id específico en la base de datos con
+     * los datos: id, nombre, apellido paterno, apellido materno, estado,
+     * municipio, calle, numero, telefono, usuario, estatus, contraseña, en el
+     * Bean.
+     *
+     * Variables:
      *
      * @param Bean // Contiene los datos del socio
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -432,7 +476,9 @@ public class AdministradorDAO {
     }
 
     /**
-     * Elimina un Socio con id específico en la base de datos.
+     * Descripción: Elimina un Socio con id específico en la base de datos.
+     *
+     * Variables:
      *
      * @param id // Contiene el id del socio
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -459,11 +505,15 @@ public class AdministradorDAO {
     }
 
     /**
-     * Busca todos Socios con los datos de nombre, apellido paterno, apellido
-     * materno, usuario, accion en la base de datos. Con la acción, busca los
-     * socios que tienen los datos similares. Ingresa los datos encontrados con
-     * los datos del socio en un array list. Ingresa el array list en la tabla,
-     * elimina los datos del array list y repite hasta encontrar todos los datos
+     * Uso: Busca todos Socios con los datos de nombre, apellido paterno,
+     * apellido materno, usuario, accion en la base de datos.
+     *
+     * Descripción: Con la acción, busca los socios que tienen los datos
+     * similares. Ingresa los datos encontrados con los datos del socio en un
+     * array list. Ingresa el array list en la tabla, elimina los datos del
+     * array list y repite hasta encontrar todos los datos.
+     *
+     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Libro
@@ -477,7 +527,7 @@ public class AdministradorDAO {
             PreparedStatement prs = null;
             switch (action) {
                 case 0: {
-                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " ORDER BY Prestamos DESC");
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + ORDER_SOCIO);
                     rs = prs.executeQuery();
                     break;
                 }
@@ -623,15 +673,18 @@ public class AdministradorDAO {
     private final String SQL_SEARCH_AUTOR = "SELECT DISTINCT * FROM Autor";
 
     /**
-     * Registra un Autor en la base de datos con los datos: id, nombre, apellido
-     * paterno, apellido materno y estatus, en el Bean. Busca el id de la nueva
-     * área y la ingresa en la Tabla junto con sus datos
+     * Uso: Registra un Autor en la base de datos con los datos: id, nombre,
+     * apellido paterno, apellido materno y estatus, en el Bean.
      *
-     * @param t // Contiene el objeto Tabla de la Vista
+     * Descripción: Busca el id de la nueva área y la ingresa en la Tabla junto
+     * con sus datos
+     *
+     * Variables:
+     *
      * @param Bean // Contiene el nombre del autor
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean IngresarAutor(DefaultTableModel t, AutorBean Bean) {
+    public boolean IngresarAutor(AutorBean Bean) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
@@ -660,8 +713,11 @@ public class AdministradorDAO {
     }
 
     /**
-     * Modifica un Autor con id específico en la base de datos con los datos:
-     * nombre, apellido paterno, apellido materno y estatus, en el Bean.
+     * Descripción: Modifica un Autor con id específico en la base de datos con
+     * los datos: nombre, apellido paterno, apellido materno y estatus, en el
+     * Bean.
+     *
+     * Variables:
      *
      * @param Bean // Contiene el id, nombre, apellido paterno, apellido materno
      * y estatus del autor
@@ -693,7 +749,9 @@ public class AdministradorDAO {
     }
 
     /**
-     * Elimina un Autor con id específico en la base de datos.
+     * Descripción: Elimina un Autor con id específico en la base de datos.
+     *
+     * Variables:
      *
      * @param id // Contiene el id del autor
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -720,11 +778,15 @@ public class AdministradorDAO {
     }
 
     /**
-     * Busca todos Autores con los datos de nombre, apellido paterno, apellido
-     * materno, accion en la base de datos. Con la acción, busca los autores que
-     * tienen los datos similares. Ingresa los datos encontrados con los datos
-     * del socio en un array list. Ingresa el array list en la tabla, elimina
-     * los datos del array list y repite hasta encontrar todos los datos
+     * Uso: Busca todos Autores con los datos de nombre, apellido paterno,
+     * apellido materno, accion en la base de datos.
+     *
+     * Descripción: Con la acción, busca los autores que tienen los datos
+     * similares. Ingresa los datos encontrados con los datos del socio en un
+     * array list. Ingresa el array list en la tabla, elimina los datos del
+     * array list y repite hasta encontrar todos los datos.
+     *
+     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del autor

@@ -1,6 +1,7 @@
 package Modelo.Otros;
 
 import Classes.Beans.LocalizacionBean;
+import Utils.CleanupDone;
 import Utils.Connexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,12 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 
 /**
+ * Descripción: MYQSL para Editorial
  *
- * @author Josaded
  */
+@CleanupDone
 public class LocalizacionDAO {
 
     Connection conn;
@@ -26,15 +27,18 @@ public class LocalizacionDAO {
     private final String SQL_MODIFY_REMOVE_LOCALIZACION = "UPDATE Localizacion SET";
 
     /**
-     * Registra una Localización en la base de datos con los datos: id, nombre y
-     * estatus, en el Bean. Busca el id de la nueva Localizacion y la ingresa en
-     * la Tabla junto con sus datos.
+     * Uso: Registra una Localización en la base de datos con los datos: id,
+     * nombre y estatus, en el Bean.
      *
-     * @param t //Contiene el objeto Tabla de la Vista
+     * Descripción: Busca el id de la nueva Localizacion y la ingresa en la
+     * Tabla junto con sus datos.
+     *
+     * Variables:
+     *
      * @param Bean // Contiene el nombre de la Localización
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean IngresarLocalizacion(DefaultTableModel t, LocalizacionBean Bean) {
+    public boolean IngresarLocalizacion(LocalizacionBean Bean) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
@@ -61,7 +65,6 @@ public class LocalizacionDAO {
             if (rs.next()) {
                 Bean.setIdLocalización(rs.getInt(1));
             }
-            t.addRow(new Object[]{Bean.getIdLocalización(), Bean.getPasillo(), "Activo"});
             rs.close();
             prs.close();
             conn.close();
@@ -78,8 +81,10 @@ public class LocalizacionDAO {
     }
 
     /**
-     * Modifica una Localización con id específico en la base de datos con los
-     * datos: nombre y estatus, en el Bean.
+     * Descripción: Modifica una Localización con id específico en la base de
+     * datos con los datos: nombre y estatus, en el Bean.
+     *
+     * Variables:
      *
      * @param Bean // Contiene el id, nombre y estatus de la Localización
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -108,7 +113,10 @@ public class LocalizacionDAO {
     }
 
     /**
-     * Elimina una Localización con id específico en la base de datos.
+     * Descripción: Elimina una Localización con id específico en la base de
+     * datos.
+     *
+     * Variables:
      *
      * @param id // Contiene el id de la Localización
      * @return // Regresa true si es exitosa y false si ocurre un error

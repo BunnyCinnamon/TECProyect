@@ -10,6 +10,11 @@ import javax.xml.transform.stream.*;
 import org.xml.sax.*;
 import org.w3c.dom.*;
 
+/**
+ * Descripción: Lector y escritor de Texto tipo xml
+ *
+ */
+@CleanupDone
 public class FileReader {
 
     private ArrayList<String> rolev;
@@ -26,7 +31,12 @@ public class FileReader {
     }
 
     /**
-     * Encuentra el archivo y lo lee
+     * Uso: Encuentra el archivo xml y lee su contenido.
+     *
+     * Descripción: Encuentra el nombre de usuario, y su debe o no guardar la
+     * selección.
+     *
+     * Variables:
      *
      * @return // Regresa true o false si ocurre o no error
      */
@@ -62,8 +72,12 @@ public class FileReader {
     }
 
     /**
-     * Encuentra el archivo y lo modifica
+     * Descripción: Encuentra el archivo xml y modifica su contenido
      *
+     * Variables:
+     *
+     * @param user // Contiene el Texto del Usuario
+     * @param login // Contiene el true o false de la selección
      */
     public void saveToXML(String user, String login) {
         Document dom;
@@ -97,6 +111,15 @@ public class FileReader {
         }
     }
 
+    /**
+     * Descripción: Busca los textos en el xmls
+     *
+     * Variables:
+     *
+     * @param def // Contiene un texto
+     * @param doc // Contiene un documento
+     * @param tag // Contiene un texto
+     */
     private String getTextValue(String def, Element doc, String tag) {
         String value = def;
         NodeList nl;

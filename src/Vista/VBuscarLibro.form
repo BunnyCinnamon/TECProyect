@@ -76,7 +76,7 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="JTabbedBusquedaLibros" pref="269" max="32767" attributes="0"/>
+                      <Component id="JTabbedBusquedaLibros" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -159,16 +159,16 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="10" rowCount="0">
-                <Column editable="true" title="Id" type="java.lang.Object"/>
-                <Column editable="true" title="ISBN" type="java.lang.Object"/>
-                <Column editable="true" title="Titulo" type="java.lang.Object"/>
-                <Column editable="true" title="N&#xb0; Pag" type="java.lang.Object"/>
-                <Column editable="true" title="Estado" type="java.lang.Object"/>
-                <Column editable="true" title="Autor" type="java.lang.Object"/>
-                <Column editable="true" title="Editorial" type="java.lang.Object"/>
-                <Column editable="true" title="Localizaci&#xf3;n" type="java.lang.Object"/>
-                <Column editable="true" title="&#xc1;rea" type="java.lang.Object"/>
-                <Column editable="true" title="Existencias" type="java.lang.Object"/>
+                <Column editable="false" title="Id" type="java.lang.Object"/>
+                <Column editable="false" title="ISBN" type="java.lang.Object"/>
+                <Column editable="false" title="Titulo" type="java.lang.Object"/>
+                <Column editable="false" title="N&#xb0; Pag" type="java.lang.Object"/>
+                <Column editable="false" title="Estado" type="java.lang.Object"/>
+                <Column editable="false" title="Autor" type="java.lang.Object"/>
+                <Column editable="false" title="Editorial" type="java.lang.Object"/>
+                <Column editable="false" title="Localizaci&#xf3;n" type="java.lang.Object"/>
+                <Column editable="false" title="&#xc1;rea" type="java.lang.Object"/>
+                <Column editable="false" title="Existencias" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -226,9 +226,12 @@
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JTableBLibroMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -501,23 +504,23 @@
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="JAsignar" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="6" max="32767" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="JAsignar" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
                   </Group>
@@ -525,13 +528,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel4">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Resources/1467285836_OFFice-33.png"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -542,11 +538,18 @@
             </Component>
             <Component class="javax.swing.JButton" name="JAsignar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Asignar a Socio"/>
+                <Property name="text" type="java.lang.String" value="Detalles"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JAsignarActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Resources/IconLibros.png"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

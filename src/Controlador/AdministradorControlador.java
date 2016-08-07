@@ -5,24 +5,37 @@ import Classes.Beans.LibroBean;
 import Classes.Beans.SocioBean;
 import Modelo.AdministradorDAO;
 import Utils.CleanupDone;
+import Utils.TableHelper;
 import Utils.TextChecker;
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
+/**
+ * Descripción: Controlador para Administradores
+ *
+ */
 @CleanupDone
 public class AdministradorControlador {
 
-    private final AdministradorDAO adm = new AdministradorDAO();
+    private static final AdministradorDAO ADM = new AdministradorDAO();
     private static final TextChecker TEXT_CHECKER = new TextChecker();
+    public final TableHelper TABLE_HELPER = new TableHelper();
 
     /**
-     * Transforma el String a un id al inicio del texto. El matcher busca el
-     * primer número en el texto y envia el resultado a un parse que convierte
-     * el número a integer
+     * Uso: Transforma el String a un id al inicio del texto.
+     *
+     * Descripción: El matcher busca el primer número en el texto y envia el
+     * resultado a un parse que convierte el número a integer.
+     *
+     * Variables:
      *
      * @param a // Contiene el texto
      */
@@ -36,10 +49,13 @@ public class AdministradorControlador {
     }
 
     /**
-     * Transforma el String a un texto leíble para la base de datos. Si el texto
-     * es null devuelve un texto vacio; Si el texto contiene texto, busca el
-     * primer espacio y resta los caracteres del texto hasta el primer espacio
-     * más 1
+     * Uso: Transforma el String a un texto leíble para la base de datos.
+     *
+     * Descripción: Si el texto es null devuelve un texto vacio; Si el texto
+     * contiene texto, busca el primer espacio y resta los caracteres del texto
+     * hasta el primer espacio más 1.
+     *
+     * Variables:
      *
      * @param e // Contiene el texto
      */
@@ -51,11 +67,15 @@ public class AdministradorControlador {
     }
 
     /**
-     * Ingresar Libro. Crea un nuevo libro bean y le asigna los datos en los
-     * text fiels y listas, si todas las listas tienen datos, ingresa la
-     * información en la tabla y envia los datos al dao correspondiente, si es
-     * correcto ingresa los datos en la tabla y muestra un JOptionPane con texto
-     * exitoso, si no es correcto envia un JOptionPane con texto erroneo
+     * Uso: Ingresar Libro.
+     *
+     * Descripción: Crea un nuevo libro bean y le asigna los datos en los text
+     * fiels y listas, si todas las listas tienen datos, ingresa la información
+     * en la tabla y envia los datos al dao correspondiente, si es correcto
+     * ingresa los datos en la tabla y muestra un JOptionPane con texto exitoso,
+     * si no es correcto envia un JOptionPane con texto erroneo.
+     *
+     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -67,11 +87,15 @@ public class AdministradorControlador {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        if (!TEXT_CHECKER.checkLenght(jField[0].toString(), 10, 13)) {
+            JOptionPane.showMessageDialog(null, "ISBN debe tener 10 ó 13 números", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Bean.setIsbn(jField[0].toString());
         Bean.setTitulo(jField[1].toString());
         Bean.setPaginas(Integer.parseInt(jField[2].toString()));
         Bean.setEstatus(jField[3].toString());
-        Bean.setNumeroPrestamos(Integer.parseInt(jField[4].toString()));
+        Bean.setNumero(Integer.parseInt(jField[4].toString()));
         try {
             Bean.setAutor(getId(jArray.get(0).toString()));
             Bean.setEditorial(getId(jArray.get(1).toString()));
@@ -82,9 +106,9 @@ public class AdministradorControlador {
             return;
         }
         if (Bean.getArea() == 0 || Bean.getEditorial() == 0 || Bean.getAutor() == 0 || Bean.getLocalizacion() == 0) {
-            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        } else if (adm.IngresarLibro(Bean)) {
-            jModel.addRow(new Object[]{Bean.getIdLibro(), Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), getString(jArray.get(0).toString()), getString(jArray.get(1).toString()), getString(jArray.get(2).toString()), getString(jArray.get(3).toString()), Bean.getNumeroPrestamos()});
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else if (ADM.IngresarLibro(Bean)) {
+            jModel.addRow(new Object[]{Bean.getIdLibro(), Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), getString(jArray.get(0).toString()), getString(jArray.get(1).toString()), getString(jArray.get(2).toString()), getString(jArray.get(3).toString()), Bean.getNumero()});
             JOptionPane.showMessageDialog(null, "El Libro ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "No se agregó el Libro correctamente", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -92,10 +116,14 @@ public class AdministradorControlador {
     }
 
     /**
-     * Modificar Libro. Crea un nuevo libro bean y le asigna los datos en los
-     * text fiels y listas, si todas las listas tienen datos, envia los datos al
-     * dao correspondiente, si algo es exitoso o erroneo muestra un texto en
-     * JOptionPane
+     * Uso: Modificar Libro.
+     *
+     * Descripción: Crea un nuevo libro bean y le asigna los datos en los text
+     * fiels y listas, si todas las listas tienen datos, envia los datos al dao
+     * correspondiente, si algo es exitoso o erroneo muestra un texto en
+     * JOptionPane.
+     *
+     * Variables:
      *
      * @param jTableRLibro // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -103,9 +131,14 @@ public class AdministradorControlador {
      */
     public void actionPerformedJModificarLibro(JTable jTableRLibro, Object[] jField, ArrayList jArray) {
         LibroBean Bean = new LibroBean();
-        int Select = jTableRLibro.getSelectedRow();
+        int select = jTableRLibro.getSelectedRow();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String isbn = jField[0].toString();
+        if (!TEXT_CHECKER.checkLenght(isbn, 10, 13) && TEXT_CHECKER.ValidadorISBN(isbn)) {
+            JOptionPane.showMessageDialog(null, "ISBN debe tener 10 ó 13 números", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
         try {
@@ -117,27 +150,33 @@ public class AdministradorControlador {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (Select < 0) {
+        if (select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-            Bean.setIdLibro(Integer.parseInt(jTableRLibro.getValueAt(Select, 0).toString()));
+            Bean.setIdLibro(Integer.parseInt(jTableRLibro.getValueAt(select, 0).toString()));
             Bean.setIsbn(jField[0].toString());
             Bean.setTitulo(jField[1].toString());
             Bean.setPaginas(Integer.parseInt(jField[2].toString()));
             Bean.setEstatus(jField[3].toString());
-            Bean.setNumeroPrestamos(Integer.parseInt(jField[4].toString()));
+            Bean.setNumero(Integer.parseInt(jField[4].toString()));
             if (Bean.getArea() == 0 || Bean.getEditorial() == 0 || Bean.getAutor() == 0 || Bean.getLocalizacion() == 0) {
-                JOptionPane.showMessageDialog(null, "Ingresa todos los datos del libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (adm.ModificarLibro(Bean)) {
+                JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (ADM.ModificarLibro(Bean)) {
+                Object[] jFieldText = new Object[]{Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), getString(jArray.get(0).toString()), getString(jArray.get(1).toString()), getString(jArray.get(2).toString()), getString(jArray.get(3).toString()), Bean.getNumero()};
+                TABLE_HELPER.updateTableContentWith(jTableRLibro, jFieldText, select, 0);
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             }
         }
     }
 
     /**
-     * Eliminar Libro. Consigue el id del libro seleccionado en la tabla, si hay
-     * un error envia JOptionPane con texto erroneo y si no un texto exitoso,
-     * envia el id al dao correspondiente
+     * Uso: Eliminar Libro.
+     *
+     * Descripción: Consigue el id del libro seleccionado en la tabla, si hay un
+     * error envia JOptionPane con texto erroneo y si no un texto exitoso, envia
+     * el id al dao correspondiente.
+     *
+     * Variables:
      *
      * @param jTableRLibro // Contiene el objeto Tabla
      */
@@ -147,7 +186,7 @@ public class AdministradorControlador {
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? (Inactivo)")) {
-            if (adm.EliminarLibro(Integer.parseInt(jTableRLibro.getValueAt(Select, 0).toString()))) {
+            if (ADM.EliminarLibro(Integer.parseInt(jTableRLibro.getValueAt(Select, 0).toString()))) {
                 ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }
@@ -155,9 +194,13 @@ public class AdministradorControlador {
     }
 
     /**
-     * Buscar Libro. Consigue el id del titulo, isbn, editorial y autor si hay
-     * un error envia JOptionPane con texto erroneo y si no un texto exitoso,
-     * envia los datos al dao correspondiente
+     * Uso: Buscar Libro.
+     *
+     * Descripción: Consigue el id del titulo, isbn, editorial y autor si hay un
+     * error envia JOptionPane con texto erroneo y si no un texto exitoso, envia
+     * los datos al dao correspondiente.
+     *
+     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -172,56 +215,68 @@ public class AdministradorControlador {
         String Autor = "";
         try {
             Editorial = getString(jField[2].toString());
+        } catch (NullPointerException n) {
+        }
+        try {
             Autor = getString(jField[3].toString());
         } catch (NullPointerException n) {
         }
-        if (jSelect[0] && (!jSelect[1] && !jSelect[2] && !jSelect[3])) {
+        boolean T = jSelect[0];
+        boolean A = jSelect[1];
+        boolean I = jSelect[2];
+        boolean E = jSelect[3];
+        if (T && (!A && !I && !E)) {
             action = 1;
-        } else if (jSelect[2] && (!jSelect[1] && !jSelect[0] && !jSelect[3])) {
+        } else if (I && (!A && !T && !E)) {
             action = 2;
-        } else if (jSelect[1] && (!jSelect[0] && !jSelect[2] && !jSelect[3])) {
+        } else if (A && (!T && !I && !E)) {
             action = 3;
-        } else if (jSelect[3] && (!jSelect[0] && !jSelect[2] && !jSelect[1])) {
+        } else if (E && (!T && !I && !A)) {
             action = 4;
-        } else if (jSelect[3] && jSelect[0] && (!jSelect[2] && !jSelect[1])) {
+        } else if (E && T && (!I && !A)) {
             action = 5;
-        } else if (jSelect[1] && jSelect[0] && (!jSelect[2] && !jSelect[3])) {
+        } else if (A && T && (!I && !E)) {
             action = 6;
-        } else if (jSelect[2] && jSelect[0] && (!jSelect[3] && !jSelect[1])) {
+        } else if (I && T && (!E && !A)) {
             action = 7;
-        } else if (jSelect[2] && jSelect[1] && (!jSelect[3] && !jSelect[0])) {
+        } else if (I && A && (!E && !T)) {
             action = 8;
-        } else if (jSelect[2] && jSelect[3] && (!jSelect[0] && !jSelect[1])) {
+        } else if (I && E && (!T && !A)) {
             action = 9;
-        } else if (jSelect[3] && jSelect[1] && (!jSelect[0] && !jSelect[2])) {
+        } else if (E && A && (!T && !I)) {
             action = 10;
-        } else if (jSelect[0] && jSelect[2] && jSelect[1] && (!jSelect[3])) {
+        } else if (T && I && A && (!E)) {
             action = 11;
-        } else if (jSelect[0] && jSelect[2] && jSelect[3] && (!jSelect[1])) {
+        } else if (T && I && E && (!A)) {
             action = 12;
-        } else if (jSelect[2] && jSelect[1] && jSelect[3] && (!jSelect[0])) {
+        } else if (I && A && E && (!T)) {
             action = 13;
-        } else if (jSelect[0] && jSelect[1] && jSelect[3] && (!jSelect[2])) {
+        } else if (T && A && E && (!I)) {
             action = 14;
-        } else if (jSelect[3] && jSelect[1] && jSelect[0] && jSelect[2]) {
+        } else if (E && A && T && I) {
             action = 15;
         }
-        adm.BuscarLibro(jModel, Bean, Editorial, Autor, action);
+        ADM.BuscarLibro(jModel, Bean, Editorial, Autor, action);
     }
 
     ////////////////////////////////////////////////////////////////////////////
     /**
-     * Ingresar Socios. Crea un nuevo socio bean y le ingresa los datos en los
-     * text fiels y listas, de la vista. Envia los datos al dao correspondiente
-     * con texto exitoso, si no es correcto envia un JOptionPane con texto
-     * erroneo y si es correcto ingresa los datos en la tabla y muestra un
-     * JOptionPane con texto exitoso, si no es correcto envia un JOptionPane con
-     * texto erroneo
+     * Uso: Ingresar Socios.
+     *
+     * Descripción: Crea un nuevo socio bean y le ingresa los datos en los text
+     * fiels y listas, de la vista. Envia los datos al dao correspondiente con
+     * texto exitoso, si no es correcto envia un JOptionPane con texto erroneo y
+     * si es correcto ingresa los datos en la tabla y muestra un JOptionPane con
+     * texto exitoso, si no es correcto envia un JOptionPane con texto erroneo.
+     *
+     * Variables:
      *
      * @param jModel // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Texto
+     * @param m // Contiene el Apellido Materno del Socio, si es que tiene
+     * @param secretPass // Contraseña segura del Socio
      */
-    public void actionPerformedJIngresarSocio(DefaultTableModel jModel, Object[] jField) {
+    public void actionPerformedJIngresarSocio(DefaultTableModel jModel, Object[] jField, String m, char[] secretPass) {
         SocioBean Bean = new SocioBean();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Socio", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -229,61 +284,105 @@ public class AdministradorControlador {
         }
         Bean.setNombre(jField[0].toString());
         Bean.setApellidoP(jField[1].toString());
-        Bean.setApellidoM(jField[2].toString());
-        Bean.setEstado(jField[3].toString());
-        Bean.setMunicipio(jField[4].toString());
-        Bean.setCalle(jField[5].toString());
-        Bean.setNumero(Integer.parseInt(jField[6].toString()));
-        Bean.setTelefono(Integer.parseInt(jField[7].toString()));
-        Bean.setUsuario(jField[8].toString());
-        Bean.setContraseña(jField[9].toString());
-        if (adm.IngresarSocio(Bean)) {
+        Bean.setApellidoM(m);
+        Bean.setEstado(jField[2].toString());
+        Bean.setMunicipio(jField[3].toString());
+        Bean.setCalle(jField[4].toString());
+        Bean.setNumero(Integer.parseInt(jField[5].toString()));
+        Bean.setTelefono(Integer.parseInt(jField[6].toString()));
+        Bean.setUsuario(jField[7].toString());
+        if (ADM.IngresarSocio(Bean, secretPass)) {
             jModel.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + "#" + Bean.getNumero(), Bean.getTelefono(), "Activo", Bean.getPrestamos(), Bean.getUsuario(), "**********"});
-            JOptionPane.showMessageDialog(null, "El Libro ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El Socio ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "No se agregó el Libro correctamente", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se agregó el Socio correctamente", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Modificar Socios. Crea un nuevo socio bean, si la tabla esta seleccionada
+     * Uso: Introducir Contraseña.
+     *
+     * Descripción: Crea una ventana donde se introduce la contraseña, si es
+     * mayor a 5 caracteres continua, si no lo es envia un cuadro de texto
+     * erroneo, pide de nuevo la contraseña y si es igual a la primera
+     * contraseña inserta el texto en el text field y lo marca en verde.
+     *
+     * Variables:
+     *
+     * @param JTextContraseñaSocio // Contiene el objeto Text Field
+     */
+    public void JTextContraseñaSocioMouseClicked(JTextField JTextContraseñaSocio) {
+        JPasswordField pwd = new JPasswordField(10);
+        JPasswordField rpwd = new JPasswordField(10);
+        if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, pwd, "Introducir contraseña", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
+            char[] pass1 = pwd.getPassword();
+            if (pass1.length < 5) {
+                JOptionPane.showMessageDialog(null, "Contraseña no válida, Ingrese una contraseña igual o mayor a 5 caracteres");
+            } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, rpwd, "Vuelva a introducir contraseña", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
+                char[] pass2 = rpwd.getPassword();
+                if (Arrays.equals(pass1, pass2)) {
+                    JTextContraseñaSocio.setText(new String(pass2));
+                    JTextContraseñaSocio.setForeground(Color.green);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Contraseñas no coinciden");
+                }
+            }
+        }
+    }
+
+    /**
+     * Uso: Modificar Socios.
+     *
+     * Descripción: Crea un nuevo socio bean, si la tabla esta seleccionada
      * consigue el id del socio y envia el Bean al dao correspondiente, si es
-     * exitoso muestra un mensaje correcto
+     * exitoso muestra un mensaje correcto.
+     *
+     * Variables:
      *
      * @param jTableRSocio // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Text
+     * @param m // Contiene el Apellido Materno del Socio, si es que tiene
      */
-    public void actionPerformedJModificarSocio(JTable jTableRSocio, Object[] jField) {
-        int Select = jTableRSocio.getSelectedRow();
+    public void actionPerformedJModificarSocio(JTable jTableRSocio, Object[] jField, String m) {
+        int select = jTableRSocio.getSelectedRow();
         SocioBean Bean = new SocioBean();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Socio", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (Select < 0) {
+        if (select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-            Bean.setIdUsuario(Integer.parseInt(jTableRSocio.getValueAt(Select, 0).toString()));
+            Bean.setIdUsuario(Integer.parseInt(jTableRSocio.getValueAt(select, 0).toString()));
             Bean.setNombre(jField[0].toString());
             Bean.setApellidoP(jField[1].toString());
-            Bean.setApellidoM(jField[2].toString());
+            Bean.setApellidoM(m);
+            Bean.setEstatus(jField[2].toString());
             Bean.setEstado(jField[3].toString());
+            Bean.setPrestamos(Integer.parseInt(jTableRSocio.getValueAt(select, 7).toString()));
             Bean.setMunicipio(jField[4].toString());
             Bean.setCalle(jField[5].toString());
             Bean.setNumero(Integer.parseInt(jField[6].toString()));
             Bean.setTelefono(Integer.parseInt(jField[7].toString()));
             Bean.setUsuario(jField[8].toString());
             Bean.setContraseña(jField[9].toString());
-            if (adm.ModificarSocio(Bean)) {
+            if (ADM.ModificarSocio(Bean)) {
+                String dir = Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + " " + Bean.getNumero();
+                Object[] jFieldText = new Object[]{Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), dir, Bean.getTelefono(), Bean.getEstatus(), Bean.getPrestamos(), Bean.getUsuario(), "**********"};
+                TABLE_HELPER.updateTableContentWith(jTableRSocio, jFieldText, select, 0);
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
             }
         }
     }
 
     /**
-     * Eliminar Socios. Si la tabla está seleccionada consigue el id del socio y
-     * lo envia a el dao correspondiente, si no muestra un JOptionPane con el
-     * mensaje que le corresponde
+     * Uso: Eliminar Socios.
+     *
+     * Descripción: Si la tabla está seleccionada consigue el id del socio y lo
+     * envia a el dao correspondiente, si no muestra un JOptionPane con el
+     * mensaje que le corresponde.
+     *
+     * Variables:
      *
      * @param jTableRSocio // Contiene el objeto Tabla de la Vista
      */
@@ -294,7 +393,7 @@ public class AdministradorControlador {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? (Inactivo)")) {
             int id = Integer.parseInt(jTableRSocio.getValueAt(Select, 0).toString());
-            if (adm.EliminarSocio(id)) {
+            if (ADM.EliminarSocio(id)) {
                 ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
             }
@@ -302,9 +401,13 @@ public class AdministradorControlador {
     }
 
     /**
-     * Buscar Socios. Crea un nuevo socio bean, ingresa los valores de los text
+     * Uso: Buscar Socios.
+     *
+     * Descripción: Crea un nuevo socio bean, ingresa los valores de los text
      * fiels en el bean y consigue la acción dependiendo de los combo box
-     * seleccionados. Envia el bean y la acción al dao correspondiente
+     * seleccionados. Envia el bean y la acción al dao correspondiente.
+     *
+     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -348,91 +451,120 @@ public class AdministradorControlador {
         } else if (jSelect[3] && jSelect[1] && jSelect[0] && jSelect[2]) {
             action = 15;
         }
-        adm.BuscarSocio(jModel, Bean, action);
+        ADM.BuscarSocio(jModel, Bean, action);
     }
 
     ////////////////////////////////////////////////////////////////////////////
     /**
-     * Ingresar Autor. Crea un nuevo autor bean y le ingresa los datos en los
-     * text field, envia el bean al dao correspondiente, si es exitoso envia un
-     * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo
+     * Uso: Ingresar Autor.
+     *
+     * Descripción: Crea un nuevo autor bean y le ingresa los datos en los text
+     * field, envia el bean al dao correspondiente, si es exitoso envia un
+     * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo.
+     *
+     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
+     * @param m // Contiene el Apellido Materno del Autor, si es que tiene
+     * @return // Retorna false o true si ocurre o no un error
      */
-    public void actionPerformedJIngresarAutor(DefaultTableModel jModel, Object[] jField) {
+    public boolean actionPerformedJIngresarAutor(DefaultTableModel jModel, Object[] jField, String m) {
         AutorBean Bean = new AutorBean();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Autor", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return false;
         }
         Bean.setNombre(jField[0].toString());
         Bean.setApellidoP(jField[1].toString());
-        Bean.setApellidoM(jField[2].toString());
-        if (adm.IngresarAutor(jModel, Bean)) {
+        Bean.setApellidoM(m);
+        if (ADM.IngresarAutor(Bean)) {
             jModel.addRow(new Object[]{Bean.getIdAutor(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), "Activo"});
-            JOptionPane.showMessageDialog(null, "El autor ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El Autor ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } else {
-            JOptionPane.showMessageDialog(null, "No se agregó el autor", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se agregó el Autor", "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 
     /**
-     * Modificar Autor. Crea un nuevo autor bean, Si la tabla está seleccionada
+     * Uso: Modificar Autor.
+     *
+     * Descripción: Crea un nuevo autor bean, Si la tabla está seleccionada
      * consigue el id del autor seleccionado y lo ingresa en el bean con todos
      * los valores en los text field. Envia los datos al dao correspondiente, si
      * es exitoso envia un JOptionPane con texto correcto, si no es exitoso
-     * envia un texto erroneo
+     * envia un texto erroneo.
+     *
+     * Variables:
      *
      * @param jTableRAutor // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Text
+     * @param m // Contiene el Apellido Materno del Autor, si es que tiene
+     * @return // Retorna false o true si ocurre o no un error
      */
-    public void actionPerformedJModificarAutor(JTable jTableRAutor, Object[] jField) {
+    public boolean actionPerformedJModificarAutor(JTable jTableRAutor, Object[] jField, String m) {
         AutorBean Bean = new AutorBean();
-        int Select = jTableRAutor.getSelectedRow();
+        int select = jTableRAutor.getSelectedRow();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Autor", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return false;
         }
-        if (Select < 0) {
+        if (select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-            Bean.setIdAutor(Integer.parseInt(jTableRAutor.getValueAt(Select, 0).toString()));
+            Bean.setIdAutor(Integer.parseInt(jTableRAutor.getValueAt(select, 0).toString()));
             Bean.setNombre(jField[0].toString());
             Bean.setApellidoP(jField[1].toString());
-            Bean.setApellidoM(jField[2].toString());
-            Bean.setStatus(jField[3].toString());
-            if (adm.ModificarAutor(Bean)) {
+            Bean.setApellidoM(m);
+            Bean.setStatus(jField[2].toString());
+            if (ADM.ModificarAutor(Bean)) {
+                Object[] jFieldText = new Object[]{Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getStatus()};
+                TABLE_HELPER.updateTableContentWith(jTableRAutor, jFieldText, select, 0);
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
+                return true;
             }
         }
+        return false;
     }
 
     /**
-     * Eliminar Autor. Si la tabla está seleccionada consigue el id del autor
+     * Uso: Eliminar Autor.
+     *
+     * Descripción: Si la tabla está seleccionada consigue el id del autor
      * seleccionado. Envia el id al dao correspondiente, si es exitoso envia un
-     * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo
+     * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo.
+     *
+     * Variables:
      *
      * @param jTableRAutor // Contiene el objeto de Tabla de la Vista
+     * @return // Retorna false o true si ocurre o no un error
      */
-    public void actionPerformedJEliminarAutor(JTable jTableRAutor) {
+    public boolean actionPerformedJEliminarAutor(JTable jTableRAutor) {
         DefaultTableModel ae = (DefaultTableModel) jTableRAutor.getModel();
         int Select = jTableRAutor.getSelectedRow();
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? ")) {
             int id = Integer.parseInt(jTableRAutor.getValueAt(Select, 0).toString());
-            if (adm.EliminarAutor(id)) {
+            if (ADM.EliminarAutor(id)) {
                 ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
+                return true;
             }
         }
+        return false;
     }
 
     /**
-     * Buscar Autor. Crea un nuevo autor bean, ingresa los valores de los text
+     * Uso: Buscar Autor.
+     *
+     * Descripción: Crea un nuevo autor bean, ingresa los valores de los text
      * fiels en el bean y consigue la acción dependiendo de los combo box
-     * seleccionados. Envia el bean y la acción al dao correspondiente
+     * seleccionados. Envia el bean y la acción al dao correspondiente.
+     *
+     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -457,6 +589,39 @@ public class AdministradorControlador {
         } else if (jSelect[1] && jSelect[2] && (!jSelect[0])) {
             action = 6;
         }
-        adm.BuscarAutor(jModel, Bean, action);
+        ADM.BuscarAutor(jModel, Bean, action);
+    }
+
+    /**
+     * Uso: Encontrar elementos de Tabla.
+     *
+     * Descripción: Consigue el tamaño del objeto y las columnas de la tabla.
+     * Luego inserta el texto de la tabla en los objetos dados.
+     *
+     * Variables:
+     *
+     * @param jTable // Contiene el objeto Tabla de la Vista
+     * @param jField // Contiene los objetos de Texto
+     * @param last // Columnas a ignorar al final de la Tabla
+     */
+    public void JTableMouseDoubleClicked(JTable jTable, Object[] jField, int last) {
+        TABLE_HELPER.JTableMouseDoubleClicked(jTable, jField, last);
+    }
+
+    /**
+     * Uso: Encontrar elementos de Tabla.
+     *
+     * Descripción: Consigue el tamaño del objeto y las columnas de la tabla.
+     * Luego inserta el texto de la tabla en los objetos dados.
+     *
+     * Variables:
+     *
+     * @param jTable // Contiene el objeto Tabla de la Vista
+     * @param jField // Contiene los objetos de Texto
+     * @param jField0 // Contiene los objetos de Texto Complejos
+     * @param last // Columnas a ignorar al final de la Tabla
+     */
+    public void JTableMouseDoubleClicked(JTable jTable, Object[] jField, Object[] jField0, int last) {
+        TABLE_HELPER.JTableMouseDoubleClicked(jTable, jField, jField0, last);
     }
 }

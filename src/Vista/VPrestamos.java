@@ -5,48 +5,56 @@ import Controlador.CargarInfoControlador;
 import Controlador.PrestamosControlador;
 import Utils.CleanupDone;
 import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
-import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 @CleanupDone
 /**
- * Vista de Prestamos, ver Prestamos con o sin fecha de expiración
+ * Descripción: Vista de Prestamos, ver Prestamos con o sin fecha de expiración
  *
  */
 public class VPrestamos extends javax.swing.JFrame {
 
-    private final CargarInfoControlador CARGAR = new CargarInfoControlador();
-    private final PrestamosControlador PRESTAMOS_CONTROLER = new PrestamosControlador();
+    private static final CargarInfoControlador CARGAR = new CargarInfoControlador();
+    private static final PrestamosControlador PRESTAMOS_CONTROLER = new PrestamosControlador();
     private int Login = 0;
     private SocioBean Stat;
 
+    /**
+     * Descripción: Inicializa la Vista.
+     *
+     */
     public VPrestamos() {
         initComponents();
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent ev) {
-                dispose();
-            }
-        });
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        addWindowListener(new WindowAdapter() {
+//            @Override
+//            public void windowClosing(WindowEvent ev) {
+//                dispose();
+//            }
+//        });
         this.setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         IniciarAdmin(0);
         SetToolTipText();
     }
 
+    /**
+     * Descripción: Inicializa la Vista.
+     *
+     * Variables:
+     *
+     * @param Bean // Contiene el Bean de Socio
+     */
     public VPrestamos(SocioBean Bean) {
         initComponents();
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent ev) {
-                dispose();
-            }
-        });
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        addWindowListener(new WindowAdapter() {
+//            @Override
+//            public void windowClosing(WindowEvent ev) {
+//                dispose();
+//            }
+//        });
         this.setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         this.Stat = Bean;
@@ -135,14 +143,14 @@ public class VPrestamos extends javax.swing.JFrame {
             }
         });
 
-        JLiberarSeleccion.setText("Liberar Selección");
+        JLiberarSeleccion.setText("Liberar");
         JLiberarSeleccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JLiberarSeleccionActionPerformed(evt);
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467284813_OFFice-90.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/IconPrestamos.png"))); // NOI18N
 
         JCheckExpirado.setText("Expirado");
 
@@ -157,9 +165,9 @@ public class VPrestamos extends javax.swing.JFrame {
                     .addComponent(JDetalles)
                     .addComponent(JLiberarSeleccion)
                     .addComponent(JCheckExpirado))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JInternalEditar1Layout.setVerticalGroup(
             JInternalEditar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +180,10 @@ public class VPrestamos extends javax.swing.JFrame {
                 .addComponent(JLiberarSeleccion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JCheckExpirado)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(JInternalEditar1Layout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         JTabbedPrestamos.addTab("Acciones", JInternalEditar1);

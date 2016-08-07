@@ -3,26 +3,32 @@ package Vista;
 import Classes.Beans.SocioBean;
 import Controlador.AsignarSocioControlador;
 import Utils.CleanupDone;
-import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-@CleanupDone
 /**
- * Vista de Asignación de Libro a Socio
+ * Descripción: Vista de Asignación de Libro a Socio
  *
  */
+@CleanupDone
 public class VAsignarSocio extends javax.swing.JFrame {
 
     private static final AsignarSocioControlador ASIGNAR_SOCIO_CONTROLER = new AsignarSocioControlador();
     private final SocioBean SOCIO_BEAN;
     private final ArrayList ARRAY_LIST;
 
+    /**
+     * Descripción: Inicializa la Vista.
+     *
+     * Variables:
+     *
+     * @param Bean // Contiene el Bean del Socio
+     * @param Array // Contiene Array del Libro
+     */
     public VAsignarSocio(SocioBean Bean, ArrayList Array) {
         initComponents();
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         LoadData(Bean, Array);
@@ -31,10 +37,16 @@ public class VAsignarSocio extends javax.swing.JFrame {
         ////////////////////////////////////////////////////////////////////////
         JTableBLibro.setToolTipText("Libro Seleccionado Previamente");
         JTableBSocio.setToolTipText("Socio loggeado en el sistema");
-        JAceptarAsignar.setForeground(Color.red);
-        JAbortar.setForeground(Color.red);
     }
 
+    /**
+     * Descripción: Carga la Vista con información.
+     *
+     * Variables:
+     *
+     * @param Bean // Contiene el Bean del Socio
+     * @param Array // Contiene Array del Libro
+     */
     private void LoadData(SocioBean Bean, ArrayList Array) {
         DefaultTableModel model = (DefaultTableModel) JTableBLibro.getModel();
         DefaultTableModel model0 = (DefaultTableModel) JTableBSocio.getModel();
@@ -65,6 +77,7 @@ public class VAsignarSocio extends javax.swing.JFrame {
         jIconLeeyAprende.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/LibraryIcon.png"))); // NOI18N
 
         JAbortar.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        JAbortar.setForeground(new java.awt.Color(204, 0, 0));
         JAbortar.setText("Abortar");
         JAbortar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +85,6 @@ public class VAsignarSocio extends javax.swing.JFrame {
             }
         });
 
-        JTableBLibro.setForeground(new java.awt.Color(186, 57, 169));
         JTableBLibro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -93,7 +105,6 @@ public class VAsignarSocio extends javax.swing.JFrame {
         JTableBLibro.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(JTableBLibro);
 
-        JTableBSocio.setForeground(new java.awt.Color(0, 208, 40));
         JTableBSocio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -120,6 +131,7 @@ public class VAsignarSocio extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel2.setText("A Socio:");
 
+        JAceptarAsignar.setForeground(new java.awt.Color(204, 0, 0));
         JAceptarAsignar.setText("Aceptar");
         JAceptarAsignar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JAceptarAsignar.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +206,7 @@ public class VAsignarSocio extends javax.swing.JFrame {
 
     private void JAceptarAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAceptarAsignarActionPerformed
         ASIGNAR_SOCIO_CONTROLER.actionPerformedJAceptarPrestamo(new Object[]{SOCIO_BEAN, ARRAY_LIST});
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_JAceptarAsignarActionPerformed
 
     private void JAbortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAbortarActionPerformed

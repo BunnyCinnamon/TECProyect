@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Descripción: MYQSL para Préstamos
+ *
+ */
 @CleanupDone
 public class PrestamosDAO {
 
@@ -16,7 +20,7 @@ public class PrestamosDAO {
     private final String SQL_ELIMINAR_PRESTAMO = "DELETE FROM Prestamo WHERE IdPrestamo=?";
 
     /**
-     * Elimina un Préstamo con id específico en la base de datos.
+     * Descripción: Elimina un Préstamo con id específico en la base de datos.
      *
      * @param id // Contiene el id del Préstamo
      * @return // Regresa true si es exitosa y false si ocurre un error

@@ -9,11 +9,16 @@ import java.lang.management.ManagementFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Descripción: Controlador para Salir de Aplicación
+ *
+ */
 @CleanupDone
 public class SalirControlador {
 
     /**
-     * Crea un nuevo Runnable y captura errores del método que controla
+     * Descripción: Crea un nuevo Runnable y captura errores del método que
+     * controla.
      *
      */
     public void actionPerformed() {
@@ -28,10 +33,13 @@ public class SalirControlador {
     public static final String SUN_JAVA_COMMAND = "sun.java.command";
 
     /**
-     * Reinicia la aplicación en ejecución con todas sus características
+     * Descripción: Reinicia la aplicación en ejecución con todas sus
+     * características.
+     *
+     * Variables:
      *
      * @param run // Código para correr en reinicio
-     * @throws IOException
+     * @throws IOException // Error de lectura
      */
     public static void reiniciarApli(Runnable run) throws IOException {
         try {

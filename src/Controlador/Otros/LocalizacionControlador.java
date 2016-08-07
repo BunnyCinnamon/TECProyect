@@ -8,51 +8,66 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Descripción: Controlador para Localización
+ *
+ */
 @CleanupDone
 public class LocalizacionControlador {
 
-    private final LocalizacionDAO adm = new LocalizacionDAO();
+    private static final LocalizacionDAO ADM = new LocalizacionDAO();
     private static final TextChecker TEXT_CHECKER = new TextChecker();
 
     /**
-     * Ingresar Localizacion. Crea un nuevo localizacion bean y le ingresa los
-     * datos en los text field, envia el bean al dao correspondiente, si es
-     * exitoso envia un JOptionPane con texto correcto, si no es exitoso envia
-     * un texto erroneo
+     * Uso: Ingresar Localizacion.
      *
-     * @param jModel // Contiene el objeto Tabla de la Vista
+     * Descripción: Crea un nuevo localizacion bean y le ingresa los datos en
+     * los text field, envia el bean al dao correspondiente, si es exitoso envia
+     * un JOptionPane con texto correcto, si no es exitoso envia un texto
+     * erroneo.
+     *
+     * Variables:
+     *
      * @param jField // Contiene el objeto Texto
+     * @return // Retorna false o true si ocurre o no un error
      */
-    public void actionPerformedJIngresarLocalizacion(DefaultTableModel jModel, Object[] jField) {
+    public boolean actionPerformedJIngresarLocalizacion(Object[] jField) {
         LocalizacionBean Bean = new LocalizacionBean();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
-            JOptionPane.showMessageDialog(null, "Ingresa todos los datos de Localizacion", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos de Localización", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
         Bean.setPasillo(jField[0].toString());
-        if (adm.IngresarLocalizacion(jModel, Bean)) {
-            JOptionPane.showMessageDialog(null, "La localización ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+        if (ADM.IngresarLocalizacion(Bean)) {
+            JOptionPane.showMessageDialog(null, "La Localización ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } else {
-            JOptionPane.showMessageDialog(null, "No se agregó la localización", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se agregó la Localización", "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 
     /**
-     * Modificar Localizacion. Crea un nuevo localizacion bean, Si la tabla está
+     * Uso: Modificar Localizacion.
+     *
+     * Descripción: Crea un nuevo localizacion bean, Si la tabla está
      * seleccionada consigue el id de la localizacion seleccionada y lo ingresa
      * en el bean con todos los valores en los text field. Envia los datos al
      * dao correspondiente, si es exitoso envia un JOptionPane con texto
-     * correcto, si no es exitoso envia un texto erroneo
+     * correcto, si no es exitoso envia un texto erroneo.
+     *
+     * Variables:
      *
      * @param jTableRLocalizacion // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Text
+     * @return // Retorna false o true si ocurre o no un error
      */
-    public void actionPerformedJModificarLocalizacion(JTable jTableRLocalizacion, Object[] jField) {
+    public boolean actionPerformedJModificarLocalizacion(JTable jTableRLocalizacion, Object[] jField) {
         LocalizacionBean Bean = new LocalizacionBean();
         int Select = jTableRLocalizacion.getSelectedRow();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
-            JOptionPane.showMessageDialog(null, "Ingresa todos los datos de Localizacion", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            JOptionPane.showMessageDialog(null, "Ingresa todos los datos de Localización", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
@@ -60,30 +75,39 @@ public class LocalizacionControlador {
             Bean.setIdLocalización(Integer.parseInt(jTableRLocalizacion.getValueAt(Select, 0).toString()));
             Bean.setPasillo(jField[0].toString());
             Bean.setEstatus(jField[1].toString());
-            if (adm.ModificarLocalizacion(Bean)) {
+            if (ADM.ModificarLocalizacion(Bean)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
+                return true;
             }
         }
+        return false;
     }
 
     /**
-     * Eliminar Localizacion. Si la tabla está seleccionada consigue el id de la
+     * Uso: Eliminar Localizacion.
+     *
+     * Descripción: Si la tabla está seleccionada consigue el id de la
      * Localizacion seleccionada. Envia el id al dao correspondiente, si es
      * exitoso envia un JOptionPane con texto correcto, si no es exitoso envia
-     * un texto erroneo
+     * un texto erroneo.
+     *
+     * Variables:
      *
      * @param jTableRLocalizacion // Contiene el objeto Tabla de la Vista
+     * @return // Retorna false o true si ocurre o no un error
      */
-    public void actionPerformedJEliminarLocalizacion(JTable jTableRLocalizacion) {
+    public boolean actionPerformedJEliminarLocalizacion(JTable jTableRLocalizacion) {
         DefaultTableModel ae = (DefaultTableModel) jTableRLocalizacion.getModel();
         int Select = jTableRLocalizacion.getSelectedRow();
         if (Select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar el registro? ")) {
-            if (adm.EliminarLocalizacion(Integer.parseInt(jTableRLocalizacion.getValueAt(Select, 0).toString()))) {
+            if (ADM.EliminarLocalizacion(Integer.parseInt(jTableRLocalizacion.getValueAt(Select, 0).toString()))) {
                 ae.removeRow(Select);
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
+                return true;
             }
         }
+        return false;
     }
 }

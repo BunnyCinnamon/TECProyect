@@ -1,29 +1,45 @@
 package Vista;
 
+import Resources.ImageHelper;
 import Classes.Beans.SocioBean;
 import Controlador.OpcionesControladorSocio;
 import Controlador.SalirControlador;
 import Utils.CleanupDone;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
-@CleanupDone
 /**
- * Vista de Socio
+ * Descripción: Vista de Socio
  *
  */
+@CleanupDone
 public class VOpcionesSocio extends javax.swing.JFrame {
 
     private static final OpcionesControladorSocio OPCIONES_CONTROLER = new OpcionesControladorSocio();
+    private static final String ICON_RING = "Load.gif";
+    private static final String ICON_BOOK = "IconLibros.png";
+    private static final String ICON_BORROW = "IconPrestamos.png";
 
     /**
-     * Creates new form Opciones
+     * Descripción: Inicializa la Vista.
      *
-     * @param Bean
+     * Variables:
+     *
+     * @param Bean // Contiene el Bean de Socio
      */
     public VOpcionesSocio(SocioBean Bean) {
         initComponents();
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent ev) {
+                SalirControlador SalirControlador = new SalirControlador();
+                SalirControlador.actionPerformed();
+            }
+        });
         this.setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         SetBean(Bean);
@@ -32,10 +48,14 @@ public class VOpcionesSocio extends javax.swing.JFrame {
         JPrestamosOpen.setToolTipText("Ver Préstamos Pendientes");
     }
 
-    private static SocioBean Bean;
+    private SocioBean Bean;
 
     private void SetBean(SocioBean Bean) {
         this.Bean = Bean;
+    }
+
+    private void setIcon(JLabel label, String icon) {
+        label.setIcon(ImageHelper.loadImage(icon));
     }
 
     @SuppressWarnings("unchecked")
@@ -69,11 +89,17 @@ public class VOpcionesSocio extends javax.swing.JFrame {
 
         jIconLeeyAprende.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/LibraryIcon.png"))); // NOI18N
 
-        JLibrosOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467285836_OFFice-33.png"))); // NOI18N
+        JLibrosOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/IconLibros.png"))); // NOI18N
         JLibrosOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JLibrosOpen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JLibrosOpenMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JLibrosOpenMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JLibrosOpenMouseExited(evt);
             }
         });
 
@@ -88,11 +114,17 @@ public class VOpcionesSocio extends javax.swing.JFrame {
             .addComponent(JLibrosOpen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        JPrestamosOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/1467284813_OFFice-90.png"))); // NOI18N
+        JPrestamosOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/IconPrestamos.png"))); // NOI18N
         JPrestamosOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JPrestamosOpen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JPrestamosOpenMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JPrestamosOpenMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JPrestamosOpenMouseExited(evt);
             }
         });
 
@@ -116,6 +148,7 @@ public class VOpcionesSocio extends javax.swing.JFrame {
 
         jMenu1.setText("Opciones");
 
+        JMenuCerrarSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, java.awt.event.InputEvent.SHIFT_MASK));
         JMenuCerrarSesion.setText("Cerrar Sesión");
         JMenuCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,8 +216,23 @@ public class VOpcionesSocio extends javax.swing.JFrame {
     private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
         SalirControlador SalirControlador = new SalirControlador();
         SalirControlador.actionPerformed();
-        this.setVisible(false);
     }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
+
+    private void JLibrosOpenMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLibrosOpenMouseEntered
+        setIcon(JLibrosOpen, ICON_RING);
+    }//GEN-LAST:event_JLibrosOpenMouseEntered
+
+    private void JLibrosOpenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLibrosOpenMouseExited
+        setIcon(JLibrosOpen, ICON_BOOK);
+    }//GEN-LAST:event_JLibrosOpenMouseExited
+
+    private void JPrestamosOpenMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPrestamosOpenMouseEntered
+        setIcon(JPrestamosOpen, ICON_RING);
+    }//GEN-LAST:event_JPrestamosOpenMouseEntered
+
+    private void JPrestamosOpenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPrestamosOpenMouseExited
+        setIcon(JPrestamosOpen, ICON_BORROW);
+    }//GEN-LAST:event_JPrestamosOpenMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel JLibrosOpen;

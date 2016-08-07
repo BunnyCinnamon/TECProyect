@@ -41,7 +41,7 @@ public class LibroBean implements java.io.Serializable {
         this.Autor = Autor;
     }
 
-    public void setNumeroPrestamos(int numeroPrestamos) {
+    public void setNumero(int numeroPrestamos) {
         this.numeroPrestamos = numeroPrestamos;
     }
 
@@ -82,7 +82,7 @@ public class LibroBean implements java.io.Serializable {
         return Autor;
     }
 
-    public int getNumeroPrestamos() {
+    public int getNumero() {
         return numeroPrestamos;
     }
 

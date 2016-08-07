@@ -6,19 +6,19 @@ import Utils.FileReader;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
-@CleanupDone
 /**
- * Vista de Inicio
+ * Descripción: Vista de Inicio
  *
  */
+@CleanupDone
 public class VIniciarSesion extends javax.swing.JFrame {
 
-    private final FileReader FileReader = new FileReader();
+    private static final FileReader FILE_READER = new FileReader();
     private String user = "";
     private String login = "";
 
     /**
-     * Inicia los componentes de la vista y lee el archivo logins.properties.
+     * Descripción: Inicializa la Vista y lee el archivo logins.properties.
      *
      */
     public VIniciarSesion() {
@@ -32,17 +32,19 @@ public class VIniciarSesion extends javax.swing.JFrame {
     }
 
     /**
-     * Lee el contenido del archivo logins.properties y busca por errores en la
-     * configuración. Si la vista tiene el recordar usuario activado el programa
+     * Uso: Lee el contenido del archivo logins.properties y busca por errores
+     * en la configuración.
+     *
+     * Descripción: Si la vista tiene el recordar usuario activado el programa
      * lee el usuario y lo inserta en la vista. Si la vista si no puede leer el
      * archivo, manda un mensaje a la vista.
      *
      */
     @SuppressWarnings("SuspiciousIndentAfterControlStatement")
     private void ReadFile() {
-        if (FileReader.readXML()) {
-            if (FileReader.getLogin().equals("true")) {
-                JUsuarioInicio.setText(FileReader.getUser());
+        if (FILE_READER.readXML()) {
+            if (FILE_READER.getLogin().equals("true")) {
+                JUsuarioInicio.setText(FILE_READER.getUser());
                 JRecordar.setSelected(true);
             }
         } else {
@@ -51,9 +53,11 @@ public class VIniciarSesion extends javax.swing.JFrame {
     }
 
     /**
-     * Encuentra el archivo y lo edita. Busca la ubicación de guardado, edita el
-     * usuario a "n" y login a "true" si el check box esta seleccionado, si no
-     * lo esta edita el login a "false".
+     * Uso: Encuentra el archivo y lo edita.
+     *
+     * Descripción: Busca la ubicación de guardado, edita el usuario a "n" y
+     * login a "true" si el check box esta seleccionado, si no lo esta edita el
+     * login a "false".
      *
      */
     private void saveFile() {
@@ -64,7 +68,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
             user = "";
             login = "false";
         }
-        FileReader.saveToXML(user, login);
+        FILE_READER.saveToXML(user, login);
     }
 
     @SuppressWarnings("unchecked")
@@ -156,7 +160,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
         );
         JSesionIconLayout.setVerticalGroup(
             JSesionIconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jIconSession, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jIconSession, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
         );
 
         JRecordar.setText("Recordar Usuario");
@@ -180,7 +184,8 @@ public class VIniciarSesion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JContraseñaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JIngresar))
                         .addGap(55, 55, 55)
                         .addComponent(JSesionIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -191,9 +196,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(JUsuario)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JRecordar)
-                                    .addComponent(JIngresar))))))
+                                .addComponent(JRecordar)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -205,19 +208,19 @@ public class VIniciarSesion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jUsuario)
                             .addComponent(JUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jContraseña)
                             .addComponent(JContraseñaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(JSesionIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(JSesionIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JIngresar)
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JRecordar)
                     .addComponent(JUsuario))

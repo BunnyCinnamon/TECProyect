@@ -7,11 +7,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@CleanupDone
 /**
- * Conexión a la base de datos
+ * Descripción: Conexión a la base de datos
  *
  */
+@CleanupDone
 public class Connexion {
 
     private static String ipAddress;
@@ -41,6 +41,13 @@ public class Connexion {
         }
     }
 
+    /**
+     * Descripción: Consigue la Conexión a la Base de Datos.
+     *
+     * Variables:
+     *
+     * @return SQLException // Contiene la conexión
+     */
     public static Connection getConnection() throws SQLException {
         if (propertiesDB == null) {
             propertiesDB = ResourceBundle.getBundle("BD");

@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.Otros;
 
 import Classes.Beans.AreaBean;
+import Utils.CleanupDone;
 import Utils.Connexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,12 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 
 /**
+ * Descripción: MYQSL para Área
  *
- * @author Josaded
  */
+@CleanupDone
 public class AreaDAO {
 
     Connection conn;
@@ -31,15 +27,18 @@ public class AreaDAO {
     private final String SQL_MODIFY_REMOVE_AREA = "UPDATE Area SET";
 
     /**
-     * Registra un Área en la base de datos con los datos: id, nombre y estatus,
-     * en el Bean. Busca el id de la nueva área y la ingresa en la Tabla junto
-     * con sus datos
+     * Uso: Registra un Área en la base de datos con los datos: id, nombre y
+     * estatus, en el Bean.
      *
-     * @param t // Contiene el objeto Tabla de la Vista
+     * Descripción: Busca el id de la nueva área y la ingresa en la Tabla junto
+     * con sus datos.
+     *
+     * Variables:
+     *
      * @param Bean // Contiene el nombre del área
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean IngresarArea(DefaultTableModel t, AreaBean Bean) {
+    public boolean IngresarArea(AreaBean Bean) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
@@ -66,7 +65,6 @@ public class AreaDAO {
             if (rs.next()) {
                 Bean.setIdArea(rs.getInt(1));
             }
-            t.addRow(new Object[]{Bean.getIdArea(), Bean.getSeccion(), "Activo"});
             rs.close();
             prs.close();
             conn.close();
@@ -83,8 +81,10 @@ public class AreaDAO {
     }
 
     /**
-     * Modifica un Área con id específico en la base de datos con los datos:
-     * nombre y estatus, en el Bean.
+     * Descripción: Modifica un Área con id específico en la base de datos con
+     * los datos: nombre y estatus, en el Bean.
+     *
+     * Variables:
      *
      * @param Bean // Contiene el id, nombre y estatus del área
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -113,7 +113,9 @@ public class AreaDAO {
     }
 
     /**
-     * Elimina un Área con id específico en la base de datos.
+     * Descripción: Elimina un Área con id específico en la base de datos.
+     *
+     * Variables:
      *
      * @param id // Contiene el id del área
      * @return // Regresa true si es exitosa y false si ocurre un error
