@@ -35,6 +35,9 @@ public class EditorialControlador {
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos de la Editorial", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return false;
+        } else if (!TEXT_CHECKER.checkText(jField[0].toString())) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return false;
         }
         Bean.setNombre(jField[0].toString());
         if (ADM.IngresarEditorial(Bean)) {
@@ -66,6 +69,9 @@ public class EditorialControlador {
         int Select = jTableREditorial.getSelectedRow();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos de la Editorial", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return false;
+        } else if (!TEXT_CHECKER.checkText(jField[0].toString())) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if (Select < 0) {

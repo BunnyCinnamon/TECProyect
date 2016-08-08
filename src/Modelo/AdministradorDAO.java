@@ -409,7 +409,7 @@ public class AdministradorDAO {
             prs.setString(5, Bean.getMunicipio());
             prs.setString(6, Bean.getCalle());
             prs.setInt(7, Bean.getNumero());
-            prs.setInt(8, Bean.getTelefono());
+            prs.setString(8, Bean.getTelefono());
             prs.setString(9, Bean.getUsuario());
             prs.setString(10, new String(secretPass));
             SUCCESS = prs.executeUpdate() == 1;
@@ -455,7 +455,7 @@ public class AdministradorDAO {
             prs.setString(5, Bean.getMunicipio());
             prs.setString(6, Bean.getCalle());
             prs.setInt(7, Bean.getNumero());
-            prs.setInt(8, Bean.getTelefono());
+            prs.setString(8, Bean.getTelefono());
             prs.setString(9, Bean.getUsuario());
             prs.setString(10, Bean.getEstatus());
             prs.setString(11, Bean.getContraseña());

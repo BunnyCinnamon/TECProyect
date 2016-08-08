@@ -174,8 +174,8 @@ public class VAdministrador extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         JInternalBuscar1 = new javax.swing.JInternalFrame();
         JCheckNombre = new javax.swing.JCheckBox();
-        JCheckApellidoP = new javax.swing.JCheckBox();
         JCheckApellidoM = new javax.swing.JCheckBox();
+        JCheckApellidoP = new javax.swing.JCheckBox();
         JBuscarSocio = new javax.swing.JButton();
         JCheckUsuario = new javax.swing.JCheckBox();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -489,21 +489,21 @@ public class VAdministrador extends javax.swing.JFrame {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jISBN4)
-                        .addGap(99, 99, 99)
-                        .addComponent(JAreaLibro, 0, 99, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jISBN3)
-                        .addGap(35, 35, 35)
-                        .addComponent(JLocalizacionLibro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(JLocalizacionLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jNPag3)
                         .addGap(18, 18, 18)
-                        .addComponent(JSpinnerCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(JSpinnerCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jISBN4)
+                        .addGap(18, 18, 18)
+                        .addComponent(JAreaLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -511,17 +511,17 @@ public class VAdministrador extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jNPag3)
-                    .addComponent(JSpinnerCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jISBN3)
                     .addComponent(JLocalizacionLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JAreaLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jISBN4))
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jNPag3)
+                    .addComponent(JSpinnerCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
@@ -748,11 +748,11 @@ public class VAdministrador extends javax.swing.JFrame {
         JCheckNombre.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         JCheckNombre.setText("Nombre");
 
-        JCheckApellidoP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckApellidoP.setText("Segundo Apellido");
-
         JCheckApellidoM.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        JCheckApellidoM.setText("Primer Apellido");
+        JCheckApellidoM.setText("Segundo Apellido");
+
+        JCheckApellidoP.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        JCheckApellidoP.setText("Primer Apellido");
 
         JBuscarSocio.setText("Buscar");
         JBuscarSocio.addActionListener(new java.awt.event.ActionListener() {
@@ -778,8 +778,8 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addGroup(JInternalBuscar1Layout.createSequentialGroup()
                         .addGroup(JInternalBuscar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JCheckNombre)
-                            .addComponent(JCheckApellidoP)
-                            .addComponent(JCheckApellidoM))
+                            .addComponent(JCheckApellidoM)
+                            .addComponent(JCheckApellidoP))
                         .addGap(0, 87, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -789,9 +789,9 @@ public class VAdministrador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(JCheckNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JCheckApellidoM)
-                .addGap(3, 3, 3)
                 .addComponent(JCheckApellidoP)
+                .addGap(3, 3, 3)
+                .addComponent(JCheckApellidoM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JCheckUsuario)
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -1234,6 +1234,12 @@ public class VAdministrador extends javax.swing.JFrame {
 
         JComboEstatusEditorial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
+        JNombreTextEditorial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JNombreTextEditorialKeyTyped(evt);
+            }
+        });
+
         JIngresarNuevoEditorial.setText("Ingresar");
         JIngresarNuevoEditorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1408,6 +1414,12 @@ public class VAdministrador extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel13.setText("Localización");
 
+        JLocalizacionText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JLocalizacionTextKeyTyped(evt);
+            }
+        });
+
         jLayeredPane3.setLayer(jTitulo15, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jScrollPane10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(JModificarLocalizacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1469,6 +1481,12 @@ public class VAdministrador extends javax.swing.JFrame {
 
         jTitulo17.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jTitulo17.setText("Estatus:");
+
+        JAreaText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JAreaTextKeyTyped(evt);
+            }
+        });
 
         JIngresarNuevaArea.setText("Ingresar");
         JIngresarNuevaArea.addActionListener(new java.awt.event.ActionListener() {
@@ -1725,6 +1743,10 @@ public class VAdministrador extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
         Object[] jField = new Object[]{JISBNText.getText(), JTituloText.getText(), JSpinnerNPag.getValue().toString(), JEstadoLibro.getSelectedItem().toString(), JSpinnerCantidad.getValue().toString()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JTituloText, JISBNText, JListAutor, JListEditorial, JAreaLibro, JLocalizacionLibro});
+        if ((!TEXT_CHECKER.checkISBN(jField[0].toString()) && !jField[0].toString().isEmpty()) || (!TEXT_CHECKER.checkText(jField[1].toString()) && !jField[1].toString().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         ArrayList jArray = new ArrayList();
         jArray.add(JListAutor.getSelectedValue());
         jArray.add(JListEditorial.getSelectedValue());
@@ -1736,6 +1758,10 @@ public class VAdministrador extends javax.swing.JFrame {
     private void JModificarLibroTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarLibroTablaActionPerformed
         Object[] jField = new Object[]{JISBNText.getText(), JTituloText.getText(), JSpinnerNPag.getValue().toString(), JEstadoLibro.getSelectedItem().toString(), JSpinnerCantidad.getValue().toString()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JTituloText, JISBNText, JListAutor, JListEditorial, JAreaLibro, JLocalizacionLibro});
+        if ((!TEXT_CHECKER.checkISBN(jField[0].toString()) && !jField[0].toString().isEmpty()) || (!TEXT_CHECKER.checkText(jField[1].toString()) && !jField[1].toString().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         ArrayList jArray = new ArrayList();
         jArray.add(JListAutor.getSelectedValue());
         jArray.add(JListEditorial.getSelectedValue());
@@ -1756,6 +1782,10 @@ public class VAdministrador extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
         Object[] jField = new Object[]{JTituloText.getText(), JISBNText.getText(), JListEditorial.getSelectedValue(), JListAutor.getSelectedValue()};
         boolean[] jSelect = {JCheckTitulo.isSelected(), JCheckAutor.isSelected(), JCheckISBN.isSelected(), JCheckEditorial.isSelected()};
+        if ((!TEXT_CHECKER.checkISBN(jField[1].toString()) && jSelect[2]) || (!TEXT_CHECKER.checkText(jField[0].toString()) && jSelect[0])) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         ADMINISTRADOR_CONTROLER.actionPerformedJBuscarLibro(model, jField, jSelect);
     }//GEN-LAST:event_JBuscarLibroActionPerformed
 
@@ -1765,39 +1795,45 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarSocioActionPerformed
-        String A = JMunicipioTextSocio.getText() + JNombreTextSocio.getText() + JApellidoPTextSocio.getText() + JEstadoTextSocio.getText();
+        String A = JNombreTextSocio.getText() + JApellidoPTextSocio.getText();
         String B = JNCalleTextSocio.getText();
+        String C = JEstadoTextSocio.getText() + JMunicipioTextSocio.getText() + JCalleTextSocio.getText();
+        String D = JTelefonoTextSocio.getText();
         String m = JApellidoMTextSocio.getText();
+        if (m.equals("Campo no Obligatorio")) {
+            m = "";
+        } else if (!TEXT_CHECKER.checkNoNumberText(m)) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         TEXT_CHECKER.checkFieldsColors(new Object[]{JNombreTextSocio, JApellidoPTextSocio, JTelefonoTextSocio, JTextUsuario, JEstadoTextSocio, JMunicipioTextSocio, JCalleTextSocio, JNCalleTextSocio});
-        if (TEXT_CHECKER.ValidadorTexto(A) && TEXT_CHECKER.ValidadorNumero(B)) {
-            if (m.equals("Campo no Obligatorio")) {
-                m = "";
-            } else {
-                TEXT_CHECKER.ValidadorTexto(m);
-            }
+        if (TEXT_CHECKER.checkNoNumberText(A) && TEXT_CHECKER.checkNumber(B) && TEXT_CHECKER.checkDirection(C) && TEXT_CHECKER.checkPhoneNumber(D)) {
             Object[] jField = new Object[]{JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JEstadoTextSocio.getText(), JMunicipioTextSocio.getText(), JCalleTextSocio.getText(), JNCalleTextSocio.getText(), JTelefonoTextSocio.getText(), JTextUsuario.getText()};
             DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
             ADMINISTRADOR_CONTROLER.actionPerformedJIngresarSocio(model, jField, m, JTextContraseñaSocio.getText().toCharArray());
         } else {
-            JOptionPane.showMessageDialog(null, "Sin texto o caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_JIngresarSocioActionPerformed
 
     private void JModificarSocioTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarSocioTablaActionPerformed
-        String A = JMunicipioTextSocio.getText() + JNombreTextSocio.getText() + JApellidoPTextSocio.getText() + JEstadoTextSocio.getText();
-        String B = JTelefonoTextSocio.getText() + JNCalleTextSocio.getText();
+        String A = JNombreTextSocio.getText() + JApellidoPTextSocio.getText();
+        String B = JNCalleTextSocio.getText();
+        String C = JEstadoTextSocio.getText() + JMunicipioTextSocio.getText() + JCalleTextSocio.getText();
+        String D = JTelefonoTextSocio.getText();
         String m = JApellidoMTextSocio.getText();
+        if (m.equals("Campo no Obligatorio")) {
+            m = "";
+        } else if (!TEXT_CHECKER.checkNoNumberText(m)) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         TEXT_CHECKER.checkFieldsColors(new Object[]{JNombreTextSocio, JApellidoPTextSocio, JTelefonoTextSocio, JTextUsuario, JEstadoTextSocio, JMunicipioTextSocio, JCalleTextSocio, JNCalleTextSocio});
-        if (TEXT_CHECKER.ValidadorTexto(A) && TEXT_CHECKER.ValidadorNumero(B)) {
-            if (m.equals("Campo no Obligatorio")) {
-                m = "";
-            } else {
-                TEXT_CHECKER.ValidadorTexto(m);
-            }
+        if (TEXT_CHECKER.checkNoNumberText(A) && TEXT_CHECKER.checkNumber(B) && TEXT_CHECKER.checkDirection(C) && TEXT_CHECKER.checkPhoneNumber(D)) {
             Object[] jField = new Object[]{JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JEstatusSocio.getSelectedItem().toString(), JEstadoTextSocio.getText(), JMunicipioTextSocio.getText(), JCalleTextSocio.getText(), JNCalleTextSocio.getText(), JTelefonoTextSocio.getText(), JTextUsuario.getText(), JTextContraseñaSocio.getText()};
             ADMINISTRADOR_CONTROLER.actionPerformedJModificarSocio(JTableRSocio, jField, m);
         } else {
-            JOptionPane.showMessageDialog(null, "Sin texto o caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_JModificarSocioTablaActionPerformed
 
@@ -1811,7 +1847,17 @@ public class VAdministrador extends javax.swing.JFrame {
     private void JBuscarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarSocioActionPerformed
         DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
         Object[] jField = new Object[]{JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JApellidoMTextSocio.getText(), JTextUsuario.getText()};
-        boolean[] jSelect = {JCheckNombre.isSelected(), JCheckApellidoP.isSelected(), JCheckApellidoM.isSelected(), JCheckUsuario.isSelected()};
+        boolean[] jSelect = {JCheckNombre.isSelected(), JCheckApellidoM.isSelected(), JCheckApellidoP.isSelected(), JCheckUsuario.isSelected()};
+        if (jField[2].toString().equals("Campo no Obligatorio")) {
+            jField[2] = "";
+        } else if ((!TEXT_CHECKER.checkNoNumberText(jField[2].toString()) && jSelect[2])) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if ((!TEXT_CHECKER.checkNoNumberText(jField[0].toString()) && jSelect[0]) || (!TEXT_CHECKER.checkNoNumberText(jField[1].toString()) && jSelect[1]) || (!TEXT_CHECKER.checkEmail(jField[3].toString()) && jSelect[3])) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         ADMINISTRADOR_CONTROLER.actionPerformedJBuscarSocio(model, jField, jSelect);
     }//GEN-LAST:event_JBuscarSocioActionPerformed
 
@@ -1824,11 +1870,12 @@ public class VAdministrador extends javax.swing.JFrame {
         String A = JNombreTextAutor.getText() + JApellidoPAutor.getText();
         String m = JApellidoMAutor.getText();
         TEXT_CHECKER.checkFieldsColors(new Object[]{JNombreTextAutor, JApellidoPAutor});
-        if (TEXT_CHECKER.ValidadorTexto(A)) {
+        if (TEXT_CHECKER.checkNoNumberText(A) && !A.isEmpty()) {
             if (m.equals("Campo no Obligatorio")) {
                 m = "";
-            } else {
-                TEXT_CHECKER.ValidadorTexto(m);
+            } else if (!TEXT_CHECKER.checkNoNumberText(m)) {
+                JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
             DefaultTableModel model = (DefaultTableModel) JTableRAutor.getModel();
             Object[] jField = new Object[]{JNombreTextAutor.getText(), JApellidoPAutor.getText()};
@@ -1843,11 +1890,13 @@ public class VAdministrador extends javax.swing.JFrame {
     private void JModificarAutorTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarAutorTablaActionPerformed
         String A = JNombreTextAutor.getText() + JApellidoPAutor.getText();
         String m = JApellidoMAutor.getText();
-        if (TEXT_CHECKER.ValidadorTexto(A)) {
+        TEXT_CHECKER.checkFieldsColors(new Object[]{JNombreTextAutor, JApellidoPAutor});
+        if (TEXT_CHECKER.checkNoNumberText(A) && !A.isEmpty()) {
             if (m.equals("Campo no Obligatorio")) {
                 m = "";
-            } else {
-                TEXT_CHECKER.ValidadorTexto(m);
+            } else if (!TEXT_CHECKER.checkNoNumberText(m)) {
+                JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
             Object[] jField = new Object[]{JNombreTextAutor.getText(), JApellidoPAutor.getText(), JComboEstatusAutor.getSelectedItem().toString()};
             if (ADMINISTRADOR_CONTROLER.actionPerformedJModificarAutor(JTableRAutor, jField, m)) {
@@ -1872,6 +1921,17 @@ public class VAdministrador extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) JTableRAutor.getModel();
         Object[] jField = new Object[]{JNombreTextAutor.getText(), JApellidoPAutor.getText(), JApellidoMAutor.getText()};
         boolean[] jSelect = {JCheckNombreAutor.isSelected(), JCheckApellidoPAutor.isSelected(), JCheckApellidoMAutor.isSelected()};
+        String m = JApellidoMAutor.getText();
+        if (m.equals("Campo no Obligatorio")) {
+            m = "";
+        } else if (!TEXT_CHECKER.checkNoNumberText(m) && jSelect[2]) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if ((!TEXT_CHECKER.checkNoNumberText(jField[0].toString()) && jSelect[0]) || (!TEXT_CHECKER.checkNoNumberText(jField[1].toString()) && jSelect[1])) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         ADMINISTRADOR_CONTROLER.actionPerformedJBuscarAutor(model, jField, jSelect);
     }//GEN-LAST:event_JBuscarAutorActionPerformed
 
@@ -1971,22 +2031,23 @@ public class VAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JEstadisticasActionPerformed
 
     private void JTituloTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTituloTextKeyTyped
-
+        TEXT_CHECKER.checkColors(JTituloText);
     }//GEN-LAST:event_JTituloTextKeyTyped
 
     private void JNombreTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextSocioKeyTyped
-        TEXT_CHECKER.checkColors(JNombreTextSocio);
+        TEXT_CHECKER.checkColorsNoNumber(JNombreTextSocio);
     }//GEN-LAST:event_JNombreTextSocioKeyTyped
 
     private void JApellidoPTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPTextSocioKeyTyped
-        TEXT_CHECKER.checkColors(JApellidoPTextSocio);
+        TEXT_CHECKER.checkColorsNoNumber(JApellidoPTextSocio);
     }//GEN-LAST:event_JApellidoPTextSocioKeyTyped
 
     private void JApellidoMTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMTextSocioKeyTyped
-        TEXT_CHECKER.checkColors(JApellidoMTextSocio);
         if (JApellidoMTextSocio.getText().isEmpty()) {
             JApellidoMTextSocio.setText("Campo no Obligatorio");
             JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
+        } else {
+            TEXT_CHECKER.checkColorsNoNumber(JApellidoMTextSocio);
         }
     }//GEN-LAST:event_JApellidoMTextSocioKeyTyped
 
@@ -1994,25 +2055,28 @@ public class VAdministrador extends javax.swing.JFrame {
         if (evt.getKeyChar() == ' ') {
             evt.setKeyChar('_');
         }
-        TEXT_CHECKER.checkColors(JEstadoTextSocio);
+        TEXT_CHECKER.checkColorsDirection(JEstadoTextSocio);
     }//GEN-LAST:event_JEstadoTextSocioKeyTyped
 
     private void JMunicipioTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JMunicipioTextSocioKeyTyped
         if (evt.getKeyChar() == ' ') {
             evt.setKeyChar('_');
         }
-        TEXT_CHECKER.checkColors(JMunicipioTextSocio);
+        TEXT_CHECKER.checkColorsDirection(JMunicipioTextSocio);
     }//GEN-LAST:event_JMunicipioTextSocioKeyTyped
 
     private void JCalleTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCalleTextSocioKeyTyped
         if (evt.getKeyChar() == ' ') {
             evt.setKeyChar('_');
         }
-        TEXT_CHECKER.checkColors(JCalleTextSocio);
+        TEXT_CHECKER.checkColorsDirection(JCalleTextSocio);
     }//GEN-LAST:event_JCalleTextSocioKeyTyped
 
     private void JTelefonoTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTelefonoTextSocioKeyTyped
-        if (!TEXT_CHECKER.ValidadorNumero(JTelefonoTextSocio.getText())) {
+        if (evt.getKeyChar() == ' ') {
+            evt.setKeyChar('-');
+        }
+        if (!TEXT_CHECKER.checkPhoneNumber(JTelefonoTextSocio.getText())) {
             JTelefonoTextSocio.setForeground(new Color(204, 0, 0));
         } else {
             JTelefonoTextSocio.setForeground(Color.black);
@@ -2020,14 +2084,16 @@ public class VAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JTelefonoTextSocioKeyTyped
 
     private void JNCalleTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNCalleTextSocioKeyTyped
-        if (!TEXT_CHECKER.ValidadorNumero(JNCalleTextSocio.getText())) {
-            JNCalleTextSocio.setForeground(new Color(204, 0, 0));
-        } else {
-            JNCalleTextSocio.setForeground(Color.black);
+        if (evt.getKeyChar() == ' ') {
+            evt.setKeyChar('0');
         }
+        TEXT_CHECKER.checkColorsNumber(JNCalleTextSocio);
     }//GEN-LAST:event_JNCalleTextSocioKeyTyped
 
     private void JTextUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextUsuarioKeyTyped
+        if (evt.getKeyChar() == ' ') {
+            evt.setKeyChar('-');
+        }
         if (!TEXT_CHECKER.checkEmail(JTextUsuario.getText())) {
             JTextUsuario.setForeground(new Color(204, 0, 0));
         } else {
@@ -2036,15 +2102,15 @@ public class VAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JTextUsuarioKeyTyped
 
     private void JNombreTextAutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextAutorKeyTyped
-        TEXT_CHECKER.checkColors(JNombreTextAutor);
+        TEXT_CHECKER.checkColorsNoNumber(JNombreTextAutor);
     }//GEN-LAST:event_JNombreTextAutorKeyTyped
 
     private void JApellidoPAutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPAutorKeyTyped
-        TEXT_CHECKER.checkColors(JApellidoPAutor);
+        TEXT_CHECKER.checkColorsNoNumber(JApellidoPAutor);
     }//GEN-LAST:event_JApellidoPAutorKeyTyped
 
     private void JApellidoMAutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMAutorKeyTyped
-        TEXT_CHECKER.checkColors(JApellidoMAutor);
+        TEXT_CHECKER.checkColorsNoNumber(JApellidoMAutor);
         if (JApellidoMAutor.getText().isEmpty()) {
             JApellidoMAutor.setText("Campo no Obligatorio");
             JApellidoMAutor.setForeground(new Color(0, 153, 0));
@@ -2109,12 +2175,27 @@ public class VAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JApellidoMAutorMouseClicked
 
     private void JISBNTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyTyped
-        if (!TEXT_CHECKER.ValidadorISBN(JISBNText.getText())) {
+        if (evt.getKeyChar() == ' ') {
+            evt.setKeyChar('-');
+        }
+        if (!TEXT_CHECKER.checkISBN(JISBNText.getText())) {
             JISBNText.setForeground(new Color(204, 0, 0));
         } else {
             JISBNText.setForeground(Color.black);
         }
     }//GEN-LAST:event_JISBNTextKeyTyped
+
+    private void JNombreTextEditorialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextEditorialKeyTyped
+        TEXT_CHECKER.checkColors(JNombreTextEditorial);
+    }//GEN-LAST:event_JNombreTextEditorialKeyTyped
+
+    private void JLocalizacionTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JLocalizacionTextKeyTyped
+        TEXT_CHECKER.checkColors(JLocalizacionText);
+    }//GEN-LAST:event_JLocalizacionTextKeyTyped
+
+    private void JAreaTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JAreaTextKeyTyped
+        TEXT_CHECKER.checkColors(JAreaText);
+    }//GEN-LAST:event_JAreaTextKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField JApellidoMAutor;

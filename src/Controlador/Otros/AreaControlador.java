@@ -35,6 +35,9 @@ public class AreaControlador {
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Área", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return false;
+        } else if (!TEXT_CHECKER.checkText(jField[0].toString())) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return false;
         }
         Bean.setSeccion(jField[0].toString());
         if (ADM.IngresarArea(Bean)) {
@@ -66,6 +69,9 @@ public class AreaControlador {
         int Select = jTableRArea.getSelectedRow();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Área", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return false;
+        } else if (!TEXT_CHECKER.checkText(jField[0].toString())) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if (Select < 0) {

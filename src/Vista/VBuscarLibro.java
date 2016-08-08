@@ -5,9 +5,11 @@ import Controlador.BuscarLibroControlador;
 import Controlador.CargarInfoControlador;
 import Utils.Autocompleter;
 import Utils.CleanupDone;
+import Utils.TextChecker;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 @CleanupDone
 public class VBuscarLibro extends javax.swing.JFrame {
 
+    private static final TextChecker TEXT_CHECKER = new TextChecker();
     private static final BuscarLibroControlador BUSCAR_LIBRO_CONTROLER = new BuscarLibroControlador();
 
     /**
@@ -402,7 +405,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }//GEN-LAST:event_JRegresarActionPerformed
 
     private void JAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAsignarActionPerformed
-        
+
     }//GEN-LAST:event_JAsignarActionPerformed
 
     private void JDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JDetallesActionPerformed
@@ -414,6 +417,10 @@ public class VBuscarLibro extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) JTableBLibro.getModel();
         Object[] jField = new Object[]{JTituloText.getText(), JISBNText.getText(), JListEditorial.getSelectedValue(), JListAutor.getSelectedValue()};
         boolean[] jSelect = {JCheckTitulo.isSelected(), JCheckAutor.isSelected(), JCheckISBN.isSelected(), JCheckEditorial.isSelected()};
+        if ((!TEXT_CHECKER.checkISBN(jField[1].toString()) && jSelect[2]) || (!TEXT_CHECKER.checkText(jField[0].toString()) && jSelect[0])) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         BUSCAR_LIBRO_CONTROLER.actionPerformedJBuscarLibro(model, jField, jSelect);
     }//GEN-LAST:event_JBuscarLibroActionPerformed
 

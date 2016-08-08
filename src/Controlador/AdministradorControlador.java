@@ -137,7 +137,7 @@ public class AdministradorControlador {
             return;
         }
         String isbn = jField[0].toString();
-        if (!TEXT_CHECKER.checkLenght(isbn, 10, 13) && TEXT_CHECKER.ValidadorISBN(isbn)) {
+        if (!TEXT_CHECKER.checkLenght(isbn, 10, 13) && TEXT_CHECKER.checkISBN(isbn)) {
             JOptionPane.showMessageDialog(null, "ISBN debe tener 10 ó 13 números", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -289,13 +289,13 @@ public class AdministradorControlador {
         Bean.setMunicipio(jField[3].toString());
         Bean.setCalle(jField[4].toString());
         Bean.setNumero(Integer.parseInt(jField[5].toString()));
-        Bean.setTelefono(Integer.parseInt(jField[6].toString()));
+        Bean.setTelefono(jField[6].toString());
         Bean.setUsuario(jField[7].toString());
         if (ADM.IngresarSocio(Bean, secretPass)) {
             jModel.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + "#" + Bean.getNumero(), Bean.getTelefono(), "Activo", Bean.getPrestamos(), Bean.getUsuario(), "**********"});
             JOptionPane.showMessageDialog(null, "El Socio ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "No se agregó el Socio correctamente", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se agregó el Socio correctamente ¿Usuario duplicado?", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -363,7 +363,7 @@ public class AdministradorControlador {
             Bean.setMunicipio(jField[4].toString());
             Bean.setCalle(jField[5].toString());
             Bean.setNumero(Integer.parseInt(jField[6].toString()));
-            Bean.setTelefono(Integer.parseInt(jField[7].toString()));
+            Bean.setTelefono(jField[7].toString());
             Bean.setUsuario(jField[8].toString());
             Bean.setContraseña(jField[9].toString());
             if (ADM.ModificarSocio(Bean)) {

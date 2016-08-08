@@ -15,7 +15,39 @@ import javax.swing.JTextField;
 public class TextChecker {
 
     /**
-     * Uso: Verificar Nombre Válido de Socio.
+     * Uso: Verificar texto válido en latino.
+     *
+     * Descripción: Compara el texto con un texto común.
+     *
+     * Variables:
+     *
+     * @param a // Contiene el objeto String
+     * @return // Regresa true o false si el texto coincide
+     */
+    public boolean checkText(String a) {
+        Pattern pat = Pattern.compile("^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_:()´&?!\\-\\s]+$");
+        Matcher mat = pat.matcher(a);
+        return mat.matches();
+    }
+
+    /**
+     * Uso: Verificar texto válido en latino.
+     *
+     * Descripción: Compara el texto con un texto sin números.
+     *
+     * Variables:
+     *
+     * @param a // Contiene el objeto String
+     * @return // Regresa true o false si el texto coincide
+     */
+    public boolean checkNoNumberText(String a) {
+        Pattern pat = Pattern.compile("^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ´\\s]+$");
+        Matcher mat = pat.matcher(a);
+        return mat.matches();
+    }
+
+    /**
+     * Uso: Verificar texto válido en latino con "_".
      *
      * Descripción: Reemplaza los espacios por underscores "_" y compara el
      * texto con un texto.
@@ -25,15 +57,14 @@ public class TextChecker {
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
      */
-    public boolean ValidadorTexto(String a) {
-        String replaceAll = a.replaceAll(" ", "_");
-        Pattern pat = Pattern.compile("^[a-zA-Z_]*");
-        Matcher mat = pat.matcher(replaceAll);
+    public boolean checkDirection(String a) {
+        Pattern pat = Pattern.compile("^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_´]+$");
+        Matcher mat = pat.matcher(a);
         return mat.matches();
     }
 
     /**
-     * Verificar Número Válido de Socio.
+     * Uso: Verificar Número Válido.
      *
      * Descripción: Compara el texto con un número.
      *
@@ -42,14 +73,30 @@ public class TextChecker {
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
      */
-    public boolean ValidadorNumero(String a) {
+    public boolean checkNumber(String a) {
         Pattern pat = Pattern.compile("[0-9]+");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
 
     /**
-     * Uso: Verificar Número Válido de Socio.
+     * Uso: Verificar Número Válido de Teléfono.
+     *
+     * Descripción: Compara el texto con un número.
+     *
+     * Variables:
+     *
+     * @param a // Contiene el objeto String
+     * @return // Regresa true o false si el texto coincide
+     */
+    public boolean checkPhoneNumber(String a) {
+        Pattern pat = Pattern.compile("^[0-9-()+]{3,20}");
+        Matcher mat = pat.matcher(a);
+        return mat.matches();
+    }
+
+    /**
+     * Uso: Verificar Número Válido de ISBN.
      *
      * Descripción: Compara el texto con un isbn.
      *
@@ -58,15 +105,30 @@ public class TextChecker {
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
      */
-    public boolean ValidadorISBN(String a) {
+    public boolean checkISBN(String a) {
         Pattern pat = Pattern.compile("[0-9-]+");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
 
     /**
-     * Uso: Checar si los Textos son correctos. Si no validan, el texto se torna
-     * rojo.
+     * Uso: Checar si el Texto es email.
+     *
+     * Descripción: Compara el texto con un email.
+     *
+     * Variables:
+     *
+     * @param text // Contiene el objeto String
+     * @return // Regresa true si tiene un email
+     */
+    public boolean checkEmail(String text) {
+        Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mat = pat.matcher(text);
+        return mat.matches();
+    }
+
+    /**
+     * Uso: Checar si los Textos son correctos.
      *
      * Descripción: Valida el texto en el text field, y le asigna un color de
      * fondo dependiendo del resultado.
@@ -76,7 +138,61 @@ public class TextChecker {
      * @param JText // Contiene el objeto Text Field
      */
     public void checkColors(JTextField JText) {
-        if (!ValidadorTexto(JText.getText())) {
+        if (!checkText(JText.getText())) {
+            JText.setForeground(new Color(204, 0, 0));
+        } else {
+            JText.setForeground(Color.black);
+        }
+    }
+
+    /**
+     * Uso: Checar si los Textos son correctos.
+     *
+     * Descripción: Valida el texto en el text field, y le asigna un color de
+     * fondo dependiendo del resultado.
+     *
+     * Variables:
+     *
+     * @param JText // Contiene el objeto Text Field
+     */
+    public void checkColorsNoNumber(JTextField JText) {
+        if (!checkNoNumberText(JText.getText())) {
+            JText.setForeground(new Color(204, 0, 0));
+        } else {
+            JText.setForeground(Color.black);
+        }
+    }
+
+    /**
+     * Uso: Checar si los Textos son correctos.
+     *
+     * Descripción: Valida el texto en el text field, y le asigna un color de
+     * fondo dependiendo del resultado.
+     *
+     * Variables:
+     *
+     * @param JText // Contiene el objeto Text Field
+     */
+    public void checkColorsDirection(JTextField JText) {
+        if (!checkDirection(JText.getText())) {
+            JText.setForeground(new Color(204, 0, 0));
+        } else {
+            JText.setForeground(Color.black);
+        }
+    }
+
+    /**
+     * Uso: Checar si los Textos son correctos.
+     *
+     * Descripción: Valida el texto en el text field, y le asigna un color de
+     * fondo dependiendo del resultado.
+     *
+     * Variables:
+     *
+     * @param JText // Contiene el objeto Text Field
+     */
+    public void checkColorsNumber(JTextField JText) {
+        if (!checkNumber(JText.getText())) {
             JText.setForeground(new Color(204, 0, 0));
         } else {
             JText.setForeground(Color.black);
@@ -95,12 +211,12 @@ public class TextChecker {
      */
     public void checkFieldsColors(Object[] obj) {
         for (Object obj1 : obj) {
-            String text;
             Color col = new Color(255, 204, 255);
             if (obj1 instanceof JTextField) {
                 JTextField field = (JTextField) obj1;
+                String text;
                 text = field.getText();
-                if (text.isEmpty()) {
+                if (text.isEmpty() || !checkText(text)) {
                     field.setBackground(col);
                 } else {
                     field.setBackground(Color.white);
@@ -144,22 +260,6 @@ public class TextChecker {
             }
         }
         return count == m || count == n;
-    }
-
-    /**
-     * Uso: Checar si el Texto es email.
-     *
-     * Descripción: Compara el texto con un email.
-     *
-     * Variables:
-     *
-     * @param text // Contiene el objeto String
-     * @return // Regresa true si tiene un email
-     */
-    public boolean checkEmail(String text) {
-        Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        Matcher mat = pat.matcher(text);
-        return mat.matches();
     }
 
     /**

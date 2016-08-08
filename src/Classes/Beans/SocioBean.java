@@ -10,7 +10,7 @@ public class SocioBean implements java.io.Serializable {
     private String municipio;
     private String calle;
     private int numero;
-    private int telefono;
+    private String telefono;
     private String usuario;
     private int Prestamos;
     private String Estatus;
@@ -52,7 +52,7 @@ public class SocioBean implements java.io.Serializable {
         this.numero = numero;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -105,7 +105,7 @@ public class SocioBean implements java.io.Serializable {
         return numero;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 

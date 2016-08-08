@@ -1,6 +1,7 @@
 package Modelo;
 
 import Classes.Beans.LibroBean;
+import Classes.Beans.SocioBean;
 import Utils.CleanupDone;
 import Utils.Connexion;
 import java.sql.Connection;
@@ -26,7 +27,9 @@ public class BuscarLibroDAO {
      * Funciones de Libro*
      */
     private final String SQL_SEARCH_BOOKS = "SELECT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo,Existencias FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F,Ejemplar G WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND G.Libro=IdLibro AND F.Libro=A.IdLibro";
+    private final String SQL_SEARCH_SOCIO = "SELECT IdSocio,Nombre,ApellidoP,ApellidoM,CONCAT(Estado,' ',Municipio,' ',Calle,' ',Numero),Telefono,Estatus,Prestamos,Usuario FROM Socio";
     private static final String ORDER = " ORDER BY IdLibro";
+    private final String ORDER_SOCIO = " ORDER BY Prestamos DESC";
 
     /**
      * Uso: Busca todos Libros con los datos de titulo, isbn, autor y editorial,
@@ -188,4 +191,165 @@ public class BuscarLibroDAO {
             }
         }
     }
+
+    /**
+     * Uso: Busca todos Socios con los datos de nombre, apellido paterno,
+     * apellido materno, usuario, accion en la base de datos.
+     *
+     * Descripción: Con la acción, busca los socios que tienen los datos
+     * similares. Ingresa los datos encontrados con los datos del socio en un
+     * array list. Ingresa el array list en la tabla, elimina los datos del
+     * array list y repite hasta encontrar todos los datos.
+     *
+     * Variables:
+     *
+     * @param t // Contiene el objeto Tabla de la Vista
+     * @param Bean // Contiene los datos del Libro
+     * @param action // Contiene el tipo de acción 0-15 segun la búsqueda
+     */
+    public void BuscarSocio(DefaultTableModel t, SocioBean Bean, int action) {
+        ArrayList<String> Array = new ArrayList<String>();
+        try {
+            conn = Connexion.getConnection();
+            ResultSet rs = null;
+            PreparedStatement prs = null;
+            switch (action) {
+                case 0: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + ORDER_SOCIO);
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 1: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Nombre like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getNombre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 2: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoP like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 3: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 4: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Usuario like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 5: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND Nombre like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 6: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? Nombre like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 7: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoP like ? AND Nombre like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoP() + "%");
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 8: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND ApellidoP like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getApellidoP() + "%");
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 9: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND ApellidoP like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    prs.setString(2, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 10: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND ApellidoM like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    prs.setString(2, '%' + Bean.getApellidoM() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 11: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Nombre like ? AND ApellidoP like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
+                    prs.setString(3, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 12: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Usuario like ? AND Nombre like ? AND ApellidoP like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getUsuario() + '%');
+                    prs.setString(2, '%' + Bean.getNombre() + '%');
+                    prs.setString(3, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 13: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Usuario like ? AND ApellidoP like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getUsuario() + '%');
+                    prs.setString(3, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 14: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Usuario like ? AND Nombre like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getUsuario() + '%');
+                    prs.setString(3, '%' + Bean.getNombre() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+                case 15: {
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Usuario like ? AND Nombre like ? AND ApellidoP like ?" + ORDER_SOCIO);
+                    prs.setString(1, '%' + Bean.getApellidoM() + '%');
+                    prs.setString(2, '%' + Bean.getUsuario() + '%');
+                    prs.setString(3, '%' + Bean.getNombre() + '%');
+                    prs.setString(4, '%' + Bean.getApellidoP() + '%');
+                    rs = prs.executeQuery();
+                    break;
+                }
+            }
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            t.setRowCount(0);
+            while (rs.next()) {
+                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    Array.add(rs.getString(columnIndex));
+                }
+                Array.add("**********");
+                t.addRow(Array.toArray());
+                Array.clear();
+            }
+            rs.close();
+            prs.close();
+            conn.close();
+        } catch (SQLException n) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+            }
+        }
+    }
+
 }

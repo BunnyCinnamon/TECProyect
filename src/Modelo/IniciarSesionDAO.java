@@ -96,7 +96,7 @@ public class IniciarSesionDAO {
                 adm.setMunicipio(rs.getString(6));
                 adm.setCalle(rs.getString(7));
                 adm.setNumero(rs.getInt(8));
-                adm.setTelefono(rs.getInt(9));
+                adm.setTelefono(rs.getString(9));
                 adm.setUsuario(rs.getString(10));
                 CORRECT = true;
             }

@@ -3,6 +3,7 @@ package Vista;
 import Controlador.IniciarSesionControlador;
 import Utils.CleanupDone;
 import Utils.FileReader;
+import Utils.TextChecker;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
@@ -12,7 +13,8 @@ import javax.swing.ImageIcon;
  */
 @CleanupDone
 public class VIniciarSesion extends javax.swing.JFrame {
-
+    
+    private static final TextChecker TEXT_CHECKER = new TextChecker();
     private static final FileReader FILE_READER = new FileReader();
     private String user = "";
     private String login = "";
@@ -70,7 +72,7 @@ public class VIniciarSesion extends javax.swing.JFrame {
         }
         FILE_READER.saveToXML(user, login);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -232,6 +234,10 @@ public class VIniciarSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarActionPerformed
+        if (JUsuarioInicio.getText().isEmpty() || JContraseñaInicio.getText().isEmpty()) {
+            JAnounce.setText("Por favor ingrese un Usuario y Contraseña");
+            return;
+        }
         IniciarSesionControlador IniciarSesionControlador = new IniciarSesionControlador();
         saveFile();
         IniciarSesionControlador.actionPerformed(this);

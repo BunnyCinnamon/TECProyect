@@ -89,6 +89,60 @@ public class BuscarLibroControlador {
     }
 
     /**
+     * Uso: Buscar Socios.
+     *
+     * Descripción: Crea un nuevo socio bean, ingresa los valores de los text
+     * fiels en el bean y consigue la acción dependiendo de los combo box
+     * seleccionados. Envia el bean y la acción al dao correspondiente.
+     *
+     * Variables:
+     *
+     * @param jModel // Contiene el objeto Tabla de la Vista
+     * @param jField // Contiene los objetos de Texto
+     * @param jSelect // Contiene los objetos de selección
+     */
+    public void actionPerformedJBuscarSocio(DefaultTableModel jModel, Object[] jField, boolean[] jSelect) {
+        int action = 0;
+        SocioBean Bean = new SocioBean();
+        Bean.setNombre(jField[0].toString());
+        Bean.setApellidoP(jField[1].toString());
+        Bean.setApellidoM(jField[2].toString());
+        Bean.setUsuario(jField[3].toString());
+        if (jSelect[0] && (!jSelect[1] && !jSelect[2] && !jSelect[3])) {
+            action = 1;
+        } else if (jSelect[2] && (!jSelect[1] && !jSelect[0] && !jSelect[3])) {
+            action = 2;
+        } else if (jSelect[1] && (!jSelect[0] && !jSelect[2] && !jSelect[3])) {
+            action = 3;
+        } else if (jSelect[3] && (!jSelect[0] && !jSelect[2] && !jSelect[1])) {
+            action = 4;
+        } else if (jSelect[3] && jSelect[0] && (!jSelect[2] && !jSelect[1])) {
+            action = 5;
+        } else if (jSelect[1] && jSelect[0] && (!jSelect[2] && !jSelect[3])) {
+            action = 6;
+        } else if (jSelect[2] && jSelect[0] && (!jSelect[3] && !jSelect[1])) {
+            action = 7;
+        } else if (jSelect[2] && jSelect[1] && (!jSelect[3] && !jSelect[0])) {
+            action = 8;
+        } else if (jSelect[2] && jSelect[3] && (!jSelect[0] && !jSelect[1])) {
+            action = 9;
+        } else if (jSelect[3] && jSelect[1] && (!jSelect[0] && !jSelect[2])) {
+            action = 10;
+        } else if (jSelect[0] && jSelect[2] && jSelect[1] && (!jSelect[3])) {
+            action = 11;
+        } else if (jSelect[0] && jSelect[2] && jSelect[3] && (!jSelect[1])) {
+            action = 12;
+        } else if (jSelect[2] && jSelect[1] && jSelect[3] && (!jSelect[0])) {
+            action = 13;
+        } else if (jSelect[0] && jSelect[1] && jSelect[3] && (!jSelect[2])) {
+            action = 14;
+        } else if (jSelect[3] && jSelect[1] && jSelect[0] && jSelect[2]) {
+            action = 15;
+        }
+        ADM.BuscarSocio(jModel, Bean, action);
+    }
+
+    /**
      * Uso: Pedir Prestamo de Libro.
      *
      * Descripción: Si no hay un libro seleccionado un Texto se muestra en
