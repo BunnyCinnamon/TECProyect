@@ -74,81 +74,67 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
-            conn.close();
         } catch (SQLException n) {
             Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
+            ////////////////////////////////////////////////////////////////////////
             try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                conn = Connexion.getConnection();
+                PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AREA + " WHERE EstatusArea='Activo' ORDER BY IdArea");
+                ResultSet rs = prs.executeQuery();
+                jFieldCombo[1].addItem("Sin Selección");
+                while (rs.next()) {
+                    jFieldCombo[1].addItem("" + rs.getString(1) + ": " + rs.getString(2));
+                }
+                rs.close();
+                prs.close();
+            } catch (SQLException n) {
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+            } finally {
+                ////////////////////////////////////////////////////////////////////////
+                try {
+                    conn = Connexion.getConnection();
+                    PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE EstatusAutor='Activo'  ORDER BY IdAutor");
+                    ResultSet rs = prs.executeQuery();
+                    ModelAutor.addElement("Sin Selección");
+                    while (rs.next()) {
+                        ModelAutor.addElement(rs.getString(1) + ": " + rs.getString(2));
+                    }
+                    rs.close();
+                    prs.close();
+                    jFieldList[0].setModel(ModelAutor);
+                } catch (SQLException n) {
+                    Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                } finally {
+                    ////////////////////////////////////////////////////////////////////////
+                    try {
+                        conn = Connexion.getConnection();
+                        PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo'  ORDER BY IdEditorial");
+                        ResultSet rs = prs.executeQuery();
+                        ModelEditorial.addElement("Sin Selección");
+                        while (rs.next()) {
+                            ModelEditorial.addElement(rs.getString(1) + ": " + rs.getString(2));
+                        }
+                        rs.close();
+                        prs.close();
+                        jFieldList[1].setModel(ModelEditorial);
+                        SUCCESS = true;
+                    } catch (SQLException n) {
+                        Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                    } finally {
+                        try {
+                            conn.close();
+                        } catch (SQLException m) {
+                            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                        }
+                    }
+                }
             }
         }
-        ////////////////////////////////////////////////////////////////////////
         try {
-            conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AREA + " WHERE EstatusArea='Activo' ORDER BY IdArea");
-            ResultSet rs = prs.executeQuery();
-            jFieldCombo[1].addItem("Sin Selección");
-            while (rs.next()) {
-                jFieldCombo[1].addItem("" + rs.getString(1) + ": " + rs.getString(2));
-            }
-            rs.close();
-            prs.close();
             conn.close();
-        } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        try {
-            conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE EstatusAutor='Activo'  ORDER BY IdAutor");
-            ResultSet rs = prs.executeQuery();
-            ModelAutor.addElement("Sin Selección");
-            while (rs.next()) {
-                ModelAutor.addElement(rs.getString(1) + ": " + rs.getString(2));
-            }
-            rs.close();
-            prs.close();
-            conn.close();
-            jFieldList[0].setModel(ModelAutor);
-        } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        try {
-            conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo'  ORDER BY IdEditorial");
-            ResultSet rs = prs.executeQuery();
-            ModelEditorial.addElement("Sin Selección");
-            while (rs.next()) {
-                ModelEditorial.addElement(rs.getString(1) + ": " + rs.getString(2));
-            }
-            rs.close();
-            prs.close();
-            conn.close();
-            jFieldList[1].setModel(ModelEditorial);
-            SUCCESS = true;
-        } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
+        } catch (SQLException m) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
         }
         return SUCCESS;
     }

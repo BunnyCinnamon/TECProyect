@@ -103,6 +103,8 @@ public class VPrestamos extends javax.swing.JFrame {
         JRegresar = new javax.swing.JButton();
         JRecargar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        JMenuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Préstamos");
@@ -202,6 +204,21 @@ public class VPrestamos extends javax.swing.JFrame {
                 JRecargarActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("Opciones");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        JMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        JMenuSalir.setText("Salir");
+        JMenuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(JMenuSalir);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,7 +262,7 @@ public class VPrestamos extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addComponent(JTabbedPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(JRecargar)
@@ -283,11 +300,16 @@ public class VPrestamos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JRecargarActionPerformed
 
+    private void JMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_JMenuSalirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox JCheckExpirado;
     private javax.swing.JButton JDetalles;
     private javax.swing.JInternalFrame JInternalEditar1;
     private javax.swing.JButton JLiberarSeleccion;
+    private javax.swing.JMenuItem JMenuSalir;
     private javax.swing.JButton JRecargar;
     private javax.swing.JButton JRegresar;
     private javax.swing.JTabbedPane JTabbedPrestamos;
@@ -295,6 +317,7 @@ public class VPrestamos extends javax.swing.JFrame {
     private javax.swing.JLabel jIconLeeyAprende;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel jRegistrarLibro;
     private javax.swing.JScrollPane jScrollPane1;

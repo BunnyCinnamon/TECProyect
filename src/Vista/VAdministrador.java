@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Utils.TextChecker;
+import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
@@ -105,6 +106,8 @@ public class VAdministrador extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenu3 = new javax.swing.JMenu();
         jIconLeeyAprende = new javax.swing.JLabel();
         jRegistrarLibro = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -249,6 +252,10 @@ public class VAdministrador extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         JRegresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuSalir = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -257,6 +264,8 @@ public class VAdministrador extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
         jMenuBar2.add(jMenu2);
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrar Biblioteca");
@@ -446,7 +455,7 @@ public class VAdministrador extends javax.swing.JFrame {
                 .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JEstadisticas)
                     .addComponent(JCheckEditorial))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         JTabbedAdminLibros.addTab("Buscar", JInternalBuscar);
@@ -583,7 +592,7 @@ public class VAdministrador extends javax.swing.JFrame {
                             .addComponent(JSpinnerNPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jISBN5)
                             .addComponent(JEstadoLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -591,7 +600,7 @@ public class VAdministrador extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(JTabbedAdminLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -969,7 +978,7 @@ public class VAdministrador extends javax.swing.JFrame {
                                 .addComponent(jLabel3))))
                     .addComponent(JTabbedBusquedaSocios, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1224,7 +1233,7 @@ public class VAdministrador extends javax.swing.JFrame {
                             .addComponent(JComboEstatusAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(JTabbedBusquedaSocios2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1353,7 +1362,7 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addComponent(JModificarEditorial)
                     .addComponent(JEliminarEditorial))
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1475,7 +1484,7 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addComponent(JModificarLocalizacion)
                     .addComponent(JEliminarLocalizacion))
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1600,7 +1609,7 @@ public class VAdministrador extends javax.swing.JFrame {
                     .addComponent(JModificarArea)
                     .addComponent(JEliminarArea))
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1637,6 +1646,28 @@ public class VAdministrador extends javax.swing.JFrame {
                 JRegresarActionPerformed(evt);
             }
         });
+
+        jMenu5.setText("Opciones");
+
+        jMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuSalir.setText("Salir");
+        jMenuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalirActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuSalir);
+
+        jMenuBar1.add(jMenu5);
+
+        jMenu4.setText("Tablas");
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem2.setText("Detalles de Tabla");
+        jMenu4.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1670,7 +1701,7 @@ public class VAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTabbedRegistroLibro, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                .addComponent(JTabbedRegistroLibro, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1701,8 +1732,8 @@ public class VAdministrador extends javax.swing.JFrame {
          */
         JLocalizacionLibro.removeAllItems();
         JAreaLibro.removeAllItems();
-        JComboBox[] jFieldCombo = new JComboBox[]{JLocalizacionLibro, JAreaLibro};
-        JList[] jFieldList = new JList[]{JListAutor, JListEditorial};
+        JComboBox[] jFieldCombo = {JLocalizacionLibro, JAreaLibro};
+        JList[] jFieldList = {JListAutor, JListEditorial};
         Cargar.CargarInfoListas(jFieldCombo, jFieldList);
         try {
             loadAuto(Cargar.CargarTexts());
@@ -1741,7 +1772,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
     private void JIngresarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarLibroActionPerformed
         DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
-        Object[] jField = new Object[]{JISBNText.getText(), JTituloText.getText(), JSpinnerNPag.getValue().toString(), JEstadoLibro.getSelectedItem().toString(), JSpinnerCantidad.getValue().toString()};
+        Object[] jField = {JISBNText.getText(), JTituloText.getText(), JSpinnerNPag.getValue().toString(), JEstadoLibro.getSelectedItem().toString(), JSpinnerCantidad.getValue().toString()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JTituloText, JISBNText, JListAutor, JListEditorial, JAreaLibro, JLocalizacionLibro});
         if ((!TEXT_CHECKER.checkISBN(jField[0].toString()) && !jField[0].toString().isEmpty()) || (!TEXT_CHECKER.checkText(jField[1].toString()) && !jField[1].toString().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
@@ -1756,7 +1787,7 @@ public class VAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JIngresarLibroActionPerformed
 
     private void JModificarLibroTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarLibroTablaActionPerformed
-        Object[] jField = new Object[]{JISBNText.getText(), JTituloText.getText(), JSpinnerNPag.getValue().toString(), JEstadoLibro.getSelectedItem().toString(), JSpinnerCantidad.getValue().toString()};
+        Object[] jField = {JISBNText.getText(), JTituloText.getText(), JSpinnerNPag.getValue().toString(), JEstadoLibro.getSelectedItem().toString(), JSpinnerCantidad.getValue().toString()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JTituloText, JISBNText, JListAutor, JListEditorial, JAreaLibro, JLocalizacionLibro});
         if ((!TEXT_CHECKER.checkISBN(jField[0].toString()) && !jField[0].toString().isEmpty()) || (!TEXT_CHECKER.checkText(jField[1].toString()) && !jField[1].toString().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
@@ -1780,7 +1811,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
     private void JBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarLibroActionPerformed
         DefaultTableModel model = (DefaultTableModel) JTableRLibro.getModel();
-        Object[] jField = new Object[]{JTituloText.getText(), JISBNText.getText(), JListEditorial.getSelectedValue(), JListAutor.getSelectedValue()};
+        Object[] jField = {JTituloText.getText(), JISBNText.getText(), JListEditorial.getSelectedValue(), JListAutor.getSelectedValue()};
         boolean[] jSelect = {JCheckTitulo.isSelected(), JCheckAutor.isSelected(), JCheckISBN.isSelected(), JCheckEditorial.isSelected()};
         if ((!TEXT_CHECKER.checkISBN(jField[1].toString()) && jSelect[2]) || (!TEXT_CHECKER.checkText(jField[0].toString()) && jSelect[0])) {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
@@ -1808,7 +1839,7 @@ public class VAdministrador extends javax.swing.JFrame {
         }
         TEXT_CHECKER.checkFieldsColors(new Object[]{JNombreTextSocio, JApellidoPTextSocio, JTelefonoTextSocio, JTextUsuario, JEstadoTextSocio, JMunicipioTextSocio, JCalleTextSocio, JNCalleTextSocio});
         if (TEXT_CHECKER.checkNoNumberText(A) && TEXT_CHECKER.checkNumber(B) && TEXT_CHECKER.checkDirection(C) && TEXT_CHECKER.checkPhoneNumber(D)) {
-            Object[] jField = new Object[]{JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JEstadoTextSocio.getText(), JMunicipioTextSocio.getText(), JCalleTextSocio.getText(), JNCalleTextSocio.getText(), JTelefonoTextSocio.getText(), JTextUsuario.getText()};
+            Object[] jField = {JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JEstadoTextSocio.getText(), JMunicipioTextSocio.getText(), JCalleTextSocio.getText(), JNCalleTextSocio.getText(), JTelefonoTextSocio.getText(), JTextUsuario.getText()};
             DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
             ADMINISTRADOR_CONTROLER.actionPerformedJIngresarSocio(model, jField, m, JTextContraseñaSocio.getText().toCharArray());
         } else {
@@ -1830,7 +1861,7 @@ public class VAdministrador extends javax.swing.JFrame {
         }
         TEXT_CHECKER.checkFieldsColors(new Object[]{JNombreTextSocio, JApellidoPTextSocio, JTelefonoTextSocio, JTextUsuario, JEstadoTextSocio, JMunicipioTextSocio, JCalleTextSocio, JNCalleTextSocio});
         if (TEXT_CHECKER.checkNoNumberText(A) && TEXT_CHECKER.checkNumber(B) && TEXT_CHECKER.checkDirection(C) && TEXT_CHECKER.checkPhoneNumber(D)) {
-            Object[] jField = new Object[]{JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JEstatusSocio.getSelectedItem().toString(), JEstadoTextSocio.getText(), JMunicipioTextSocio.getText(), JCalleTextSocio.getText(), JNCalleTextSocio.getText(), JTelefonoTextSocio.getText(), JTextUsuario.getText(), JTextContraseñaSocio.getText()};
+            Object[] jField = {JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JEstatusSocio.getSelectedItem().toString(), JEstadoTextSocio.getText(), JMunicipioTextSocio.getText(), JCalleTextSocio.getText(), JNCalleTextSocio.getText(), JTelefonoTextSocio.getText(), JTextUsuario.getText(), JTextContraseñaSocio.getText()};
             ADMINISTRADOR_CONTROLER.actionPerformedJModificarSocio(JTableRSocio, jField, m);
         } else {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
@@ -1846,7 +1877,7 @@ public class VAdministrador extends javax.swing.JFrame {
      */
     private void JBuscarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarSocioActionPerformed
         DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
-        Object[] jField = new Object[]{JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JApellidoMTextSocio.getText(), JTextUsuario.getText()};
+        Object[] jField = {JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JApellidoMTextSocio.getText(), JTextUsuario.getText()};
         boolean[] jSelect = {JCheckNombre.isSelected(), JCheckApellidoM.isSelected(), JCheckApellidoP.isSelected(), JCheckUsuario.isSelected()};
         if (jField[2].toString().equals("Campo no Obligatorio")) {
             jField[2] = "";
@@ -1878,7 +1909,7 @@ public class VAdministrador extends javax.swing.JFrame {
                 return;
             }
             DefaultTableModel model = (DefaultTableModel) JTableRAutor.getModel();
-            Object[] jField = new Object[]{JNombreTextAutor.getText(), JApellidoPAutor.getText()};
+            Object[] jField = {JNombreTextAutor.getText(), JApellidoPAutor.getText()};
             if (ADMINISTRADOR_CONTROLER.actionPerformedJIngresarAutor(model, jField, m)) {
                 this.Iniciar();
             }
@@ -1898,7 +1929,7 @@ public class VAdministrador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-            Object[] jField = new Object[]{JNombreTextAutor.getText(), JApellidoPAutor.getText(), JComboEstatusAutor.getSelectedItem().toString()};
+            Object[] jField = {JNombreTextAutor.getText(), JApellidoPAutor.getText(), JComboEstatusAutor.getSelectedItem().toString()};
             if (ADMINISTRADOR_CONTROLER.actionPerformedJModificarAutor(JTableRAutor, jField, m)) {
                 this.Iniciar();
             }
@@ -1919,7 +1950,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
     private void JBuscarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarAutorActionPerformed
         DefaultTableModel model = (DefaultTableModel) JTableRAutor.getModel();
-        Object[] jField = new Object[]{JNombreTextAutor.getText(), JApellidoPAutor.getText(), JApellidoMAutor.getText()};
+        Object[] jField = {JNombreTextAutor.getText(), JApellidoPAutor.getText(), JApellidoMAutor.getText()};
         boolean[] jSelect = {JCheckNombreAutor.isSelected(), JCheckApellidoPAutor.isSelected(), JCheckApellidoMAutor.isSelected()};
         String m = JApellidoMAutor.getText();
         if (m.equals("Campo no Obligatorio")) {
@@ -1941,7 +1972,7 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarNuevoEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarNuevoEditorialActionPerformed
-        Object[] jField = new Object[]{JNombreTextEditorial.getText()};
+        Object[] jField = {JNombreTextEditorial.getText()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JNombreTextEditorial});
         if (EDITORIAL_CONTROLER.actionPerformedJIngresarEditorial(jField)) {
             this.Iniciar();
@@ -1949,7 +1980,7 @@ public class VAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JIngresarNuevoEditorialActionPerformed
 
     private void JModificarEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarEditorialActionPerformed
-        Object[] jField = new Object[]{JNombreTextEditorial.getText(), JComboEstatusEditorial.getSelectedItem().toString()};
+        Object[] jField = {JNombreTextEditorial.getText(), JComboEstatusEditorial.getSelectedItem().toString()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JNombreTextEditorial});
         if (EDITORIAL_CONTROLER.actionPerformedJModificarEditorial(JTableREditorial, jField)) {
             this.Iniciar();
@@ -1968,7 +1999,7 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarNuevoLocalizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarNuevoLocalizacionActionPerformed
-        Object[] jField = new Object[]{JLocalizacionText.getText()};
+        Object[] jField = {JLocalizacionText.getText()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JLocalizacionText});
         if (LOCALIZACION_CONTROLER.actionPerformedJIngresarLocalizacion(jField)) {
             this.Iniciar();
@@ -1976,7 +2007,7 @@ public class VAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JIngresarNuevoLocalizacionActionPerformed
 
     private void JModificarLocalizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarLocalizacionActionPerformed
-        Object[] jField = new Object[]{JLocalizacionText.getText(), JComboEstatusLocalizacion.getSelectedItem().toString()};
+        Object[] jField = {JLocalizacionText.getText(), JComboEstatusLocalizacion.getSelectedItem().toString()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JLocalizacionText});
         if (LOCALIZACION_CONTROLER.actionPerformedJModificarLocalizacion(JTableRLocalizacion, jField)) {
             this.Iniciar();
@@ -1999,7 +2030,7 @@ public class VAdministrador extends javax.swing.JFrame {
      */
 
     private void JIngresarNuevaAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIngresarNuevaAreaActionPerformed
-        Object[] jField = new Object[]{JAreaText.getText()};
+        Object[] jField = {JAreaText.getText()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JAreaText});
         if (AREA_CONTROLER.actionPerformedJIngresarArea(jField)) {
             Iniciar();
@@ -2007,7 +2038,7 @@ public class VAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_JIngresarNuevaAreaActionPerformed
 
     private void JModificarAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JModificarAreaActionPerformed
-        Object[] jField = new Object[]{JAreaText.getText(), JComboEstatusArea.getSelectedItem().toString()};
+        Object[] jField = {JAreaText.getText(), JComboEstatusArea.getSelectedItem().toString()};
         TEXT_CHECKER.checkFieldsColors(new Object[]{JAreaText});
         if (AREA_CONTROLER.actionPerformedJModificarArea(JTableRArea, jField)) {
             Iniciar();
@@ -2123,44 +2154,56 @@ public class VAdministrador extends javax.swing.JFrame {
 
     private void JTableRLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableRLibroMouseClicked
         if (evt.getClickCount() == 2) {
-            Object[] jField = new Object[]{JISBNText, JTituloText, JSpinnerNPag, JEstadoLibro, JListAutor, JListEditorial, JLocalizacionLibro, JAreaLibro, JSpinnerCantidad};
+            Object[] jField = {JISBNText, JTituloText, JSpinnerNPag, JEstadoLibro, JListAutor, JListEditorial, JLocalizacionLibro, JAreaLibro, JSpinnerCantidad};
             ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableRLibro, jField, 0);
+        } else if ((evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            ADMINISTRADOR_CONTROLER.JTableMouseControlClicked((DefaultTableModel) JTableRLibro.getModel());
         }
     }//GEN-LAST:event_JTableRLibroMouseClicked
 
     private void JTableRSocioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableRSocioMouseClicked
         if (evt.getClickCount() == 2) {
-            Object[] jField = new Object[]{JNombreTextSocio, JApellidoPTextSocio, JApellidoMTextSocio, null, JTelefonoTextSocio, JEstatusSocio, null, JTextUsuario};
-            Object[] jField0 = new Object[]{JEstadoTextSocio, JMunicipioTextSocio, JCalleTextSocio, JNCalleTextSocio};
+            Object[] jField = {JNombreTextSocio, JApellidoPTextSocio, JApellidoMTextSocio, null, JTelefonoTextSocio, JEstatusSocio, null, JTextUsuario};
+            Object[] jField0 = {JEstadoTextSocio, JMunicipioTextSocio, JCalleTextSocio, JNCalleTextSocio};
             ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableRSocio, jField, jField0, 1);
+        } else if ((evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            ADMINISTRADOR_CONTROLER.JTableMouseControlClicked((DefaultTableModel) JTableRSocio.getModel());
         }
     }//GEN-LAST:event_JTableRSocioMouseClicked
 
     private void JTableRAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableRAutorMouseClicked
         if (evt.getClickCount() == 2) {
-            Object[] jField = new Object[]{JNombreTextAutor, JApellidoPAutor, JApellidoMAutor, JComboEstatusAutor};
+            Object[] jField = {JNombreTextAutor, JApellidoPAutor, JApellidoMAutor, JComboEstatusAutor};
             ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableRAutor, jField, 0);
+        } else if ((evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            ADMINISTRADOR_CONTROLER.JTableMouseControlClicked((DefaultTableModel) JTableRAutor.getModel());
         }
     }//GEN-LAST:event_JTableRAutorMouseClicked
 
     private void JTableREditorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableREditorialMouseClicked
         if (evt.getClickCount() == 2) {
-            Object[] jField = new Object[]{JNombreTextEditorial, JComboEstatusEditorial};
+            Object[] jField = {JNombreTextEditorial, JComboEstatusEditorial};
             ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableREditorial, jField, 0);
+        } else if ((evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            ADMINISTRADOR_CONTROLER.JTableMouseControlClicked((DefaultTableModel) JTableREditorial.getModel());
         }
     }//GEN-LAST:event_JTableREditorialMouseClicked
 
     private void JTableRLocalizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableRLocalizacionMouseClicked
         if (evt.getClickCount() == 2) {
-            Object[] jField = new Object[]{JLocalizacionText, JComboEstatusLocalizacion};
+            Object[] jField = {JLocalizacionText, JComboEstatusLocalizacion};
             ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableRLocalizacion, jField, 0);
+        } else if ((evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            ADMINISTRADOR_CONTROLER.JTableMouseControlClicked((DefaultTableModel) JTableRLocalizacion.getModel());
         }
     }//GEN-LAST:event_JTableRLocalizacionMouseClicked
 
     private void JTableRAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableRAreaMouseClicked
         if (evt.getClickCount() == 2) {
-            Object[] jField = new Object[]{JAreaText, JComboEstatusArea};
+            Object[] jField = {JAreaText, JComboEstatusArea};
             ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableRArea, jField, 0);
+        } else if ((evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            ADMINISTRADOR_CONTROLER.JTableMouseControlClicked((DefaultTableModel) JTableRArea.getModel());
         }
     }//GEN-LAST:event_JTableRAreaMouseClicked
 
@@ -2196,6 +2239,10 @@ public class VAdministrador extends javax.swing.JFrame {
     private void JAreaTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JAreaTextKeyTyped
         TEXT_CHECKER.checkColors(JAreaText);
     }//GEN-LAST:event_JAreaTextKeyTyped
+
+    private void jMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMenuSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField JApellidoMAutor;
@@ -2313,13 +2360,19 @@ public class VAdministrador extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuSalir;
     private javax.swing.JLabel jNPag;
     private javax.swing.JLabel jNPag1;
     private javax.swing.JLabel jNPag2;
     private javax.swing.JLabel jNPag3;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel jRegistrarLibro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;

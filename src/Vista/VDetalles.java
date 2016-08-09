@@ -139,7 +139,13 @@ public class VDetalles extends javax.swing.JFrame {
         jMenu1.setText("Opciones");
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        JMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         JMenuSalir.setText("Salir");
+        JMenuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuSalirActionPerformed(evt);
+            }
+        });
         jMenu1.add(JMenuSalir);
 
         jMenuBar1.add(jMenu1);
@@ -224,6 +230,10 @@ public class VDetalles extends javax.swing.JFrame {
     private void JTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTerminadoActionPerformed
         dispose();
     }//GEN-LAST:event_JTerminadoActionPerformed
+
+    private void JMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_JMenuSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel JDesc0;

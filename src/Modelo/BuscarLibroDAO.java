@@ -29,7 +29,7 @@ public class BuscarLibroDAO {
     private final String SQL_SEARCH_BOOKS = "SELECT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo,Existencias FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F,Ejemplar G WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND G.Libro=IdLibro AND F.Libro=A.IdLibro";
     private final String SQL_SEARCH_SOCIO = "SELECT IdSocio,Nombre,ApellidoP,ApellidoM,CONCAT(Estado,' ',Municipio,' ',Calle,' ',Numero),Telefono,Estatus,Prestamos,Usuario FROM Socio";
     private static final String ORDER = " ORDER BY IdLibro";
-    private final String ORDER_SOCIO = " ORDER BY Prestamos DESC";
+    private static final String ORDER_SOCIO = " ORDER BY Prestamos DESC";
 
     /**
      * Uso: Busca todos Libros con los datos de titulo, isbn, autor y editorial,

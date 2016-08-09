@@ -1,15 +1,10 @@
 package Controlador;
 
 import Classes.Beans.LibroBean;
-import Classes.Beans.SocioBean;
-import Classes.Beans.AdministradorBean;
 import Modelo.BuscarLibroDAO;
 import Utils.CleanupDone;
 import Utils.TableHelper;
-import Vista.VAsignarSocio;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import Vista.VDynamicTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -87,106 +82,19 @@ public class BuscarLibroControlador {
         }
         ADM.BuscarLibro(jModel, Bean, Editorial, Autor, action);
     }
-
+    
     /**
-     * Uso: Buscar Socios.
+     * Uso: Encontrar elementos de Tabla.
      *
-     * Descripción: Crea un nuevo socio bean, ingresa los valores de los text
-     * fiels en el bean y consigue la acción dependiendo de los combo box
-     * seleccionados. Envia el bean y la acción al dao correspondiente.
+     * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
+     * la tabla dinámica.
      *
      * Variables:
      *
-     * @param jModel // Contiene el objeto Tabla de la Vista
-     * @param jField // Contiene los objetos de Texto
-     * @param jSelect // Contiene los objetos de selección
+     * @param jTable // Contiene el objeto Tabla de la Vista
      */
-    public void actionPerformedJBuscarSocio(DefaultTableModel jModel, Object[] jField, boolean[] jSelect) {
-        int action = 0;
-        SocioBean Bean = new SocioBean();
-        Bean.setNombre(jField[0].toString());
-        Bean.setApellidoP(jField[1].toString());
-        Bean.setApellidoM(jField[2].toString());
-        Bean.setUsuario(jField[3].toString());
-        if (jSelect[0] && (!jSelect[1] && !jSelect[2] && !jSelect[3])) {
-            action = 1;
-        } else if (jSelect[2] && (!jSelect[1] && !jSelect[0] && !jSelect[3])) {
-            action = 2;
-        } else if (jSelect[1] && (!jSelect[0] && !jSelect[2] && !jSelect[3])) {
-            action = 3;
-        } else if (jSelect[3] && (!jSelect[0] && !jSelect[2] && !jSelect[1])) {
-            action = 4;
-        } else if (jSelect[3] && jSelect[0] && (!jSelect[2] && !jSelect[1])) {
-            action = 5;
-        } else if (jSelect[1] && jSelect[0] && (!jSelect[2] && !jSelect[3])) {
-            action = 6;
-        } else if (jSelect[2] && jSelect[0] && (!jSelect[3] && !jSelect[1])) {
-            action = 7;
-        } else if (jSelect[2] && jSelect[1] && (!jSelect[3] && !jSelect[0])) {
-            action = 8;
-        } else if (jSelect[2] && jSelect[3] && (!jSelect[0] && !jSelect[1])) {
-            action = 9;
-        } else if (jSelect[3] && jSelect[1] && (!jSelect[0] && !jSelect[2])) {
-            action = 10;
-        } else if (jSelect[0] && jSelect[2] && jSelect[1] && (!jSelect[3])) {
-            action = 11;
-        } else if (jSelect[0] && jSelect[2] && jSelect[3] && (!jSelect[1])) {
-            action = 12;
-        } else if (jSelect[2] && jSelect[1] && jSelect[3] && (!jSelect[0])) {
-            action = 13;
-        } else if (jSelect[0] && jSelect[1] && jSelect[3] && (!jSelect[2])) {
-            action = 14;
-        } else if (jSelect[3] && jSelect[1] && jSelect[0] && jSelect[2]) {
-            action = 15;
-        }
-        ADM.BuscarSocio(jModel, Bean, action);
+    public void JTableMouseControlClicked(DefaultTableModel jTable) {
+        VDynamicTable vDynamic = new VDynamicTable(jTable);
+        vDynamic.setVisible(true);
     }
-
-    /**
-     * Uso: Pedir Prestamo de Libro.
-     *
-     * Descripción: Si no hay un libro seleccionado un Texto se muestra en
-     * JOptionPane, si hay un libro seleccionado los datos en la tabla se
-     * introducen en un array y son enviados junto con el bean del socio a el
-     * dao correspondiente.
-     *
-     * Variables:
-     *
-     * @param Bean // Contiene los datos del Administrador
-     * @param jTableBLibro // Contiene el objeto Tabla de Vista
-     * @param jTableBSocio // Contiene el objeto Tabla de Vista
-     */
-    public void actionPerformedJPrestamo(AdministradorBean Bean, JTable jTableBLibro, JTable jTableBSocio) {
-        int select = jTableBLibro.getSelectedRow();
-        int select0 = jTableBSocio.getSelectedRow();
-        SocioBean SocioBean = new SocioBean();
-        if (select0 < 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla de Socios");
-            return;
-        } else {
-            boolean[] canGet = new boolean[]{true, true, true, true, true, false, false, false, true};
-            ArrayList jArray = TABLE_HELPER.getTextFromSelectedTable(jTableBSocio, canGet, 1);
-            SocioBean.setIdUsuario(Integer.parseInt(jArray.get(0).toString()));
-            SocioBean.setNombre(jArray.get(1).toString());
-            SocioBean.setApellidoP(jArray.get(2).toString());
-            SocioBean.setApellidoM(jArray.get(3).toString());
-            SocioBean.setEstado(jArray.get(4).toString());
-            SocioBean.setUsuario(jArray.get(5).toString());
-        }
-        if (select < 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla de Libros");
-        } else {
-            ArrayList Array = new ArrayList();
-            Array.add(jTableBLibro.getValueAt(select, 0).toString());
-            Array.add(jTableBLibro.getValueAt(select, 2).toString());
-            Array.add(jTableBLibro.getValueAt(select, 1).toString());
-            Array.add(jTableBLibro.getValueAt(select, 3).toString());
-            Array.add(jTableBLibro.getValueAt(select, 5).toString());
-            Array.add(jTableBLibro.getValueAt(select, 6).toString());
-            VAsignarSocio vas = new VAsignarSocio(SocioBean, Array);
-            vas.setLocationRelativeTo(null);
-            vas.setVisible(true);
-        }
-    }
-
 }

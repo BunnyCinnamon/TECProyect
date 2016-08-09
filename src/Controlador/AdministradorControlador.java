@@ -7,6 +7,7 @@ import Modelo.AdministradorDAO;
 import Utils.CleanupDone;
 import Utils.TableHelper;
 import Utils.TextChecker;
+import Vista.VDynamicTable;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -623,5 +624,20 @@ public class AdministradorControlador {
      */
     public void JTableMouseDoubleClicked(JTable jTable, Object[] jField, Object[] jField0, int last) {
         TABLE_HELPER.JTableMouseDoubleClicked(jTable, jField, jField0, last);
+    }
+
+    /**
+     * Uso: Encontrar elementos de Tabla.
+     *
+     * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
+     * la tabla dinámica.
+     *
+     * Variables:
+     *
+     * @param jTable // Contiene el objeto Tabla de la Vista
+     */
+    public void JTableMouseControlClicked(DefaultTableModel jTable) {
+        VDynamicTable vDynamic = new VDynamicTable(jTable);
+        vDynamic.setVisible(true);
     }
 }

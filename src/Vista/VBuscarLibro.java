@@ -6,6 +6,8 @@ import Controlador.CargarInfoControlador;
 import Utils.Autocompleter;
 import Utils.CleanupDone;
 import Utils.TextChecker;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -18,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 @CleanupDone
 public class VBuscarLibro extends javax.swing.JFrame {
-
+    
     private static final TextChecker TEXT_CHECKER = new TextChecker();
     private static final BuscarLibroControlador BUSCAR_LIBRO_CONTROLER = new BuscarLibroControlador();
 
@@ -93,11 +95,11 @@ public class VBuscarLibro extends javax.swing.JFrame {
      * Bean de Socio*
      */
     private SocioBean Bean;
-
+    
     private void SetBean(SocioBean Bean) {
         this.Bean = Bean;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -133,6 +135,10 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         JRegresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuSalir = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Búsqueda de Libros");
@@ -171,6 +177,18 @@ public class VBuscarLibro extends javax.swing.JFrame {
 
         jISBN.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jISBN.setText("ISBN:");
+
+        JTituloText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JTituloTextKeyTyped(evt);
+            }
+        });
+
+        JISBNText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JISBNTextKeyTyped(evt);
+            }
+        });
 
         jNPag.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jNPag.setText("Usuario:");
@@ -223,39 +241,36 @@ public class VBuscarLibro extends javax.swing.JFrame {
         JInternalBuscarLayout.setHorizontalGroup(
             JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JInternalBuscarLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JInternalBuscarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCheckTitulo)
-                            .addComponent(JCheckISBN))
-                        .addGap(18, 18, 18)
-                        .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCheckEditorial)
-                            .addComponent(JCheckAutor)))
-                    .addGroup(JInternalBuscarLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(JBuscarLibro)
-                        .addGap(18, 18, 18)
-                        .addComponent(JDetalles)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(JCheckTitulo)
+                    .addComponent(JCheckISBN)
+                    .addComponent(JCheckAutor)
+                    .addComponent(JCheckEditorial))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JBuscarLibro, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JDetalles, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         JInternalBuscarLayout.setVerticalGroup(
             JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JInternalBuscarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JCheckTitulo)
-                    .addComponent(JCheckAutor))
+                .addComponent(JCheckTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JCheckISBN)
-                    .addComponent(JCheckEditorial))
-                .addGap(18, 18, 18)
-                .addGroup(JInternalBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBuscarLibro)
-                    .addComponent(JDetalles))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(JCheckISBN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JCheckAutor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JCheckEditorial)
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JInternalBuscarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JBuscarLibro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JDetalles)
+                .addContainerGap())
         );
 
         JTabbedBusquedaLibros.addTab("Buscar", JInternalBuscar);
@@ -309,6 +324,28 @@ public class VBuscarLibro extends javax.swing.JFrame {
                 JRegresarActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("Opciones");
+
+        jMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuSalir.setText("Salir");
+        jMenuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSalir);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("Tablas");
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem2.setText("Detalles de Tabla");
+        jMenu4.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -329,29 +366,32 @@ public class VBuscarLibro extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jNPag)
+                                    .addComponent(jISBN)
+                                    .addComponent(jTitulo))
+                                .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3)
+                                    .addComponent(JTituloText)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(JISBNText, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                            .addComponent(JNPagText))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jISBN)
-                                    .addComponent(jTitulo)
-                                    .addComponent(jNPag))
-                                .addGap(20, 20, 20)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(0, 198, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JNPagText, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(JTituloText, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(JISBNText, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(17, 17, 17)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(9, 9, 9)
                         .addComponent(JTabbedBusquedaLibros)))
                 .addContainerGap())
         );
@@ -393,7 +433,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JTabbedBusquedaLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -428,8 +468,29 @@ public class VBuscarLibro extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             Object[] jField = new Object[]{JISBNText, JTituloText, null, null, JListAutor, JListEditorial};
             BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableBLibro, jField, 3);
+        } else if ((evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            BUSCAR_LIBRO_CONTROLER.JTableMouseControlClicked((DefaultTableModel) JTableBLibro.getModel());
         }
     }//GEN-LAST:event_JTableBLibroMouseClicked
+
+    private void JTituloTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTituloTextKeyTyped
+        TEXT_CHECKER.checkColors(JTituloText);
+    }//GEN-LAST:event_JTituloTextKeyTyped
+
+    private void JISBNTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyTyped
+        if (evt.getKeyChar() == ' ') {
+            evt.setKeyChar('-');
+        }
+        if (!TEXT_CHECKER.checkISBN(JISBNText.getText())) {
+            JISBNText.setForeground(new Color(204, 0, 0));
+        } else {
+            JISBNText.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_JISBNTextKeyTyped
+
+    private void jMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMenuSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JAsignar;
@@ -455,7 +516,11 @@ public class VBuscarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuSalir;
     private javax.swing.JLabel jNPag;
     private javax.swing.JLabel jRegistrarLibro;
     private javax.swing.JScrollPane jScrollPane1;

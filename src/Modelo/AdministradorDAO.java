@@ -72,59 +72,50 @@ public class AdministradorDAO {
             if (rs.next()) {
                 Bean.setIdLibro(rs.getInt(1));
             }
+            rs.close();
             prs.close();
-            conn.close();
         } catch (SQLException n) {
             Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        if (SUCCESSI) {
-            try {
-                conn = Connexion.getConnection();
-                PreparedStatement prs = conn.prepareStatement(SQL_ADD_AUTOR_TO_LIBRO);
-                prs.setInt(1, Bean.getAutor());
-                prs.setInt(2, Bean.getIdLibro());
-                SUCCESSM = prs.executeUpdate() == 1;
-                prs.close();
-                conn.close();
-            } catch (SQLException n) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-            } finally {
+            ////////////////////////////////////////////////////////////////////
+            if (SUCCESSI) {
                 try {
-                    conn.close();
-                } catch (SQLException m) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-                }
-            }
-            ////////////////////////////////////////////////////////////////////////
-            if (SUCCESSM) {
-                try {
-                    conn = Connexion.getConnection();
-                    PreparedStatement prs = conn.prepareStatement(SQL_ADD_LIBRO_TO_EJEMPLAR);
-                    prs.setInt(1, Bean.getNumero());
+                    PreparedStatement prs = conn.prepareStatement(SQL_ADD_AUTOR_TO_LIBRO);
+                    prs.setInt(1, Bean.getAutor());
                     prs.setInt(2, Bean.getIdLibro());
                     SUCCESSM = prs.executeUpdate() == 1;
                     prs.close();
-                    conn.close();
                 } catch (SQLException n) {
                     Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
                 } finally {
-                    try {
-                        conn.close();
-                    } catch (SQLException m) {
-                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                    ////////////////////////////////////////////////////////////
+                    if (SUCCESSM) {
+                        try {
+                            PreparedStatement prs = conn.prepareStatement(SQL_ADD_LIBRO_TO_EJEMPLAR);
+                            prs.setInt(1, Bean.getNumero());
+                            prs.setInt(2, Bean.getIdLibro());
+                            SUCCESSM = prs.executeUpdate() == 1;
+                            prs.close();
+                        } catch (SQLException n) {
+                            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                        } finally {
+                            try {
+                                conn.close();
+                            } catch (SQLException m) {
+                                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                            }
+                        }
+                    }
+                    if (SUCCESSI && SUCCESSM) {
+                        SUCCESSF = true;
                     }
                 }
             }
-            if (SUCCESSI && SUCCESSM) {
-                SUCCESSF = true;
-            }
+        }
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", ex);
         }
         return SUCCESSF;
     }
@@ -154,34 +145,31 @@ public class AdministradorDAO {
             prs.setInt(8, Bean.getIdLibro());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
-            conn.close();
         } catch (SQLException n) {
             Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        if (SUCCESS) {
-            try {
-                conn = Connexion.getConnection();
-                PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_ESCRIBE);
-                prs.setInt(1, Bean.getAutor());
-                prs.setInt(2, Bean.getIdLibro());
-                SUCCESS = prs.executeUpdate() == 1;
-                prs.close();
-                conn.close();
-            } catch (SQLException n) {
-                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", n);
-            } finally {
+            if (SUCCESS) {
                 try {
-                    conn.close();
-                } catch (SQLException m) {
-                    Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                    PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_ESCRIBE);
+                    prs.setInt(1, Bean.getAutor());
+                    prs.setInt(2, Bean.getIdLibro());
+                    SUCCESS = prs.executeUpdate() == 1;
+                    prs.close();
+                } catch (SQLException n) {
+                    Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException m) {
+                        Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                    }
                 }
             }
+        }
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return SUCCESS;
     }
@@ -418,6 +406,7 @@ public class AdministradorDAO {
             if (rs.next()) {
                 Bean.setIdUsuario(rs.getInt(1));
             }
+            rs.close();
             prs.close();
             conn.close();
         } catch (SQLException n) {
@@ -698,6 +687,7 @@ public class AdministradorDAO {
             if (rs.next()) {
                 Bean.setIdAutor(rs.getInt(1));
             }
+            rs.close();
             prs.close();
             conn.close();
         } catch (SQLException n) {

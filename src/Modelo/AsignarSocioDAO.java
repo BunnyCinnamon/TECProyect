@@ -57,93 +57,69 @@ public class AsignarSocioDAO {
                 AVAILABLE = true;
             }
             prs.close();
-            conn.close();
         } catch (SQLException n) {
             Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+            if (AVAILABLE) {
+                AVAILABLE = false;
+                try {
+                    PreparedStatement prs = conn.prepareStatement(SQL_CHECK_REPEATED);
+                    prs.setInt(1, SocioBean.getIdUsuario());
+                    ResultSet rs = prs.executeQuery();
+                    if (rs.next()) {
+                        int cant = rs.getInt(1);
+                        if (cant <= 2) {
+                            AVAILABLE = true;
+                        }
+                    }
+                    prs.close();
+                } catch (SQLException n) {
+                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                } finally {
+                    if (AVAILABLE) {
+                        try {
+                            PreparedStatement prs = conn.prepareStatement(SQL_ADD_PRESTAMO);
+                            prs.setInt(1, SocioBean.getIdUsuario());
+                            prs.setInt(2, Integer.parseInt(Array.get(0).toString()));
+                            SUCCESS = prs.executeUpdate() == 1;
+                            prs.close();
+                        } catch (SQLException n) {
+                            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                        } finally {
+                            ////////////////////////////////////////////////////////////////
+                            try {
+                                PreparedStatement prs = conn.prepareStatement(SQL_INCREASE_BOOK_PRESTAMO);
+                                prs.setInt(1, Integer.parseInt(Array.get(0).toString()));
+                                prs.executeUpdate();
+                                prs.close();
+                            } catch (SQLException n) {
+                                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                            } finally {
+                                ////////////////////////////////////////////////////////////////
+                                try {
+                                    PreparedStatement prs = conn.prepareStatement(SQL_INCREASE_PRESTAMOS);
+                                    prs.setInt(1, SocioBean.getIdUsuario());
+                                    prs.executeUpdate();
+                                    prs.close();
+                                } catch (SQLException n) {
+                                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                                } finally {
+                                    try {
+                                        conn.close();
+                                    } catch (SQLException m) {
+                                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-        if (AVAILABLE) {
-            AVAILABLE = false;
-            try {
-                conn = Connexion.getConnection();
-                PreparedStatement prs = conn.prepareStatement(SQL_CHECK_REPEATED);
-                prs.setInt(1, SocioBean.getIdUsuario());
-                ResultSet rs = prs.executeQuery();
-                if (rs.next()) {
-                    int cant = rs.getInt(1);
-                    if (cant <= 2) {
-                        AVAILABLE = true;
-                    }
-                }
-                prs.close();
-                conn.close();
-            } catch (SQLException n) {
-                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-            } finally {
-                try {
-                    conn.close();
-                } catch (SQLException m) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-                }
-            }
-            if (AVAILABLE) {
-                try {
-                    conn = Connexion.getConnection();
-                    PreparedStatement prs = conn.prepareStatement(SQL_ADD_PRESTAMO);
-                    prs.setInt(1, SocioBean.getIdUsuario());
-                    prs.setInt(2, Integer.parseInt(Array.get(0).toString()));
-                    SUCCESS = prs.executeUpdate() == 1;
-                    prs.close();
-                    conn.close();
-                } catch (SQLException n) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-                } finally {
-                    try {
-                        conn.close();
-                    } catch (SQLException m) {
-                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-                    }
-                }
-                ////////////////////////////////////////////////////////////////
-                try {
-                    conn = Connexion.getConnection();
-                    PreparedStatement prs = conn.prepareStatement(SQL_INCREASE_BOOK_PRESTAMO);
-                    prs.setInt(1, Integer.parseInt(Array.get(0).toString()));
-                    prs.executeUpdate();
-                    prs.close();
-                    conn.close();
-                } catch (SQLException n) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-                } finally {
-                    try {
-                        conn.close();
-                    } catch (SQLException m) {
-                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-                    }
-                }
-                ////////////////////////////////////////////////////////////////
-                try {
-                    conn = Connexion.getConnection();
-                    PreparedStatement prs = conn.prepareStatement(SQL_INCREASE_PRESTAMOS);
-                    prs.setInt(1, SocioBean.getIdUsuario());
-                    prs.executeUpdate();
-                    prs.close();
-                    conn.close();
-                } catch (SQLException n) {
-                    Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", n);
-                } finally {
-                    try {
-                        conn.close();
-                    } catch (SQLException m) {
-                        Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
-                    }
-                }
-            }
+        try {
+            conn.close();
+        } catch (SQLException m) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, "Error", m);
         }
         return SUCCESS;
     }
