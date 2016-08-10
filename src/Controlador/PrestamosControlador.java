@@ -7,8 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -44,11 +42,14 @@ public class PrestamosControlador {
     }
 
     /**
-     * Descripción: Abre una nueva ventana de Detalles.
+     * Uso: Encontrar elementos de Row de una Tabla.
+     *
+     * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
+     * la tabla dinámica.
      *
      * Variables:
      *
-     * @param jTablePrestamos //Contiene el objeto Tabla de la Vista
+     * @param jTablePrestamos // Contiene el objeto Tabla de la Vista
      */
     public void JDetallesActionPerformed(JTable jTablePrestamos) {
         DefaultTableModel model = (DefaultTableModel) jTablePrestamos.getModel();
@@ -65,7 +66,8 @@ public class PrestamosControlador {
             }
             try {
                 Date startDate = formatter.parse(jArray.get(4).toString());
-                Date finalDate = formatter.parse(jArray.get(5).toString());
+                String finalDateString = formatter.format(new Date());
+                Date finalDate = formatter.parse(finalDateString);
                 long diff = Math.abs(finalDate.getTime() - startDate.getTime());
                 diffDays = diff / (24 * 60 * 60 * 1000);
             } catch (ParseException ex) {
@@ -73,20 +75,24 @@ public class PrestamosControlador {
                 return;
             }
             jArray.add(diffDays + " Dias");
-            if (diffDays <= 3) {
+            if (diffDays < 1) {
+                jArray.add("$0");
+            } else if (diffDays <= 3) {
                 jArray.add("$5");
             } else if (diffDays <= 6) {
                 jArray.add("$10");
             } else if (diffDays <= 10) {
                 jArray.add("$20");
-            } else if (diffDays <= 20) {
+            } else if (diffDays <= 30) {
                 jArray.add("$50");
-            } else if (diffDays <= 50) {
+            } else if (diffDays > 30) {
                 jArray.add("$499.99");
             }
             DefaultTableModel jModel = new DefaultTableModel(columns, 0);
             jModel.addRow(jArray.toArray());
             VDynamicTable vDynamic = new VDynamicTable(jModel);
+            vDynamic.setSize(1080, 170);
+            vDynamic.setLocationRelativeTo(null);
             vDynamic.setVisible(true);
         }
     }

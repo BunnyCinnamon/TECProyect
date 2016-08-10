@@ -4,7 +4,6 @@ import Classes.Beans.LibroBean;
 import Modelo.BuscarLibroDAO;
 import Utils.CleanupDone;
 import Utils.TableHelper;
-import Vista.VDynamicTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -81,20 +80,5 @@ public class BuscarLibroControlador {
             action = 15;
         }
         ADM.BuscarLibro(jModel, Bean, Editorial, Autor, action);
-    }
-    
-    /**
-     * Uso: Encontrar elementos de Tabla.
-     *
-     * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
-     * la tabla dinámica.
-     *
-     * Variables:
-     *
-     * @param jTable // Contiene el objeto Tabla de la Vista
-     */
-    public void JTableMouseControlClicked(DefaultTableModel jTable) {
-        VDynamicTable vDynamic = new VDynamicTable(jTable);
-        vDynamic.setVisible(true);
     }
 }

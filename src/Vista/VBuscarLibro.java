@@ -10,8 +10,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 @CleanupDone
 public class VBuscarLibro extends javax.swing.JFrame {
-    
+
     private static final TextChecker TEXT_CHECKER = new TextChecker();
     private static final BuscarLibroControlador BUSCAR_LIBRO_CONTROLER = new BuscarLibroControlador();
 
@@ -84,7 +87,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
      * el programa inicia con normalidad pero sin las funciones de
      * autocompletado
      *
-     * @param array
+     * @param array // Contiene el array de textos encontrados
      */
     private void loadAuto(ArrayList array) throws java.lang.ExceptionInInitializerError {
         Autocompleter Autocompleter;
@@ -92,14 +95,38 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }
 
     /**
+     * Uso: Limpiar todas las opciones a Default.
+     *
+     * Descripción: Busca por cada objeto y cambia su contenido a un default
+     * establecido.
+     *
+     * Variables:
+     *
+     * @param jText // Contiene los objetos de opciones
+     */
+    private void clearTexts(Object[] jText) {
+        for (Object c : jText) {
+            if (c instanceof JTextField) {
+                ((JTextField) c).setText("");
+            } else if (c instanceof JList) {
+                ((JList) c).setSelectedIndex(0);
+            } else if (c instanceof JComboBox) {
+                ((JComboBox) c).setSelectedIndex(0);
+            } else if (c instanceof JSpinner) {
+                ((JSpinner) c).setValue(0);
+            }
+        }
+    }
+
+    /**
      * Bean de Socio*
      */
     private SocioBean Bean;
-    
+
     private void SetBean(SocioBean Bean) {
         this.Bean = Bean;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -138,6 +165,9 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuSalir = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        JRadioTableSelection = new javax.swing.JRadioButtonMenuItem();
+        JRadioTableComplete = new javax.swing.JRadioButtonMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -338,10 +368,26 @@ public class VBuscarLibro extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu4.setText("Tablas");
+        jMenu4.setText("Elementos");
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem2.setText("Detalles de Tabla");
+        jMenu6.setText("Tablas");
+
+        JRadioTableSelection.setSelected(true);
+        JRadioTableSelection.setText("Detalles de Tabla por Selección");
+        jMenu6.add(JRadioTableSelection);
+
+        JRadioTableComplete.setText("Detalles de Tabla Completa");
+        jMenu6.add(JRadioTableComplete);
+
+        jMenu4.add(jMenu6);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Clear All Texts");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem2);
 
         jMenuBar1.add(jMenu4);
@@ -468,8 +514,12 @@ public class VBuscarLibro extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             Object[] jField = new Object[]{JISBNText, JTituloText, null, null, JListAutor, JListEditorial};
             BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableBLibro, jField, 3);
-        } else if ((evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
-            BUSCAR_LIBRO_CONTROLER.JTableMouseControlClicked((DefaultTableModel) JTableBLibro.getModel());
+        } else if ((evt.getModifiers() & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK) {
+            if (JRadioTableComplete.isSelected()) {
+                BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseControlClicked((DefaultTableModel) JTableBLibro.getModel());
+            } else if (JRadioTableSelection.isSelected()) {
+                BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseControlClickedRow(JTableBLibro);
+            }
         }
     }//GEN-LAST:event_JTableBLibroMouseClicked
 
@@ -492,6 +542,11 @@ public class VBuscarLibro extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuSalirActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Object[] jText = {JTituloText, JISBNText, JListAutor, JListEditorial};
+        clearTexts(jText);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JAsignar;
     private javax.swing.JButton JBuscarLibro;
@@ -506,6 +561,8 @@ public class VBuscarLibro extends javax.swing.JFrame {
     public javax.swing.JList<String> JListAutor;
     public javax.swing.JList<String> JListEditorial;
     public javax.swing.JTextField JNPagText;
+    private javax.swing.JRadioButtonMenuItem JRadioTableComplete;
+    private javax.swing.JRadioButtonMenuItem JRadioTableSelection;
     private javax.swing.JButton JRegresar;
     private javax.swing.JTabbedPane JTabbedBusquedaLibros;
     public javax.swing.JTable JTableBLibro;
@@ -518,6 +575,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuSalir;

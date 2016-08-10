@@ -7,7 +7,6 @@ import Modelo.AdministradorDAO;
 import Utils.CleanupDone;
 import Utils.TableHelper;
 import Utils.TextChecker;
-import Vista.VDynamicTable;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,16 +80,17 @@ public class AdministradorControlador {
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
      * @param jArray // Contiene los objetos de selección
+     * @return // Regresa true o false si ocurre un error
      */
-    public void actionPerformedJIngresarLibro(DefaultTableModel jModel, Object[] jField, ArrayList jArray) {
+    public boolean actionPerformedJIngresarLibro(DefaultTableModel jModel, Object[] jField, ArrayList jArray) {
         LibroBean Bean = new LibroBean();
+        boolean err = false;
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if (!TEXT_CHECKER.checkLenght(jField[0].toString(), 10, 13)) {
+            return err;
+        } else if (!TEXT_CHECKER.checkLenght(jField[0].toString(), 10, 13)) {
             JOptionPane.showMessageDialog(null, "ISBN debe tener 10 ó 13 números", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return err;
         }
         Bean.setIsbn(jField[0].toString());
         Bean.setTitulo(jField[1].toString());
@@ -104,16 +104,18 @@ public class AdministradorControlador {
             Bean.setLocalizacion(getId(jArray.get(3).toString()));
         } catch (NullPointerException n) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return err;
         }
         if (Bean.getArea() == 0 || Bean.getEditorial() == 0 || Bean.getAutor() == 0 || Bean.getLocalizacion() == 0) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else if (ADM.IngresarLibro(Bean)) {
             jModel.addRow(new Object[]{Bean.getIdLibro(), Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), getString(jArray.get(0).toString()), getString(jArray.get(1).toString()), getString(jArray.get(2).toString()), getString(jArray.get(3).toString()), Bean.getNumero()});
             JOptionPane.showMessageDialog(null, "El Libro ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } else {
             JOptionPane.showMessageDialog(null, "No se agregó el Libro correctamente", "Error!", JOptionPane.ERROR_MESSAGE);
         }
+        return err;
     }
 
     /**
@@ -129,18 +131,20 @@ public class AdministradorControlador {
      * @param jTableRLibro // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
      * @param jArray // Contiene los objetos de selección
+     * @return // Regresa true o false si ocurre un error
      */
-    public void actionPerformedJModificarLibro(JTable jTableRLibro, Object[] jField, ArrayList jArray) {
+    public boolean actionPerformedJModificarLibro(JTable jTableRLibro, Object[] jField, ArrayList jArray) {
         LibroBean Bean = new LibroBean();
+        boolean err = false;
         int select = jTableRLibro.getSelectedRow();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return err;
         }
         String isbn = jField[0].toString();
         if (!TEXT_CHECKER.checkLenght(isbn, 10, 13) && TEXT_CHECKER.checkISBN(isbn)) {
             JOptionPane.showMessageDialog(null, "ISBN debe tener 10 ó 13 números", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return err;
         }
         try {
             Bean.setAutor(getId(jArray.get(0).toString()));
@@ -149,7 +153,7 @@ public class AdministradorControlador {
             Bean.setLocalizacion(getId(jArray.get(3).toString()));
         } catch (NullPointerException n) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return err;
         }
         if (select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
@@ -166,8 +170,10 @@ public class AdministradorControlador {
                 Object[] jFieldText = new Object[]{Bean.getIsbn(), Bean.getTitulo(), Bean.getPaginas(), Bean.getEstatus(), getString(jArray.get(0).toString()), getString(jArray.get(1).toString()), getString(jArray.get(2).toString()), getString(jArray.get(3).toString()), Bean.getNumero()};
                 TABLE_HELPER.updateTableContentWith(jTableRLibro, jFieldText, select, 0);
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
+                return true;
             }
         }
+        return err;
     }
 
     /**
@@ -276,12 +282,14 @@ public class AdministradorControlador {
      * @param jField // Contiene los objetos Texto
      * @param m // Contiene el Apellido Materno del Socio, si es que tiene
      * @param secretPass // Contraseña segura del Socio
+     * @return // Regresa true o false si ocurre un error
      */
-    public void actionPerformedJIngresarSocio(DefaultTableModel jModel, Object[] jField, String m, char[] secretPass) {
+    public boolean actionPerformedJIngresarSocio(DefaultTableModel jModel, Object[] jField, String m, char[] secretPass) {
         SocioBean Bean = new SocioBean();
+        boolean err = false;
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Socio", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return err;
         }
         Bean.setNombre(jField[0].toString());
         Bean.setApellidoP(jField[1].toString());
@@ -295,9 +303,11 @@ public class AdministradorControlador {
         if (ADM.IngresarSocio(Bean, secretPass)) {
             jModel.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + "#" + Bean.getNumero(), Bean.getTelefono(), "Activo", Bean.getPrestamos(), Bean.getUsuario(), "**********"});
             JOptionPane.showMessageDialog(null, "El Socio ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } else {
             JOptionPane.showMessageDialog(null, "No se agregó el Socio correctamente ¿Usuario duplicado?", "Error!", JOptionPane.ERROR_MESSAGE);
         }
+        return err;
     }
 
     /**
@@ -343,13 +353,15 @@ public class AdministradorControlador {
      * @param jTableRSocio // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Text
      * @param m // Contiene el Apellido Materno del Socio, si es que tiene
+     * @return // Regresa true o false si ocurre un error
      */
-    public void actionPerformedJModificarSocio(JTable jTableRSocio, Object[] jField, String m) {
+    public boolean actionPerformedJModificarSocio(JTable jTableRSocio, Object[] jField, String m) {
         int select = jTableRSocio.getSelectedRow();
+        boolean err = false;
         SocioBean Bean = new SocioBean();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Socio", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            return err;
         }
         if (select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
@@ -372,8 +384,10 @@ public class AdministradorControlador {
                 Object[] jFieldText = new Object[]{Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), dir, Bean.getTelefono(), Bean.getEstatus(), Bean.getPrestamos(), Bean.getUsuario(), "**********"};
                 TABLE_HELPER.updateTableContentWith(jTableRSocio, jFieldText, select, 0);
                 JOptionPane.showMessageDialog(null, "Registro Modificado");
+                return true;
             }
         }
+        return err;
     }
 
     /**
@@ -472,9 +486,10 @@ public class AdministradorControlador {
      */
     public boolean actionPerformedJIngresarAutor(DefaultTableModel jModel, Object[] jField, String m) {
         AutorBean Bean = new AutorBean();
+        boolean err = false;
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Autor", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return false;
+            return err;
         }
         Bean.setNombre(jField[0].toString());
         Bean.setApellidoP(jField[1].toString());
@@ -485,7 +500,7 @@ public class AdministradorControlador {
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "No se agregó el Autor", "Error!", JOptionPane.ERROR_MESSAGE);
-            return false;
+            return err;
         }
     }
 
@@ -507,10 +522,11 @@ public class AdministradorControlador {
      */
     public boolean actionPerformedJModificarAutor(JTable jTableRAutor, Object[] jField, String m) {
         AutorBean Bean = new AutorBean();
+        boolean err = false;
         int select = jTableRAutor.getSelectedRow();
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Autor", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return false;
+            return err;
         }
         if (select < 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
@@ -527,7 +543,7 @@ public class AdministradorControlador {
                 return true;
             }
         }
-        return false;
+        return err;
     }
 
     /**
@@ -591,53 +607,5 @@ public class AdministradorControlador {
             action = 6;
         }
         ADM.BuscarAutor(jModel, Bean, action);
-    }
-
-    /**
-     * Uso: Encontrar elementos de Tabla.
-     *
-     * Descripción: Consigue el tamaño del objeto y las columnas de la tabla.
-     * Luego inserta el texto de la tabla en los objetos dados.
-     *
-     * Variables:
-     *
-     * @param jTable // Contiene el objeto Tabla de la Vista
-     * @param jField // Contiene los objetos de Texto
-     * @param last // Columnas a ignorar al final de la Tabla
-     */
-    public void JTableMouseDoubleClicked(JTable jTable, Object[] jField, int last) {
-        TABLE_HELPER.JTableMouseDoubleClicked(jTable, jField, last);
-    }
-
-    /**
-     * Uso: Encontrar elementos de Tabla.
-     *
-     * Descripción: Consigue el tamaño del objeto y las columnas de la tabla.
-     * Luego inserta el texto de la tabla en los objetos dados.
-     *
-     * Variables:
-     *
-     * @param jTable // Contiene el objeto Tabla de la Vista
-     * @param jField // Contiene los objetos de Texto
-     * @param jField0 // Contiene los objetos de Texto Complejos
-     * @param last // Columnas a ignorar al final de la Tabla
-     */
-    public void JTableMouseDoubleClicked(JTable jTable, Object[] jField, Object[] jField0, int last) {
-        TABLE_HELPER.JTableMouseDoubleClicked(jTable, jField, jField0, last);
-    }
-
-    /**
-     * Uso: Encontrar elementos de Tabla.
-     *
-     * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
-     * la tabla dinámica.
-     *
-     * Variables:
-     *
-     * @param jTable // Contiene el objeto Tabla de la Vista
-     */
-    public void JTableMouseControlClicked(DefaultTableModel jTable) {
-        VDynamicTable vDynamic = new VDynamicTable(jTable);
-        vDynamic.setVisible(true);
     }
 }

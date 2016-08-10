@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 /**

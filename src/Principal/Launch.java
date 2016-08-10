@@ -79,7 +79,7 @@ public class Launch {
             if (texture != null) {
                 props.put("disabledTexture", texture);
             }
-            texture = ImageHelper.loadImage("DesktopTexture.jpg");
+            texture = ImageHelper.loadImage("DesktoppTexture.jpg");
             if (texture != null) {
                 props.put("menubarTexture", texture);
             }

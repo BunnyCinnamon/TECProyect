@@ -1,9 +1,11 @@
 package Utils;
 
+import Vista.VDynamicTable;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -207,6 +209,52 @@ public class TableHelper {
         for (int i = 1; i < start; i++) {
             String string = jField[i - 1].toString();
             jTable.setValueAt(string, select, i);
+        }
+    }
+
+    /**
+     * Uso: Encontrar elementos de Tabla.
+     *
+     * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
+     * la tabla dinámica.
+     *
+     * Variables:
+     *
+     * @param jTable // Contiene el objeto Tabla de la Vista
+     */
+    public void JTableMouseControlClicked(DefaultTableModel jTable) {
+        VDynamicTable vDynamic = new VDynamicTable(jTable);
+        vDynamic.setLocationRelativeTo(null);
+        vDynamic.setVisible(true);
+    }
+
+    /**
+     * Uso: Encontrar elementos de Row de una Tabla.
+     *
+     * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
+     * la tabla dinámica.
+     *
+     * Variables:
+     *
+     * @param jTable // Contiene el objeto Tabla de la Vista
+     */
+    public void JTableMouseControlClickedRow(JTable jTable) {
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        int Select = jTable.getSelectedRow();
+        if (Select < 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+        } else {
+            DefaultTableModel jModel = new DefaultTableModel();
+            ArrayList jArray = new ArrayList();
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                jArray.add(model.getValueAt(Select, i));
+                jModel.addColumn(model.getColumnName(i));
+            }
+            jModel.addRow(jArray.toArray());
+            VDynamicTable vDynamic = new VDynamicTable(jModel);
+            vDynamic.setSize(1080, 170);
+            vDynamic.setLocationRelativeTo(null);
+            vDynamic.setVisible(true);
         }
     }
 

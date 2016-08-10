@@ -1,5 +1,6 @@
 package Vista;
 
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,6 +17,7 @@ public class VDynamicTable extends javax.swing.JFrame {
     public VDynamicTable(DefaultTableModel jDinamicTable) {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         jDynamicTable.setModel(jDinamicTable);
     }
 
@@ -76,7 +78,7 @@ public class VDynamicTable extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
