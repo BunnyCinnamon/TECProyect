@@ -50,10 +50,14 @@ public class VBuscarLibro extends javax.swing.JFrame {
         Iniciar();
         ////////////////////////////////////////////////////////////////////////
         JBuscarLibro.setToolTipText("Buscar Libro con datos parecidos");
-        JAsignar.setToolTipText("Pedir Libro Seleccionado");
+        JAsignar.setToolTipText("Detalles del Libro Seleccionado");
         JDetalles.setToolTipText("Ver las Estadísticas de Biblioteca");
         JNPagText.setToolTipText("Usuario loggeado al sistema");
         JNPagText.setText(Bean.getUsuario());
+        JTituloText.setToolTipText("Ingresa el Título del Libro");
+        JISBNText.setToolTipText("De 10 ó 13 números ej:\"0-123456-47-9 ó 978-3-16-148410-0\"");
+        JListAutor.setToolTipText("Seleccione un Autor");
+        JListEditorial.setToolTipText("Seleccione una Editorial");
     }
 
     /**

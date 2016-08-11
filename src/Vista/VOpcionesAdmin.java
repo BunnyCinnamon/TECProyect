@@ -44,6 +44,7 @@ public class VOpcionesAdmin extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
         JBibliotecaOpen.setToolTipText("Agregar, Modificar, y Eliminar Registros");
         JPrestamosOpen.setToolTipText("Ver todos los Préstamos");
+        JLibrosOpen.setToolTipText("Hacer un Préstamo");
     }
 
     private AdministradorBean Bean;

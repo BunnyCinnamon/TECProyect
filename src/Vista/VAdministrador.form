@@ -686,7 +686,7 @@
             <Component class="javax.swing.JLabel" name="jISBN5">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="14" style="0"/>
+                  <Font name="Consolas" size="14" style="2"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Estado:"/>
               </Properties>
@@ -1155,7 +1155,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="99" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S/N"/>
+                <Property name="text" type="java.lang.String" value="N/A"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JApellidoMTextSocioMouseClicked"/>
@@ -1489,7 +1489,7 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="14" style="0"/>
+                  <Font name="Consolas" size="14" style="2"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usuario:"/>
               </Properties>
@@ -1519,7 +1519,7 @@
             <Component class="javax.swing.JLabel" name="jTitulo8">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="14" style="0"/>
+                  <Font name="Consolas" size="14" style="2"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Estatus:"/>
               </Properties>
@@ -1527,7 +1527,7 @@
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="14" style="0"/>
+                  <Font name="Consolas" size="14" style="2"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
               </Properties>
@@ -1704,7 +1704,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="99" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S/N"/>
+                <Property name="text" type="java.lang.String" value="N/A"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JApellidoMAutorMouseClicked"/>
@@ -1975,7 +1975,7 @@
             <Component class="javax.swing.JLabel" name="jTitulo10">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="14" style="0"/>
+                  <Font name="Consolas" size="14" style="2"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Estatus:"/>
               </Properties>
@@ -2172,7 +2172,7 @@
                 <Component class="javax.swing.JLabel" name="jTitulo14">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Consolas" size="14" style="0"/>
+                      <Font name="Consolas" size="14" style="2"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Estatus:"/>
                   </Properties>
@@ -2390,7 +2390,7 @@
                 <Component class="javax.swing.JLabel" name="jTitulo18">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Consolas" size="14" style="0"/>
+                      <Font name="Consolas" size="14" style="2"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Estatus:"/>
                   </Properties>
@@ -2524,7 +2524,7 @@
                 <Component class="javax.swing.JLabel" name="jTitulo17">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Consolas" size="14" style="0"/>
+                      <Font name="Consolas" size="14" style="2"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Estatus:"/>
                   </Properties>

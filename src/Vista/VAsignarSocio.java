@@ -33,8 +33,9 @@ public class VAsignarSocio extends javax.swing.JFrame {
         this.SOCIO_BEAN = Bean;
         this.ARRAY_LIST = Array;
         ////////////////////////////////////////////////////////////////////////
-        JTableBLibro.setToolTipText("Libro Seleccionado Previamente");
-        JTableBSocio.setToolTipText("Socio loggeado en el sistema");
+        JTableBLibro.setToolTipText("Libro Seleccionado");
+        JTableBSocio.setToolTipText("Socio Seleccionado");
+        JAceptarAsignar.setToolTipText("Confirmar Préstamo");
     }
 
     /**

@@ -57,9 +57,17 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
 
     private void SetToolTipText() {
         JBuscarLibro.setToolTipText("Buscar Libro");
-        JDetalles.setToolTipText("Pedir Información del Libro Seleccionado");
+        JDetalles.setToolTipText("Asignar Libro al Socio");
         JEstadisticas.setToolTipText("Ver las Estadísticas de Biblioteca");
-        JNPagText.setToolTipText("Su Username");
+        JNPagText.setToolTipText("Usuario loggeado al sistema");
+        JTituloText.setToolTipText("Ingresa el Título del Libro");
+        JISBNText.setToolTipText("De 10 ó 13 números ej:\"0-123456-47-9 ó 978-3-16-148410-0\"");
+        JListAutor.setToolTipText("Seleccione un Autor");
+        JListEditorial.setToolTipText("Seleccione una Editorial");
+        JNombreTextSocio.setToolTipText("Ingrese sólo Letras");
+        JApellidoPTextSocio.setToolTipText("Ingrese sólo Letras");
+        JApellidoMTextSocio.setToolTipText("Campo no Obligatorio, Ingrese sólo Letras");
+        JTextUsuario.setToolTipText("Correo Electrónico ej:\"correo@gmail.com\"");
     }
 
     /**
