@@ -23,8 +23,6 @@ public class PrestamosControlador {
     /**
      * Descripción: Elimina el Préstamo de la base de datos.
      *
-     * Variables:
-     *
      * @param jTablePrestamos //Contiene el objeto Tabla de la Vista
      */
     public void JLiberarSeleccionActionPerformed(JTable jTablePrestamos) {
@@ -46,8 +44,6 @@ public class PrestamosControlador {
      *
      * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
      * la tabla dinámica.
-     *
-     * Variables:
      *
      * @param jTablePrestamos // Contiene el objeto Tabla de la Vista
      */

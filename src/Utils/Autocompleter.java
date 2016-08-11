@@ -17,8 +17,6 @@ public class Autocompleter {
      * Descripción: Añade los Textos encontrados y crea un nuevo Autocompleter
      * de un TextField.
      *
-     * Variables:
-     *
      * @param r // Text field para autocompletado
      * @param array // Contiene el objeto de Arrays
      */
@@ -28,9 +26,7 @@ public class Autocompleter {
     }
 
     /**
-     * Descripción: Añade los textos al autocompletado del TextField
-     *
-     * Variables:
+     * Descripción: Añade los textos al autocompletado del TextField.
      *
      * @param array // Contiene el objeto de Arrays
      */

@@ -21,8 +21,6 @@ public class AsignarSocioControlador {
      * objeto, tipo bean socio y tipo array list. Introduce los datos a las
      * tablas en la vista.
      *
-     * Variables:
-     *
      * @param U // Contiene los objetos de Tablas
      */
     public void LoadData(Object[] U) {
@@ -41,8 +39,6 @@ public class AsignarSocioControlador {
      * Descripción: Introduce los datos de las tablas a un objeto y las envia a
      * un dao correspondiente. Si el ingreso fué exitoso o erroneo envia un
      * texto a JOptionPane.
-     *
-     * Variables:
      *
      * @param U // Contiene los objetos de Tablas
      */

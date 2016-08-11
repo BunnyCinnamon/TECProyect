@@ -38,8 +38,6 @@ public class AsignarSocioDAO {
      * existencias por 1, si es exitoso icrementa el número de préstamos que ha
      * hecho el socio.
      *
-     * Variables:
-     *
      * @param U // Contiene el objeto Bean y ArrayList
      * @return // Regresa true si es exitosa y false si ocurre un error
      */

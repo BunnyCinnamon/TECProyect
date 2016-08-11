@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Uso: Maneja el flujo de información de Tablas entre Vistas y Controladores o
- * entre estas
+ * entre estas.
  *
  * Descripción: Controlador para Tablas
  *
@@ -26,8 +26,6 @@ public class TableHelper {
      *
      * Descripción: Consigue el tamaño del objeto y las columnas de la tabla.
      * Luego inserta el texto de la tabla en los objetos dados.
-     *
-     * Variables:
      *
      * @param jTable // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -66,8 +64,6 @@ public class TableHelper {
      *
      * Descripción: Consigue el tamaño del objeto y las columnas de la tabla.
      * Luego inserta el texto de la tabla en los objetos dados.
-     *
-     * Variables:
      *
      * @param jTable // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -111,8 +107,6 @@ public class TableHelper {
      * Descripción: Consigue las columnas de la tabla. Luego inserta el texto de
      * la tabla en un array.
      *
-     * Variables:
-     *
      * @param jTable // Contiene el objeto Tabla de la Vista
      * @param canGet // Contiene las columnas que son true para conseguir su
      * información
@@ -137,8 +131,6 @@ public class TableHelper {
      *
      * Descripción: Separa el texto en sus palabras.
      *
-     * Variables:
-     *
      * @param text // Contiene el texto
      * @param return // Regresa un Array con texto separado
      */
@@ -151,8 +143,6 @@ public class TableHelper {
      * Tabla.
      *
      * Descripción: Busca la fila en un jlist que tenga el texto proporcionado.
-     *
-     * Variables:
      *
      * @param l // Contiene el objeto Combo Box
      * @param n // Contiene el Texto
@@ -175,8 +165,6 @@ public class TableHelper {
      * Descripción: Busca la fila en un jcombobox que tenga el texto
      * proporcionado.
      *
-     * Variables:
-     *
      * @param l // Contiene el objeto Combo Box
      * @param n // Contiene el Texto
      */
@@ -195,8 +183,6 @@ public class TableHelper {
      * Uso: Modificar Tabla.
      *
      * Descripción: Modifica la Tabla con los datos en los Objetos.
-     *
-     * Variables:
      *
      * @param jTable // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -218,8 +204,6 @@ public class TableHelper {
      * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
      * la tabla dinámica.
      *
-     * Variables:
-     *
      * @param jTable // Contiene el objeto Tabla de la Vista
      */
     public void JTableMouseControlClicked(DefaultTableModel jTable) {
@@ -233,8 +217,6 @@ public class TableHelper {
      *
      * Descripción: Consigue la tabla. Luego inserta el contenido de la tabla en
      * la tabla dinámica.
-     *
-     * Variables:
      *
      * @param jTable // Contiene el objeto Tabla de la Vista
      */

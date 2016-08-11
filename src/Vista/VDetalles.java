@@ -28,9 +28,7 @@ public class VDetalles extends javax.swing.JFrame {
     }
 
     /**
-     * Descripción: Inserta texto en el Titulo y Array a Detalles
-     *
-     * Variables:
+     * Descripción: Inserta texto en el Titulo y Array a Detalles.
      *
      * @param Titulo // Título de la vista
      * @param A // Array list con la información encontrada
@@ -84,7 +82,7 @@ public class VDetalles extends javax.swing.JFrame {
         JTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         JTitulo.setText("SU BASE DE DATOS ESTA VACIA");
 
-        JTitulo0.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        JTitulo0.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
         JTitulo0.setForeground(new java.awt.Color(0, 153, 153));
         JTitulo0.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JTitulo0.setText("TITLE");
@@ -93,7 +91,7 @@ public class VDetalles extends javax.swing.JFrame {
         JDesc0.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JDesc0.setText("DESCRIPTION");
 
-        JTitulo1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        JTitulo1.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
         JTitulo1.setForeground(new java.awt.Color(0, 153, 153));
         JTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JTitulo1.setText("TITLE");
@@ -102,7 +100,7 @@ public class VDetalles extends javax.swing.JFrame {
         JDesc1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JDesc1.setText("DESCRIPTION");
 
-        JTitulo2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        JTitulo2.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
         JTitulo2.setForeground(new java.awt.Color(0, 153, 153));
         JTitulo2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JTitulo2.setText("TITLE");
@@ -111,7 +109,7 @@ public class VDetalles extends javax.swing.JFrame {
         JDesc2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JDesc2.setText("DESCRIPTION");
 
-        JTitulo3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        JTitulo3.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
         JTitulo3.setForeground(new java.awt.Color(0, 153, 153));
         JTitulo3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JTitulo3.setText("TITLE");
@@ -127,7 +125,7 @@ public class VDetalles extends javax.swing.JFrame {
             }
         });
 
-        JTitulo4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        JTitulo4.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
         JTitulo4.setForeground(new java.awt.Color(0, 153, 153));
         JTitulo4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JTitulo4.setText("TITLE");
@@ -136,7 +134,7 @@ public class VDetalles extends javax.swing.JFrame {
         JDesc4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         JDesc4.setText("DESCRIPTION");
 
-        jMenu1.setText("Opciones");
+        jMenu1.setText("Ventana");
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         JMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));

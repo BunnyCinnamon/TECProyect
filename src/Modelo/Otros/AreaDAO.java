@@ -33,8 +33,6 @@ public class AreaDAO {
      * Descripción: Busca el id de la nueva área y la ingresa en la Tabla junto
      * con sus datos.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el nombre del área
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -84,8 +82,6 @@ public class AreaDAO {
      * Descripción: Modifica un Área con id específico en la base de datos con
      * los datos: nombre y estatus, en el Bean.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el id, nombre y estatus del área
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -114,8 +110,6 @@ public class AreaDAO {
 
     /**
      * Descripción: Elimina un Área con id específico en la base de datos.
-     *
-     * Variables:
      *
      * @param id // Contiene el id del área
      * @return // Regresa true si es exitosa y false si ocurre un error

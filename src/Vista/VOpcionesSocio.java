@@ -1,6 +1,6 @@
 package Vista;
 
-import Resources.ImageHelper;
+import Resources.ResourceHelper;
 import Classes.Beans.SocioBean;
 import Controlador.OpcionesControladorSocio;
 import Controlador.SalirControlador;
@@ -25,8 +25,6 @@ public class VOpcionesSocio extends javax.swing.JFrame {
 
     /**
      * Descripción: Inicializa la Vista.
-     *
-     * Variables:
      *
      * @param Bean // Contiene el Bean de Socio
      */
@@ -55,7 +53,7 @@ public class VOpcionesSocio extends javax.swing.JFrame {
     }
 
     private void setIcon(JLabel label, String icon) {
-        label.setIcon(ImageHelper.loadImage(icon));
+        label.setIcon(ResourceHelper.cargarImagen(icon));
     }
 
     @SuppressWarnings("unchecked")
@@ -146,7 +144,7 @@ public class VOpcionesSocio extends javax.swing.JFrame {
         jPrestamos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPrestamos.setText("Préstamos");
 
-        jMenu1.setText("Opciones");
+        jMenu1.setText("Ventana");
 
         JMenuCerrarSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, java.awt.event.InputEvent.SHIFT_MASK));
         JMenuCerrarSesion.setText("Cerrar Sesión");

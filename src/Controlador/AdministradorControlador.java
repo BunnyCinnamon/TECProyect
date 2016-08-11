@@ -35,8 +35,6 @@ public class AdministradorControlador {
      * Descripción: El matcher busca el primer número en el texto y envia el
      * resultado a un parse que convierte el número a integer.
      *
-     * Variables:
-     *
      * @param a // Contiene el texto
      */
     private int getId(String a) throws NullPointerException {
@@ -55,8 +53,6 @@ public class AdministradorControlador {
      * contiene texto, busca el primer espacio y resta los caracteres del texto
      * hasta el primer espacio más 1.
      *
-     * Variables:
-     *
      * @param e // Contiene el texto
      */
     private String getString(String e) {
@@ -74,8 +70,6 @@ public class AdministradorControlador {
      * en la tabla y envia los datos al dao correspondiente, si es correcto
      * ingresa los datos en la tabla y muestra un JOptionPane con texto exitoso,
      * si no es correcto envia un JOptionPane con texto erroneo.
-     *
-     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -125,8 +119,6 @@ public class AdministradorControlador {
      * fiels y listas, si todas las listas tienen datos, envia los datos al dao
      * correspondiente, si algo es exitoso o erroneo muestra un texto en
      * JOptionPane.
-     *
-     * Variables:
      *
      * @param jTableRLibro // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -183,8 +175,6 @@ public class AdministradorControlador {
      * error envia JOptionPane con texto erroneo y si no un texto exitoso, envia
      * el id al dao correspondiente.
      *
-     * Variables:
-     *
      * @param jTableRLibro // Contiene el objeto Tabla
      */
     public void actionPerformedJEliminarLibro(JTable jTableRLibro) {
@@ -206,8 +196,6 @@ public class AdministradorControlador {
      * Descripción: Consigue el id del titulo, isbn, editorial y autor si hay un
      * error envia JOptionPane con texto erroneo y si no un texto exitoso, envia
      * los datos al dao correspondiente.
-     *
-     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -276,36 +264,42 @@ public class AdministradorControlador {
      * si es correcto ingresa los datos en la tabla y muestra un JOptionPane con
      * texto exitoso, si no es correcto envia un JOptionPane con texto erroneo.
      *
-     * Variables:
-     *
      * @param jModel // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Texto
-     * @param m // Contiene el Apellido Materno del Socio, si es que tiene
+     * @param A // Contiene el Apellido Materno del Socio, si es que tiene
+     * @param B // Contiene el Número de Calle del Socio, si es que tiene
      * @param secretPass // Contraseña segura del Socio
      * @return // Regresa true o false si ocurre un error
      */
-    public boolean actionPerformedJIngresarSocio(DefaultTableModel jModel, Object[] jField, String m, char[] secretPass) {
+    public boolean actionPerformedJIngresarSocio(DefaultTableModel jModel, Object[] jField, String A, String B, char[] secretPass) {
         SocioBean Bean = new SocioBean();
         boolean err = false;
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Socio", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return err;
         }
-        Bean.setNombre(jField[0].toString());
-        Bean.setApellidoP(jField[1].toString());
-        Bean.setApellidoM(m);
-        Bean.setEstado(jField[2].toString());
-        Bean.setMunicipio(jField[3].toString());
-        Bean.setCalle(jField[4].toString());
-        Bean.setNumero(Integer.parseInt(jField[5].toString()));
-        Bean.setTelefono(jField[6].toString());
-        Bean.setUsuario(jField[7].toString());
-        if (ADM.IngresarSocio(Bean, secretPass)) {
-            jModel.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + "#" + Bean.getNumero(), Bean.getTelefono(), "Activo", Bean.getPrestamos(), Bean.getUsuario(), "**********"});
-            JOptionPane.showMessageDialog(null, "El Socio ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
-            return true;
+        if (TEXT_CHECKER.checkNoNumberText(jField[0].toString() + jField[1].toString())
+                && TEXT_CHECKER.checkDirection(jField[2].toString() + jField[3].toString() + jField[4].toString())
+                && TEXT_CHECKER.checkPhoneNumber(jField[5].toString())
+                && TEXT_CHECKER.checkEmail(jField[6].toString())) {
+            Bean.setNombre(jField[0].toString());
+            Bean.setApellidoP(jField[1].toString());
+            Bean.setApellidoM(A);
+            Bean.setEstado(jField[2].toString());
+            Bean.setMunicipio(jField[3].toString());
+            Bean.setCalle(jField[4].toString());
+            Bean.setNumero(B);
+            Bean.setTelefono(jField[5].toString());
+            Bean.setUsuario(jField[6].toString());
+            if (ADM.IngresarSocio(Bean, secretPass)) {
+                jModel.addRow(new Object[]{Bean.getIdUsuario(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + " " + Bean.getNumero(), Bean.getTelefono(), "Activo", Bean.getPrestamos(), Bean.getUsuario(), "**********"});
+                JOptionPane.showMessageDialog(null, "El Socio ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se agregó el Socio correctamente ¿Usuario duplicado?", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "No se agregó el Socio correctamente ¿Usuario duplicado?", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
         return err;
     }
@@ -317,8 +311,6 @@ public class AdministradorControlador {
      * mayor a 5 caracteres continua, si no lo es envia un cuadro de texto
      * erroneo, pide de nuevo la contraseña y si es igual a la primera
      * contraseña inserta el texto en el text field y lo marca en verde.
-     *
-     * Variables:
      *
      * @param JTextContraseñaSocio // Contiene el objeto Text Field
      */
@@ -348,14 +340,14 @@ public class AdministradorControlador {
      * consigue el id del socio y envia el Bean al dao correspondiente, si es
      * exitoso muestra un mensaje correcto.
      *
-     * Variables:
-     *
      * @param jTableRSocio // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Text
-     * @param m // Contiene el Apellido Materno del Socio, si es que tiene
+     * @param A // Contiene el Apellido Materno del Socio, si es que tiene
+     * @param B // Contiene el Número de Calle del Socio, si es que tiene
+     * @param secretPass // Contraseña segura del Socio
      * @return // Regresa true o false si ocurre un error
      */
-    public boolean actionPerformedJModificarSocio(JTable jTableRSocio, Object[] jField, String m) {
+    public boolean actionPerformedJModificarSocio(JTable jTableRSocio, Object[] jField, String A, String B, char[] secretPass) {
         int select = jTableRSocio.getSelectedRow();
         boolean err = false;
         SocioBean Bean = new SocioBean();
@@ -363,29 +355,35 @@ public class AdministradorControlador {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Socio", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return err;
         }
-        if (select < 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
-        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-            Bean.setIdUsuario(Integer.parseInt(jTableRSocio.getValueAt(select, 0).toString()));
-            Bean.setNombre(jField[0].toString());
-            Bean.setApellidoP(jField[1].toString());
-            Bean.setApellidoM(m);
-            Bean.setEstatus(jField[2].toString());
-            Bean.setEstado(jField[3].toString());
-            Bean.setPrestamos(Integer.parseInt(jTableRSocio.getValueAt(select, 7).toString()));
-            Bean.setMunicipio(jField[4].toString());
-            Bean.setCalle(jField[5].toString());
-            Bean.setNumero(Integer.parseInt(jField[6].toString()));
-            Bean.setTelefono(jField[7].toString());
-            Bean.setUsuario(jField[8].toString());
-            Bean.setContraseña(jField[9].toString());
-            if (ADM.ModificarSocio(Bean)) {
-                String dir = Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + " " + Bean.getNumero();
-                Object[] jFieldText = new Object[]{Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), dir, Bean.getTelefono(), Bean.getEstatus(), Bean.getPrestamos(), Bean.getUsuario(), "**********"};
-                TABLE_HELPER.updateTableContentWith(jTableRSocio, jFieldText, select, 0);
-                JOptionPane.showMessageDialog(null, "Registro Modificado");
-                return true;
+        if (TEXT_CHECKER.checkNoNumberText(jField[0].toString() + jField[1].toString())
+                && TEXT_CHECKER.checkDirection(jField[3].toString() + jField[4].toString() + jField[5].toString())
+                && TEXT_CHECKER.checkPhoneNumber(jField[6].toString())
+                && TEXT_CHECKER.checkEmail(jField[7].toString())) {
+            if (select < 0) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+            } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
+                Bean.setIdUsuario(Integer.parseInt(jTableRSocio.getValueAt(select, 0).toString()));
+                Bean.setNombre(jField[0].toString());
+                Bean.setApellidoP(jField[1].toString());
+                Bean.setApellidoM(A);
+                Bean.setEstatus(jField[2].toString());
+                Bean.setEstado(jField[3].toString());
+                Bean.setPrestamos(Integer.parseInt(jTableRSocio.getValueAt(select, 7).toString()));
+                Bean.setMunicipio(jField[4].toString());
+                Bean.setCalle(jField[5].toString());
+                Bean.setNumero(B);
+                Bean.setTelefono(jField[6].toString());
+                Bean.setUsuario(jField[7].toString());
+                if (ADM.ModificarSocio(Bean, secretPass)) {
+                    String dir = Bean.getEstado() + " " + Bean.getMunicipio() + " " + Bean.getCalle() + " " + Bean.getNumero();
+                    Object[] jFieldText = new Object[]{Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), dir, Bean.getTelefono(), Bean.getEstatus(), Bean.getPrestamos(), Bean.getUsuario(), "**********"};
+                    TABLE_HELPER.updateTableContentWith(jTableRSocio, jFieldText, select, 0);
+                    JOptionPane.showMessageDialog(null, "Registro Modificado");
+                    return true;
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
         return err;
     }
@@ -396,8 +394,6 @@ public class AdministradorControlador {
      * Descripción: Si la tabla está seleccionada consigue el id del socio y lo
      * envia a el dao correspondiente, si no muestra un JOptionPane con el
      * mensaje que le corresponde.
-     *
-     * Variables:
      *
      * @param jTableRSocio // Contiene el objeto Tabla de la Vista
      */
@@ -421,8 +417,6 @@ public class AdministradorControlador {
      * Descripción: Crea un nuevo socio bean, ingresa los valores de los text
      * fiels en el bean y consigue la acción dependiendo de los combo box
      * seleccionados. Envia el bean y la acción al dao correspondiente.
-     *
-     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
@@ -477,8 +471,6 @@ public class AdministradorControlador {
      * field, envia el bean al dao correspondiente, si es exitoso envia un
      * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo.
      *
-     * Variables:
-     *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
      * @param m // Contiene el Apellido Materno del Autor, si es que tiene
@@ -491,17 +483,22 @@ public class AdministradorControlador {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Autor", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return err;
         }
-        Bean.setNombre(jField[0].toString());
-        Bean.setApellidoP(jField[1].toString());
-        Bean.setApellidoM(m);
-        if (ADM.IngresarAutor(Bean)) {
-            jModel.addRow(new Object[]{Bean.getIdAutor(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), "Activo"});
-            JOptionPane.showMessageDialog(null, "El Autor ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
-            return true;
+        if (TEXT_CHECKER.checkNoNumberText(jField[0].toString() + jField[1].toString())) {
+            Bean.setNombre(jField[0].toString());
+            Bean.setApellidoP(jField[1].toString());
+            Bean.setApellidoM(m);
+            if (ADM.IngresarAutor(Bean)) {
+                jModel.addRow(new Object[]{Bean.getIdAutor(), Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), "Activo"});
+                JOptionPane.showMessageDialog(null, "El Autor ha sido agregado de manera exitosa", "Éxito!", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se agregó el Autor", "Error!", JOptionPane.ERROR_MESSAGE);
+                return err;
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "No se agregó el Autor", "Error!", JOptionPane.ERROR_MESSAGE);
-            return err;
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
+        return err;
     }
 
     /**
@@ -512,8 +509,6 @@ public class AdministradorControlador {
      * los valores en los text field. Envia los datos al dao correspondiente, si
      * es exitoso envia un JOptionPane con texto correcto, si no es exitoso
      * envia un texto erroneo.
-     *
-     * Variables:
      *
      * @param jTableRAutor // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Text
@@ -528,20 +523,25 @@ public class AdministradorControlador {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Autor", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return err;
         }
-        if (select < 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
-        } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
-            Bean.setIdAutor(Integer.parseInt(jTableRAutor.getValueAt(select, 0).toString()));
-            Bean.setNombre(jField[0].toString());
-            Bean.setApellidoP(jField[1].toString());
-            Bean.setApellidoM(m);
-            Bean.setStatus(jField[2].toString());
-            if (ADM.ModificarAutor(Bean)) {
-                Object[] jFieldText = new Object[]{Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getStatus()};
-                TABLE_HELPER.updateTableContentWith(jTableRAutor, jFieldText, select, 0);
-                JOptionPane.showMessageDialog(null, "Registro Modificado");
-                return true;
+        if (TEXT_CHECKER.checkNoNumberText(jField[0].toString() + jField[1].toString())) {
+            if (select < 0) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+            } else if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar el registro? ")) {
+                Bean.setIdAutor(Integer.parseInt(jTableRAutor.getValueAt(select, 0).toString()));
+                Bean.setNombre(jField[0].toString());
+                Bean.setApellidoP(jField[1].toString());
+                Bean.setApellidoM(m);
+                Bean.setStatus(jField[2].toString());
+                if (ADM.ModificarAutor(Bean)) {
+                    Object[] jFieldText = new Object[]{Bean.getNombre(), Bean.getApellidoP(), Bean.getApellidoM(), Bean.getStatus()};
+                    TABLE_HELPER.updateTableContentWith(jTableRAutor, jFieldText, select, 0);
+                    JOptionPane.showMessageDialog(null, "Registro Modificado");
+                    return true;
+                }
             }
+            return err;
+        } else {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
         return err;
     }
@@ -552,8 +552,6 @@ public class AdministradorControlador {
      * Descripción: Si la tabla está seleccionada consigue el id del autor
      * seleccionado. Envia el id al dao correspondiente, si es exitoso envia un
      * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo.
-     *
-     * Variables:
      *
      * @param jTableRAutor // Contiene el objeto de Tabla de la Vista
      * @return // Retorna false o true si ocurre o no un error
@@ -580,8 +578,6 @@ public class AdministradorControlador {
      * Descripción: Crea un nuevo autor bean, ingresa los valores de los text
      * fiels en el bean y consigue la acción dependiendo de los combo box
      * seleccionados. Envia el bean y la acción al dao correspondiente.
-     *
-     * Variables:
      *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto

@@ -21,8 +21,6 @@ public class VAsignarSocio extends javax.swing.JFrame {
     /**
      * Descripción: Inicializa la Vista.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el Bean del Socio
      * @param Array // Contiene Array del Libro
      */
@@ -41,8 +39,6 @@ public class VAsignarSocio extends javax.swing.JFrame {
 
     /**
      * Descripción: Carga la Vista con información.
-     *
-     * Variables:
      *
      * @param Bean // Contiene el Bean del Socio
      * @param Array // Contiene Array del Libro
@@ -140,7 +136,7 @@ public class VAsignarSocio extends javax.swing.JFrame {
             }
         });
 
-        JMenuOpciones.setText("Opciones");
+        JMenuOpciones.setText("Ventana");
 
         JMenuSalir.setText("Salir");
         JMenuOpciones.add(JMenuSalir);

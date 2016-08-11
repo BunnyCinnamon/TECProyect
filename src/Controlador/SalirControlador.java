@@ -36,8 +36,6 @@ public class SalirControlador {
      * Descripción: Reinicia la aplicación en ejecución con todas sus
      * características.
      *
-     * Variables:
-     *
      * @param run // Código para correr en reinicio
      * @throws IOException // Error de lectura
      */

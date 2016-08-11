@@ -25,8 +25,6 @@ public class EditorialControlador {
      * text field, envia el bean al dao correspondiente, si es exitoso envia un
      * JOptionPane con texto correcto, si no es exitoso envia un texto erroneo.
      *
-     * Variables:
-     *
      * @param jField // Contiene el objeto Texto
      * @return // Retorna false o true si ocurre o no un error
      */
@@ -57,8 +55,6 @@ public class EditorialControlador {
      * todos los valores en los text field. Envia los datos al dao
      * correspondiente, si es exitoso envia un JOptionPane con texto correcto,
      * si no es exitoso envia un texto erroneo.
-     *
-     * Variables:
      *
      * @param jTableREditorial // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Text

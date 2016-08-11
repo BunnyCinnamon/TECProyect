@@ -23,8 +23,6 @@ public class BuscarLibroControlador {
      * error envia JOptionPane con texto erroneo y si no un texto exitoso, envia
      * los datos al dao correspondiente.
      *
-     * Variables:
-     *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
      * @param jSelect // Contiene los objetos de selección

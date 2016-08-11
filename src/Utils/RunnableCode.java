@@ -21,9 +21,7 @@ public class RunnableCode implements Runnable {
     }
 
     /**
-     * Descripción: Muestra JOptionPane por segundos, luego lo elimina
-     *
-     * Variables:
+     * Descripción: Muestra JOptionPane por segundos, luego lo elimina.
      *
      * @param n // Tiempo de vida del mensaje
      */

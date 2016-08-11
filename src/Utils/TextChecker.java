@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 /**
@@ -20,8 +19,6 @@ public class TextChecker {
      *
      * Descripción: Compara el texto con un texto común.
      *
-     * Variables:
-     *
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
      */
@@ -35,8 +32,6 @@ public class TextChecker {
      * Uso: Verificar texto válido en latino.
      *
      * Descripción: Compara el texto con un texto sin números.
-     *
-     * Variables:
      *
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
@@ -53,8 +48,6 @@ public class TextChecker {
      * Descripción: Reemplaza los espacios por underscores "_" y compara el
      * texto con un texto.
      *
-     * Variables:
-     *
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
      */
@@ -68,8 +61,6 @@ public class TextChecker {
      * Uso: Verificar Número Válido.
      *
      * Descripción: Compara el texto con un número.
-     *
-     * Variables:
      *
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
@@ -85,8 +76,6 @@ public class TextChecker {
      *
      * Descripción: Compara el texto con un número.
      *
-     * Variables:
-     *
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
      */
@@ -100,8 +89,6 @@ public class TextChecker {
      * Uso: Verificar Número Válido de ISBN.
      *
      * Descripción: Compara el texto con un isbn.
-     *
-     * Variables:
      *
      * @param a // Contiene el objeto String
      * @return // Regresa true o false si el texto coincide
@@ -117,8 +104,6 @@ public class TextChecker {
      *
      * Descripción: Compara el texto con un email.
      *
-     * Variables:
-     *
      * @param text // Contiene el objeto String
      * @return // Regresa true si tiene un email
      */
@@ -133,8 +118,6 @@ public class TextChecker {
      *
      * Descripción: Valida el texto en el text field, y le asigna un color de
      * fondo dependiendo del resultado.
-     *
-     * Variables:
      *
      * @param JText // Contiene el objeto Text Field
      */
@@ -152,8 +135,6 @@ public class TextChecker {
      * Descripción: Valida el texto en el text field, y le asigna un color de
      * fondo dependiendo del resultado.
      *
-     * Variables:
-     *
      * @param JText // Contiene el objeto Text Field
      */
     public void checkColorsNoNumber(JTextField JText) {
@@ -169,8 +150,6 @@ public class TextChecker {
      *
      * Descripción: Valida el texto en el text field, y le asigna un color de
      * fondo dependiendo del resultado.
-     *
-     * Variables:
      *
      * @param JText // Contiene el objeto Text Field
      */
@@ -188,8 +167,6 @@ public class TextChecker {
      * Descripción: Valida el texto en el text field, y le asigna un color de
      * fondo dependiendo del resultado.
      *
-     * Variables:
-     *
      * @param JText // Contiene el objeto Text Field
      */
     public void checkColorsNumber(JTextField JText) {
@@ -206,8 +183,6 @@ public class TextChecker {
      * Descripción: Busca que cada objeto tenga un valor no nulo o vacio, si lo
      * tienen cambia su fondo a rojo.
      *
-     * Variables:
-     *
      * @param obj // Contiene los objetos Text Field
      */
     public void checkFieldsColors(Object[] obj) {
@@ -217,7 +192,7 @@ public class TextChecker {
                 JTextField field = (JTextField) obj1;
                 String text;
                 text = field.getText();
-                if (text.isEmpty() || !checkText(text)) {
+                if (text.isEmpty()) {
                     field.setBackground(col);
                 } else {
                     field.setBackground(Color.white);
@@ -246,8 +221,6 @@ public class TextChecker {
      * Descripción: Contar los números dentro del texto, retorna true o false si
      * el texto tiene los números deseados.
      *
-     * Variables:
-     *
      * @param l // Contiene el objeto String
      * @param m // Primer condición
      * @param n // Segunda condición
@@ -267,8 +240,6 @@ public class TextChecker {
      * Uso: Checar si los Textos son vacios.
      *
      * Descripción: Busca que el texto no mida 0 o sea 0.
-     *
-     * Variables:
      *
      * @param obj // Contiene los objetos Text Field
      * @return // Retorna true si el objeto esta vacio

@@ -33,8 +33,6 @@ public class LocalizacionDAO {
      * Descripción: Busca el id de la nueva Localizacion y la ingresa en la
      * Tabla junto con sus datos.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el nombre de la Localización
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -84,8 +82,6 @@ public class LocalizacionDAO {
      * Descripción: Modifica una Localización con id específico en la base de
      * datos con los datos: nombre y estatus, en el Bean.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el id, nombre y estatus de la Localización
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -115,8 +111,6 @@ public class LocalizacionDAO {
     /**
      * Descripción: Elimina una Localización con id específico en la base de
      * datos.
-     *
-     * Variables:
      *
      * @param id // Contiene el id de la Localización
      * @return // Regresa true si es exitosa y false si ocurre un error

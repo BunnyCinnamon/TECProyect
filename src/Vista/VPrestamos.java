@@ -42,8 +42,6 @@ public class VPrestamos extends javax.swing.JFrame {
     /**
      * Descripción: Inicializa la Vista.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el Bean de Socio
      */
     public VPrestamos(SocioBean Bean) {
@@ -205,7 +203,7 @@ public class VPrestamos extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Opciones");
+        jMenu1.setText("Ventana");
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         JMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));

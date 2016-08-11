@@ -1,13 +1,10 @@
 package Principal;
 
-import Resources.ImageHelper;
+import Resources.ResourceHelper;
 import Utils.CleanupDone;
 import java.awt.Color;
-import java.awt.Toolkit;
-import java.net.URL;
 import java.util.Properties;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -24,8 +21,6 @@ public class Launch {
      * Uso: Llama el método de Textura y carga una nueva ventana Iniciar Sesión.
      *
      * Descripción: Si isloaded es false manda un aviso a la vista inicio.
-     *
-     * Variables:
      *
      * @param args // Carga el Programa
      */
@@ -51,35 +46,35 @@ public class Launch {
         try {
             Properties props = new Properties();
             props.put("textureSet", "Custom");
-            Icon texture = ImageHelper.loadImage("DesktopTextur.jpg");
+            Icon texture = ResourceHelper.cargarImagen("WindowTexture.jpg");
             if (texture != null) {
                 props.put("windowTexture", texture);
             }
-            texture = ImageHelper.loadImage("DesktopTexture.jpg");
+            texture = ResourceHelper.cargarImagen("BackgroundTexture.jpg");
             if (texture != null) {
                 props.put("backgroundTexture", texture);
             }
-            texture = ImageHelper.loadImage("DesktopTexture.jpg");
+            texture = ResourceHelper.cargarImagen("AlterBackgroundTexture.jpg");
             if (texture != null) {
                 props.put("alterBackgroundTexture", texture);
             }
-            texture = ImageHelper.loadImage(".gif");
+            texture = ResourceHelper.cargarImagen("RolloverTexture.jpg");
             if (texture != null) {
                 props.put("rolloverTexture", texture);
             }
-            texture = ImageHelper.loadImage(".gif");
+            texture = ResourceHelper.cargarImagen("SelectedTexture.jpg");
             if (texture != null) {
                 props.put("selectedTexture", texture);
             }
-            texture = ImageHelper.loadImage("DesktopTexture.jpg");
+            texture = ResourceHelper.cargarImagen("PressedTexture.jpg");
             if (texture != null) {
                 props.put("pressedTexture", texture);
             }
-            texture = ImageHelper.loadImage("DesktopTexture.jpg");
+            texture = ResourceHelper.cargarImagen("DisabledTexture.jpg");
             if (texture != null) {
                 props.put("disabledTexture", texture);
             }
-            texture = ImageHelper.loadImage("DesktoppTexture.jpg");
+            texture = ResourceHelper.cargarImagen("MenubarTexture.jpg");
             if (texture != null) {
                 props.put("menubarTexture", texture);
             }
@@ -126,31 +121,4 @@ public class Launch {
         }
         return true;
     }
-
-    /**
-     * Uso: Carga la Imagen.
-     *
-     * Descripción: Busca la imagen en los Resources.
-     *
-     * Variables:
-     *
-     * @param name // Nombre del ícono
-     * @return // Imagen
-     */
-    public static ImageIcon loadImage(String name) {
-        ImageIcon image = null;
-        try {
-            URL url = ImageHelper.class.getResource(name);
-            if (url != null) {
-                java.awt.Image img = Toolkit.getDefaultToolkit().createImage(url);
-                if (img != null) {
-                    image = new ImageIcon(img);
-                }
-            }
-        } catch (Throwable ex) {
-            System.out.println("ERROR: loading image " + name + " failed. Exception: " + ex.getMessage());
-        }
-        return image;
-    }
-
 }

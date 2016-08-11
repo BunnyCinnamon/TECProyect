@@ -24,8 +24,6 @@ public class CargarInfoControlador {
      *
      * Descripción: Envia los objetos para ser llenados con información.
      *
-     * Variables:
-     *
      * @param jFieldCombo // Contiene los objetos ComboBox
      * @param jFieldList // Contiene los objetos List
      */
@@ -40,8 +38,6 @@ public class CargarInfoControlador {
      *
      * Descripción: Envia los objetos para ser llenados con información.
      *
-     * Variables:
-     *
      * @param jFieldList // Contiene los objetos List
      */
     public void CargarInfoListas(JList[] jFieldList) {
@@ -54,8 +50,6 @@ public class CargarInfoControlador {
      * Uso: CARGAR Información de Prestamos en Vista Administrador.
      *
      * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param accion // Contiene el tipo de acción
@@ -70,8 +64,6 @@ public class CargarInfoControlador {
      * Uso: CARGAR Información de Prestamos en Vista Administrador.
      *
      * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Socio
@@ -103,8 +95,6 @@ public class CargarInfoControlador {
      *
      * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
      *
-     * Variables:
-     *
      * @param t // Contiene el objeto Tabla de la Vista
      */
     public void CargarLocalizacion(DefaultTableModel t) {
@@ -117,8 +107,6 @@ public class CargarInfoControlador {
      * Uso: Buscar Información de Area.
      *
      * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      */
@@ -133,8 +121,6 @@ public class CargarInfoControlador {
      *
      * Descripción: Si ocurre un error se manda un Texto en JOptionPane.
      *
-     * Variables:
-     *
      * @param t // Contiene el objeto Tabla de la Vista
      */
     public void CargarEditorial(DefaultTableModel t) {
@@ -147,8 +133,6 @@ public class CargarInfoControlador {
      * Uso: Buscar Texto de Libros.
      *
      * Descripción: Busca información y la ingresa en un arraylist.
-     *
-     * Variables:
      *
      * @return // Regresa los Textos encontrados
      */

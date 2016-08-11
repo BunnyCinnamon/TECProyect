@@ -46,7 +46,7 @@ public class VDynamicTable extends javax.swing.JFrame {
         jDynamicTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jDynamicTable);
 
-        jMenu1.setText("Opciones");
+        jMenu1.setText("Ventana");
 
         jMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuSalir.setText("Salir");

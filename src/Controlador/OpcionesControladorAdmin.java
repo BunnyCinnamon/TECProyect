@@ -26,8 +26,6 @@ public class OpcionesControladorAdmin {
     /**
      * Descripción: Abre una nueva ventana de Buscar Libros.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el Bean Socio
      */
     public void actionPerformedJLibrosOpen(AdministradorBean Bean) {

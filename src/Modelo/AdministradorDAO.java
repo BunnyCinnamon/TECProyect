@@ -46,8 +46,6 @@ public class AdministradorDAO {
      * nuevo libro. Relaciona el nuevo libro con un autor. Relaciona el nuevo
      * libro con un ejemplar nuevo.
      *
-     * Variables:
-     *
      * @param Bean // Contiene los datos del Libro
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -125,8 +123,6 @@ public class AdministradorDAO {
      * los datos: isbn, titulo, paginas, estatus, prestamos, editorial, area,
      * localizacion, en el Bean.
      *
-     * Variables:
-     *
      * @param Bean // Contiene los datos del Libro
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -177,8 +173,6 @@ public class AdministradorDAO {
     /**
      * Descripción: Elimina un Libro con id específico en la base de datos.
      *
-     * Variables:
-     *
      * @param id // Contiene el id del Libro
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -211,8 +205,6 @@ public class AdministradorDAO {
      * similares. Ingresa los datos encontrados con los datos del libro en un
      * array list. Ingresa el array list en la tabla, elimina los datos del
      * array list y repite hasta encontrar todos los datos.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Libro
@@ -379,8 +371,6 @@ public class AdministradorDAO {
      * numero, telefono, usuario, estatus, contraseña, en el Bean. Busca el id
      * del nuevo socio.
      *
-     * Variables:
-     *
      * @param Bean // Contiene los datos del socio
      * @param secretPass // Contraseña segura del Socio
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -396,7 +386,7 @@ public class AdministradorDAO {
             prs.setString(4, Bean.getEstado());
             prs.setString(5, Bean.getMunicipio());
             prs.setString(6, Bean.getCalle());
-            prs.setInt(7, Bean.getNumero());
+            prs.setString(7, Bean.getNumero());
             prs.setString(8, Bean.getTelefono());
             prs.setString(9, Bean.getUsuario());
             prs.setString(10, new String(secretPass));
@@ -427,12 +417,10 @@ public class AdministradorDAO {
      * municipio, calle, numero, telefono, usuario, estatus, contraseña, en el
      * Bean.
      *
-     * Variables:
-     *
      * @param Bean // Contiene los datos del socio
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
-    public boolean ModificarSocio(SocioBean Bean) {
+    public boolean ModificarSocio(SocioBean Bean, char[] secretPass) {
         boolean SUCCESS = false;
         try {
             conn = Connexion.getConnection();
@@ -443,11 +431,11 @@ public class AdministradorDAO {
             prs.setString(4, Bean.getEstado());
             prs.setString(5, Bean.getMunicipio());
             prs.setString(6, Bean.getCalle());
-            prs.setInt(7, Bean.getNumero());
+            prs.setString(7, Bean.getNumero());
             prs.setString(8, Bean.getTelefono());
             prs.setString(9, Bean.getUsuario());
             prs.setString(10, Bean.getEstatus());
-            prs.setString(11, Bean.getContraseña());
+            prs.setString(11, new String(secretPass));
             prs.setInt(12, Bean.getIdUsuario());
             SUCCESS = prs.executeUpdate() == 1;
             prs.close();
@@ -466,8 +454,6 @@ public class AdministradorDAO {
 
     /**
      * Descripción: Elimina un Socio con id específico en la base de datos.
-     *
-     * Variables:
      *
      * @param id // Contiene el id del socio
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -501,8 +487,6 @@ public class AdministradorDAO {
      * similares. Ingresa los datos encontrados con los datos del socio en un
      * array list. Ingresa el array list en la tabla, elimina los datos del
      * array list y repite hasta encontrar todos los datos.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Libro
@@ -666,9 +650,7 @@ public class AdministradorDAO {
      * apellido paterno, apellido materno y estatus, en el Bean.
      *
      * Descripción: Busca el id de la nueva área y la ingresa en la Tabla junto
-     * con sus datos
-     *
-     * Variables:
+     * con sus datos.
      *
      * @param Bean // Contiene el nombre del autor
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -707,8 +689,6 @@ public class AdministradorDAO {
      * los datos: nombre, apellido paterno, apellido materno y estatus, en el
      * Bean.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el id, nombre, apellido paterno, apellido materno
      * y estatus del autor
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -740,8 +720,6 @@ public class AdministradorDAO {
 
     /**
      * Descripción: Elimina un Autor con id específico en la base de datos.
-     *
-     * Variables:
      *
      * @param id // Contiene el id del autor
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -775,8 +753,6 @@ public class AdministradorDAO {
      * similares. Ingresa los datos encontrados con los datos del socio en un
      * array list. Ingresa el array list en la tabla, elimina los datos del
      * array list y repite hasta encontrar todos los datos.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del autor

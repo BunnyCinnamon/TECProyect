@@ -23,8 +23,6 @@ public class IniciarSesionControlador {
      * Descripción: Si el checkbox está activado ingresa como administrador, si
      * no lo está ingresa como socio.
      *
-     * Variables:
-     *
      * @param vis // Contiene el objeto Vista
      */
     public void actionPerformed(VIniciarSesion vis) {

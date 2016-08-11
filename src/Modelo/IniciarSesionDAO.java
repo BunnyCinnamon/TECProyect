@@ -30,8 +30,6 @@ public class IniciarSesionDAO {
      *
      * Descripción: Consigue el id del Administrador y lo almacena en el Bean.
      *
-     * Variables:
-     *
      * @param adm // Contiene el usuario y contraseña del Administrador
      * @param secretPass // Contraseña segura del Admin
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -72,8 +70,6 @@ public class IniciarSesionDAO {
      *
      * Descripción: Consigue todos los datos del Socio y lo almacena en el Bean.
      *
-     * Variables:
-     *
      * @param adm // Contiene el usuario y contraseña del Socio
      * @param secretPass // Contraseña segura del Socio
      * @return // Regresa un Objeto con el Bean del Socio junto con true si es
@@ -95,7 +91,7 @@ public class IniciarSesionDAO {
                 adm.setEstado(rs.getString(5));
                 adm.setMunicipio(rs.getString(6));
                 adm.setCalle(rs.getString(7));
-                adm.setNumero(rs.getInt(8));
+                adm.setNumero(rs.getString(8));
                 adm.setTelefono(rs.getString(9));
                 adm.setUsuario(rs.getString(10));
                 CORRECT = true;

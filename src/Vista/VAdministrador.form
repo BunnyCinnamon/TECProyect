@@ -46,7 +46,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Opciones"/>
+            <Property name="text" type="java.lang.String" value="Ventana"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuSalir">
@@ -64,16 +64,19 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Elementos"/>
+            <Property name="text" type="java.lang.String" value="Opciones"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tablas"/>
+                <Property name="text" type="java.lang.String" value="Opciones de Tabla"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="JRadioTableSelection">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="Alt+S"/>
+                    </Property>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="ButtonTables"/>
                     </Property>
@@ -83,6 +86,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JRadioButtonMenuItem" name="JRadioTableComplete">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="Alt+C"/>
+                    </Property>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="ButtonTables"/>
                     </Property>
@@ -91,15 +97,15 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="JClearTexts">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+Z"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Clear All Texts"/>
+                <Property name="text" type="java.lang.String" value="Limpiar todos los textos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JClearTextsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -536,7 +542,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel5">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Consolas" size="12" style="0"/>
+                          <Font name="Consolas" size="12" style="2"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Selecci&#xf3;n:"/>
                       </Properties>
@@ -700,6 +706,11 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JSpinner" name="JSpinnerNPag">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -707,7 +718,7 @@
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="18" style="0"/>
+                  <Font name="Consolas" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Libro"/>
               </Properties>
@@ -720,25 +731,29 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jNPag3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="JSpinnerCantidad" min="-2" pref="45" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="113" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
                                   <Component id="jISBN3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="JLocalizacionLibro" min="-2" pref="116" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jNPag3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="JSpinnerCantidad" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="JLocalizacionLibro" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jISBN4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="JAreaLibro" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="JAreaLibro" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -804,6 +819,11 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JSpinner" name="JSpinnerCantidad">
+                  <Properties>
+                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                      <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                    </Property>
+                  </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -1100,7 +1120,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="JNCalleTextSocio">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="99" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="S/N"/>
+              </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JNCalleTextSocioMouseClicked"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JNCalleTextSocioKeyTyped"/>
               </Events>
               <AuxValues>
@@ -1128,7 +1155,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="99" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Campo no Obligatorio"/>
+                <Property name="text" type="java.lang.String" value="S/N"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JApellidoMTextSocioMouseClicked"/>
@@ -1225,14 +1252,14 @@
                     <Component class="javax.swing.JLabel" name="jLabel8">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Consolas" size="12" style="0"/>
+                          <Font name="Consolas" size="12" style="2"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Selecci&#xf3;n:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="JIngresarSocio">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Ingresar"/>
+                        <Property name="text" type="java.lang.String" value="Registrar"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarSocioActionPerformed"/>
@@ -1519,7 +1546,7 @@
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="18" style="0"/>
+                  <Font name="Consolas" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Socio"/>
               </Properties>
@@ -1527,7 +1554,7 @@
             <Component class="javax.swing.JLabel" name="jISBN7">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="14" style="0"/>
+                  <Font name="Consolas" size="14" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Apellido(s):"/>
               </Properties>
@@ -1677,7 +1704,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="99" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Campo no Obligatorio"/>
+                <Property name="text" type="java.lang.String" value="S/N"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JApellidoMAutorMouseClicked"/>
@@ -1758,14 +1785,14 @@
                     <Component class="javax.swing.JLabel" name="jLabel10">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Consolas" size="12" style="0"/>
+                          <Font name="Consolas" size="12" style="2"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Selecci&#xf3;n:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="JIngresarAutor">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Ingresar"/>
+                        <Property name="text" type="java.lang.String" value="Registrar"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarAutorActionPerformed"/>
@@ -1970,7 +1997,7 @@
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="18" style="0"/>
+                  <Font name="Consolas" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Autor"/>
               </Properties>
@@ -1978,7 +2005,7 @@
             <Component class="javax.swing.JLabel" name="jISBN6">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Consolas" size="14" style="0"/>
+                  <Font name="Consolas" size="14" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Apellido(s):"/>
               </Properties>
@@ -2008,9 +2035,9 @@
                       <Component id="jLayeredPane2" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="jLayeredPane3" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLayeredPane4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="861" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="870" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2047,7 +2074,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="JComboEstatusEditorial" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="JIngresarNuevoEditorial" min="-2" pref="73" max="-2" attributes="0"/>
+                                          <Component id="JIngresarNuevoEditorial" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="JNombreTextEditorial" max="32767" attributes="0"/>
                                   </Group>
@@ -2122,7 +2149,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="JIngresarNuevoEditorial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ingresar"/>
+                    <Property name="text" type="java.lang.String" value="Registrar"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarNuevoEditorialActionPerformed"/>
@@ -2167,7 +2194,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel12">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Consolas" size="18" style="0"/>
+                      <Font name="Consolas" size="18" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Editoriales"/>
                   </Properties>
@@ -2384,7 +2411,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="JIngresarNuevoLocalizacion">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ingresar"/>
+                    <Property name="text" type="java.lang.String" value="Registrar"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarNuevoLocalizacionActionPerformed"/>
@@ -2410,7 +2437,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Consolas" size="18" style="0"/>
+                      <Font name="Consolas" size="18" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Localizaci&#xf3;n"/>
                   </Properties>
@@ -2448,13 +2475,13 @@
                                               <Component id="jTitulo17" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Group type="102" attributes="0">
-                                                  <Component id="JComboEstatusArea" pref="0" max="32767" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="JComboEstatusArea" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="JIngresarNuevaArea" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="JAreaText" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Component id="JAreaText" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -2512,7 +2539,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="JIngresarNuevaArea">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ingresar"/>
+                    <Property name="text" type="java.lang.String" value="Registrar"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JIngresarNuevaAreaActionPerformed"/>
@@ -2619,7 +2646,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel14">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Consolas" size="18" style="0"/>
+                      <Font name="Consolas" size="18" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&#xc1;rea"/>
                   </Properties>

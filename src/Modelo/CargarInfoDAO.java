@@ -54,8 +54,6 @@ public class CargarInfoDAO {
      * autor en el List Model de la vista administrador. Ingresa los datos
      * encontrados de la editorial en el List Model de la vista administrador.
      *
-     * Variables:
-     *
      * @param jFieldCombo // Contiene los objetos ComboBox
      * @param jFieldList // Contiene los objetos List
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -146,8 +144,6 @@ public class CargarInfoDAO {
      * la vista buscar libro. Ingresa los datos encontrados de la editorial en
      * el List Model de la vista administrador.
      *
-     * Variables:
-     *
      * @param jFieldList // Contiene los objetos List
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -210,8 +206,6 @@ public class CargarInfoDAO {
      * introduce texto descriptivo. Ingresa los datos encontrados del libro con
      * más préstamos en un array list e introduce texto descriptivo Envia el
      * Array junto con el titulo a la vista detalles.
-     *
-     * Variables:
      *
      * @param ea //Contiene el objeto Vista
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -301,8 +295,6 @@ public class CargarInfoDAO {
      * list. Ingresa el array list en la tabla, elimina los datos del array list
      * y repite hasta encontrar todos los datos.
      *
-     * Variables:
-     *
      * @param t // Contiene el objeto Tabla de la Vista
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -345,8 +337,6 @@ public class CargarInfoDAO {
      * Descripción: Ingresa los datos encontrados del área en un array list.
      * Ingresa el array list en la tabla, elimina los datos del array list y
      * repite hasta encontrar todos los datos.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @return // Regresa true si es exitosa y false si ocurre un error
@@ -391,8 +381,6 @@ public class CargarInfoDAO {
      * list. Ingresa el array list en la tabla, elimina los datos del array list
      * y repite hasta encontrar todos los datos.
      *
-     * Variables:
-     *
      * @param t // Contiene el objeto Tabla de la Vista
      * @return // Regresa true si es exitosa y false si ocurre un error
      */
@@ -435,8 +423,6 @@ public class CargarInfoDAO {
      * Descripción: Ingresa los datos encontrados de prestamos en un array list.
      * Ingresa el array list en la tabla, elimina los datos del array list y
      * repite hasta encontrar todos los datos.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param accion // Contiene el tipo de accion 1 o 2 segun la búsqueda sin y
@@ -490,8 +476,6 @@ public class CargarInfoDAO {
      * Descripción: Ingresa los datos encontrados de prestamos en un array list.
      * Ingresa el array list en la tabla, elimina los datos del array list y
      * repite hasta encontrar todos los datos.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Socio
@@ -547,8 +531,6 @@ public class CargarInfoDAO {
      *
      * Descripción: Ingresa los datos encontrados de Libros en un array list,
      * repite hasta encontrar todos los datos.
-     *
-     * Variables:
      *
      * @return // Regresa true si es exitosa y false si ocurre un error
      */

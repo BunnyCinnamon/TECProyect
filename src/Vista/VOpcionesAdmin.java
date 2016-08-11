@@ -3,7 +3,7 @@ package Vista;
 import Classes.Beans.AdministradorBean;
 import Controlador.OpcionesControladorAdmin;
 import Controlador.SalirControlador;
-import Resources.ImageHelper;
+import Resources.ResourceHelper;
 import Utils.CleanupDone;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -26,8 +26,6 @@ public class VOpcionesAdmin extends javax.swing.JFrame {
 
     /**
      * Descripción: Inicializa la Vista.
-     *
-     * Variables:
      *
      * @param Bean // Contiene el Bean de Administrador
      */
@@ -55,7 +53,7 @@ public class VOpcionesAdmin extends javax.swing.JFrame {
     }
 
     private void setIcon(JLabel label, String icon) {
-        label.setIcon(ImageHelper.loadImage(icon));
+        label.setIcon(ResourceHelper.cargarImagen(icon));
     }
 
     @SuppressWarnings("unchecked")
@@ -178,7 +176,7 @@ public class VOpcionesAdmin extends javax.swing.JFrame {
             .addComponent(JLibrosOpen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Opciones");
+        jMenu1.setText("Ventana");
 
         JMenuCerrarSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, java.awt.event.InputEvent.SHIFT_MASK));
         JMenuCerrarSesion.setText("Cerrar Sesión");

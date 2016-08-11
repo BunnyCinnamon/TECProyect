@@ -36,8 +36,6 @@ public class FileReader {
      * Descripción: Encuentra el nombre de usuario, y su debe o no guardar la
      * selección.
      *
-     * Variables:
-     *
      * @return // Regresa true o false si ocurre o no error
      */
     public boolean readXML() {
@@ -72,9 +70,7 @@ public class FileReader {
     }
 
     /**
-     * Descripción: Encuentra el archivo xml y modifica su contenido
-     *
-     * Variables:
+     * Descripción: Encuentra el archivo xml y modifica su contenido.
      *
      * @param user // Contiene el Texto del Usuario
      * @param login // Contiene el true o false de la selección
@@ -112,9 +108,7 @@ public class FileReader {
     }
 
     /**
-     * Descripción: Busca los textos en el xmls
-     *
-     * Variables:
+     * Descripción: Busca los textos en el xmls.
      *
      * @param def // Contiene un texto
      * @param doc // Contiene un documento

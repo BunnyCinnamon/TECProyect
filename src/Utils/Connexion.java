@@ -44,8 +44,6 @@ public class Connexion {
     /**
      * Descripción: Consigue la Conexión a la Base de Datos.
      *
-     * Variables:
-     *
      * @return SQLException // Contiene la conexión
      */
     public static Connection getConnection() throws SQLException {

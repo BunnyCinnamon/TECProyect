@@ -29,8 +29,6 @@ public class BuscarLibroControladorAdmin {
      * error envia JOptionPane con texto erroneo y si no un texto exitoso, envia
      * los datos al dao correspondiente.
      *
-     * Variables:
-     *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
      * @param jSelect // Contiene los objetos de selección
@@ -95,8 +93,6 @@ public class BuscarLibroControladorAdmin {
      * fiels en el bean y consigue la acción dependiendo de los combo box
      * seleccionados. Envia el bean y la acción al dao correspondiente.
      *
-     * Variables:
-     *
      * @param jModel // Contiene el objeto Tabla de la Vista
      * @param jField // Contiene los objetos de Texto
      * @param jSelect // Contiene los objetos de selección
@@ -149,8 +145,6 @@ public class BuscarLibroControladorAdmin {
      * JOptionPane, si hay un libro seleccionado los datos en la tabla se
      * introducen en un array y son enviados junto con el bean del socio a el
      * dao correspondiente.
-     *
-     * Variables:
      *
      * @param Bean // Contiene los datos del Administrador
      * @param jTableBLibro // Contiene el objeto Tabla de Vista

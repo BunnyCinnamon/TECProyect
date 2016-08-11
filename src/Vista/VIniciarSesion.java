@@ -3,7 +3,6 @@ package Vista;
 import Controlador.IniciarSesionControlador;
 import Utils.CleanupDone;
 import Utils.FileReader;
-import Utils.TextChecker;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
@@ -14,7 +13,6 @@ import javax.swing.ImageIcon;
 @CleanupDone
 public class VIniciarSesion extends javax.swing.JFrame {
     
-    private static final TextChecker TEXT_CHECKER = new TextChecker();
     private static final FileReader FILE_READER = new FileReader();
     private String user = "";
     private String login = "";

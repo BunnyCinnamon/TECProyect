@@ -26,8 +26,6 @@ public class LocalizacionControlador {
      * un JOptionPane con texto correcto, si no es exitoso envia un texto
      * erroneo.
      *
-     * Variables:
-     *
      * @param jField // Contiene el objeto Texto
      * @return // Retorna false o true si ocurre o no un error
      */
@@ -58,8 +56,6 @@ public class LocalizacionControlador {
      * en el bean con todos los valores en los text field. Envia los datos al
      * dao correspondiente, si es exitoso envia un JOptionPane con texto
      * correcto, si no es exitoso envia un texto erroneo.
-     *
-     * Variables:
      *
      * @param jTableRLocalizacion // Contiene el objeto de Tabla de la Vista
      * @param jField // Contiene los objetos Text
@@ -96,8 +92,6 @@ public class LocalizacionControlador {
      * Localizacion seleccionada. Envia el id al dao correspondiente, si es
      * exitoso envia un JOptionPane con texto correcto, si no es exitoso envia
      * un texto erroneo.
-     *
-     * Variables:
      *
      * @param jTableRLocalizacion // Contiene el objeto Tabla de la Vista
      * @return // Retorna false o true si ocurre o no un error

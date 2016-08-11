@@ -40,8 +40,6 @@ public class BuscarLibroDAO {
      * array list. Ingresa el array list en la tabla, elimina los datos del
      * array list y repite hasta encontrar todos los datos.
      *
-     * Variables:
-     *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Libro
      * @param Editorial // Contiene la editorial
@@ -200,8 +198,6 @@ public class BuscarLibroDAO {
      * similares. Ingresa los datos encontrados con los datos del socio en un
      * array list. Ingresa el array list en la tabla, elimina los datos del
      * array list y repite hasta encontrar todos los datos.
-     *
-     * Variables:
      *
      * @param t // Contiene el objeto Tabla de la Vista
      * @param Bean // Contiene los datos del Libro

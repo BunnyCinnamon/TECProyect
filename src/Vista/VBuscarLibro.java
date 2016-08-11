@@ -30,8 +30,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
     /**
      * Descripción: Inicializa la Vista.
      *
-     * Variables:
-     *
      * @param Bean // Contiene el Bean de Socio
      */
     public VBuscarLibro(SocioBean Bean) {
@@ -100,8 +98,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
      * Descripción: Busca por cada objeto y cambia su contenido a un default
      * establecido.
      *
-     * Variables:
-     *
      * @param jText // Contiene los objetos de opciones
      */
     private void clearTexts(Object[] jText) {
@@ -168,7 +164,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         JRadioTableSelection = new javax.swing.JRadioButtonMenuItem();
         JRadioTableComplete = new javax.swing.JRadioButtonMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        JClearTexts = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Búsqueda de Libros");
@@ -355,7 +351,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Opciones");
+        jMenu1.setText("Ventana");
 
         jMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuSalir.setText("Salir");
@@ -368,27 +364,29 @@ public class VBuscarLibro extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu4.setText("Elementos");
+        jMenu4.setText("Opciones");
 
-        jMenu6.setText("Tablas");
+        jMenu6.setText("Opciones de Tabla");
 
+        JRadioTableSelection.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         JRadioTableSelection.setSelected(true);
         JRadioTableSelection.setText("Detalles de Tabla por Selección");
         jMenu6.add(JRadioTableSelection);
 
+        JRadioTableComplete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         JRadioTableComplete.setText("Detalles de Tabla Completa");
         jMenu6.add(JRadioTableComplete);
 
         jMenu4.add(jMenu6);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Clear All Texts");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        JClearTexts.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
+        JClearTexts.setText("Limpiar todos los textos");
+        JClearTexts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                JClearTextsActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem2);
+        jMenu4.add(JClearTexts);
 
         jMenuBar1.add(jMenu4);
 
@@ -491,7 +489,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
     }//GEN-LAST:event_JRegresarActionPerformed
 
     private void JAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAsignarActionPerformed
-
+        BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseControlClickedRow(JTableBLibro);
     }//GEN-LAST:event_JAsignarActionPerformed
 
     private void JDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JDetallesActionPerformed
@@ -542,10 +540,10 @@ public class VBuscarLibro extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuSalirActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void JClearTextsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JClearTextsActionPerformed
         Object[] jText = {JTituloText, JISBNText, JListAutor, JListEditorial};
         clearTexts(jText);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_JClearTextsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JAsignar;
@@ -554,6 +552,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
     public javax.swing.JCheckBox JCheckEditorial;
     public javax.swing.JCheckBox JCheckISBN;
     public javax.swing.JCheckBox JCheckTitulo;
+    private javax.swing.JMenuItem JClearTexts;
     private javax.swing.JButton JDetalles;
     public javax.swing.JTextField JISBNText;
     private javax.swing.JInternalFrame JInternalBuscar;
@@ -577,7 +576,6 @@ public class VBuscarLibro extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuSalir;
     private javax.swing.JLabel jNPag;
     private javax.swing.JLabel jRegistrarLibro;
