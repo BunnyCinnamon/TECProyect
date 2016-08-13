@@ -22,7 +22,7 @@ public class IniciarSesionDAO {
     ResultSet rs;
 
     private final String SQL_CHECK_PASSWORD_ADMIN = "SELECT IdAdministrador, Nombre, ApellidoP, ApellidoM FROM Administrador WHERE Usuario=? AND Contraseña=?";
-    private final String SQL_CHECK_PASSWORD_SOCIO = "SELECT * FROM Socio WHERE Usuario=? AND Contraseña=?";
+    private final String SQL_CHECK_PASSWORD_SOCIO = "SELECT * FROM Socio WHERE Usuario=? AND Contraseña=? AND Estatus='Activo'";
 
     /**
      * Uso: Busca un Administrador en la base de datos con los datos: usuario y

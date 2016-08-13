@@ -663,7 +663,7 @@ public class VAdministrador extends javax.swing.JFrame {
         jTitulo6.setText("N°Calle:");
 
         JNCalleTextSocio.setForeground(new java.awt.Color(0, 153, 0));
-        JNCalleTextSocio.setText("S/N");
+        JNCalleTextSocio.setText("N/A");
         JNCalleTextSocio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JNCalleTextSocioMouseClicked(evt);
@@ -1900,7 +1900,7 @@ public class VAdministrador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        if (B.equals("S/N")) {
+        if (B.equals("N/A")) {
         } else if (!TEXT_CHECKER.checkNumber(B)) {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -1912,7 +1912,7 @@ public class VAdministrador extends javax.swing.JFrame {
             clearTexts(jText);
             JApellidoMTextSocio.setText("N/A");
             JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
-            JNCalleTextSocio.setText("S/N");
+            JNCalleTextSocio.setText("N/A");
             JNCalleTextSocio.setForeground(new Color(0, 153, 0));
         }
     }//GEN-LAST:event_JIngresarSocioActionPerformed
@@ -1930,7 +1930,7 @@ public class VAdministrador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        if (B.equals("S/N")) {
+        if (B.equals("N/A")) {
         } else if (!TEXT_CHECKER.checkNumber(B)) {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -1941,7 +1941,7 @@ public class VAdministrador extends javax.swing.JFrame {
             clearTexts(jText);
             JApellidoMTextSocio.setText("N/A");
             JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
-            JNCalleTextSocio.setText("S/N");
+            JNCalleTextSocio.setText("N/A");
             JNCalleTextSocio.setForeground(new Color(0, 153, 0));
         }
     }//GEN-LAST:event_JModificarSocioTablaActionPerformed
@@ -2208,7 +2208,7 @@ public class VAdministrador extends javax.swing.JFrame {
         }
         TEXT_CHECKER.checkColorsNumber(JNCalleTextSocio);
         if (JNCalleTextSocio.getText().isEmpty()) {
-            JNCalleTextSocio.setText("S/N");
+            JNCalleTextSocio.setText("N/A");
             JNCalleTextSocio.setForeground(new Color(0, 153, 0));
         }
     }//GEN-LAST:event_JNCalleTextSocioKeyTyped
@@ -2369,7 +2369,7 @@ public class VAdministrador extends javax.swing.JFrame {
         clearTexts(jText);
         JApellidoMTextSocio.setText("N/A");
         JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
-        JNCalleTextSocio.setText("S/N");
+        JNCalleTextSocio.setText("N/A");
         JNCalleTextSocio.setForeground(new Color(0, 153, 0));
         JApellidoMAutor.setText("N/A");
         JApellidoMAutor.setForeground(new Color(0, 153, 0));

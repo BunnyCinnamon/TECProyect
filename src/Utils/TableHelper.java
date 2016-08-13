@@ -41,7 +41,7 @@ public class TableHelper {
             if (obj instanceof JTextField) {
                 JTextField text = (JTextField) obj;
                 if (n.isEmpty()) {
-                    text.setText("Campo no Obligatorio");
+                    text.setText("N/A");
                     text.setForeground(new Color(0, 153, 0));
                     continue;
                 }
@@ -80,7 +80,7 @@ public class TableHelper {
             if (obj instanceof JTextField) {
                 JTextField text = (JTextField) obj;
                 if (n.isEmpty()) {
-                    text.setText("Campo no Obligatorio");
+                    text.setText("N/A");
                     text.setForeground(new Color(0, 153, 0));
                     continue;
                 }
