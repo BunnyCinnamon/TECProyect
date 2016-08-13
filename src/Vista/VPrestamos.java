@@ -55,6 +55,7 @@ public class VPrestamos extends javax.swing.JFrame {
 //        });
         this.setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/Resources/Icon.png")).getImage());
+        JLiberarSeleccion.setEnabled(false);
         this.Stat = Bean;
         this.Login = 1;
         IniciarSocio(Bean, 0);
