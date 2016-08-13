@@ -1839,10 +1839,6 @@ public class VAdministrador extends javax.swing.JFrame {
         Object[] jField = {JISBNText.getText(), JTituloText.getText(), JSpinnerNPag.getValue().toString(), JEstadoLibro.getSelectedItem().toString(), JSpinnerCantidad.getValue().toString()};
         Object[] jText = {JTituloText, JISBNText, JListAutor, JListEditorial, JAreaLibro, JLocalizacionLibro, JSpinnerNPag, JSpinnerCantidad};
         TEXT_CHECKER.checkFieldsColors(jText);
-        if ((!TEXT_CHECKER.checkISBN(jField[0].toString()) && !jField[0].toString().isEmpty()) || (!TEXT_CHECKER.checkText(jField[1].toString()) && !jField[1].toString().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
         ArrayList jArray = new ArrayList();
         jArray.add(JListAutor.getSelectedValue());
         jArray.add(JListEditorial.getSelectedValue());
@@ -1857,10 +1853,6 @@ public class VAdministrador extends javax.swing.JFrame {
         Object[] jField = {JISBNText.getText(), JTituloText.getText(), JSpinnerNPag.getValue().toString(), JEstadoLibro.getSelectedItem().toString(), JSpinnerCantidad.getValue().toString()};
         Object[] jText = {JTituloText, JISBNText, JListAutor, JListEditorial, JAreaLibro, JLocalizacionLibro, JSpinnerNPag, JSpinnerCantidad};
         TEXT_CHECKER.checkFieldsColors(jText);
-        if ((!TEXT_CHECKER.checkISBN(jField[0].toString()) && !jField[0].toString().isEmpty()) || (!TEXT_CHECKER.checkText(jField[1].toString()) && !jField[1].toString().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
         ArrayList jArray = new ArrayList();
         jArray.add(JListAutor.getSelectedValue());
         jArray.add(JListEditorial.getSelectedValue());

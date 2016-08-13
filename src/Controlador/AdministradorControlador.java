@@ -86,6 +86,10 @@ public class AdministradorControlador {
             JOptionPane.showMessageDialog(null, "ISBN debe tener 10 ó 13 números", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return err;
         }
+        if (!TEXT_CHECKER.checkISBN(jField[0].toString()) || !TEXT_CHECKER.checkText(jField[1].toString())) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+            return err;
+        }
         Bean.setIsbn(jField[0].toString());
         Bean.setTitulo(jField[1].toString());
         Bean.setPaginas(Integer.parseInt(jField[2].toString()));
@@ -132,10 +136,12 @@ public class AdministradorControlador {
         if (TEXT_CHECKER.checkIfEmpty(jField)) {
             JOptionPane.showMessageDialog(null, "Ingresa todos los datos del Libro", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return err;
-        }
-        String isbn = jField[0].toString();
-        if (!TEXT_CHECKER.checkLenght(isbn, 10, 13) && TEXT_CHECKER.checkISBN(isbn)) {
+        } else if (!TEXT_CHECKER.checkLenght(jField[0].toString(), 10, 13)) {
             JOptionPane.showMessageDialog(null, "ISBN debe tener 10 ó 13 números", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return err;
+        }
+        if (!TEXT_CHECKER.checkISBN(jField[0].toString()) || !TEXT_CHECKER.checkText(jField[1].toString())) {
+            JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z,ñ´] [0-9,-]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return err;
         }
         try {

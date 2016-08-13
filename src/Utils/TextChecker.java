@@ -23,7 +23,7 @@ public class TextChecker {
      * @return // Regresa true o false si el texto coincide
      */
     public boolean checkText(String a) {
-        Pattern pat = Pattern.compile("^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_:()´&?!\\-\\s]+$");
+        Pattern pat = Pattern.compile("^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_:().´&?!\\-\\s]+$");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
@@ -37,7 +37,7 @@ public class TextChecker {
      * @return // Regresa true o false si el texto coincide
      */
     public boolean checkNoNumberText(String a) {
-        Pattern pat = Pattern.compile("^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ´\\s]+$");
+        Pattern pat = Pattern.compile("^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ´.\\s]+$");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
