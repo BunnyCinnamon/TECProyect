@@ -82,7 +82,7 @@ public class CargarInfoDAO {
                 ResultSet rs = prs.executeQuery();
                 jFieldCombo[1].addItem("Sin Selección");
                 while (rs.next()) {
-                    jFieldCombo[1].addItem("" + rs.getString(1) + ": " + rs.getString(2));
+                    jFieldCombo[1].addItem(rs.getString(1) + ": " + rs.getString(2));
                 }
                 rs.close();
                 prs.close();

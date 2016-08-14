@@ -2246,7 +2246,7 @@ public class VAdministrador extends javax.swing.JFrame {
 
     private void JTableRLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableRLibroMouseClicked
         if (evt.getClickCount() == 2) {
-            Object[] jField = {JISBNText, JTituloText, JSpinnerNPag, JEstadoLibro, JListAutor, JListEditorial, JLocalizacionLibro, JAreaLibro, JSpinnerCantidad};
+            Object[] jField = {JISBNText, JTituloText, JSpinnerNPag, JEstadoLibro, JListAutor, JListEditorial, JAreaLibro, JLocalizacionLibro, JSpinnerCantidad};
             ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableRLibro, jField, 0);
         } else if ((evt.getModifiers() & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK) {
             if (JRadioTableComplete.isSelected()) {

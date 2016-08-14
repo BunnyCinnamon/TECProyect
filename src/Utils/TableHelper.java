@@ -169,9 +169,11 @@ public class TableHelper {
      * @param n // Contiene el Texto
      */
     private String getExistingString(JComboBox l, String n) {
+        System.out.println(n);
         for (int i = 0; i < l.getItemCount(); i++) {
             l.setSelectedIndex(i);
             String n1 = l.getSelectedItem().toString();
+            System.out.println(n1);
             if (n1.endsWith(n)) {
                 return n1;
             }
