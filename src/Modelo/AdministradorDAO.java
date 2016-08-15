@@ -529,14 +529,14 @@ public class AdministradorDAO {
                     break;
                 }
                 case 5: {
-                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND Nombre like ?" + ORDER_SOCIO);
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Usuario like ? AND Nombre like ?" + ORDER_SOCIO);
                     prs.setString(1, '%' + Bean.getUsuario() + '%');
                     prs.setString(2, '%' + Bean.getNombre() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 6: {
-                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? Nombre like ?" + ORDER_SOCIO);
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE ApellidoM like ? AND Nombre like ?" + ORDER_SOCIO);
                     prs.setString(1, '%' + Bean.getApellidoM() + '%');
                     prs.setString(2, '%' + Bean.getNombre() + '%');
                     rs = prs.executeQuery();
@@ -557,14 +557,14 @@ public class AdministradorDAO {
                     break;
                 }
                 case 9: {
-                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND ApellidoP like ?" + ORDER_SOCIO);
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Usuario like ? AND ApellidoP like ?" + ORDER_SOCIO);
                     prs.setString(1, '%' + Bean.getUsuario() + '%');
                     prs.setString(2, '%' + Bean.getApellidoP() + '%');
                     rs = prs.executeQuery();
                     break;
                 }
                 case 10: {
-                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE B.NombreEditorial=? AND ApellidoM like ?" + ORDER_SOCIO);
+                    prs = conn.prepareStatement(SQL_SEARCH_SOCIO + " WHERE Usuario like ? AND ApellidoM like ?" + ORDER_SOCIO);
                     prs.setString(1, '%' + Bean.getUsuario() + '%');
                     prs.setString(2, '%' + Bean.getApellidoM() + '%');
                     rs = prs.executeQuery();

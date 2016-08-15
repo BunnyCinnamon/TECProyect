@@ -439,35 +439,35 @@ public class AdministradorControlador {
         boolean Ap = jSelect[1];
         boolean Am = jSelect[2];
         boolean U = jSelect[3];
-        if (N && (!Ap && !Am && !U)) {
+        if (N && (!Am && !Ap && !U)) {
             action = 1;
-        } else if (Am && (!Ap && !N && !U)) {
+        } else if (Ap && (!Am && !N && !U)) {
             action = 2;
-        } else if (Ap && (!N && !Am && !U)) {
+        } else if (Am && (!N && !Ap && !U)) {
             action = 3;
-        } else if (U && (!N && !Am && !Ap)) {
+        } else if (U && (!N && !Ap && !Am)) {
             action = 4;
-        } else if (U && N && (!Am && !Ap)) {
+        } else if (U && N && (!Ap && !Am)) {
             action = 5;
-        } else if (Ap && N && (!Am && !U)) {
+        } else if (Am && N && (!Ap && !U)) {
             action = 6;
-        } else if (Am && N && (!U && !Ap)) {
+        } else if (Ap && N && (!U && !Am)) {
             action = 7;
-        } else if (Am && Ap && (!U && !N)) {
+        } else if (Ap && Am && (!U && !N)) {
             action = 8;
-        } else if (Am && U && (!N && !Ap)) {
+        } else if (Ap && U && (!N && !Am)) {
             action = 9;
-        } else if (U && Ap && (!N && !Am)) {
+        } else if (U && Am && (!N && !Ap)) {
             action = 10;
-        } else if (N && Am && Ap && (!U)) {
+        } else if (N && Ap && Am && (!U)) {
             action = 11;
-        } else if (N && Am && U && (!Ap)) {
-            action = 12;
-        } else if (Am && Ap && U && (!N)) {
-            action = 13;
         } else if (N && Ap && U && (!Am)) {
+            action = 12;
+        } else if (Ap && Am && U && (!N)) {
+            action = 13;
+        } else if (N && Am && U && (!Ap)) {
             action = 14;
-        } else if (U && Ap && N && Am) {
+        } else if (U && Am && N && Ap) {
             action = 15;
         }
         ADM.BuscarSocio(jModel, Bean, action);
@@ -602,17 +602,17 @@ public class AdministradorControlador {
         boolean N = jSelect[0];
         boolean Ap = jSelect[1];
         boolean Am = jSelect[2];
-        if (N && (!Ap && !Am)) {
+        if (N && (!Am && !Ap)) {
             action = 1;
-        } else if (Am && (!Ap && !N)) {
+        } else if (Ap && (!Am && !N)) {
             action = 2;
-        } else if (Ap && (!N && !Am)) {
+        } else if (Am && (!N && !Ap)) {
             action = 3;
-        } else if (Am && N && (!Ap)) {
-            action = 4;
         } else if (Ap && N && (!Am)) {
+            action = 4;
+        } else if (Am && N && (!Ap)) {
             action = 5;
-        } else if (Ap && Am && (!N)) {
+        } else if (Am && Ap && (!N)) {
             action = 6;
         }
         ADM.BuscarAutor(jModel, Bean, action);

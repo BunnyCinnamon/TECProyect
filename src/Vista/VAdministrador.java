@@ -1956,7 +1956,7 @@ public class VAdministrador extends javax.swing.JFrame {
     private void JBuscarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarSocioActionPerformed
         DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
         Object[] jField = {JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JApellidoMTextSocio.getText(), JTextUsuario.getText()};
-        boolean[] jSelect = {JCheckNombre.isSelected(), JCheckApellidoM.isSelected(), JCheckApellidoP.isSelected(), JCheckUsuario.isSelected()};
+        boolean[] jSelect = {JCheckNombre.isSelected(), JCheckApellidoP.isSelected(), JCheckApellidoM.isSelected(), JCheckUsuario.isSelected()};
         if (jField[2].toString().equals("N/A")) {
             jField[2] = "";
         } else if ((!TEXT_CHECKER.checkNoNumberText(jField[2].toString()) && jSelect[2])) {
@@ -2028,10 +2028,9 @@ public class VAdministrador extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) JTableRAutor.getModel();
         Object[] jField = {JNombreTextAutor.getText(), JApellidoPAutor.getText(), JApellidoMAutor.getText()};
         boolean[] jSelect = {JCheckNombreAutor.isSelected(), JCheckApellidoPAutor.isSelected(), JCheckApellidoMAutor.isSelected()};
-        String m = JApellidoMAutor.getText();
-        if (m.equals("N/A")) {
-            m = "";
-        } else if (!TEXT_CHECKER.checkNoNumberText(m) && jSelect[2]) {
+        if (jField[2].toString().equals("N/A")) {
+            jField[2] = "";
+        } else if (!TEXT_CHECKER.checkNoNumberText(jField[2].toString()) && jSelect[2]) {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
