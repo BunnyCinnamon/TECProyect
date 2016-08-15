@@ -435,35 +435,39 @@ public class AdministradorControlador {
         Bean.setApellidoP(jField[1].toString());
         Bean.setApellidoM(jField[2].toString());
         Bean.setUsuario(jField[3].toString());
-        if (jSelect[0] && (!jSelect[1] && !jSelect[2] && !jSelect[3])) {
+        boolean N = jSelect[0];
+        boolean Ap = jSelect[1];
+        boolean Am = jSelect[2];
+        boolean U = jSelect[3];
+        if (N && (!Ap && !Am && !U)) {
             action = 1;
-        } else if (jSelect[2] && (!jSelect[1] && !jSelect[0] && !jSelect[3])) {
+        } else if (Am && (!Ap && !N && !U)) {
             action = 2;
-        } else if (jSelect[1] && (!jSelect[0] && !jSelect[2] && !jSelect[3])) {
+        } else if (Ap && (!N && !Am && !U)) {
             action = 3;
-        } else if (jSelect[3] && (!jSelect[0] && !jSelect[2] && !jSelect[1])) {
+        } else if (U && (!N && !Am && !Ap)) {
             action = 4;
-        } else if (jSelect[3] && jSelect[0] && (!jSelect[2] && !jSelect[1])) {
+        } else if (U && N && (!Am && !Ap)) {
             action = 5;
-        } else if (jSelect[1] && jSelect[0] && (!jSelect[2] && !jSelect[3])) {
+        } else if (Ap && N && (!Am && !U)) {
             action = 6;
-        } else if (jSelect[2] && jSelect[0] && (!jSelect[3] && !jSelect[1])) {
+        } else if (Am && N && (!U && !Ap)) {
             action = 7;
-        } else if (jSelect[2] && jSelect[1] && (!jSelect[3] && !jSelect[0])) {
+        } else if (Am && Ap && (!U && !N)) {
             action = 8;
-        } else if (jSelect[2] && jSelect[3] && (!jSelect[0] && !jSelect[1])) {
+        } else if (Am && U && (!N && !Ap)) {
             action = 9;
-        } else if (jSelect[3] && jSelect[1] && (!jSelect[0] && !jSelect[2])) {
+        } else if (U && Ap && (!N && !Am)) {
             action = 10;
-        } else if (jSelect[0] && jSelect[2] && jSelect[1] && (!jSelect[3])) {
+        } else if (N && Am && Ap && (!U)) {
             action = 11;
-        } else if (jSelect[0] && jSelect[2] && jSelect[3] && (!jSelect[1])) {
+        } else if (N && Am && U && (!Ap)) {
             action = 12;
-        } else if (jSelect[2] && jSelect[1] && jSelect[3] && (!jSelect[0])) {
+        } else if (Am && Ap && U && (!N)) {
             action = 13;
-        } else if (jSelect[0] && jSelect[1] && jSelect[3] && (!jSelect[2])) {
+        } else if (N && Ap && U && (!Am)) {
             action = 14;
-        } else if (jSelect[3] && jSelect[1] && jSelect[0] && jSelect[2]) {
+        } else if (U && Ap && N && Am) {
             action = 15;
         }
         ADM.BuscarSocio(jModel, Bean, action);
@@ -595,17 +599,20 @@ public class AdministradorControlador {
         Bean.setNombre(jField[0].toString());
         Bean.setApellidoP(jField[1].toString());
         Bean.setApellidoM(jField[2].toString());
-        if (jSelect[0] && (!jSelect[1] && !jSelect[2])) {
+        boolean N = jSelect[0];
+        boolean Ap = jSelect[1];
+        boolean Am = jSelect[2];
+        if (N && (!Ap && !Am)) {
             action = 1;
-        } else if (jSelect[2] && (!jSelect[1] && !jSelect[0])) {
+        } else if (Am && (!Ap && !N)) {
             action = 2;
-        } else if (jSelect[1] && (!jSelect[0] && !jSelect[2])) {
+        } else if (Ap && (!N && !Am)) {
             action = 3;
-        } else if (jSelect[2] && jSelect[0] && (!jSelect[1])) {
+        } else if (Am && N && (!Ap)) {
             action = 4;
-        } else if (jSelect[1] && jSelect[0] && (!jSelect[2])) {
+        } else if (Ap && N && (!Am)) {
             action = 5;
-        } else if (jSelect[1] && jSelect[2] && (!jSelect[0])) {
+        } else if (Ap && Am && (!N)) {
             action = 6;
         }
         ADM.BuscarAutor(jModel, Bean, action);
