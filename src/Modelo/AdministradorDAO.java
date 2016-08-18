@@ -33,6 +33,7 @@ public class AdministradorDAO {
     ////////////////////////////////////////////////////////////////////////////
     private final String SQL_MODIFY_BOOKS = "UPDATE Libro SET Isbn=?, Titulo=?, Paginas=?, Estatus=?, Editorial=?, Area=?, Localizacion=? WHERE IdLibro=?";
     private final String SQL_MODIFY_ESCRIBE = "UPDATE Escribe SET Autor=? WHERE Libro=?";
+    private final String SQL_MODIFY_EJEMPLAR = "UPDATE Ejemplar SET Existencias=? WHERE Libro=?";
     private final String SQL_REMOVE_BOOKS = "UPDATE Libro SET Estatus='Inactivo' WHERE IdLibro=?";
     private final String SQL_SEARCH_BOOKS = "SELECT IdLibro,Isbn,Titulo,Paginas,Estatus,NombreAutor,NombreEditorial,Seccion,Pasillo,Existencias FROM Libro AS A join Editorial B,Area C,Localizacion D,Autor E,Escribe F,Ejemplar G WHERE A.Editorial=B.IdEditorial AND A.Area=C.IdArea AND A.Localizacion=D.IdLocalizacion AND F.Autor=E.IdAutor AND G.Libro=IdLibro AND F.Libro=A.IdLibro";
     private static final String ORDER = " ORDER BY IdLibro";
@@ -154,10 +155,22 @@ public class AdministradorDAO {
                 } catch (SQLException n) {
                     Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", n);
                 } finally {
-                    try {
-                        conn.close();
-                    } catch (SQLException m) {
-                        Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                    if (SUCCESS) {
+                        try {
+                            PreparedStatement prs = conn.prepareStatement(SQL_MODIFY_EJEMPLAR);
+                            prs.setInt(1, Bean.getNumero());
+                            prs.setInt(2, Bean.getIdLibro());
+                            SUCCESS = prs.executeUpdate() == 1;
+                            prs.close();
+                        } catch (SQLException n) {
+                            Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                        } finally {
+                            try {
+                                conn.close();
+                            } catch (SQLException m) {
+                                Logger.getLogger(IniciarSesionDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                            }
+                        }
                     }
                 }
             }

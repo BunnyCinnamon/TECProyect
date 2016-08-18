@@ -108,7 +108,7 @@ public class TextChecker {
      * @return // Regresa true si tiene un email
      */
     public boolean checkEmail(String text) {
-        Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{1,})$");
         Matcher mat = pat.matcher(text);
         return mat.matches();
     }

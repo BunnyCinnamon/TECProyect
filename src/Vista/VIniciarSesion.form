@@ -25,15 +25,24 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
-              <Component id="JCodeWorkIcon" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="JLeeyAprendeIcon" max="32767" attributes="0"/>
-          </Group>
+          <Component id="JLeeyAprendeIcon" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="JAnounce" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="JUsuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="JRecordar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jIconCodeWork" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jUsuario" min="-2" max="-2" attributes="0"/>
                           <Component id="jContraseña" min="-2" max="-2" attributes="0"/>
@@ -46,18 +55,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Component id="JSesionIcon" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="JAnounce" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="JUsuario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="JRecordar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -67,10 +65,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="JCodeWorkIcon" max="32767" attributes="0"/>
-                  <Component id="JLeeyAprendeIcon" max="32767" attributes="0"/>
-              </Group>
+              <Component id="JLeeyAprendeIcon" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -91,9 +86,12 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="JIngresar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="JRecordar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="JUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="JRecordar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jIconCodeWork" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
               <Component id="JAnounce" min="-2" max="-2" attributes="0"/>
@@ -104,47 +102,15 @@
   <SubComponents>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
-    <Container class="javax.swing.JPanel" name="JCodeWorkIcon">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jIconCodeWork" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jIconCodeWork" pref="0" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="jIconCodeWork">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Resources/Logo.jpg"/>
-            </Property>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
     <Container class="javax.swing.JPanel" name="JLeeyAprendeIcon">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                   <Component id="jIconLeeyAprende" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -244,6 +210,13 @@
     <Component class="javax.swing.JCheckBox" name="JRecordar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Recordar Usuario"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jIconCodeWork">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Resources/Logomini.jpg"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

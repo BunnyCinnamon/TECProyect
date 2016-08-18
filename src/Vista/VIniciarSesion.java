@@ -76,8 +76,6 @@ public class VIniciarSesion extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        JCodeWorkIcon = new javax.swing.JPanel();
-        jIconCodeWork = new javax.swing.JLabel();
         JLeeyAprendeIcon = new javax.swing.JPanel();
         jIconLeeyAprende = new javax.swing.JLabel();
         jUsuario = new javax.swing.JLabel();
@@ -90,28 +88,10 @@ public class VIniciarSesion extends javax.swing.JFrame {
         jIconSession = new javax.swing.JLabel();
         JAnounce = new javax.swing.JLabel();
         JRecordar = new javax.swing.JCheckBox();
+        jIconCodeWork = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Sesión");
-
-        jIconCodeWork.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Logo.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout JCodeWorkIconLayout = new javax.swing.GroupLayout(JCodeWorkIcon);
-        JCodeWorkIcon.setLayout(JCodeWorkIconLayout);
-        JCodeWorkIconLayout.setHorizontalGroup(
-            JCodeWorkIconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JCodeWorkIconLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jIconCodeWork)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-        JCodeWorkIconLayout.setVerticalGroup(
-            JCodeWorkIconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JCodeWorkIconLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jIconCodeWork, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
 
         jIconLeeyAprende.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/LibraryIcon.png"))); // NOI18N
 
@@ -119,10 +99,10 @@ public class VIniciarSesion extends javax.swing.JFrame {
         JLeeyAprendeIcon.setLayout(JLeeyAprendeIconLayout);
         JLeeyAprendeIconLayout.setHorizontalGroup(
             JLeeyAprendeIconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JLeeyAprendeIconLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(JLeeyAprendeIconLayout.createSequentialGroup()
+                .addGap(138, 138, 138)
                 .addComponent(jIconLeeyAprende)
-                .addGap(18, 18, 18))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JLeeyAprendeIconLayout.setVerticalGroup(
             JLeeyAprendeIconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,17 +145,26 @@ public class VIniciarSesion extends javax.swing.JFrame {
 
         JRecordar.setText("Recordar Usuario");
 
+        jIconCodeWork.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Logomini.jpg"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(JCodeWorkIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JLeeyAprendeIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(JLeeyAprendeIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JUsuario)
+                                .addGap(18, 18, 18)
+                                .addComponent(JRecordar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jIconCodeWork))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,23 +177,13 @@ public class VIniciarSesion extends javax.swing.JFrame {
                             .addComponent(JIngresar))
                         .addGap(55, 55, 55)
                         .addComponent(JSesionIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JAnounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(JUsuario)
-                                .addGap(18, 18, 18)
-                                .addComponent(JRecordar)))))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(JCodeWorkIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JLeeyAprendeIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(JLeeyAprendeIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -221,9 +200,11 @@ public class VIniciarSesion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JIngresar)
                 .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JRecordar)
-                    .addComponent(JUsuario))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(JRecordar)
+                        .addComponent(JUsuario))
+                    .addComponent(jIconCodeWork))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(JAnounce))
         );
@@ -249,7 +230,6 @@ public class VIniciarSesion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel JAnounce;
-    private javax.swing.JPanel JCodeWorkIcon;
     public javax.swing.JPasswordField JContraseñaInicio;
     public javax.swing.JButton JIngresar;
     private javax.swing.JPanel JLeeyAprendeIcon;

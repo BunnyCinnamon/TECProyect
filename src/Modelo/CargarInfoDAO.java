@@ -43,7 +43,7 @@ public class CargarInfoDAO {
     private final String SQL_SEARCH_MAX_PRESTAMO_LIBRO = "SELECT Titulo,Isbn,NombreEditorial,NumeroPrestamos FROM Libro JOIN Editorial WHERE NumeroPrestamos=(SELECT MAX(NumeroPrestamos) FROM Libro) AND Editorial=IdEditorial LIMIT 1";
     ////////////////////////////////////////////////////////////////////////////
     private final String SQL_SEARCH_TITULO_LIBRO = "SELECT Titulo FROM Libro";
-
+    
     /**
      * Uso: Busca todos los datos de Localización, Area, Autor y Editorial, en
      * la base de datos.

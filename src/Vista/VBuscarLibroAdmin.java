@@ -482,7 +482,7 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
         jNPag1.setText("Segundo:");
 
         JApellidoMTextSocio.setForeground(new java.awt.Color(0, 153, 0));
-        JApellidoMTextSocio.setText("Campo no Obligatorio");
+        JApellidoMTextSocio.setText("N/A");
         JApellidoMTextSocio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JApellidoMTextSocioMouseClicked(evt);
@@ -795,6 +795,10 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
 
     private void JApellidoMTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMTextSocioKeyTyped
         TEXT_CHECKER.checkColorsNoNumber(JApellidoMTextSocio);
+        if (JApellidoMTextSocio.getText().isEmpty()) {
+            JApellidoMTextSocio.setText("N/A");
+            JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
+        }
     }//GEN-LAST:event_JApellidoMTextSocioKeyTyped
 
     private void JApellidoPTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPTextSocioKeyTyped
@@ -809,7 +813,7 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
         Object[] jField = new Object[]{JNombreTextSocio.getText(), JApellidoPTextSocio.getText(), JApellidoMTextSocio.getText(), JTextUsuario.getText()};
         boolean[] jSelect = {JCheckNombre.isSelected(), JCheckApellidoM.isSelected(), JCheckApellidoP.isSelected(), JCheckUsuario.isSelected()};
-        if (jField[2].toString().equals("Campo no Obligatorio")) {
+        if (jField[2].toString().equals("N/A")) {
             jField[2] = "";
         } else if ((!TEXT_CHECKER.checkNoNumberText(jField[2].toString()) && jSelect[2])) {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
@@ -865,6 +869,8 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
     private void JClearTextsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JClearTextsActionPerformed
         Object[] jText = {JNombreTextSocio, JApellidoPTextSocio, JTextUsuario,
             JTituloText, JISBNText, JListAutor, JListEditorial};
+        JApellidoMTextSocio.setText("N/A");
+        JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
         clearTexts(jText);
     }//GEN-LAST:event_JClearTextsActionPerformed
 

@@ -639,7 +639,7 @@ public class VAdministrador extends javax.swing.JFrame {
         jTitulo2.setText("Estado:");
 
         jTitulo3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jTitulo3.setText("Mucicipio:");
+        jTitulo3.setText("Municipio:");
 
         jTitulo4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jTitulo4.setText("Calle:");
@@ -1486,7 +1486,7 @@ public class VAdministrador extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane3Layout.createSequentialGroup()
                             .addComponent(jTitulo15)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(JLocalizacionText, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JLocalizacionText))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane3Layout.setVerticalGroup(
