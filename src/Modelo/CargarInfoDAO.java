@@ -42,8 +42,13 @@ public class CargarInfoDAO {
     private final String SQL_SEARCH_MIN_EXISTENCIA_EDITORIAL = "SELECT NombreEditorial,Existencias FROM Libro JOIN Ejemplar,Editorial WHERE IdLibro=Libro AND Editorial=IdEditorial AND Existencias=(SELECT MIN(Existencias) FROM Ejemplar) LIMIT 1";
     private final String SQL_SEARCH_MAX_PRESTAMO_LIBRO = "SELECT Titulo,Isbn,NombreEditorial,NumeroPrestamos FROM Libro JOIN Editorial WHERE NumeroPrestamos=(SELECT MAX(NumeroPrestamos) FROM Libro) AND Editorial=IdEditorial LIMIT 1";
     ////////////////////////////////////////////////////////////////////////////
-    private final String SQL_SEARCH_TITULO_LIBRO = "SELECT Titulo FROM Libro";
-    
+    private final String SQL_SEARCH_TITULO_LIBRO = "SELECT Titulo,Isbn FROM Libro";
+    private final String SQL_SEARCH_NOMBRE_SOCIO = "SELECT Nombre FROM Socio";
+    private final String SQL_SEARCH_NOMBRE_AUTOR = "SELECT NombreAutor FROM Autor";
+    private final String SQL_SEARCH_NOMBRE_EDITORIAL = "SELECT NombreEditorial FROM Editorial";
+    private final String SQL_SEARCH_NOMBRE_LOCALIZACION = "SELECT Pasillo FROM Localizacion";
+    private final String SQL_SEARCH_NOMBRE_AREA = "SELECT Seccion FROM Area";
+
     /**
      * Uso: Busca todos los datos de Localización, Area, Autor y Editorial, en
      * la base de datos.
@@ -77,7 +82,6 @@ public class CargarInfoDAO {
         } finally {
             ////////////////////////////////////////////////////////////////////////
             try {
-                conn = Connexion.getConnection();
                 PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AREA + " WHERE EstatusArea='Activo' ORDER BY IdArea");
                 ResultSet rs = prs.executeQuery();
                 jFieldCombo[1].addItem("Sin Selección");
@@ -91,7 +95,6 @@ public class CargarInfoDAO {
             } finally {
                 ////////////////////////////////////////////////////////////////////////
                 try {
-                    conn = Connexion.getConnection();
                     PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_AUTOR + " WHERE EstatusAutor='Activo'  ORDER BY IdAutor");
                     ResultSet rs = prs.executeQuery();
                     ModelAutor.addElement("Sin Selección");
@@ -106,7 +109,6 @@ public class CargarInfoDAO {
                 } finally {
                     ////////////////////////////////////////////////////////////////////////
                     try {
-                        conn = Connexion.getConnection();
                         PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo'  ORDER BY IdEditorial");
                         ResultSet rs = prs.executeQuery();
                         ModelEditorial.addElement("Sin Selección");
@@ -160,38 +162,35 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
-            conn.close();
             jFieldList[0].setModel(ModelAutor);
         } catch (SQLException n) {
             Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
+            ////////////////////////////////////////////////////////////////////////
             try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo' ORDER BY IdEditorial");
+                ResultSet rs = prs.executeQuery();
+                while (rs.next()) {
+                    ModelEditorial.addElement(rs.getString(2));
+                }
+                rs.close();
+                prs.close();
+                jFieldList[1].setModel(ModelEditorial);
+                SUCCESS = true;
+            } catch (SQLException n) {
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException m) {
+                    Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                }
             }
         }
-        ////////////////////////////////////////////////////////////////////////
         try {
-            conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_EDITORIAL + " WHERE EstatusEditorial='Activo' ORDER BY IdEditorial");
-            ResultSet rs = prs.executeQuery();
-            while (rs.next()) {
-                ModelEditorial.addElement(rs.getString(2));
-            }
-            rs.close();
-            prs.close();
             conn.close();
-            jFieldList[1].setModel(ModelEditorial);
-            SUCCESS = true;
-        } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
+        } catch (SQLException m) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
         }
         return SUCCESS;
     }
@@ -223,67 +222,56 @@ public class CargarInfoDAO {
             }
             rs.close();
             prs.close();
-            conn.close();
             SUCCESS = true;
         } catch (SQLException n) {
             Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
         } finally {
+            ////////////////////////////////////////////////////////////////////////
             try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        try {
-            conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_MIN_EXISTENCIA_EDITORIAL);
-            ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
-                Array.add(2, "Editorial con Menos Existencias:");
-                Array.add(3, "Editorial: " + rs.getString(1) + " | Cantidad: " + rs.getString(2));
-            }
-            rs.close();
-            prs.close();
-            conn.close();
-        } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
-        }
-        ////////////////////////////////////////////////////////////////////////
-        try {
-            conn = Connexion.getConnection();
-            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_MAX_PRESTAMO_LIBRO);
-            ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
-                Array.add(4, "Libro con más Préstamos:");
-                Array.add(5, "Título: " + rs.getString(1) + " | ISBN: " + rs.getString(2));
-                Array.add(6, "");
-                Array.add(7, "Editorial: " + rs.getString(3) + " | Cantidad: " + rs.getInt(4));
-                for (int i = 8; i <= 10; i++) {
-                    Array.add("");
+                PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_MIN_EXISTENCIA_EDITORIAL);
+                ResultSet rs = prs.executeQuery();
+                if (rs.next()) {
+                    Array.add(2, "Editorial con Menos Existencias:");
+                    Array.add(3, "Editorial: " + rs.getString(1) + " | Cantidad: " + rs.getString(2));
                 }
                 rs.close();
                 prs.close();
-                conn.close();
-                ea.LoadData("Información", Array);
+            } catch (SQLException n) {
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+            } finally {
+                ////////////////////////////////////////////////////////////////////////
+                try {
+                    PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_MAX_PRESTAMO_LIBRO);
+                    ResultSet rs = prs.executeQuery();
+                    if (rs.next()) {
+                        Array.add(4, "Libro con más Préstamos:");
+                        Array.add(5, "Título: " + rs.getString(1) + " | ISBN: " + rs.getString(2));
+                        Array.add(6, "");
+                        Array.add(7, "Editorial: " + rs.getString(3) + " | Cantidad: " + rs.getInt(4));
+                        for (int i = 8; i <= 10; i++) {
+                            Array.add("");
+                        }
+                        rs.close();
+                        prs.close();
+                        ea.LoadData("Información", Array);
+                    }
+                    Array.clear();
+                    SUCCESS = true;
+                } catch (SQLException n) {
+                    Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException m) {
+                        Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                    }
+                }
             }
-            Array.clear();
-            SUCCESS = true;
-
-        } catch (SQLException n) {
-            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException m) {
-                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
-            }
+        }
+        try {
+            conn.close();
+        } catch (SQLException m) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
         }
         return SUCCESS;
     }
@@ -532,10 +520,182 @@ public class CargarInfoDAO {
      * Descripción: Ingresa los datos encontrados de Libros en un array list,
      * repite hasta encontrar todos los datos.
      *
-     * @return // Regresa true si es exitosa y false si ocurre un error
+     * @return // Regresa un Objeto con los Arrays
      */
-    public ArrayList LoadTexts() {
-        ArrayList<String> Array = new ArrayList<String>();
+    public Object[] LoadAllTexts() {
+        ArrayList<String> Array0 = new ArrayList<String>();
+        ArrayList<String> Array1 = new ArrayList<String>();
+        ArrayList<String> Array2 = new ArrayList<String>();
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_TITULO_LIBRO);
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                Array0.add(rs.getString(1));
+            }
+            rs.close();
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+        } finally {
+            try {
+                PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_NOMBRE_SOCIO);
+                ResultSet rs = prs.executeQuery();
+                while (rs.next()) {
+                    Array1.add(rs.getString(1));
+                }
+                rs.close();
+                prs.close();
+            } catch (SQLException n) {
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+            } finally {
+                try {
+                    PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_NOMBRE_AUTOR);
+                    ResultSet rs = prs.executeQuery();
+                    while (rs.next()) {
+                        Array2.add(rs.getString(1));
+                    }
+                    rs.close();
+                    prs.close();
+                } catch (SQLException n) {
+                    Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                } finally {
+
+                }
+            }
+            try {
+                conn.close();
+            } catch (SQLException m) {
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+            }
+        }
+        return new Object[]{Array0, Array1, Array2};
+    }
+
+    /**
+     * Uso: Busca los Titulos de Libros en la base de datos.
+     *
+     * Descripción: Ingresa los datos encontrados de Libros en un array list,
+     * repite hasta encontrar todos los datos.
+     *
+     * @return // Regresa un Objeto con los Arrays
+     */
+    public Object[] LoadAllTextsSecond() {
+        ArrayList<String> Array0 = new ArrayList<String>();
+        ArrayList<String> Array1 = new ArrayList<String>();
+        ArrayList<String> Array2 = new ArrayList<String>();
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_NOMBRE_EDITORIAL);
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                Array0.add(rs.getString(1));
+            }
+            rs.close();
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+        } finally {
+            try {
+                PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_NOMBRE_LOCALIZACION);
+                ResultSet rs = prs.executeQuery();
+                while (rs.next()) {
+                    Array1.add(rs.getString(1));
+                }
+                rs.close();
+                prs.close();
+            } catch (SQLException n) {
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+            } finally {
+                try {
+                    PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_NOMBRE_AREA);
+                    ResultSet rs = prs.executeQuery();
+                    while (rs.next()) {
+                        Array2.add(rs.getString(1));
+                    }
+                    rs.close();
+                    prs.close();
+                } catch (SQLException n) {
+                    Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException m) {
+                        Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                    }
+                }
+            }
+        }
+        try {
+            conn.close();
+        } catch (SQLException m) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+        }
+        return new Object[]{Array0, Array1, Array2};
+    }
+
+    /**
+     * Uso: Busca los Titulos de Libros en la base de datos.
+     *
+     * Descripción: Ingresa los datos encontrados de Libros en un array list,
+     * repite hasta encontrar todos los datos.
+     *
+     * @return // Regresa un Objeto con los Arrays
+     */
+    public Object[] LoadAdminTexts() {
+        ArrayList<String> Array0 = new ArrayList<String>();
+        ArrayList<String> Array1 = new ArrayList<String>();
+        ArrayList<String> Array2 = new ArrayList<String>();
+        try {
+            conn = Connexion.getConnection();
+            PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_TITULO_LIBRO);
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                Array0.add(rs.getString(1));
+                Array1.add(rs.getString(2));
+            }
+            rs.close();
+            prs.close();
+        } catch (SQLException n) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+        } finally {
+            try {
+                PreparedStatement prs = conn.prepareStatement(SQL_SEARCH_NOMBRE_SOCIO);
+                ResultSet rs = prs.executeQuery();
+                while (rs.next()) {
+                    Array2.add(rs.getString(1));
+                }
+                rs.close();
+                prs.close();
+            } catch (SQLException n) {
+                Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", n);
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException m) {
+                    Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+                }
+            }
+        }
+        try {
+            conn.close();
+        } catch (SQLException m) {
+            Logger.getLogger(CargarInfoDAO.class.getName()).log(Level.SEVERE, "Error", m);
+        }
+        return new Object[]{Array0, Array1, Array2};
+    }
+
+    /**
+     * Uso: Busca los Titulos de Libros en la base de datos.
+     *
+     * Descripción: Ingresa los datos encontrados de Libros en un array list,
+     * repite hasta encontrar todos los datos.
+     *
+     * @return // Regresa un Objeto con los Arrays
+     */
+    public Object[] LoadSocioTexts() {
+        ArrayList<String> Array0 = new ArrayList<String>();
+        ArrayList<String> Array1 = new ArrayList<String>();
         PreparedStatement prs;
         ResultSet rs;
         try {
@@ -543,7 +703,8 @@ public class CargarInfoDAO {
             prs = conn.prepareStatement(SQL_SEARCH_TITULO_LIBRO);
             rs = prs.executeQuery();
             while (rs.next()) {
-                Array.add(rs.getString(1));
+                Array0.add(rs.getString(1));
+                Array1.add(rs.getString(2));
             }
             rs.close();
             prs.close();
@@ -558,7 +719,7 @@ public class CargarInfoDAO {
             }
         }
 
-        return Array;
+        return new Object[]{Array0, Array1};
     }
 
 }

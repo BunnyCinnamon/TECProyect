@@ -4,7 +4,6 @@ import Classes.Beans.SocioBean;
 import Modelo.CargarInfoDAO;
 import Utils.CleanupDone;
 import Vista.VDetalles;
-import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -134,10 +133,47 @@ public class CargarInfoControlador {
      *
      * Descripción: Busca información y la ingresa en un arraylist.
      *
-     * @return // Regresa los Textos encontrados
+     * @return // Regresa los Textos encontrados en un Objeto
      */
-    public ArrayList<String> CargarTexts() {
-        ArrayList array = CARGAR.LoadTexts();
+    public Object[] CargarAllTexts() {
+        Object[] array = CARGAR.LoadAllTexts();
         return array;
     }
+
+    /**
+     * Uso: Buscar Texto de Libros.
+     *
+     * Descripción: Busca información y la ingresa en un arraylist.
+     *
+     * @return // Regresa los Textos encontrados en un Objeto
+     */
+    public Object[] CargarAllTextsSecond() {
+        Object[] array = CARGAR.LoadAllTextsSecond();
+        return array;
+    }
+
+    /**
+     * Uso: Buscar Texto de Libros.
+     *
+     * Descripción: Busca información y la ingresa en un arraylist.
+     *
+     * @return // Regresa los Textos encontrados en un Objeto
+     */
+    public Object[] CargarAdminTexts() {
+        Object[] array = CARGAR.LoadAdminTexts();
+        return array;
+    }
+
+    /**
+     * Uso: Buscar Texto de Libros.
+     *
+     * Descripción: Busca información y la ingresa en un arraylist.
+     *
+     * @return // Regresa los Textos encontrados
+     */
+    public Object[] CargarSocioTexts() {
+        Object[] array = CARGAR.LoadSocioTexts();
+        return array;
+    }
+
 }

@@ -1780,7 +1780,8 @@ public class VAdministrador extends javax.swing.JFrame {
         JList[] jFieldList = {JListAutor, JListEditorial};
         Cargar.CargarInfoListas(jFieldCombo, jFieldList);
         try {
-            loadAuto(Cargar.CargarTexts());
+            loadAuto(Cargar.CargarAllTexts());
+            loadAutoSecond(Cargar.CargarAllTextsSecond());
         } catch (java.lang.ExceptionInInitializerError ex) {
             System.err.println("Error in Autocomplete file: " + ex.getLocalizedMessage());
         }
@@ -1803,9 +1804,26 @@ public class VAdministrador extends javax.swing.JFrame {
      *
      * @param array // Contiene el array de textos encontrados
      */
-    private void loadAuto(ArrayList array) throws java.lang.ExceptionInInitializerError {
+    private void loadAuto(Object[] array) throws java.lang.ExceptionInInitializerError {
         Autocompleter Autocompleter;
-        Autocompleter = new Autocompleter(JTituloText, array);
+        Autocompleter = new Autocompleter(JTituloText, (ArrayList) array[0]);
+        Autocompleter = new Autocompleter(JNombreTextSocio, (ArrayList) array[1]);
+        Autocompleter = new Autocompleter(JNombreTextAutor, (ArrayList) array[2]);
+    }
+
+    /**
+     * Uso: Cargar libreria Autocompleter.
+     *
+     * Descripción: Si la libreria no se encuentra presente, el programa inicia
+     * con normalidad pero sin las funciones de autocompletado.
+     *
+     * @param array // Contiene el array de textos encontrados
+     */
+    private void loadAutoSecond(Object[] array) throws java.lang.ExceptionInInitializerError {
+        Autocompleter Autocompleter;
+        Autocompleter = new Autocompleter(JNombreTextEditorial, (ArrayList) array[0]);
+        Autocompleter = new Autocompleter(JLocalizacionText, (ArrayList) array[1]);
+        Autocompleter = new Autocompleter(JAreaText, (ArrayList) array[2]);
     }
 
     /**

@@ -73,7 +73,7 @@ public class VBuscarLibro extends javax.swing.JFrame {
         JListAutor.setListData(new String[0]);
         JListEditorial.setListData(new String[0]);
         try {
-            loadAuto(Cargar.CargarTexts());
+            loadAuto(Cargar.CargarSocioTexts());
         } catch (java.lang.ExceptionInInitializerError ex) {
             System.err.println("Error in JTatoo file: " + ex.getLocalizedMessage());
         }
@@ -91,9 +91,10 @@ public class VBuscarLibro extends javax.swing.JFrame {
      *
      * @param array // Contiene el array de textos encontrados
      */
-    private void loadAuto(ArrayList array) throws java.lang.ExceptionInInitializerError {
+    private void loadAuto(Object[] array) throws java.lang.ExceptionInInitializerError {
         Autocompleter Autocompleter;
-        Autocompleter = new Autocompleter(JTituloText, array);
+        Autocompleter = new Autocompleter(JTituloText, (ArrayList) array[0]);
+        Autocompleter = new Autocompleter(JISBNText, (ArrayList) array[1]);
     }
 
     /**
