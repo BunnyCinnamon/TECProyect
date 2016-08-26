@@ -292,8 +292,8 @@ public class VAdministrador extends javax.swing.JFrame {
         jTitulo.setText("Título:");
 
         JTituloText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTituloTextKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTituloTextKeyReleased(evt);
             }
         });
 
@@ -301,6 +301,9 @@ public class VAdministrador extends javax.swing.JFrame {
         jISBN.setText("ISBN:");
 
         JISBNText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JISBNTextKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JISBNTextKeyTyped(evt);
             }
@@ -645,6 +648,9 @@ public class VAdministrador extends javax.swing.JFrame {
         jTitulo4.setText("Calle:");
 
         JCalleTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JCalleTextSocioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JCalleTextSocioKeyTyped(evt);
             }
@@ -654,6 +660,9 @@ public class VAdministrador extends javax.swing.JFrame {
         jTitulo5.setText("Teléfono:");
 
         JTelefonoTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTelefonoTextSocioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JTelefonoTextSocioKeyTyped(evt);
             }
@@ -670,18 +679,27 @@ public class VAdministrador extends javax.swing.JFrame {
             }
         });
         JNCalleTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JNCalleTextSocioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JNCalleTextSocioKeyTyped(evt);
             }
         });
 
         JMunicipioTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JMunicipioTextSocioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JMunicipioTextSocioKeyTyped(evt);
             }
         });
 
         JEstadoTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JEstadoTextSocioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JEstadoTextSocioKeyTyped(evt);
             }
@@ -695,20 +713,20 @@ public class VAdministrador extends javax.swing.JFrame {
             }
         });
         JApellidoMTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JApellidoMTextSocioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JApellidoMTextSocioKeyReleased(evt);
             }
         });
 
         JApellidoPTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JApellidoPTextSocioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JApellidoPTextSocioKeyReleased(evt);
             }
         });
 
         JNombreTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JNombreTextSocioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JNombreTextSocioKeyReleased(evt);
             }
         });
 
@@ -864,6 +882,9 @@ public class VAdministrador extends javax.swing.JFrame {
         jLabel3.setText("Usuario:");
 
         JTextUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTextUsuarioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JTextUsuarioKeyTyped(evt);
             }
@@ -1014,8 +1035,8 @@ public class VAdministrador extends javax.swing.JFrame {
         jTitulo7.setText("Nombre:");
 
         JNombreTextAutor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JNombreTextAutorKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JNombreTextAutorKeyReleased(evt);
             }
         });
 
@@ -1023,8 +1044,8 @@ public class VAdministrador extends javax.swing.JFrame {
         jISBN2.setText("Primero:");
 
         JApellidoPAutor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JApellidoPAutorKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JApellidoPAutorKeyReleased(evt);
             }
         });
 
@@ -1039,8 +1060,8 @@ public class VAdministrador extends javax.swing.JFrame {
             }
         });
         JApellidoMAutor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JApellidoMAutorKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JApellidoMAutorKeyReleased(evt);
             }
         });
 
@@ -1268,8 +1289,8 @@ public class VAdministrador extends javax.swing.JFrame {
         JComboEstatusEditorial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
         JNombreTextEditorial.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JNombreTextEditorialKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JNombreTextEditorialKeyReleased(evt);
             }
         });
 
@@ -1448,8 +1469,8 @@ public class VAdministrador extends javax.swing.JFrame {
         jLabel13.setText("Localización");
 
         JLocalizacionText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JLocalizacionTextKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JLocalizacionTextKeyReleased(evt);
             }
         });
 
@@ -1516,8 +1537,8 @@ public class VAdministrador extends javax.swing.JFrame {
         jTitulo17.setText("Estatus:");
 
         JAreaText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JAreaTextKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JAreaTextKeyReleased(evt);
             }
         });
 
@@ -1838,10 +1859,14 @@ public class VAdministrador extends javax.swing.JFrame {
         for (Object c : jText) {
             if (c instanceof JTextField) {
                 ((JTextField) c).setText("");
+                ((JTextField) c).setForeground(Color.black);
+                ((JTextField) c).setBackground(Color.white);
             } else if (c instanceof JList) {
                 ((JList) c).setSelectedIndex(0);
+                ((JList) c).setBackground(Color.white);
             } else if (c instanceof JComboBox) {
                 ((JComboBox) c).setSelectedIndex(0);
+                ((JComboBox) c).setBackground(Color.white);
             } else if (c instanceof JSpinner) {
                 ((JSpinner) c).setValue(0);
             }
@@ -2166,96 +2191,78 @@ public class VAdministrador extends javax.swing.JFrame {
         Cargar.CargarInfoEstadisticas();
     }//GEN-LAST:event_JEstadisticasActionPerformed
 
-    private void JTituloTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTituloTextKeyTyped
+    private void JTituloTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTituloTextKeyReleased
         TEXT_CHECKER.checkColors(JTituloText);
-    }//GEN-LAST:event_JTituloTextKeyTyped
+    }//GEN-LAST:event_JTituloTextKeyReleased
 
-    private void JNombreTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextSocioKeyTyped
+    private void JNombreTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextSocioKeyReleased
         TEXT_CHECKER.checkColorsNoNumber(JNombreTextSocio);
-    }//GEN-LAST:event_JNombreTextSocioKeyTyped
+    }//GEN-LAST:event_JNombreTextSocioKeyReleased
 
-    private void JApellidoPTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPTextSocioKeyTyped
+    private void JApellidoPTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPTextSocioKeyReleased
         TEXT_CHECKER.checkColorsNoNumber(JApellidoPTextSocio);
-    }//GEN-LAST:event_JApellidoPTextSocioKeyTyped
+    }//GEN-LAST:event_JApellidoPTextSocioKeyReleased
 
-    private void JApellidoMTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMTextSocioKeyTyped
+    private void JApellidoMTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMTextSocioKeyReleased
         if (JApellidoMTextSocio.getText().isEmpty()) {
             JApellidoMTextSocio.setText("N/A");
             JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
         } else {
             TEXT_CHECKER.checkColorsNoNumber(JApellidoMTextSocio);
         }
-    }//GEN-LAST:event_JApellidoMTextSocioKeyTyped
+    }//GEN-LAST:event_JApellidoMTextSocioKeyReleased
 
-    private void JEstadoTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JEstadoTextSocioKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('_');
-        }
+    private void JEstadoTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JEstadoTextSocioKeyReleased
         TEXT_CHECKER.checkColorsDirection(JEstadoTextSocio);
-    }//GEN-LAST:event_JEstadoTextSocioKeyTyped
+    }//GEN-LAST:event_JEstadoTextSocioKeyReleased
 
-    private void JMunicipioTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JMunicipioTextSocioKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('_');
-        }
+    private void JMunicipioTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JMunicipioTextSocioKeyReleased
         TEXT_CHECKER.checkColorsDirection(JMunicipioTextSocio);
-    }//GEN-LAST:event_JMunicipioTextSocioKeyTyped
+    }//GEN-LAST:event_JMunicipioTextSocioKeyReleased
 
-    private void JCalleTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCalleTextSocioKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('_');
-        }
+    private void JCalleTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCalleTextSocioKeyReleased
         TEXT_CHECKER.checkColorsDirection(JCalleTextSocio);
-    }//GEN-LAST:event_JCalleTextSocioKeyTyped
+    }//GEN-LAST:event_JCalleTextSocioKeyReleased
 
-    private void JTelefonoTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTelefonoTextSocioKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('-');
-        }
+    private void JTelefonoTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTelefonoTextSocioKeyReleased
         if (!TEXT_CHECKER.checkPhoneNumber(JTelefonoTextSocio.getText())) {
             JTelefonoTextSocio.setForeground(new Color(204, 0, 0));
         } else {
             JTelefonoTextSocio.setForeground(Color.black);
         }
-    }//GEN-LAST:event_JTelefonoTextSocioKeyTyped
+    }//GEN-LAST:event_JTelefonoTextSocioKeyReleased
 
-    private void JNCalleTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNCalleTextSocioKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('0');
-        }
+    private void JNCalleTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNCalleTextSocioKeyReleased
         TEXT_CHECKER.checkColorsNumber(JNCalleTextSocio);
         if (JNCalleTextSocio.getText().isEmpty()) {
             JNCalleTextSocio.setText("N/A");
             JNCalleTextSocio.setForeground(new Color(0, 153, 0));
         }
-    }//GEN-LAST:event_JNCalleTextSocioKeyTyped
+    }//GEN-LAST:event_JNCalleTextSocioKeyReleased
 
-    private void JTextUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextUsuarioKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('-');
-        }
+    private void JTextUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextUsuarioKeyReleased
         if (!TEXT_CHECKER.checkEmail(JTextUsuario.getText())) {
             JTextUsuario.setForeground(new Color(204, 0, 0));
         } else {
             JTextUsuario.setForeground(Color.black);
         }
-    }//GEN-LAST:event_JTextUsuarioKeyTyped
+    }//GEN-LAST:event_JTextUsuarioKeyReleased
 
-    private void JNombreTextAutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextAutorKeyTyped
+    private void JNombreTextAutorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextAutorKeyReleased
         TEXT_CHECKER.checkColorsNoNumber(JNombreTextAutor);
-    }//GEN-LAST:event_JNombreTextAutorKeyTyped
+    }//GEN-LAST:event_JNombreTextAutorKeyReleased
 
-    private void JApellidoPAutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPAutorKeyTyped
+    private void JApellidoPAutorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPAutorKeyReleased
         TEXT_CHECKER.checkColorsNoNumber(JApellidoPAutor);
-    }//GEN-LAST:event_JApellidoPAutorKeyTyped
+    }//GEN-LAST:event_JApellidoPAutorKeyReleased
 
-    private void JApellidoMAutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMAutorKeyTyped
+    private void JApellidoMAutorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMAutorKeyReleased
         TEXT_CHECKER.checkColorsNoNumber(JApellidoMAutor);
         if (JApellidoMAutor.getText().isEmpty()) {
             JApellidoMAutor.setText("N/A");
             JApellidoMAutor.setForeground(new Color(0, 153, 0));
         }
-    }//GEN-LAST:event_JApellidoMAutorKeyTyped
+    }//GEN-LAST:event_JApellidoMAutorKeyReleased
 
     private void JTextContraseñaSocioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTextContraseñaSocioMouseClicked
         ADMINISTRADOR_CONTROLER.JTextContraseñaSocioMouseClicked(JTextContraseñaSocio);
@@ -2350,28 +2357,25 @@ public class VAdministrador extends javax.swing.JFrame {
         JApellidoMAutor.setForeground(Color.black);
     }//GEN-LAST:event_JApellidoMAutorMouseClicked
 
-    private void JISBNTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('-');
-        }
+    private void JISBNTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyReleased
         if (!TEXT_CHECKER.checkISBN(JISBNText.getText())) {
             JISBNText.setForeground(new Color(204, 0, 0));
         } else {
             JISBNText.setForeground(Color.black);
         }
-    }//GEN-LAST:event_JISBNTextKeyTyped
+    }//GEN-LAST:event_JISBNTextKeyReleased
 
-    private void JNombreTextEditorialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextEditorialKeyTyped
+    private void JNombreTextEditorialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextEditorialKeyReleased
         TEXT_CHECKER.checkColors(JNombreTextEditorial);
-    }//GEN-LAST:event_JNombreTextEditorialKeyTyped
+    }//GEN-LAST:event_JNombreTextEditorialKeyReleased
 
-    private void JLocalizacionTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JLocalizacionTextKeyTyped
+    private void JLocalizacionTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JLocalizacionTextKeyReleased
         TEXT_CHECKER.checkColors(JLocalizacionText);
-    }//GEN-LAST:event_JLocalizacionTextKeyTyped
+    }//GEN-LAST:event_JLocalizacionTextKeyReleased
 
-    private void JAreaTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JAreaTextKeyTyped
+    private void JAreaTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JAreaTextKeyReleased
         TEXT_CHECKER.checkColors(JAreaText);
-    }//GEN-LAST:event_JAreaTextKeyTyped
+    }//GEN-LAST:event_JAreaTextKeyReleased
 
     private void jMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalirActionPerformed
         dispose();
@@ -2396,6 +2400,48 @@ public class VAdministrador extends javax.swing.JFrame {
         JNCalleTextSocio.selectAll();
         JNCalleTextSocio.setForeground(Color.black);
     }//GEN-LAST:event_JNCalleTextSocioMouseClicked
+
+    private void JISBNTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyTyped
+        if (evt.getKeyChar()== ' ') {
+            evt.setKeyChar('-');
+        }
+    }//GEN-LAST:event_JISBNTextKeyTyped
+
+    private void JTelefonoTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTelefonoTextSocioKeyTyped
+        if (evt.getKeyChar()== ' ') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_JTelefonoTextSocioKeyTyped
+
+    private void JTextUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextUsuarioKeyTyped
+        if (evt.getKeyChar()== ' ') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_JTextUsuarioKeyTyped
+
+    private void JEstadoTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JEstadoTextSocioKeyTyped
+        if (evt.getKeyChar()== ' ') {
+            evt.setKeyChar('_');
+        }
+    }//GEN-LAST:event_JEstadoTextSocioKeyTyped
+
+    private void JMunicipioTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JMunicipioTextSocioKeyTyped
+        if (evt.getKeyChar()== ' ') {
+            evt.setKeyChar('_');
+        }
+    }//GEN-LAST:event_JMunicipioTextSocioKeyTyped
+
+    private void JCalleTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCalleTextSocioKeyTyped
+        if (evt.getKeyChar()== ' ') {
+            evt.setKeyChar('_');
+        }
+    }//GEN-LAST:event_JCalleTextSocioKeyTyped
+
+    private void JNCalleTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNCalleTextSocioKeyTyped
+        if (evt.getKeyChar()== ' ') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_JNCalleTextSocioKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup ButtonTables;

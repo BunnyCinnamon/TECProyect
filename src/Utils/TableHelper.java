@@ -45,15 +45,19 @@ public class TableHelper {
                     text.setForeground(new Color(0, 153, 0));
                     continue;
                 }
+                text.setForeground(Color.black);
+                text.setBackground(Color.white);
                 text.setText(n);
             } else if (obj instanceof JSpinner) {
                 JSpinner text = (JSpinner) obj;
                 text.setValue(Integer.parseInt(n));
             } else if (obj instanceof JList) {
                 JList text = (JList) obj;
+                text.setBackground(Color.white);
                 text.setSelectedValue(getExistingString(text, n), true);
             } else if (obj instanceof JComboBox) {
                 JComboBox text = (JComboBox) obj;
+                text.setBackground(Color.white);
                 text.setSelectedItem(getExistingString(text, n));
             }
         }

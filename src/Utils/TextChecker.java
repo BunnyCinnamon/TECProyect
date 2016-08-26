@@ -23,7 +23,7 @@ public class TextChecker {
      * @return // Regresa true o false si el texto coincide
      */
     public boolean checkText(String a) {
-        Pattern pat = Pattern.compile("^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_:().´&?!,\\-\\s]+$");
+        Pattern pat = Pattern.compile("^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_:().´&?!#$,\\-]([0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_:().´&?!#$,\\-]| (?! ))+$");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
@@ -37,7 +37,7 @@ public class TextChecker {
      * @return // Regresa true o false si el texto coincide
      */
     public boolean checkNoNumberText(String a) {
-        Pattern pat = Pattern.compile("^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ´.\\s]+$");
+        Pattern pat = Pattern.compile("^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ´]([a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ´]| (?! ))+$");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
@@ -52,7 +52,7 @@ public class TextChecker {
      * @return // Regresa true o false si el texto coincide
      */
     public boolean checkDirection(String a) {
-        Pattern pat = Pattern.compile("^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_´]+$");
+        Pattern pat = Pattern.compile("^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ´]([a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ´]|_(?!_))+$");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
@@ -80,7 +80,7 @@ public class TextChecker {
      * @return // Regresa true o false si el texto coincide
      */
     public boolean checkPhoneNumber(String a) {
-        Pattern pat = Pattern.compile("^[0-9-()+]{3,20}");
+        Pattern pat = Pattern.compile("^[0-9-()+]{7,20}");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
@@ -94,7 +94,7 @@ public class TextChecker {
      * @return // Regresa true o false si el texto coincide
      */
     public boolean checkISBN(String a) {
-        Pattern pat = Pattern.compile("[0-9-]+");
+        Pattern pat = Pattern.compile("[0-9]([0-9]|-(?!-))+");
         Matcher mat = pat.matcher(a);
         return mat.matches();
     }
@@ -108,9 +108,11 @@ public class TextChecker {
      * @return // Regresa true si tiene un email
      */
     public boolean checkEmail(String text) {
-        Pattern pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{1,})$");
-        Matcher mat = pat.matcher(text);
-        return mat.matches();
+        Pattern pat1 = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]{1,})$");
+        Matcher mat1 = pat1.matcher(text);
+        Pattern pat2 = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]{1,}\\.[A-Za-z0-9]{1,})$");
+        Matcher mat2 = pat2.matcher(text);
+        return mat1.matches() || mat2.matches();
     }
 
     /**

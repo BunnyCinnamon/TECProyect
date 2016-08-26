@@ -121,10 +121,14 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
         for (Object c : jText) {
             if (c instanceof JTextField) {
                 ((JTextField) c).setText("");
+                ((JTextField) c).setForeground(Color.black);
+                ((JTextField) c).setBackground(Color.white);
             } else if (c instanceof JList) {
                 ((JList) c).setSelectedIndex(0);
+                ((JList) c).setBackground(Color.white);
             } else if (c instanceof JComboBox) {
                 ((JComboBox) c).setSelectedIndex(0);
+                ((JComboBox) c).setBackground(Color.white);
             } else if (c instanceof JSpinner) {
                 ((JSpinner) c).setValue(0);
             }
@@ -234,12 +238,15 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
         jISBN.setText("ISBN:");
 
         JTituloText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTituloTextKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTituloTextKeyReleased(evt);
             }
         });
 
         JISBNText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JISBNTextKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JISBNTextKeyTyped(evt);
             }
@@ -491,20 +498,20 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
             }
         });
         JApellidoMTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JApellidoMTextSocioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JApellidoMTextSocioKeyReleased(evt);
             }
         });
 
         JApellidoPTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JApellidoPTextSocioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JApellidoPTextSocioKeyReleased(evt);
             }
         });
 
         JNombreTextSocio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JNombreTextSocioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JNombreTextSocioKeyReleased(evt);
             }
         });
 
@@ -594,8 +601,8 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
         jLabel3.setText("Usuario:");
 
         JTextUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTextUsuarioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTextUsuarioKeyReleased(evt);
             }
         });
 
@@ -783,9 +790,9 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
             BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableBLibro, jField, 3);
         } else if ((evt.getModifiers() & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK) {
             if (JRadioTableComplete.isSelected()) {
-                ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseControlClicked((DefaultTableModel) JTableBLibro.getModel());
+                BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseControlClicked((DefaultTableModel) JTableBLibro.getModel());
             } else if (JRadioTableSelection.isSelected()) {
-                ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseControlClickedRow(JTableBLibro);
+                BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseControlClickedRow(JTableBLibro);
             }
         }
     }//GEN-LAST:event_JTableBLibroMouseClicked
@@ -795,21 +802,21 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
         JApellidoMTextSocio.setForeground(Color.black);
     }//GEN-LAST:event_JApellidoMTextSocioMouseClicked
 
-    private void JApellidoMTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMTextSocioKeyTyped
+    private void JApellidoMTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoMTextSocioKeyReleased
         TEXT_CHECKER.checkColorsNoNumber(JApellidoMTextSocio);
         if (JApellidoMTextSocio.getText().isEmpty()) {
             JApellidoMTextSocio.setText("N/A");
             JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
         }
-    }//GEN-LAST:event_JApellidoMTextSocioKeyTyped
+    }//GEN-LAST:event_JApellidoMTextSocioKeyReleased
 
-    private void JApellidoPTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPTextSocioKeyTyped
+    private void JApellidoPTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JApellidoPTextSocioKeyReleased
         TEXT_CHECKER.checkColorsNoNumber(JApellidoPTextSocio);
-    }//GEN-LAST:event_JApellidoPTextSocioKeyTyped
+    }//GEN-LAST:event_JApellidoPTextSocioKeyReleased
 
-    private void JNombreTextSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextSocioKeyTyped
+    private void JNombreTextSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JNombreTextSocioKeyReleased
         TEXT_CHECKER.checkColorsNoNumber(JNombreTextSocio);
-    }//GEN-LAST:event_JNombreTextSocioKeyTyped
+    }//GEN-LAST:event_JNombreTextSocioKeyReleased
 
     private void JBuscarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarSocioActionPerformed
         DefaultTableModel model = (DefaultTableModel) JTableRSocio.getModel();
@@ -825,44 +832,41 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Caracteres no válidos, solo intriducir [a-z|A-Z] [0-9]", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        ADMINISTRADOR_CONTROLER.actionPerformedJBuscarSocio(model, jField, jSelect);
+        BUSCAR_LIBRO_CONTROLER.actionPerformedJBuscarSocio(model, jField, jSelect);
     }//GEN-LAST:event_JBuscarSocioActionPerformed
 
     private void JTableRSocioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableRSocioMouseClicked
         if (evt.getClickCount() == 2) {
             Object[] jField = new Object[]{JNombreTextSocio, JApellidoPTextSocio, JApellidoMTextSocio, null, null, null, null, JTextUsuario};
-            ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableRSocio, jField, 1);
+            BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseDoubleClicked(JTableRSocio, jField, 1);
         } else if ((evt.getModifiers() & ActionEvent.ALT_MASK) == ActionEvent.ALT_MASK) {
             if (JRadioTableComplete.isSelected()) {
-                ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseControlClicked((DefaultTableModel) JTableRSocio.getModel());
+                BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseControlClicked((DefaultTableModel) JTableRSocio.getModel());
             } else if (JRadioTableSelection.isSelected()) {
-                ADMINISTRADOR_CONTROLER.TABLE_HELPER.JTableMouseControlClickedRow(JTableRSocio);
+                BUSCAR_LIBRO_CONTROLER.TABLE_HELPER.JTableMouseControlClickedRow(JTableRSocio);
             }
         }
     }//GEN-LAST:event_JTableRSocioMouseClicked
 
-    private void JTextUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextUsuarioKeyTyped
+    private void JTextUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextUsuarioKeyReleased
         if (!TEXT_CHECKER.checkEmail(JTextUsuario.getText())) {
             JTextUsuario.setForeground(new Color(204, 0, 0));
         } else {
             JTextUsuario.setForeground(Color.black);
         }
-    }//GEN-LAST:event_JTextUsuarioKeyTyped
+    }//GEN-LAST:event_JTextUsuarioKeyReleased
 
-    private void JTituloTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTituloTextKeyTyped
+    private void JTituloTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTituloTextKeyReleased
         TEXT_CHECKER.checkColors(JTituloText);
-    }//GEN-LAST:event_JTituloTextKeyTyped
+    }//GEN-LAST:event_JTituloTextKeyReleased
 
-    private void JISBNTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('-');
-        }
+    private void JISBNTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyReleased
         if (!TEXT_CHECKER.checkISBN(JISBNText.getText())) {
             JISBNText.setForeground(new Color(204, 0, 0));
         } else {
             JISBNText.setForeground(Color.black);
         }
-    }//GEN-LAST:event_JISBNTextKeyTyped
+    }//GEN-LAST:event_JISBNTextKeyReleased
 
     private void jMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalirActionPerformed
         dispose();
@@ -875,6 +879,12 @@ public class VBuscarLibroAdmin extends javax.swing.JFrame {
         JApellidoMTextSocio.setForeground(new Color(0, 153, 0));
         clearTexts(jText);
     }//GEN-LAST:event_JClearTextsActionPerformed
+
+    private void JISBNTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyTyped
+        if (evt.getKeyChar() == ' ') {
+            evt.setKeyChar('-');
+        }
+    }//GEN-LAST:event_JISBNTextKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField JApellidoMTextSocio;

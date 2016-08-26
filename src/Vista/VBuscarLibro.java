@@ -109,10 +109,14 @@ public class VBuscarLibro extends javax.swing.JFrame {
         for (Object c : jText) {
             if (c instanceof JTextField) {
                 ((JTextField) c).setText("");
+                ((JTextField) c).setForeground(Color.black);
+                ((JTextField) c).setBackground(Color.white);
             } else if (c instanceof JList) {
                 ((JList) c).setSelectedIndex(0);
+                ((JList) c).setBackground(Color.white);
             } else if (c instanceof JComboBox) {
                 ((JComboBox) c).setSelectedIndex(0);
+                ((JComboBox) c).setBackground(Color.white);
             } else if (c instanceof JSpinner) {
                 ((JSpinner) c).setValue(0);
             }
@@ -210,12 +214,15 @@ public class VBuscarLibro extends javax.swing.JFrame {
         jISBN.setText("ISBN:");
 
         JTituloText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTituloTextKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTituloTextKeyReleased(evt);
             }
         });
 
         JISBNText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JISBNTextKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JISBNTextKeyTyped(evt);
             }
@@ -526,20 +533,17 @@ public class VBuscarLibro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JTableBLibroMouseClicked
 
-    private void JTituloTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTituloTextKeyTyped
+    private void JTituloTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTituloTextKeyReleased
         TEXT_CHECKER.checkColors(JTituloText);
-    }//GEN-LAST:event_JTituloTextKeyTyped
+    }//GEN-LAST:event_JTituloTextKeyReleased
 
-    private void JISBNTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyTyped
-        if (evt.getKeyChar() == ' ') {
-            evt.setKeyChar('-');
-        }
+    private void JISBNTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyReleased
         if (!TEXT_CHECKER.checkISBN(JISBNText.getText())) {
             JISBNText.setForeground(new Color(204, 0, 0));
         } else {
             JISBNText.setForeground(Color.black);
         }
-    }//GEN-LAST:event_JISBNTextKeyTyped
+    }//GEN-LAST:event_JISBNTextKeyReleased
 
     private void jMenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalirActionPerformed
         dispose();
@@ -549,6 +553,12 @@ public class VBuscarLibro extends javax.swing.JFrame {
         Object[] jText = {JTituloText, JISBNText, JListAutor, JListEditorial};
         clearTexts(jText);
     }//GEN-LAST:event_JClearTextsActionPerformed
+
+    private void JISBNTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JISBNTextKeyTyped
+        if (evt.getKeyChar() == ' ') {
+            evt.setKeyChar('-');
+        }
+    }//GEN-LAST:event_JISBNTextKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JAsignar;
